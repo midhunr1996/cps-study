@@ -1,0 +1,58 @@
+#separator:tab
+#html:false
+#columns:Question	Answer
+What is the definition of "risk" (ISO 9001)?	"Risk is the effect of uncertainty." An event/circumstance that can prevent reaching the project goal (probability < 100%).
+Difference between a risk and a problem?	Risk = has NOT happened yet (probability < 100%). Problem = it has ALREADY occurred (handled differently).
+Which two kinds of risk must be kept separate?	General company risks vs project-specific risks.
+What is PDCA and its other names?	Plan–Do–Check–Act. Also called the Deming cycle or Shewhart cycle (from ISO 9001).
+PDCA – what happens in "Plan"?	Plan the process/product, set goals & resources, address risks & opportunities.
+PDCA – Do, Check, Act?	Do = implement the plan; Check = monitor & measure the process/target; Act = take action to improve performance.
+Which method is used in the PDCA "Plan" phase?	FMEA.
+Can a risk be positive?	Yes — opportunities can be recorded as positive events.
+What is a "speak-up line"?	An anonymous channel for employees to report undiscovered risks and violations.
+Do risks add up like costs?	No. Risks do not add up — they must be aggregated using models/simulations (e.g. Monte Carlo).
+How do you reduce risk through diversification?	Use diversified and NON-correlating solutions; asset & time diversification (idea by Harry Markowitz, Nobel Prize).
+Sensor reliability example – wrong vs right way to improve a 50% ECU?	Wrong: add a 2nd identical ECU (increases failure). Right: add a different, mechanical crash detector.
+What does the portfolio "efficiency curve" mean?	Optimum portfolios lie on the curve; nothing can be above it; portfolios below it are inefficient.
+What does ISO 9001 demand regarding risk?	"Risk-based thinking" — use opportunities and prevent unwanted outcomes.
+What is ISO 31000?	The dedicated "Risk Management" standard.
+What are provisions (Rückstellungen)?	Money set aside for company/product risks; linked to quality management.
+Risk management at company level is what kind of task?	A managerial task.
+Name the 9 levels/areas risks can affect.	Technical/product, Compliance, Finances/costs, Time, Market, Currency, Social, Project-management, Environmental.
+Who defined the 6 levels of risk management?	Gleißner & Mott.
+What is KonTraG?	German law obliging management to perform risk analysis.
+List the targets/steps of risk management (6).	Detect → Analyse → Evaluate → Control → Monitor → Document & communicate.
+What are the 4 options when CONTROLLING a risk?	Avoid, Prevent, Transfer, Accept.
+What does "Detect" involve?	Regular & systematic internal AND external analysis; frequency depends on the volatility of the environment.
+Name the 6 methods to detect risks.	KPI changes, LeLe (lessons learned), Headstand/Flip-Flop, Delphi, Risk workshop, PAAG/HAZOP.
+Three safety detection methods in development?	ALARP (As Low As Reasonably Practicable), FMEA, DRBFM (Design Review Based on Failure Mode).
+Head-stand / Flip-Flop method – 4 steps?	1) Invert the thesis, 2) find solutions for the flipped thesis, 3) invert those solutions, 4) define actions.
+What is the key idea of the Delphi method?	Experts answer anonymously with no discussion; share major deviations; repeat until consolidated; take the average.
+When evaluating a risk, which two properties are scored?	Severity (how bad) and Occurrence/likelihood (how likely; subjective — not called "probability").
+Combining severity and occurrence produces what?	A risk matrix (used to prioritise); all risks kept in a risk list managed by the PM/risk manager.
+Three ways to assess possible IMPACT?	Historical data ("empirical values"), probability distribution (e.g. normal), Monte Carlo simulation.
+Severity & Occurrence example scales – ranges?	Severity 1 (low) → 4 (very high). Occurrence 0 (0%, eliminated) → 5 (100%, occurred = problem).
+What is Risk Avoidance?	Reduce occurrence to 0 — ban activities, remove features, use technical barriers like Poka Yoke.
+What is Poka Yoke?	Japanese for "avoid silly mistakes" — mistake-proofing for immediate error detection (e.g. key-lock principle).
+What is Risk Prevention?	Reduce occurrence OR mitigate severity using quality/process methods (e.g. PDCA).
+What is Risk Transfer?	Shift the risk to whoever handles it better — e.g. crash ECU risk transferred to the car chassis.
+What is Risk Acceptance?	Consciously accept a risk — only if occurrence AND impact are low.
+What does FMEA stand for and what is it?	Failure Mode and Effects Analysis — a reliability-improvement method.
+FMEA rates defects by which three factors?	Severity, Probability (Occurrence), Recognizability.
+What are the goals of an FMEA?	Recognise systematic & random errors before they occur; derive detection & prevention measures; improve successor products.
+What is FMECA?	FMEA + a "Criticality" metric for risk of failure → enables prioritisation (usually what people mean by FMEA).
+What is FMEDA?	FMEA + "Diagnostics"; multiple-error analysis; used for automotive electronics; accounts for self-detection lowering failure rate.
+What are the three TYPES of FMEA?	System FMEA, D-FMEA (Design), P-FMEA (Process).
+Difference between D-FMEA and P-FMEA?	D-FMEA = development/customer focus, avoid systemic errors; P-FMEA = production-process weaknesses; the two must be linked.
+Key FMEA standards by domain?	Automotive: ISO 26262. Industry: IEC 61508, ISO 13849. Aerospace: DO-254, ARP 4761.
+Describe the FMEA process.	Prepared early (before detailed plans), built in expert workshops from many domains, created from cause→error, then verify the assumed probabilities.
+What is the Rule of Ten?	The later an error is found, the higher the cost — ~×10 per stage: Planning 1€ → Development 10€ → Assembly 100€ → Final acceptance 1000€ → Customer.
+Until when must an FMEA be maintained?	Until EOP (End of Production), better EOS (End of Sales); update it on product changes; old FMEA feeds the next project (LeLe).
+How is the RPV calculated?	RPV = Severity × Probability(Occurrence) × Recognizability, each rated 1–10.
+Recognizability scale direction in FMEA?	1 = surely recognized (≥99% detected); 10 = certainly not recognized (<10% detected) — opposite of severity.
+What is a Special Characteristic (SC)?	A high-severity feature marked on drawings; each SC must be checked/measured in production; can also be a legal requirement.
+SC variants in the automotive industry?	BMW: L/S/F (Legal/Safety/Function). Daimler: DS/DZ. VW: D/S (Documented/Safety).
+What is a System FMEA?	Considers the whole system + subsystems, focuses on interfaces and interaction with the environment; finds random & systemic errors.
+Software tools to track risks?	ClickUp, cplace, Jira — with consistent linking to up/downstream processes.
+Summary – core message of risk management?	Avoid greater damage; identify risks as early as possible (Rule of Ten); rate by severity & occurrence; use FMEA and derive SCs.
+Walter Scheel's risk quote?	"Nothing happens without risk, but without taking risks also nothing happens." — still take risks to move forward.
