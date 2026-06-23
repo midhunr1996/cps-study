@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Requirement Management — Field Manual · CPS MMC-01a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEE2; --paper-2:#ECE3D0; --card:#FBF7EE;
+    --ink:#211C16; --ink-soft:#5C5246; --line:#D9CDB4;
+    --amber:#E0962A; --amber-deep:#B96E12; --red:#B23A2E; --green:#4C7A46;
+    --shadow: 0 1px 0 rgba(33,28,22,.04), 0 18px 40px -28px rgba(33,28,22,.45);
+    --mono:'Space Mono',ui-monospace,monospace;
+    --disp:'Bricolage Grotesque',system-ui,sans-serif;
+    --body:'Spectral',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink); font-family:var(--body);
+    font-size:18px; line-height:1.62; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 12% -5%, rgba(224,150,42,.10), transparent 42%),
+      radial-gradient(circle at 92% 4%, rgba(178,58,46,.07), transparent 40%);
+  }
+  /* subtle grain */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.5; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+  /* progress + topbar */
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--amber),var(--red));z-index:60}
+  header.top{position:sticky;top:0;z-index:50;background:rgba(244,238,226,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;align-items:center;gap:14px;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--amber-deep);white-space:nowrap}
+  nav.tabs{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+  nav.tabs a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);text-decoration:none;padding:7px 10px;border-radius:7px}
+  nav.tabs a:hover{background:var(--paper-2);color:var(--ink)}
+
+  /* hero */
+  .hero{padding:70px 0 40px;border-bottom:3px solid var(--ink);position:relative}
+  .stripe{height:14px;width:100%;background:repeating-linear-gradient(45deg,var(--ink) 0 16px,var(--amber) 16px 32px);border-radius:3px;margin-bottom:30px}
+  .kicker{font-family:var(--mono);text-transform:uppercase;letter-spacing:3px;font-size:12px;color:var(--amber-deep)}
+  h1{font-family:var(--disp);font-weight:800;font-size:clamp(40px,8vw,76px);line-height:.95;margin:14px 0 8px;letter-spacing:-.02em}
+  h1 em{font-style:normal;color:var(--red)}
+  .sub{font-size:21px;color:var(--ink-soft);max-width:62ch}
+  .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin-top:18px;display:flex;gap:8px 18px;flex-wrap:wrap}
+  .meta b{color:var(--ink)}
+
+  .riku{margin-top:30px;background:var(--ink);color:var(--paper);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .riku::after{content:"📝";position:absolute;right:-10px;top:-26px;font-size:140px;opacity:.06}
+  .riku h3{font-family:var(--disp);margin:.1em 0 .4em;font-size:23px}
+  .riku p{margin:.3em 0;color:#E9DEC9}
+  .riku .big{font-family:var(--mono);font-weight:700;color:var(--amber);font-size:15px;letter-spacing:1px;margin-top:10px}
+
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .sec-label{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--amber-deep);display:flex;align-items:center;gap:10px}
+  .sec-label::before{content:"";width:34px;height:2px;background:var(--amber-deep)}
+  h2{font-family:var(--disp);font-weight:800;font-size:clamp(28px,5vw,42px);margin:12px 0 6px;letter-spacing:-.01em;line-height:1.04}
+  h3.topic{font-family:var(--disp);font-weight:600;font-size:23px;margin:34px 0 4px;color:var(--ink)}
+  h3.topic .n{font-family:var(--mono);font-size:13px;color:var(--amber-deep);margin-right:8px}
+
+  .lead{font-size:19px;color:var(--ink-soft)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;box-shadow:var(--shadow)}
+  .story{position:relative;padding-left:20px}
+  .story::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:linear-gradient(var(--amber),var(--red))}
+  .story .who{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--amber-deep)}
+
+  .exam{background:#FBF3DE;border:1px solid #E7C97E;border-left:5px solid var(--amber-deep);border-radius:10px;padding:14px 18px 14px 16px;margin:14px 0}
+  .exam .tag{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber-deep);display:flex;align-items:center;gap:7px}
+  .exam ul{margin:8px 0 2px;padding-left:20px}
+  .exam li{margin:5px 0}
+  .exam b{color:var(--red)}
+
+  .hook{display:flex;gap:12px;align-items:flex-start;background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:13px 16px;margin:12px 0;font-size:16.5px}
+  .hook .ic{font-size:20px;line-height:1.2}
+  .hook b{color:#bfe6a8}
+
+  /* memory movie */
+  .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
+  .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
+  .scene .num{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep)}
+  .scene .decode{color:var(--red);font-weight:600}
+  .pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:16px 0}
+  .pic{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);break-inside:avoid}
+  .pic .big{font-size:32px;line-height:1}
+  .pic h4{font-family:var(--disp);margin:7px 0 4px;font-size:17px}
+  .pic p{margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.45}
+  .pic .key{color:var(--red);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+  tbody tr:nth-child(even){background:var(--paper-2)}
+  td.c{text-align:center;font-family:var(--mono);font-weight:700}
+
+  details.more{margin:12px 0;border:1px dashed var(--line);border-radius:10px;background:var(--card);overflow:hidden}
+  details.more>summary{cursor:pointer;padding:11px 16px;font-family:var(--mono);font-size:13px;letter-spacing:.5px;color:var(--amber-deep);list-style:none}
+  details.more>summary::-webkit-details-marker{display:none}
+  details.more>summary::before{content:"▸ ";color:var(--amber-deep)}
+  details.more[open]>summary::before{content:"▾ "}
+  details.more .inner{padding:2px 16px 14px}
+
+  /* mark learned */
+  .learn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);cursor:pointer;user-select:none;margin-top:6px}
+  .learn input{appearance:none;width:18px;height:18px;border:2px solid var(--line);border-radius:5px;cursor:pointer;display:grid;place-content:center;background:var(--card)}
+  .learn input:checked{background:var(--green);border-color:var(--green)}
+  .learn input:checked::after{content:"✓";color:#fff;font-size:12px;font-weight:700}
+
+  /* FLASHCARDS */
+  .deck-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .flashcard{width:100%;max-width:640px;height:300px;perspective:1600px;cursor:pointer}
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+  .flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .fc-front{background:var(--card)}
+  .fc-back{background:var(--ink);color:var(--paper);transform:rotateY(180deg)}
+  .fc-face .lab{position:absolute;top:16px;left:22px;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.7}
+  .fc-front .lab{color:var(--amber-deep)} .fc-back .lab{color:var(--amber)}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:24px;line-height:1.18}
+  .fc-a{font-size:18px;line-height:1.5}
+  .fc-hint{position:absolute;bottom:14px;right:22px;font-family:var(--mono);font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:1px}
+  .deck-ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+  .btn{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.5px;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:9px;cursor:pointer;transition:.15s}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.amber{border-color:var(--amber-deep);background:var(--amber);color:#241a06}
+  .btn.amber:hover{background:var(--amber-deep);color:#fff}
+  .counter{font-family:var(--mono);font-size:14px;color:var(--ink-soft);min-width:74px;text-align:center}
+
+  /* PRACTICE */
+  .q-block{counter-increment:q}
+  .q-block .q-head{font-family:var(--disp);font-weight:700;font-size:21px;display:flex;gap:12px;align-items:baseline}
+  .q-block .q-head .num{font-family:var(--mono);color:#fff;background:var(--red);border-radius:8px;padding:2px 10px;font-size:15px;flex:none}
+  .q-type{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep);margin:4px 0 0 0}
+  .answer{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;display:none}
+  .answer.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
+  .answer .alab{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--green);font-weight:700}
+
+  .cheat td:first-child{font-family:var(--mono);font-size:12px;color:var(--amber-deep);white-space:nowrap}
+  .cheat td:nth-child(2){font-weight:600}
+
+  footer{padding:40px 0 70px;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:12px}
+  .print-only{display:none}
+  a.inline{color:var(--amber-deep)}
+
+  @media (max-width:560px){ body{font-size:17px} .flashcard{height:340px} h1{font-size:46px} }
+
+  /* ---------- PRINT / PDF ---------- */
+  @media print{
+    @page{size:A4;margin:15mm 14mm}
+    body{background:#fff;color:#000;font-size:11.5pt}
+    body::before,#bar{display:none}
+    header.top,nav.tabs,.deck-ctrl,.fc-hint,.learn,.flip-note{display:none !important}
+    .wrap{max-width:none;padding:0}
+    .hero{padding:0 0 14px;border-bottom:2px solid #000}
+    .riku{background:#f3f3f3;color:#000;box-shadow:none;border:1px solid #999}
+    .riku p{color:#222}.riku .big{color:#a8650a}.riku::after{display:none}
+    section{padding:14px 0;border-bottom:1px solid #bbb;break-inside:avoid}
+    .card,.exam,.hook,table,.q-block,.flashcard{box-shadow:none;break-inside:avoid}
+    .hook{background:#eef3ec;color:#000;border:1px solid #9bbf8c}.hook b{color:#2f5a28}
+    .exam{background:#fdf6e3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    th{background:#222 !important;color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .stripe{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    details.more{border:none} details.more .inner{padding:0} details.more>summary{display:none}
+    details.more[open] .inner, details.more .inner{display:block !important}
+    /* show all practice answers */
+    .answer{display:block !important;border-top:1px solid #bbb}
+    /* flatten flashcards to Q/A in print */
+    #fc-live{display:none}
+    .print-only{display:block}
+    #fc-print .pc{break-inside:avoid;border:1px solid #bbb;border-radius:8px;padding:8px 12px;margin:7px 0}
+    #fc-print .pq{font-weight:700} #fc-print .pa{color:#222}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="top"><div class="wrap">
+  <span class="brand">📝 Req Mgmt · MMC-01a</span>
+  <nav class="tabs">
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
+    <a href="#" onclick="window.print();return false;">⤓ PDF</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <div class="stripe"></div>
+    <div class="kicker">Structure &amp; Functions of Cyber-Physical Systems</div>
+    <h1>Requirement <em>Management</em><br>Field Manual</h1>
+    <p class="sub">Memorize the whole deck the easy way: one story, the exact exam points, and a memory hook on every topic.</p>
+    <div class="meta"><span>Module <b>MMC-01a</b></span><span>Lecturer <b>Prof. Dr. M. Górka</b></span><span>Source <b>2.pptx · 151 slides</b></span><span><b>THD · NuW · AI for Smart Sensors</b></span></div>
+
+    <div class="riku">
+      <h3>🦜 Meet Pip the parrot — your memory anchor</h3>
+      <p>A kid named <b>Mira walks into a robot shop and says “I want a robot pet.”</b> Behind the counter sits <b>Pip, a parrot</b> whose one job is to <b>repeat the wish back perfectly</b> — because if Pip mishears a single word, the <b>workshop</b> in the back builds the wrong robot.</p>
+      <p>Every slide answers one question: <b>“How does Pip turn a fuzzy human wish into exact, written, testable orders — and keep them straight for the product's whole life?”</b> Keep <b>Mira (customer) → Pip (requirement) → workshop (supplier)</b> in your head and the chapter tells itself.</p>
+      <div class="big">★ MASTER KEY → basket → scale → index cards → ladder → checklist → catch changes = Collect · Assess · Develop · Tier-down · Verify · Changes</div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="sec-label">00 · The shape of the whole chapter</div>
+    <h2>See the skeleton before the bones</h2>
+    <p class="lead">Requirement Management is <b>step 2 of System Engineering</b>:</p>
+    <div class="card" style="font-family:var(--mono);font-size:14px;line-height:2">
+      1 Basics → <b style="color:var(--red)">2 REQUIREMENTS ★</b> → 3 Risk → 4 Change → 5 Ideation → (6 Design) → (7 Test) → (8 Project Setup)
+    </div>
+    <p>The chapter solves requirements in a fixed order — the <b>6-phase process</b>. Learn this one picture-story and you already own the structure of the exam; everything else just bolts onto one of these six scenes:</p>
+    <div class="hook"><span class="ic">🧠</span><div><b>basket → scale → index cards → ladder → checklist → catch the changes.</b><br><b>C</b>ollect → <b>A</b>ssess → <b>D</b>evelop → <b>T</b>ier-down → <b>V</b>erify → <b>C</b>hanges.</div></div>
+  </section>
+
+  <!-- MEMORY MOVIE -->
+  <section id="movie">
+    <div class="sec-label">The trick · watch, don't memorize</div>
+    <h2>🎬 The Memory Movie</h2>
+    <p class="lead">Don't memorize sentences — your brain hates random letters. Instead <b>close your eyes and play this 6-scene movie</b> of Pip building Mira's robot pet. Each picture <em>is</em> a phase of the process, in order, so when you replay the movie the exam answer just appears. Read it 3 times, then try to replay it with your eyes shut.</p>
+
+    <div class="scene"><div class="emo">🧺</div><div><div class="num">Scene 1</div>Pip walks around with a <b>basket</b>, scooping up every wish, law and old note. → <span class="decode">(1) COLLECT requests.</span></div></div>
+    <div class="scene"><div class="emo">⚖️</div><div><div class="num">Scene 2</div>He tips the basket onto a <b>judge's scale</b>: relevant? important? what kind? → <span class="decode">(2) ASSESS requests (the Kano judge lives here).</span></div></div>
+    <div class="scene"><div class="emo">✍️</div><div><div class="num">Scene 3</div>He writes each survivor as a crisp <b>index card</b> — short, exact, testable. → <span class="decode">(3) DEVELOP requirements (SMART · testable · linked).</span></div></div>
+    <div class="scene"><div class="emo">🪜</div><div><div class="num">Scene 4</div>He carries the cards <b>down a ladder</b>, handing smaller orders to each workshop floor. → <span class="decode">(4) TIER DOWN to component level.</span></div></div>
+    <div class="scene"><div class="emo">✅</div><div><div class="num">Scene 5</div>He ticks a <b>checklist</b> as the workshop proves each card was built right. → <span class="decode">(5) track VALIDATION / VERIFICATION.</span></div></div>
+    <div class="scene"><div class="emo">🔁</div><div><div class="num">Scene 6</div>Someone changes their mind — Pip catches it and <b>updates every card</b>. → <span class="decode">(6) follow up of CHANGES.</span></div></div>
+
+    <div class="hook"><span class="ic">🎥</span><div>Replay in one breath: <b>basket → scale → index cards → down the ladder → tick the checklist → catch the changes.</b> That's the whole chapter's skeleton — no letters needed.</div></div>
+
+    <h3 class="topic">📕📗 The two binders Pip carries (the Core Documents)</h3>
+    <p>Picture two ring-binders on the counter — this is the most common exam pair:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">📕</div><h4>Red WISH binder = PRD</h4><p>German <em>Lastenheft</em>. The <span class="key">customer's “what”</span> — the sum of all customer requirements; used to request offers.</p></div>
+      <div class="pic"><div class="big">📗</div><h4>Green PROMISE binder = Impl. Spec</h4><p>German <em>Pflichtenheft</em>. The <span class="key">supplier's “how &amp; with what.”</span> Sign it → development starts.</p></div>
+    </div>
+
+    <h3 class="topic">🖼️ Picture-hooks for the tricky lists</h3>
+    <p>Same trick for every list that wouldn't stick — turn it into one strong, weird image:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">🌳</div><h4>Why RM? (tree-swing)</h4><p>Everyone draws a <b>different swing</b> from the same words. That chaos is <span class="key">why Pip exists</span>: one common understanding, no field disasters.</p></div>
+      <div class="pic"><div class="big">🪜</div><h4>Kano's 5 shelves</h4><p>🍞 <b>bread</b> (basic/must — noticed only when gone) · 📈 <b>dial</b> (performance/should — more = happier) · 🎁 <b>gift</b> (delighter/could — wow!) · 😐 <b>grey box</b> (indifferent) · 🤢 <b>stink bomb</b> (reverse/don't — worse).</p></div>
+      <div class="pic"><div class="big">🧠⌚</div><h4>SMART</h4><p>A brain in a <b>smart-watch</b>: <span class="key">Specific · Measurable · Achievable · Reasonable · Time-bound.</span></p></div>
+      <div class="pic"><div class="big">🔭</div><h4>Why specific</h4><p>“The man on the mountain with the telescope” → 5 different drawings. Language is ambiguous → <span class="key">fix with IF–THEN code.</span></p></div>
+      <div class="pic"><div class="big">📺</div><h4>Not TOO specific</h4><p>A <b>bicycle hidden in a TV box</b> — they fixed the <span class="key">problem</span> (shipping damage), not the package → a clever solution emerged.</p></div>
+      <div class="pic"><div class="big">🌉</div><h4>“Linked” disaster</h4><p>A broken bridge with a <b>28 cm step</b> (North-Sea zero vs Mediterranean zero) → <span class="key">unlinked requirements smash together.</span></p></div>
+      <div class="pic"><div class="big">🛞</div><h4>System Wheel</h4><p>A <b>wagon wheel</b>: hub = mechanics/E-E/software · inner ring = 7 “DNA” datasheet props · outer ring = 10 extended properties.</p></div>
+      <div class="pic"><div class="big">🚪</div><h4>Tier-down bouncer</h4><p>A bouncer at each door: <span class="key">acceptable? → in. Not? → can I tweak it? yes: modify / no: toss.</span></p></div>
+      <div class="pic"><div class="big">🛑</div><h4>Analysis paralysis</h4><p>A man <b>frozen forever at the planning desk</b>, never starting the build. <span class="key">Don't be him.</span></p></div>
+      <div class="pic"><div class="big">🔌</div><h4>ReqIF</h4><p>A <b>universal plug</b> (XML) letting two requirement tools — and customer↔supplier — <span class="key">exchange requirements.</span></p></div>
+    </div>
+
+    <div class="hook"><span class="ic">🧠</span><div><b>How to actually lock it in:</b> (1) read a scene, (2) <b>shut your eyes and re-see the picture</b>, (3) say the real meaning out loud. Do the 6-scene movie + 10 picture-hooks twice today and once tomorrow — then test yourself with the <a href="#cards" style="color:#bfe6a8">flashcards</a>. Seeing beats reading; testing beats re-reading.</div></div>
+  </section>
+
+  <!-- LESSON -->
+  <section id="lesson">
+    <div class="sec-label">The full lesson · all slides</div>
+    <h2>Taught like a story — with the points you must write</h2>
+
+    <!-- 1 -->
+    <h3 class="topic"><span class="n">01</span>What <em>is</em> a requirement?</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Mira says “robot pet.” That's a wish, not a buildable order. Pip's job is to turn it into a <b>requirement</b>: an exact written target for one property that already accounts for all conditions (outdoors? quiet at night?). One robot needs <b>hundreds to tens of thousands</b> of these cards.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Definition</div><ul>
+      <li><b>Requirement = an accurately phrased development target for a property</b> of the system/component, <b>considering all relevant conditions</b>.</li>
+      <li><b>Amount:</b> several hundred to <b>(ten-)thousands</b> (grows over time, e.g. autonomous cars).</li>
+      <li>Defined in standards: <b>ISO/IEC/IEEE 29148</b> (software req. engineering), <b>ISO/IEC 25000 (SQuaRE)</b>; part of maturity models <b>CMMI, SPICE (ISO/IEC 15504), ISO/IEC 12207</b>.</li>
+      <li>Lives inside <b>ItO – Idea to Offer</b>: customer requirement → ItO → offer → product (purchasing procures in parallel; after test/validation &amp; industrialization → release).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>A requirement is <b>one exact card for one property</b> — not a vague wish. Software rulebook number to anchor: <b>29148</b>.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t1">Mark learned</label>
+
+    <!-- 2 -->
+    <h3 class="topic"><span class="n">02</span>Why do we need RM? (the tree-swing)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>The famous <b>tree-swing cartoon</b>: the customer explains a swing, sales describes another, the designer draws a third, the workshop builds a fourth — and what the customer <em>really</em> needed was something else entirely. That mess is exactly what Pip prevents.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Why RM</div><ul>
+      <li>RM identifies the necessary requirements <b>from (super)system level down to component level</b> and <b>maintains them over the whole lifecycle</b>.</li>
+      <li>RM is the <b>enabler</b> to: increase <b>customer satisfaction</b> · get a <b>common understanding</b> · avoid <b>safety/field (quality) issues</b> · avoid <b>late changes &amp; cost impacts</b> · feed <b>LeLe</b>.</li>
+      <li>➡ RM is the <b>essential discipline in systems design — if the targets are set wrong, the whole product is wrong!</b></li>
+      <li><b>Challenges (3):</b> clear &amp; distinct definition · completeness (missing reqs found too late) · inaccurate interpretation. → <b>LeLe is important!</b></li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Same words, <b>five different swings</b>. RM = <b>one common picture</b>.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t2">Mark learned</label>
+
+    <!-- 3 -->
+    <h3 class="topic"><span class="n">03</span>The two binders (Core Documents)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Pip carries two binders. Mira hands over the 📕 <b>red WISH binder (PRD)</b> = everything <em>she</em> wants. The workshop reads it and writes back the 📗 <b>green PROMISE binder (Implementation Spec)</b> = exactly <em>how</em> and <em>with what</em>. When Mira signs the green binder, building begins.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — PRD (Lastenheft)</div><ul>
+      <li><b>Sum of all requirements of a commercial customer</b> (not necessarily the end user); standards <b>DIN 69901-5</b> / IEEE <b>SRS 29148</b>.</li>
+      <li>Used in the <b>nomination phase</b> to request technical &amp; commercial <b>offers</b> from suppliers.</li>
+      <li><b>Content:</b> intro · current state · target (main reqs) · interfaces · <b>functional</b> · <b>NFR</b> · system architecture · expected scope of delivery · acceptance criteria.</li>
+      <li><b>Internal</b> dev → detailed &amp; tiered down. <b>External</b> dev → generic (property level) to <b>avoid specifying the solution</b>.</li>
+    </ul></div>
+    <div class="exam"><div class="tag">📝 Write in exam — Implementation Spec (Pflichtenheft)</div><ul>
+      <li>The <b>supplier's answer to the customer's PRD</b>: the <b>“How”</b> (technical concept) and the <b>“With what”</b> (resources, project plan).</li>
+      <li><b>Every PRD requirement</b> must be covered by ≥1 deliverable. <b>Customer acceptance → development starts.</b></li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Red = Request</b> (customer, “what”) · <b>Green = Guarantee</b> (supplier, “how/with what”). <em>Lastenheft</em> = load you carry → <em>Pflichtenheft</em> = duty you accept.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t3">Mark learned</label>
+
+    <!-- 4 -->
+    <h3 class="topic"><span class="n">04</span>The 6-phase process (the spine)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>This is the <b>movie</b> again — Pip's six scenes. Different rulebooks describe it (<b>IEEE SWEBOK, CMMI, IIBA/BABOK, Volere, IREB</b>), but the lecture uses one variant with two freeze points: <b>PRD freeze</b> and <b>Implementation-spec freeze</b>. In big projects a <b>requirement manager</b> steers it.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>6 phases:</b> (1) Collect → (2) Assess → (3) Develop → (4) Tier down → (5) Validation/Verification → (6) Changes.</li>
+      <li><b>Cascade of who:</b> Customer (request) → <b>Property Engineer</b> (1→x system properties) → <b>Developer</b> (x→y component requirements).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>basket → scale → index cards → ladder → checklist → catch the changes.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="t4">Mark learned</label>
+
+    <!-- 5 -->
+    <h3 class="topic"><span class="n">05</span>(1) COLLECT — fill the basket</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Pip scoops up wishes from <em>outside</em> (Mira first!, plus law and rules) and from <em>inside</em> the shop (old notebooks, house rules). But careful — interviewing <b>more and more people gives less and less new info</b> (diminishing returns).</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>External requests:</b> <b>!!!Customer!!! (the prior source!)</b> · Law · Standards &amp; guidelines · Cultural · Political · Social expectations.</li>
+      <li><b>Internal requests:</b> <b>LeLe</b> · company <b>standards</b> · existing <b>tool kits</b> · <b>company strategy</b> · <b>CI/design</b> · business-dept restrictions.</li>
+      <li><b>Use cases</b> capture demand: <b>“As [role] / I would like to [function] / To [reason]”</b>; named after the goal.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Customer first, then the world outside, then your own shop. And <b>fewer secrets per extra interviewee</b>.</div></div>
+
+    <h3 class="topic" style="font-size:19px"><span class="n">05a</span>LeLe — Lessons Learned</h3>
+    <div class="card story"><div class="who">🧒 Story</div>At the <b>kick-off</b>, the team reads the old notebook so they don't repeat last project's mistakes. They keep updating it, and at the <b>end</b> hold a workshop to write the new wisdom into the standard.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li>Use prior-project knowledge at the <b>start</b> (kick-off) → <b>constantly update</b> during → <b>end workshop</b> transfers “what went well / what to improve” into the <b>new standard</b>. Covers <b>technical, PM, commercial</b> knowledge; document <b>in software</b>.</li>
+      <li><b>Golden rule:</b> the solution is <b>NOT the negation of the problem</b>. “We started the test too late” → ❌ “don't start so late” → ✅ <b>“start the test ≥2 weeks before release and anchor it in the project plan.”</b> (Same for positive feedback.)</li>
+    </ul></div>
+    <details class="more"><summary>Show the LeLe documentation table</summary><div class="inner">
+      <table><thead><tr><th>ID</th><th>From</th><th>Date</th><th>Keep/Improve</th><th>Topic</th><th>Prio</th><th>Suggested Solution / Anchor</th><th>Responsible</th><th>Until</th><th>Status</th></tr></thead><tbody>
+        <tr><td class="c">001</td><td>Jens Koppi, LM-2</td><td>10.12.2022</td><td>keep</td><td>parallel ordering while simulation runs saved 2 weeks</td><td>high</td><td>Change generic project plan</td><td>Franz Haupt, AM-1</td><td>13.08.2025</td><td>realized</td></tr>
+        <tr><td class="c">002</td><td>Patricia Müller, TE-8</td><td>10.12.2022</td><td>improve</td><td>Prototype wrongly built, causing a test delay</td><td>middle</td><td>provide assembly manual early for the prototype workshop</td><td>Jan Schulze, OF-2</td><td>20.10.2025</td><td>clarification needed</td></tr>
+      </tbody></table>
+    </div></details>
+
+    <h3 class="topic" style="font-size:19px"><span class="n">05b</span>Standards &amp; “who is the customer?”</h3>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Regional:</b> TGL (DDR) · DIN (German) · GB/GB-T (China). <b>International:</b> EN (European) · ISO (mechanics) · IEC (electrical/electronics). <b>Industry:</b> IATF (automotive) · VDE (electrotechnics).</li>
+      <li><b>“Who is the customer?” pitfall:</b> wrong requirements come from misunderstanding who the real customer/user is (parents choosing for the child).</li>
+    </ul></div>
+    <label class="learn"><input type="checkbox" data-k="t5">Mark learned</label>
+
+    <!-- 6 -->
+    <h3 class="topic"><span class="n">06</span>(2) ASSESS — the judge's scale &amp; Kano</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Pip can't build everything, so he <b>judges</b> each wish three ways: is it <b>relevant</b> here? how <b>important</b> is it? what <b>kind</b> is it? The most famous judge on the scale is <b>Mr. Kano</b>, who sorts every feature onto one of 5 shelves by how it moves Mira's happiness.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — assess by</div><ul>
+      <li><b>Relevance</b> (relevant for <em>this</em> product? e.g. not sold in Japan → ignore Japanese law) · <b>Priority</b> (which wins if not all fit, e.g. airbag &gt; turn signal; depends on company strategy) · <b>Classification</b>.</li>
+      <li><b>Design strategies</b> driving priority: Design for <b>Customer</b> (Design Thinking) · <b>Costs</b> · <b>Quality/Reliability</b> · <b>Production/Manufacturing (DFM)</b> · <b>Service</b>.</li>
+    </ul></div>
+    <div class="exam"><div class="tag">📝 Write in exam — Kano model (Prof. Noriaki Kano)</div><ul>
+      <li><b>Basic (must)</b> — bread: invisible if present, furious if missing; no competitor differentiation. <em>(call-centre greeting)</em></li>
+      <li><b>Performance (should)</b> — dial: <b>more = happier</b>. <em>(hotline waiting time)</em></li>
+      <li><b>Delighter (could)</b> — surprise gift: unexpected → <b>wow</b>; a little gives a lot. <em>(live ticket-status tracking)</em></li>
+      <li><b>Indifferent</b> — grey box: present or not, nobody cares. <em>(hold-music song)</em></li>
+      <li><b>Reverse (don't)</b> — stink bomb: its presence <b>lowers</b> satisfaction. <em>(jargon in a hotline call)</em></li>
+      <li>Classification <b>shifts</b> by <b>customer</b>, by <b>price/business model</b>, and over <b>time</b> (delighters become basics).</li>
+      <li>Survey: <b>standardised</b> (remove interviewer impact) + <b>demographics</b>; ask a <b>functional + dysfunctional</b> pair.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Order of happiness: <b>Bread → Dial → Gift → Grey box → Stink bomb.</b> <em>(Car: must=it drives · should=horsepower · could=launch control · indifferent=underfloor-screw colour · reverse=new rust after a wash.)</em></div></div>
+    <details class="more"><summary>Show the Kano survey tables (questions &amp; class lookup)</summary><div class="inner">
+      <p style="font-family:var(--mono);font-size:12px;margin:10px 0 2px;color:var(--amber-deep)">THE FUNCTIONAL / DYSFUNCTIONAL QUESTION PAIR</p>
+      <table><thead><tr><th></th><th>Question</th><th>like</th><th>expect</th><th>neutral</th><th>tolerate</th><th>dislike</th></tr></thead><tbody>
+        <tr><td><b>Functional</b></td><td>How would you feel if it had MORE of…?</td><td class="c">○</td><td class="c">○</td><td class="c">○</td><td class="c">○</td><td class="c">○</td></tr>
+        <tr><td><b>Dysfunctional</b></td><td>…if it did NOT have / LESS of…?</td><td class="c">○</td><td class="c">○</td><td class="c">○</td><td class="c">○</td><td class="c">○</td></tr>
+      </tbody></table>
+      <p style="font-family:var(--mono);font-size:12px;margin:14px 0 2px;color:var(--amber-deep)">READING THE CLASS FROM THE COMBINATION</p>
+      <table><thead><tr><th>Functional</th><th>Dysfunctional</th><th>Class</th></tr></thead><tbody>
+        <tr><td>I expect it</td><td>I dislike it</td><td>basic needs (must)</td></tr>
+        <tr><td>I like it</td><td>I dislike it</td><td>performance needs (should)</td></tr>
+        <tr><td>I like it</td><td>I am neutral</td><td>delighter (could)</td></tr>
+        <tr><td>I am neutral</td><td>I am neutral</td><td>indifferent</td></tr>
+        <tr><td>I dislike it</td><td>I expect it</td><td>reverse (don't)</td></tr>
+        <tr><td colspan="2">All others (e.g. both “I like it”)</td><td>remove / questionable</td></tr>
+      </tbody></table>
+    </div></details>
+
+    <h3 class="topic" style="font-size:19px"><span class="n">06a</span>Classification of requests</h3>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>By belonging:</b> <b>Product (What)</b> [SE focus] · <b>Process (How)</b> · <b>External (Rest)</b>.</li>
+      <li><b>By function:</b> <b>Functional</b> (prints my file) vs <b>NFR</b> (24/7, 99.9% uptime — not a feature but still expected).</li>
+      <li><b>Function attributes:</b> inputs/outputs · value range/dimensions · tolerance · how often executed · how fast (throughput time).</li>
+    </ul></div>
+    <label class="learn"><input type="checkbox" data-k="t6">Mark learned</label>
+
+    <!-- 7 -->
+    <h3 class="topic"><span class="n">07</span>(3) DEVELOP — write the perfect index card</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Now Pip writes each requirement as a tiny, perfect card. Rule of thumb: <b>one idea per card, written like a robot could obey it.</b></div>
+    <div class="exam"><div class="tag">📝 Write in exam — a good requirement is…</div><ul>
+      <li><b>Complete</b> (no supplier assumptions) · <b>correct</b> · <b>SMART</b> · <b>testable</b> · <b>linked</b> · <b>necessary</b> (no “nice-to-haves”).</li>
+      <li><b>Short</b> · <b>atomic</b> (one req/sentence) · <b>active voice</b> (“The motor rotates the shaft” ✅, not “is driven by” ❌) · <b>no weak words</b> (“really/very/roughly” — tools <b>ReQualize, DESIRe</b>) · <b>avoid “should/must”</b>.</li>
+      <li><b>Understandable · traceable · unambiguous &amp; consistent · feasible · equipped with properties.</b></li>
+    </ul></div>
+    <div class="exam"><div class="tag">📝 Properties of a requirement</div><ul>
+      <li>Unique <b>ID</b> · description · <b>rationale/target</b> · <b>originator</b> · <b>creator</b> · <b>user</b> · <b>fit criterion</b> (testable) · <b>priority</b> · dependencies/interfaces · conflicts · release/maturity · linked documents · comments · <b>version</b> · <b>change history</b> · <b>status</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>One card, one idea, active voice, no fuzzy words — and give each card a <b>passport</b> (ID, who, why, test, version, status).</div></div>
+
+    <h3 class="topic" style="font-size:19px"><span class="n">07a</span>SMART</h3>
+    <div class="card story"><div class="who">🧒 Story</div><b>Specific:</b> “I saw the man on the mountain with the telescope” — five people draw five different pictures → fix with <b>IF–THEN–ELSE code</b>. <b>Not too specific:</b> a company asked to cut a bicycle's <b>shipping damage</b> (not “improve the box”) → result: a box that <b>looks like a TV</b>, far fewer damages. Specify the <em>problem</em>, not the <em>solution</em>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>SMART = Specific · Measurable · Achievable · Reasonable · Time-Bound.</b></li>
+      <li>Natural language is <b>ambiguous</b> → use mathematical/IF-THEN descriptions and <b>exclude variants</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Brain in a <b>smart-watch</b>. + <b>telescope = be specific</b> / <b>bicycle-in-a-TV-box = don't over-specify</b>.</div></div>
+
+    <h3 class="topic" style="font-size:19px"><span class="n">07b</span>Testable &amp; writing guideline</h3>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li>To be <b>testable</b> a requirement must be <b>specific, detailed, affordable to test, linked to a maturity level</b>. (“The charger needs to be efficient” = untestable — 75%? 80%?)</li>
+      <li>Verification must be <b>affordable</b> (don't crash 10 real cars to check “mute button accessible after a crash”).</li>
+    </ul></div>
+    <details class="more"><summary>Show the writing guideline (Bad → Better)</summary><div class="inner">
+      <table><thead><tr><th>Guideline</th><th>Bad</th><th>Better</th></tr></thead><tbody>
+        <tr><td>Positive not negative</td><td>The box is not complicated to open.</td><td>The box is easy to open.</td></tr>
+        <tr><td>Avoid “could/should”</td><td>If possible, the bike should be easy to clean.</td><td>The bike is easy to clean.</td></tr>
+        <tr><td>Specific</td><td>The cage is robust.</td><td>The cage operates normally after 10× dropping from 2 m onto concrete.</td></tr>
+        <tr><td>What not how</td><td>The bag has a handle on the top.</td><td>The bag has a possibility to carry it.</td></tr>
+      </tbody></table>
+    </div></details>
+
+    <h3 class="topic" style="font-size:19px"><span class="n">07c</span>Linked + SCRUM</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Every card holds hands with its neighbours. The 🌉 <b>bridge built from two countries</b> (North-Sea zero vs Mediterranean zero) ended with a <b>28 cm step</b> — and the fix went the wrong way, doubling it. That's what unlinked requirements do.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Link each requirement to:</b> its <b>request</b> · <b>child &amp; mother</b> reqs (hierarchy) · <b>neighbour</b> reqs (mutual impact) · <b>functions &amp; NFR</b> · <b>test items</b> · <b>interfaces</b>.</li>
+      <li><b>SCRUM</b> (agile, software): <b>Epic → feature request → product backlog</b> — same idea, highly simplified; backlog rows use the role/function/reason format.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>The <b>28 cm bridge step</b> = always link your requirements.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t7">Mark learned</label>
+
+    <!-- 8 -->
+    <h3 class="topic"><span class="n">08</span>The System Wheel</h3>
+    <div class="card story"><div class="who">🧒 Story</div>To not forget any property of Mira's robot, Pip spins a <b>wagon wheel</b> of properties (recap from chapter 1, used here to develop requirements as a “datasheet”).</div>
+    <div class="exam"><div class="tag">📝 Write in exam — 3 layers</div><ul>
+      <li><b>Hub = realization domain:</b> mechanics · E/E · software.</li>
+      <li><b>Inner ring = core “DNA” (datasheet):</b> performance · consumption · acoustic · costs · reliability · weight · size.</li>
+      <li><b>Outer ring = 10 extended properties:</b> acoustical behaviour · performance &amp; efficiency · data acquisition/access &amp; security · design for production/service/upgrade · <b>safety</b> (ISO 26262, FuSiKo/HARA) · <b>EMC</b> (emission, immunity, ESD) · sustainability · reliability · thermal behaviour · volumetric behaviour &amp; design (incl. <b>FMK</b> tolerance concept, crash behaviour).</li>
+      <li><b>Property engineer</b> = the <b>voice of the customer for one property</b>; optimises <b>across the system</b> (not one component); thinks in <b>system functions</b>; the <b>system engineer decides conflicts</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Wheel = <b>hub (3 domains) + inner ring (7 DNA) + outer ring (10 extended)</b>. Property engineer = one property's customer-voice.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t8">Mark learned</label>
+
+    <!-- 9 -->
+    <h3 class="topic"><span class="n">09</span>(4) TIER DOWN — carry the cards down the ladder</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Pip walks the cards <b>down</b> from supersystem → system → sub-system → component, handing each floor an order it can actually build and <b>own</b>. A loudspeaker maker <b>won't promise the sound inside the whole car</b> — he didn't build the room! Each receiver must <b>accept, reject, or ask to change</b> the card.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li>Tier down system → component level; the receiver (e.g. component team) must <b>accept / reject / feedback for change</b> and be able to <b>take responsibility</b>.</li>
+      <li><b>New-requirement flow:</b> new req → <b>inbox/pool</b> → <b>acceptable?</b> yes → add to component reqs → END. No → <b>modification possible?</b> yes → modify (or decline <b>with reason</b>) · no → <b>discard</b>.</li>
+      <li><b>Hierarchy:</b> Supersystem (4) → System (3) → Sub-system (2) → Component (1).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>A <b>bouncer at each door</b>: fits? in. Doesn't? can I tweak it? yes→modify / no→toss. Only promise what you can build.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t9">Mark learned</label>
+
+    <!-- 10 -->
+    <h3 class="topic"><span class="n">10</span>(5) Verify &amp; (6) Changes + Analysis Paralysis</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Pip doesn't run the tests himself — he just <b>ticks them off</b> as the workshop proves each card. When anyone changes their mind, he <b>chases the change</b> through every card. And he must never freeze polishing cards forever instead of letting the build start.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>(5) Validation/Verification:</b> all reqs must be <b>testable</b>; RM does <b>not verify</b> but <b>tracks</b> that each was <b>confirmed by testing</b> (→ Test &amp; Verification chapter).</li>
+      <li><b>(6) Changes:</b> track &amp; follow up <b>changes of requests/requirements</b> (→ Change Management chapter).</li>
+      <li><b>Analysis paralysis:</b> RM is vital, but don't analyse forever to be 100% perfect <b>instead of starting realization</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>RM <b>tracks the ticks, it doesn't do the tests</b>. Changes → Change Management. And <b>don't freeze at the desk</b> — start building.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t10">Mark learned</label>
+
+    <!-- 11 -->
+    <h3 class="topic"><span class="n">11</span>Software, ReqIF &amp; Summary</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Thousands of cards need real tools (not Word/Excel). And two different tools — or customer &amp; supplier — talk through one <b>adapter language: ReqIF</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Software must:</b> administrate · structure/sort/filter · tailor to owner · manage workflow/status · <b>link</b> · version &amp; change-history · <b>branch</b> for products; <b>traceability &amp; transparency</b> matter (no standard office tool!).</li>
+      <li><b>ReqIF = Requirement Interchange Format</b> — an <b>XML</b> format, managed by <b>ProSTEP iViP e.V.</b>, to <b>exchange requirements between tools and between customer &amp; supplier</b>.</li>
+      <li><b>Tools:</b> Codebeamer (PTC) · DOORS (IBM) · JAMA. <b>Agile:</b> ClickUp · cplace · Jira (Epic → product backlog → sprint backlog).</li>
+      <li><b>Summary:</b> RM is the <b>most important step in system design</b> — right product, right quality, highest <b>customer satisfaction</b>; runs in <b>6 phases</b> and focuses on <b>properties, not technical solutions</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>ReqIF = the <b>universal plug (XML)</b> between tools and partners. <em>If the targets are set wrong, the whole product is wrong</em> — but don't drown in analysis paralysis.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t11">Mark learned</label>
+
+    <div class="card" style="text-align:center;background:var(--ink);color:var(--paper)">
+      <div style="font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--amber)">YOUR PROGRESS</div>
+      <div id="progress" style="font-family:var(--disp);font-size:34px;font-weight:800;margin-top:4px">0 / 11 topics learned</div>
+      <div style="height:8px;background:#3a342b;border-radius:6px;margin-top:10px;overflow:hidden"><div id="progbar" style="height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--red));transition:.4s"></div></div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section id="cards">
+    <div class="sec-label">Active recall · flip to test yourself</div>
+    <h2>Flashcards</h2>
+    <p class="lead">Read the question, say the answer <em>out loud</em>, then flip. Cover the deck and run it twice — that's how it sticks. <span class="flip-note">(Click a card to flip · also exported to <b>2_flashcards.txt</b> for Anki.)</span></p>
+    <div id="fc-live" class="deck-wrap">
+      <div class="flashcard" id="fcard" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-face fc-front"><span class="lab">Question</span><div class="fc-q" id="fcq">…</div><span class="fc-hint">click to flip ⟲</span></div>
+          <div class="fc-face fc-back"><span class="lab">Answer</span><div class="fc-a" id="fca">…</div><span class="fc-hint">click to flip ⟲</span></div>
+        </div>
+      </div>
+      <div class="deck-ctrl">
+        <button class="btn" onclick="fcPrev()">‹ Prev</button>
+        <span class="counter" id="fccount">1 / 1</span>
+        <button class="btn" onclick="fcNext()">Next ›</button>
+        <button class="btn amber" onclick="fcShuffle()">⤮ Shuffle</button>
+      </div>
+    </div>
+    <!-- print version filled by JS -->
+    <div id="fc-print" class="print-only"></div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="exam">
+    <div class="sec-label">Exam rehearsal · write first, then reveal</div>
+    <h2>3 Practice Questions <span style="font-size:15px;font-family:var(--mono);color:var(--ink-soft)">+ model answers</span></h2>
+    <p class="lead">Try to answer on paper before clicking <b>Reveal</b>. The model answers show the exact points an examiner rewards.</p>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q1</span><span>Describe the requirement-management process. Name its phases, and explain the two core documents (PRD and Implementation Specification) and who is responsible for them.</span></div>
+      <div class="q-type">Type: structured / theory · ~10 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p>RM follows a fixed process: <b>(1) Collect requests → (2) Assess requests → (3) Develop requirements → (4) Tier down → (5) Validation/Verification → (6) Follow up of changes</b>, with a <b>PRD freeze</b> and an <b>Implementation-spec freeze</b>; in large projects a <b>requirement manager</b> steers it. RM exists to build the right product (the tree-swing problem) and follows the rule: <em>if the targets are set wrong, the whole product is wrong</em>.</p>
+        <ul>
+          <li><b>PRD (Product Requirements Document / Lastenheft):</b> the customer's sum of all requirements (DIN 69901-5 / IEEE SRS); used in the nomination phase to request offers. Content: current state, target, interfaces, functional + non-functional reqs, architecture, scope of delivery, acceptance criteria.</li>
+          <li><b>Implementation Specification (Pflichtenheft):</b> the <b>supplier's</b> answer — the “How” (technical concept) and “With what” (resources/project plan); every PRD requirement must be covered. On customer acceptance, development starts.</li>
+        </ul>
+        <p>Responsibility cascades: <b>Customer</b> (request) → <b>Property Engineer</b> (system properties) → <b>Developer</b> (component requirements). RM focuses on <b>properties, not technical solutions</b>.</p>
+      </div>
+    </div>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q2</span><span>Explain the Kano model. Name its 5 levels with one example each, explain how a classification can change, and how the functional/dysfunctional survey works.</span></div>
+      <div class="q-type">Type: theory / model · ~12 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p>The <b>Kano model</b> (Prof. Dr. Noriaki Kano, from quality management) prioritises customer requests by linking an implemented feature to customer satisfaction. Its <b>5 levels</b>:</p>
+        <ul>
+          <li><b>Basic needs (must):</b> self-evident; only noticed when missing — e.g. a call-centre greeting.</li>
+          <li><b>Performance needs (should):</b> satisfaction scales with fulfilment — e.g. hotline waiting time.</li>
+          <li><b>Delighter (could):</b> unexpected, creates enthusiasm — e.g. live status tracking of a ticket.</li>
+          <li><b>Indifferent:</b> little impact — e.g. the hold-music song.</li>
+          <li><b>Reverse (don't):</b> its presence lowers satisfaction — e.g. jargon in a hotline call.</li>
+        </ul>
+        <p>A classification <b>changes</b> by <b>customer</b> (delighter for one = reverse for another), by <b>price/business model</b> (delighter on a budget product = basic on a premium one), and over <b>time</b> (delighters become basic needs). The <b>survey</b> is standardized (to remove interviewer impact), includes demographics, and asks a <b>functional</b> question (“how would you feel if it had MORE of…?”) and a <b>dysfunctional</b> one (“…if it had LESS/none of…?”); the class is read from the answer combination (e.g. <em>expect it / dislike it = basic; like it / dislike it = performance; like it / neutral = delighter</em>).</p>
+      </div>
+    </div>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q3</span><span>Mira orders a custom robot pet. (a) Why must a requirement be SMART, atomic and linked — give one failure example. (b) Why “specific” but not “too specific”? (c) What does RM do in tier-down and in validation/verification?</span></div>
+      <div class="q-type">Type: application · ~8 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p><b>(a)</b> A requirement must be <b>SMART</b> (Specific, Measurable, Achievable, Reasonable, Time-Bound), <b>atomic</b> (one requirement per sentence), in <b>active voice</b>, free of weak words, and <b>linked</b> to its request, mother/child &amp; neighbour requirements, functions, test items and interfaces. <b>Failure example:</b> a bridge built from Germany (North-Sea zero) and Switzerland (Mediterranean zero) had a <b>28 cm step</b> because the height references were not linked — and the correction was even applied in the wrong direction.</p>
+        <p><b>(b)</b> Natural language is <b>ambiguous</b> (“I saw the man on the mountain with the telescope” has many readings), so a requirement must be specific/testable (“efficient” → state 80%) — but <b>not too specific</b>: specify the <em>problem</em>, not the <em>solution</em>. Example: asked to reduce a bicycle's shipping damage, the team made a box that <b>looks like a TV</b>, cutting damage sharply — a solution that over-specification would have blocked.</p>
+        <p><b>(c)</b> In <b>tier-down</b>, RM breaks system requirements to component level; the receiver must <b>accept, reject or request a change</b>, and only owns what it can build. In <b>validation/verification</b>, RM does <b>not</b> run tests but <b>tracks</b> whether each testable requirement was successfully confirmed.</p>
+      </div>
+    </div>
+
+    <details class="more"><summary>Bonus: 10 rapid-fire short answers</summary><div class="inner">
+      <ol>
+        <li><b>Requirement =</b> exact development target for one property, all conditions.</li>
+        <li><b>PRD =</b> Lastenheft (customer, “what”); <b>Impl. Spec =</b> Pflichtenheft (supplier, “how/with what”).</li>
+        <li><b>6 phases =</b> Collect · Assess · Develop · Tier-down · Verify · Changes.</li>
+        <li><b>Kano 5 =</b> basic · performance · delighter · indifferent · reverse.</li>
+        <li><b>SMART =</b> Specific · Measurable · Achievable · Reasonable · Time-Bound.</li>
+        <li><b>NFR =</b> non-functional req (e.g. 99.9% uptime), not a feature.</li>
+        <li><b>LeLe rule:</b> solution ≠ negation of the problem; anchor a concrete action.</li>
+        <li><b>Active voice:</b> “The motor rotates the shaft,” not “is driven by.”</li>
+        <li><b>ReqIF =</b> XML format (ProSTEP iViP) to exchange requirements.</li>
+        <li><b>Avoid</b> analysis paralysis — start realizing.</li>
+      </ol>
+    </div></details>
+  </section>
+
+  <!-- CHEAT CARD -->
+  <section id="cheat">
+    <div class="sec-label">Last 5 minutes before the exam</div>
+    <h2>One-screen cheat-card</h2>
+    <table class="cheat"><tbody>
+      <tr><td>Skeleton</td><td>Collect·Assess·Develop·Tier-down·Verify·Changes</td><td>basket→scale→cards→ladder→checklist→changes</td></tr>
+      <tr><td>Requirement</td><td>exact card for ONE property, all conditions</td><td>not a vague wish</td></tr>
+      <tr><td>Why RM</td><td>one common picture; targets wrong → product wrong</td><td>the tree-swing cartoon</td></tr>
+      <tr><td>Two docs</td><td>PRD=Lastenheft (customer, what) · Impl.Spec=Pflichtenheft (supplier, how)</td><td>Red Request · Green Guarantee</td></tr>
+      <tr><td>Collect</td><td>customer FIRST, then law/standards; internal = LeLe etc.</td><td>fewer secrets per extra interviewee</td></tr>
+      <tr><td>LeLe rule</td><td>solution ≠ negation; anchor a concrete action</td><td>“test ≥2 wks early, in the plan”</td></tr>
+      <tr><td>Kano 5</td><td>basic·performance·delighter·indifferent·reverse</td><td>bread·dial·gift·grey box·stink bomb</td></tr>
+      <tr><td>Kano shifts</td><td>by customer · by price · over time</td><td>delighter → basic over time</td></tr>
+      <tr><td>Classify</td><td>Product / Process / External · Functional / NFR</td><td>What / How / Rest</td></tr>
+      <tr><td>Develop</td><td>atomic, active, no weak words, testable, linked</td><td>one card, one idea</td></tr>
+      <tr><td>SMART</td><td>Specific·Measurable·Achievable·Reasonable·Time-bound</td><td>brain in a smart-watch</td></tr>
+      <tr><td>Specific</td><td>language ambiguous → IF-THEN; not too specific</td><td>telescope · bicycle-in-a-TV-box</td></tr>
+      <tr><td>Linked</td><td>request·mother/child·neighbour·function·test·interface</td><td>the 28 cm bridge step</td></tr>
+      <tr><td>System Wheel</td><td>hub(mech/EE/sw) + 7 DNA + 10 extended</td><td>wagon wheel</td></tr>
+      <tr><td>Tier down</td><td>accept / reject / feedback; own what you can build</td><td>bouncer at each door</td></tr>
+      <tr><td>Verify (5)</td><td>RM tracks ticks, doesn't test</td><td>checklist</td></tr>
+      <tr><td>ReqIF</td><td>XML, ProSTEP iViP, tool↔tool &amp; cust↔supplier</td><td>universal plug</td></tr>
+    </tbody></table>
+  </section>
+
+  <footer>
+    Requirement Management · CPS MMC-01a · study build · keep Pip in your head 🦜<br>
+    Downloads: <a class="inline" href="2_study.pdf">PDF</a> · <a class="inline" href="2_flashcards.txt">Anki flashcards</a> · <a class="inline" href="2_memorize.md">memorize guide</a> · <a class="inline" href="2.md">notes</a>
+  </footer>
+</main>
+
+<script>
+/* progress bar on scroll */
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;const s=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(s*100)+'%';});
+
+/* mark-learned with localStorage */
+const boxes=[...document.querySelectorAll('.learn input')];
+const prog=document.getElementById('progress'),pb=document.getElementById('progbar');
+function refresh(){const n=boxes.filter(b=>b.checked).length;prog.textContent=n+' / '+boxes.length+' topics learned';pb.style.width=(n/boxes.length*100)+'%';}
+boxes.forEach(b=>{const k='reqm_'+b.dataset.k;if(localStorage.getItem(k)==='1')b.checked=true;b.addEventListener('change',()=>{localStorage.setItem(k,b.checked?'1':'0');refresh();});});
+refresh();
+
+/* FLASHCARDS */
+const CARDS=[
+ ["What is a \"requirement\"?","An accurately phrased development target for a property of the system/component, considering all relevant conditions."],
+ ["How many requirements does a product have?","Several hundred to (ten-)thousands, depending on complexity (and growing over time)."],
+ ["Which standards define requirements engineering?","ISO/IEC/IEEE 29148 (software) & ISO/IEC 25000 (SQuaRE); in maturity models CMMI, SPICE (ISO/IEC 15504), ISO/IEC 12207."],
+ ["What does ItO (Idea to Offer) describe?","The core development process: customer requirement → ItO → offer → product (purchasing in parallel; then test/validation & industrialization → release)."],
+ ["What does the tree-swing cartoon show?","Everyone understands the same words differently — so RM is needed to create one common understanding."],
+ ["What is RM the enabler of?","Customer satisfaction, common understanding, avoiding safety/field issues, fewer late changes & costs, and LeLe."],
+ ["Why is RM essential in systems design?","If the targets (requirements) are set wrong, the whole product is wrong."],
+ ["Three challenges for RM?","Clear definition, completeness (missing reqs found late), and inaccurate interpretation."],
+ ["The two core documents in RM?","Product Requirements Document (PRD/Lastenheft) and Implementation Specification (Pflichtenheft)."],
+ ["What is the PRD (Lastenheft)?","The sum of all customer requirements; used in the nomination phase to request offers. DIN 69901-5 / IEEE SRS 29148."],
+ ["What does a PRD contain?","Intro, current state, target/main reqs, interfaces, functional reqs, NFR, system architecture, scope of delivery, acceptance criteria."],
+ ["PRD detail: external vs internal dev?","Internal: detailed & tiered down. External: generic property level to avoid specifying the solution."],
+ ["What is the Implementation Spec (Pflichtenheft)?","The supplier's answer to the PRD: the 'How' (technical concept) and 'With what' (resources, project plan)."],
+ ["When does development start?","When the customer accepts the Implementation Specification (every PRD requirement covered by a deliverable)."],
+ ["Which bodies describe the RM process?","IEEE (SWEBOK), CMMI, IIBA (BABOK), Volere, IREB."],
+ ["Two freeze milestones in the RM process?","PRD freeze and Implementation-specification freeze."],
+ ["The 6 phases of the RM process?","Collect requests, Assess requests, Develop requirements, Tier down, Validation/Verification, Follow up of changes."],
+ ["How do requests cascade by role?","Customer (request) → Property Engineer (system properties) → Developer (component requirements)."],
+ ["Prior source of external requests?","The customer (must be the prior source). Also law, standards, cultural/political/social expectations."],
+ ["What happens with more interview partners?","Gained knowledge decreases — diminishing returns."],
+ ["Use-case format for demand?","'As [role] / I would like to [function] / To [reason]' — named after the goal."],
+ ["Typical internal requests?","LeLe, company standards, existing tool kits, company strategy, CI/design, business-dept restrictions."],
+ ["What is LeLe (Lessons Learned)?","Knowledge management: use prior-project knowledge at kick-off, update throughout, transfer findings to the new standard at the end."],
+ ["Golden rule of LeLe?","The solution is NOT the negation of the problem — write a concrete, anchored action (e.g. 'start the test ≥2 weeks before release, in the plan')."],
+ ["Examples of regional/international/industry standards?","Regional: TGL, DIN, GB. International: EN, ISO (mechanics), IEC (electrical). Industry: IATF (automotive), VDE."],
+ ["Three ways to assess requests?","By Relevance, by Priority, and by Classification."],
+ ["What does assessing by Relevance mean?","Is the request relevant for this product? (e.g. not sold in Japan → ignore Japanese law)."],
+ ["What does Priority depend on?","Which request wins if not all fit (e.g. safety) and the company strategy; requirements often impact each other negatively."],
+ ["Name design strategies affecting priority.","Design for Customer (Design Thinking), Costs, Quality/Reliability, Production/Manufacturing (DFM), Service."],
+ ["What is the Kano model & who made it?","A method to prioritise requests by linking features to satisfaction; by Prof. Dr. Noriaki Kano (from quality management)."],
+ ["The 5 Kano levels?","Basic (must), Performance (should), Delighter (could), Indifferent, Reverse (don't)."],
+ ["Kano: basic needs (must)?","Self-evident; only noticed when missing; absence dissatisfies, presence adds no satisfaction (e.g. call-centre greeting)."],
+ ["Kano: performance needs (should)?","Satisfaction scales with the degree of fulfilment (e.g. hotline waiting time)."],
+ ["Kano: delighter (could)?","Unexpected feature creating enthusiasm; a small increase gives disproportional benefit (e.g. live ticket tracking)."],
+ ["Kano: indifferent vs reverse?","Indifferent = little impact (hold-music song). Reverse (don't) = its presence lowers satisfaction (jargon in a call)."],
+ ["How can a Kano class change?","By customer, by price/business model, and over time (delighters become basic needs)."],
+ ["Kano survey question pair?","A functional ('how if it had MORE…?') and dysfunctional ('…if LESS/none…?') question; class read from the combination."],
+ ["Kano: 'expect it' + 'dislike it' =?","Basic need (must)."],
+ ["Kano: 'like it' + 'neutral' =?","Delighter (could)."],
+ ["Classify requirements by 'Belonging'?","Product (What) [SE focus], Process (How), External (Rest)."],
+ ["Functional requirement vs NFR?","Functional = a dedicated feature (prints my file). NFR = an expectation, not a feature (24/7, 99.9% uptime)."],
+ ["Attributes of a function?","Inputs/outputs, value range/dimensions, tolerance, how often executed, how fast (throughput time)."],
+ ["Qualities a good requirement must have?","Complete, correct, SMART, testable, linked, necessary, short, atomic, active voice, no weak words, traceable, unambiguous, feasible."],
+ ["Why atomic & active voice?","Atomic = one requirement per sentence. Active ('The motor rotates the shaft') beats passive ('is driven by')."],
+ ["Weak words and tools to find them?","Vague words like 'really, very, roughly'; found with ReQualize or DESIRe."],
+ ["Key properties of a requirement?","Unique ID, description, rationale/target, originator, creator, user, fit criterion, priority, dependencies, version, change history, status."],
+ ["What does SMART stand for?","Specific, Measurable, Achievable, Reasonable, Time-Bound."],
+ ["Why does 'specific' matter?","Natural language is ambiguous ('the man on the mountain with the telescope'); fix with IF-THEN descriptions and exclude variants."],
+ ["Lesson of the bicycle 'TV box' example?","Don't be too specific — specify the problem (reduce shipping damage), not the solution; a clever solution (TV-shaped box) emerges."],
+ ["What makes a requirement testable?","It must be specific, detailed, affordable to test, and linked to a maturity level."],
+ ["Why must verification be affordable?","Avoid impractical tests, e.g. crashing many real cars to verify 'mute button accessible after a crash'."],
+ ["General requirement-writing guideline?","Positive not negative; avoid 'could/should'; be specific; say WHAT not HOW."],
+ ["What must a requirement be linked to?","Its request, mother/child reqs, neighbour reqs, functions & NFR, test items, and interfaces."],
+ ["Lesson of the bridge example?","A bridge built with North-Sea vs Mediterranean zero had a 28 cm step; the fix went the wrong way — unlinked requirements cause costly errors."],
+ ["How does SCRUM handle requirements?","Simplified agile: Epic → feature request → product backlog → sprint backlog; rows use role/function/reason."],
+ ["What is the System Wheel?","An overview of mechatronic-system properties: hub (mechanics/E-E/software), core 'DNA' datasheet properties, and 10 extended properties."],
+ ["Core 'DNA' properties of the System Wheel?","Performance, consumption, acoustic, costs, reliability, weight, size."],
+ ["Role of the property engineer?","The voice of the customer for one property; optimises across the system, thinking in system functions, and breaks function down to component reqs."],
+ ["What is 'tier down'?","Breaking system requirements to lower (component) levels so the component team can develop and own them."],
+ ["What must the receiver of a tiered-down req do?","Accept, reject, or feedback a request for change — and only own what it can build."],
+ ["New-requirement decision flow?","Inbox/pool → acceptable? yes: add to component reqs. no: modification possible? yes: modify/decline with reason; no: discard."],
+ ["System hierarchy for tier-down?","Supersystem (4) → System (3) → Sub-system (2) → Component (1)."],
+ ["RM's role in validation/verification (5)?","RM does not verify but tracks whether each testable requirement was confirmed by testing."],
+ ["What happens in phase 6 (changes)?","Changes of requests & requirements are tracked and followed up (Change Management chapter)."],
+ ["What is analysis paralysis?","Analysing forever to be 100% perfect instead of starting realization — RM must avoid it."],
+ ["Functions professional RM software must provide?","Administrate, structure/sort/filter, tailor to owner, workflow/status, link, change history & versioning, branching — with traceability."],
+ ["What is ReqIF?","Requirement Interchange Format — an XML format (ProSTEP iViP e.V.) to exchange requirements between tools and between customer & supplier."],
+ ["Example RM tools?","Codebeamer (PTC), DOORS (IBM), JAMA. Agile: ClickUp, cplace, Jira."],
+ ["Core summary of RM?","The most important step in system design; ensures the right product with the right quality and highest satisfaction; 6 phases; focus on properties, not solutions."]
+];
+let order=CARDS.map((_,i)=>i),pos=0;
+const q=document.getElementById('fcq'),a=document.getElementById('fca'),cnt=document.getElementById('fccount'),cardEl=document.getElementById('fcard');
+function show(){const c=CARDS[order[pos]];cardEl.classList.remove('flipped');q.textContent=c[0];a.textContent=c[1];cnt.textContent=(pos+1)+' / '+CARDS.length;}
+function fcNext(){pos=(pos+1)%CARDS.length;show();}
+function fcPrev(){pos=(pos-1+CARDS.length)%CARDS.length;show();}
+function fcShuffle(){for(let i=order.length-1;i>0;i--){const j=(i*7+pos*13+3)%(i+1);[order[i],order[j]]=[order[j],order[i]];}pos=0;show();}
+show();
+/* build print list */
+const fp=document.getElementById('fc-print');
+fp.innerHTML='<h3 class="topic">All flashcards (Q/A)</h3>'+CARDS.map((c,i)=>'<div class="pc"><div class="pq">'+(i+1)+'. '+c[0]+'</div><div class="pa">'+c[1]+'</div></div>').join('');
+
+/* practice reveal */
+function reveal(btn){const ans=btn.nextElementSibling;const open=ans.classList.toggle('show');btn.textContent=open?'Hide model answer':'Reveal model answer';}
+</script>
+</body>
+</html>

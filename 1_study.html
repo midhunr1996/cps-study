@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basics of System Engineering — Field Manual · CPS MMC-01a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEE2; --paper-2:#ECE3D0; --card:#FBF7EE;
+    --ink:#211C16; --ink-soft:#5C5246; --line:#D9CDB4;
+    --amber:#E0962A; --amber-deep:#B96E12; --red:#B23A2E; --green:#4C7A46;
+    --shadow: 0 1px 0 rgba(33,28,22,.04), 0 18px 40px -28px rgba(33,28,22,.45);
+    --mono:'Space Mono',ui-monospace,monospace;
+    --disp:'Bricolage Grotesque',system-ui,sans-serif;
+    --body:'Spectral',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink); font-family:var(--body);
+    font-size:18px; line-height:1.62; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 12% -5%, rgba(224,150,42,.10), transparent 42%),
+      radial-gradient(circle at 92% 4%, rgba(178,58,46,.07), transparent 40%);
+  }
+  /* subtle grain */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.5; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+  /* progress + topbar */
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--amber),var(--red));z-index:60}
+  header.top{position:sticky;top:0;z-index:50;background:rgba(244,238,226,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;align-items:center;gap:14px;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--amber-deep);white-space:nowrap}
+  nav.tabs{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+  nav.tabs a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);text-decoration:none;padding:7px 10px;border-radius:7px}
+  nav.tabs a:hover{background:var(--paper-2);color:var(--ink)}
+
+  /* hero */
+  .hero{padding:70px 0 40px;border-bottom:3px solid var(--ink);position:relative}
+  .stripe{height:14px;width:100%;background:repeating-linear-gradient(45deg,var(--ink) 0 16px,var(--amber) 16px 32px);border-radius:3px;margin-bottom:30px}
+  .kicker{font-family:var(--mono);text-transform:uppercase;letter-spacing:3px;font-size:12px;color:var(--amber-deep)}
+  h1{font-family:var(--disp);font-weight:800;font-size:clamp(40px,8vw,76px);line-height:.95;margin:14px 0 8px;letter-spacing:-.02em}
+  h1 em{font-style:normal;color:var(--red)}
+  .sub{font-size:21px;color:var(--ink-soft);max-width:62ch}
+  .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin-top:18px;display:flex;gap:8px 18px;flex-wrap:wrap}
+  .meta b{color:var(--ink)}
+
+  .riku{margin-top:30px;background:var(--ink);color:var(--paper);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .riku::after{content:"🤖";position:absolute;right:-10px;top:-26px;font-size:140px;opacity:.06}
+  .riku h3{font-family:var(--disp);margin:.1em 0 .4em;font-size:23px}
+  .riku p{margin:.3em 0;color:#E9DEC9}
+  .riku .big{font-family:var(--mono);font-weight:700;color:var(--amber);font-size:15px;letter-spacing:1px;margin-top:10px}
+
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .sec-label{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--amber-deep);display:flex;align-items:center;gap:10px}
+  .sec-label::before{content:"";width:34px;height:2px;background:var(--amber-deep)}
+  h2{font-family:var(--disp);font-weight:800;font-size:clamp(28px,5vw,42px);margin:12px 0 6px;letter-spacing:-.01em;line-height:1.04}
+  h3.topic{font-family:var(--disp);font-weight:600;font-size:23px;margin:34px 0 4px;color:var(--ink)}
+  h3.topic .n{font-family:var(--mono);font-size:13px;color:var(--amber-deep);margin-right:8px}
+
+  .lead{font-size:19px;color:var(--ink-soft)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;box-shadow:var(--shadow)}
+  .story{position:relative;padding-left:20px}
+  .story::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:linear-gradient(var(--amber),var(--red))}
+  .story .who{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--amber-deep)}
+
+  .exam{background:#FBF3DE;border:1px solid #E7C97E;border-left:5px solid var(--amber-deep);border-radius:10px;padding:14px 18px 14px 16px;margin:14px 0}
+  .exam .tag{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber-deep);display:flex;align-items:center;gap:7px}
+  .exam ul{margin:8px 0 2px;padding-left:20px}
+  .exam li{margin:5px 0}
+  .exam b{color:var(--red)}
+
+  .hook{display:flex;gap:12px;align-items:flex-start;background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:13px 16px;margin:12px 0;font-size:16.5px}
+  .hook .ic{font-size:20px;line-height:1.2}
+  .hook b{color:#bfe6a8}
+
+  /* memory movie */
+  .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
+  .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
+  .scene .num{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep)}
+  .scene .decode{color:var(--red);font-weight:600}
+  .pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:16px 0}
+  .pic{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);break-inside:avoid}
+  .pic .big{font-size:32px;line-height:1}
+  .pic h4{font-family:var(--disp);margin:7px 0 4px;font-size:17px}
+  .pic p{margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.45}
+  .pic .key{color:var(--red);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+  tbody tr:nth-child(even){background:var(--paper-2)}
+  td.c{text-align:center;font-family:var(--mono);font-weight:700}
+
+  details.more{margin:12px 0;border:1px dashed var(--line);border-radius:10px;background:var(--card);overflow:hidden}
+  details.more>summary{cursor:pointer;padding:11px 16px;font-family:var(--mono);font-size:13px;letter-spacing:.5px;color:var(--amber-deep);list-style:none}
+  details.more>summary::-webkit-details-marker{display:none}
+  details.more>summary::before{content:"▸ ";color:var(--amber-deep)}
+  details.more[open]>summary::before{content:"▾ "}
+  details.more .inner{padding:2px 16px 14px}
+
+  /* mark learned */
+  .learn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);cursor:pointer;user-select:none;margin-top:6px}
+  .learn input{appearance:none;width:18px;height:18px;border:2px solid var(--line);border-radius:5px;cursor:pointer;display:grid;place-content:center;background:var(--card)}
+  .learn input:checked{background:var(--green);border-color:var(--green)}
+  .learn input:checked::after{content:"✓";color:#fff;font-size:12px;font-weight:700}
+
+  /* FLASHCARDS */
+  .deck-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .flashcard{width:100%;max-width:640px;height:300px;perspective:1600px;cursor:pointer}
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+  .flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .fc-front{background:var(--card)}
+  .fc-back{background:var(--ink);color:var(--paper);transform:rotateY(180deg)}
+  .fc-face .lab{position:absolute;top:16px;left:22px;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.7}
+  .fc-front .lab{color:var(--amber-deep)} .fc-back .lab{color:var(--amber)}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:24px;line-height:1.18}
+  .fc-a{font-size:18px;line-height:1.5}
+  .fc-hint{position:absolute;bottom:14px;right:22px;font-family:var(--mono);font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:1px}
+  .deck-ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+  .btn{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.5px;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:9px;cursor:pointer;transition:.15s}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.amber{border-color:var(--amber-deep);background:var(--amber);color:#241a06}
+  .btn.amber:hover{background:var(--amber-deep);color:#fff}
+  .counter{font-family:var(--mono);font-size:14px;color:var(--ink-soft);min-width:74px;text-align:center}
+
+  /* PRACTICE */
+  .q-block{counter-increment:q}
+  .q-block .q-head{font-family:var(--disp);font-weight:700;font-size:21px;display:flex;gap:12px;align-items:baseline}
+  .q-block .q-head .num{font-family:var(--mono);color:#fff;background:var(--red);border-radius:8px;padding:2px 10px;font-size:15px;flex:none}
+  .q-type{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep);margin:4px 0 0 0}
+  .answer{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;display:none}
+  .answer.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
+  .answer .alab{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--green);font-weight:700}
+
+  .cheat td:first-child{font-family:var(--mono);font-size:12px;color:var(--amber-deep);white-space:nowrap}
+  .cheat td:nth-child(2){font-weight:600}
+
+  footer{padding:40px 0 70px;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:12px}
+  .print-only{display:none}
+  a.inline{color:var(--amber-deep)}
+
+  @media (max-width:560px){ body{font-size:17px} .flashcard{height:340px} h1{font-size:46px} }
+
+  /* ---------- PRINT / PDF ---------- */
+  @media print{
+    @page{size:A4;margin:15mm 14mm}
+    body{background:#fff;color:#000;font-size:11.5pt}
+    body::before,#bar{display:none}
+    header.top,nav.tabs,.deck-ctrl,.fc-hint,.learn,.flip-note{display:none !important}
+    .wrap{max-width:none;padding:0}
+    .hero{padding:0 0 14px;border-bottom:2px solid #000}
+    .riku{background:#f3f3f3;color:#000;box-shadow:none;border:1px solid #999}
+    .riku p{color:#222}.riku .big{color:#a8650a}.riku::after{display:none}
+    section{padding:14px 0;border-bottom:1px solid #bbb;break-inside:avoid}
+    .card,.exam,.hook,table,.q-block,.flashcard{box-shadow:none;break-inside:avoid}
+    .hook{background:#eef3ec;color:#000;border:1px solid #9bbf8c}.hook b{color:#2f5a28}
+    .exam{background:#fdf6e3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    th{background:#222 !important;color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .stripe{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    details.more{border:none} details.more .inner{padding:0} details.more>summary{display:none}
+    details.more[open] .inner, details.more .inner{display:block !important}
+    /* show all practice answers */
+    .answer{display:block !important;border-top:1px solid #bbb}
+    /* flatten flashcards to Q/A in print */
+    #fc-live{display:none}
+    .print-only{display:block}
+    #fc-print .pc{break-inside:avoid;border:1px solid #bbb;border-radius:8px;padding:8px 12px;margin:7px 0}
+    #fc-print .pq{font-weight:700} #fc-print .pa{color:#222}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="top"><div class="wrap">
+  <span class="brand">🤖 System Eng · MMC-01a</span>
+  <nav class="tabs">
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
+    <a href="#" onclick="window.print();return false;">⤓ PDF</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <div class="stripe"></div>
+    <div class="kicker">Structure &amp; Functions of Cyber-Physical Systems</div>
+    <h1>Basics of <em>System Engineering</em><br>Field Manual</h1>
+    <p class="sub">Memorize the whole deck the easy way: one story, the exact exam points, and a memory hook on every topic.</p>
+    <div class="meta"><span>Module <b>MMC-01a</b></span><span>Lecturer <b>Prof. Dr. M. Górka</b></span><span>Source <b>1.pptx · 154 slides</b></span><span><b>THD · NuW · Mechatronic &amp; CPS</b></span></div>
+
+    <div class="riku">
+      <h3>🤖 Meet Robi &amp; Cy — your memory anchors</h3>
+      <p>You're an engineering team building <b>Robi, a cleaning robot</b> — your first <b>Cyber-Physical System</b>. Robi has a <b>body you can touch</b> (sensors, motors, wires = <em>physical</em>) and a <b>brain that thinks &amp; talks to the internet</b> (software, AI = <em>cyber</em>). Watching over your shoulder is <b>Cy, a wise owl</b>, who keeps hooting “What <em>is</em> a system? What <em>is</em> design?”</p>
+      <p>Every slide just answers one question: <b>“What is Robi made of, how complex is it, and how do clever engineers design and build a whole SYSTEM instead of bolting parts together?”</b> Keep Robi + Cy in your head and the chapter tells itself.</p>
+      <div class="big">★ MASTER KEY → System = WHAT (purpose) · Design = HOW · then ENGINEER the whole system: Requirements → Ideation → Design → Test → Release (ringed by Risk &amp; Change)</div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="sec-label">00 · The shape of the whole chapter</div>
+    <h2>See the skeleton before the bones</h2>
+    <p class="lead">Basics of System Engineering is <b>step 1 of System Engineering</b>:</p>
+    <div class="card" style="font-family:var(--mono);font-size:14px;line-height:2">
+      <b style="color:var(--red)">1 BASICS ★</b> → 2 Requirements → 3 Risk → 4 Change → 5 Ideation → (6 Design) → (7 Test) → (8 Project Setup)
+    </div>
+    <p>The chapter has two big halves — and they are literally the definition of <b>System Design</b>. First we zoom <em>into</em> a system (what it's made of, how complex it is); then we zoom <em>out</em> to how you <b>engineer</b> a whole one.</p>
+    <div class="hook"><span class="ic">🧠</span><div><b>System = WHAT (the purpose) · Design = HOW.</b> Hold that split and every topic has a home.</div></div>
+  </section>
+
+  <!-- MEMORY MOVIE -->
+  <section id="movie">
+    <div class="sec-label">The trick · watch, don't memorize</div>
+    <h2>🎬 The Memory Movie</h2>
+    <p class="lead">Don't memorize sentences — your brain hates random letters. Instead <b>close your eyes and play this movie</b> of <em>“Building Robi, from idea to finished robot”</em> in slide order. Each picture <em>is</em> a concept, so when you replay the movie the exam answer just appears. Read it 3 times, then try to replay it with your eyes shut.</p>
+
+    <div class="scene"><div class="emo">🦉</div><div><div class="num">Scene 1</div><b>Cy the owl</b> lands on the workbench and hoots “What is a system?” → <span class="decode">a group of parts working for ONE purpose, fenced off from the world.</span></div></div>
+    <div class="scene"><div class="emo">🌌🍃🫁</div><div><div class="num">Scene 2</div>Cy points outside: <b>galaxy, leaf, lung</b> grew with no human (NATURAL); on the bench a <b>piano, plane, robot</b> were built (ARTIFICIAL). → <span class="decode">examples of systems.</span></div></div>
+    <div class="scene"><div class="emo">🪸</div><div><div class="num">Scene 3</div>A glass tank shows a <b>coral reef</b> (life + machine pumps). → <span class="decode">CLASSIFICATION: natural / artificial / biotechnical; Open · Partly-open · Isolated doors.</span></div></div>
+    <div class="scene"><div class="emo">🔁</div><div><div class="num">Scene 4</div>Robi's brain runs a <b>loop</b>: “where I should be” vs “where I am”, fix the gap. → <span class="decode">CYBERNETICS — the control loop; “cyber” = the brainy half.</span></div></div>
+    <div class="scene"><div class="emo">🎡</div><div><div class="num">Scene 5</div>A giant <b>wheel</b> spins: a tiny DNA-datasheet core, a ring of properties, 3 pie-slices (mech/E-E/SW). → <span class="decode">the SYSTEM WHEEL.</span></div></div>
+    <div class="scene"><div class="emo">➡️</div><div><div class="num">Scene 6</div>Robi is a <b>conveyor belt</b>: Sensor → wire → Brain → wire → Motor. → <span class="decode">SYSTEM STRUCTURE (SIPOC).</span></div></div>
+    <div class="scene"><div class="emo">🪆</div><div><div class="num">Scene 7</div><b>Russian nesting dolls</b>: Supersystem ⊃ System ⊃ Sub-system ⊃ Component. → <span class="decode">SYSTEM LEVELS / tiers.</span></div></div>
+    <div class="scene"><div class="emo">🧱</div><div><div class="num">Scene 8</div>You tip Robi out into a <b>pile of bricks</b> (hardware, software, liquids, even people &amp; ideas). → <span class="decode">COMPONENTS.</span></div></div>
+    <div class="scene"><div class="emo">🟡</div><div><div class="num">Scene 9</div>One sulphur crumb is colourless, but a <b>pile glows yellow</b>. → <span class="decode">EMERGENCE (“1+1=3”).</span></div></div>
+    <div class="scene"><div class="emo">🌪️</div><div><div class="num">Scene 10</div>A <b>storm cloud (VUCA)</b> rolls in; a neat <b>subway map</b> = merely complicated, the <b>weather</b> = truly complex. → <span class="decode">COMPLEXITY.</span></div></div>
+    <div class="scene"><div class="emo">🕸️</div><div><div class="num">Scene 11</div>Robi's parts are tied into a <b>spider web</b> — count the knots. → <span class="decode">DEGREE OF CONNECTIVITY (clustering coefficient).</span></div></div>
+    <div class="scene"><div class="emo">🌊🦋</div><div><div class="num">Scene 12</div>You <b>simulate</b> Robi 1000× on screen; a <b>butterfly</b> flaps and it explodes. → <span class="decode">SYSTEM DYNAMICS + CHAOS THEORY.</span></div></div>
+    <div class="scene"><div class="emo">🎨</div><div><div class="num">Scene 13</div>An artist with a <b>paintbrush</b> turns requirements into drawings, models, code. → <span class="decode">DESIGN.</span></div></div>
+    <div class="scene"><div class="emo">🏭</div><div><div class="num">Scene 14</div>A <b>factory</b> with 3 lanes (core/management/support) and BMW's Idea→Offer→Order→Delivery. → <span class="decode">SYSTEM DESIGN PROCESS.</span></div></div>
+    <div class="scene"><div class="emo">🔄</div><div><div class="num">Scene 15</div>A <b>big gear-loop</b>: Requirements → Ideas → Design → Test → Release, ringed by Risk ☢️ &amp; Change 🔁. → <span class="decode">SYSTEM ENGINEERING (the steps).</span></div></div>
+    <div class="scene"><div class="emo">🏃</div><div><div class="num">Scene 16</div>A <b>runner at the start line</b> sweats about globalization, interfaces, variants, safety. → <span class="decode">the CHALLENGES.</span></div></div>
+    <div class="scene"><div class="emo">👯</div><div><div class="num">Scene 17</div>A <b>digital ghost-twin</b> floats beside the real Robi; code pops out of a diagram by itself. → <span class="decode">MBSE / MDSD / Digital Engineering.</span></div></div>
+
+    <div class="hook"><span class="ic">🎥</span><div>Replay in one breath: <b>owl asks → galaxy vs piano → reef tank → brain-loop → spinning wheel → conveyor belt → nesting dolls → brick pile → glowing sulphur → storm cloud → spider web → simulation + butterfly → paintbrush → factory → gear-loop → sweating runner → digital twin.</b></div></div>
+
+    <h3 class="topic">🖼️ Picture-hooks for the tricky lists</h3>
+    <p>Same trick for every list that wouldn't stick — turn it into one strong, weird image:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">🌌🍃🫁</div><h4>Natural systems</h4><p>Galaxy (life), Leaf (photosynthesis), Lung (breathing). <span class="key">Grew by themselves, no human.</span></p></div>
+      <div class="pic"><div class="big">🎹✈️🤖</div><h4>Artificial systems</h4><p>Piano (sound), Plane (fly), Robot (expressions). <span class="key">Built by people.</span></p></div>
+      <div class="pic"><div class="big">🚪🚪🚪</div><h4>Open · Partly · Isolated</h4><p>Three doors on Robi: <span class="key">wide-open</span> · a mail-slot (OBD car) · welded shut.</p></div>
+      <div class="pic"><div class="big">🧺📡</div><h4>Mechatronic vs CPS</h4><p>A <b>lone washing machine</b> (standalone) vs a smart home where the <b>washer texts the solar panels</b> <span class="key">(CPS / IoT).</span></p></div>
+      <div class="pic"><div class="big">🎡</div><h4>System Wheel</h4><p>Bike wheel: hub = <span class="key">DNA datasheet</span>, spokes = properties, 3-colour rim = mechanics / E-E / software.</p></div>
+      <div class="pic"><div class="big">➡️</div><h4>SIPOC structure</h4><p>“<b>See It Process Output Customer</b>” = <span class="key">Sensor → Connector → Logic → Connector → Actuator.</span></p></div>
+      <div class="pic"><div class="big">🪆</div><h4>System Levels</h4><p>Nesting dolls. <span class="key">System + Component always exist</span>; Super/Sub optional. Your level depends on who holds the doll (tier).</p></div>
+      <div class="pic"><div class="big">🟡</div><h4>Emergence</h4><p>One sulphur crumb is colourless, the <b>pile glows</b>; one molecule has no pressure, the gas does. <span class="key">Ignorance ≠ emergence.</span></p></div>
+      <div class="pic"><div class="big">🌪️</div><h4>VUCA storm</h4><p>A <b>Very Ugly Chaotic Atmosphere</b>: <span class="key">V</span>olatile, <span class="key">U</span>ncertain, <span class="key">C</span>omplex, <span class="key">A</span>mbiguous.</p></div>
+      <div class="pic"><div class="big">🗺️🌦️</div><h4>Complicated vs Complex</h4><p><b>Subway map</b> (rules known → waterfall) vs <b>weather</b> (rules unknown → <span class="key">SCRUM</span>).</p></div>
+      <div class="pic"><div class="big">🐜</div><h4>Multi-Agent System</h4><p>An <b>ant colony</b> solving a maze with no boss; an ant that claims a job <span class="key">broadcasts</span> so others don't repeat it.</p></div>
+      <div class="pic"><div class="big">🕸️</div><h4>Connectivity</h4><p>A <b>spider web</b>: count nodes + connections; a <span class="key">two-way strand counts as 2</span> (clustering coefficient).</p></div>
+      <div class="pic"><div class="big">🦋</div><h4>Chaos theory</h4><p>A <b>butterfly</b> over turbulent gas / the internet: tiny flap, <span class="key">huge unpredictable effect.</span></p></div>
+      <div class="pic"><div class="big">🔄☢️🔁</div><h4>SE steps</h4><p>Requirements → Ideation → Design → Test → Release, with <span class="key">Risk ☢️ &amp; Change 🔁</span> hugging the loop. ISO 15288.</p></div>
+      <div class="pic"><div class="big">🚗💥</div><h4>Accountability</h4><p>After Robi-car crashes, a <b>crowd of suspects</b> lines up. <span class="key">Nobody knows who's to blame</span> — the future challenge.</p></div>
+      <div class="pic"><div class="big">👯</div><h4>Digital twin / MDSD</h4><p>A <b>ghost-Robi</b> mirrors the real one live (Digital Eng.); a <b>vending machine</b> spits code from a diagram <span class="key">(MDSD / Simulink).</span></p></div>
+    </div>
+
+    <div class="hook"><span class="ic">🧠</span><div><b>How to actually lock it in:</b> (1) read a scene, (2) <b>shut your eyes and re-see the picture</b>, (3) say the real meaning out loud. Do the 17-scene movie + picture-hooks twice today and once tomorrow — then test yourself with the <a href="#cards" style="color:#bfe6a8">flashcards</a>. Seeing beats reading; testing beats re-reading.</div></div>
+  </section>
+
+  <!-- LESSON -->
+  <section id="lesson">
+    <div class="sec-label">The full lesson · all slides</div>
+    <h2>Taught like a story — with the points you must write</h2>
+
+    <!-- 1 -->
+    <h3 class="topic"><span class="n">01</span>System Design = two halves</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Before you touch a screwdriver, Cy splits the word. <b>System Design = “the System” (its purpose) + “the Design” (how you build it).</b> Robi's <em>purpose</em> is “clean the floor”; the <em>design</em> is the wiring diagram and code that make it happen.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>System Design consists of two parts:</b> the <b>System</b> (purpose) and the <b>Design</b> (how).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>System = WHAT · Design = HOW.</b> Two words, two halves of the whole course.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t1">Mark learned</label>
+
+    <!-- 2 -->
+    <h3 class="topic"><span class="n">02</span>What <em>is</em> a system?</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Cy hoots, “What is a system?” Look at Robi: lots of <b>different parts</b> all chasing <b>one purpose</b>, and you can draw a <b>fence</b> separating it from the world. If the parts were all the same with no shared purpose, it's just a <b>pile</b> (accumulation), not a system.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — definition</div><ul>
+      <li><b>A system = a group of associated components that work together for the same purpose and that can be bordered from the environment.</b></li>
+      <li>Components have <b>different characteristics</b> — otherwise it's an <b>accumulation</b>, not a system.</li>
+      <li>Systems are <b>clearly bordered</b>; sometimes <b>partial overlaps at interfaces</b>.</li>
+      <li><b>Natural</b> (no human): Galaxy (life) · Leaf (photosynthesis) · Lung (breathing).</li>
+      <li><b>Artificial</b> (man-made): Piano (sound) · Airplane (fly) · Robot (expressions); also search engine, sports team, organization.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Different parts · one purpose · a <b>fence</b> around it. No fence or all-same-parts = not a system.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t2">Mark learned</label>
+
+    <!-- 3 -->
+    <h3 class="topic"><span class="n">03</span>System Classification</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Cy shows a <b>coral-reef tank</b> — living coral + machine pumps. Systems sort into <b>3 bins</b>, man-made ones into <b>3 more</b>, and each is tagged by <b>how open its doors are</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Types of systems:</b> Natural · Artificial · <b>Biotechnical</b>.</li>
+      <li><b>Man-made types:</b> <b>Technical</b> (machines, tools) · <b>Social</b> (family, groups, work) · <b>Sociotechnical</b> (technical + social influencing each other; e.g. information/work system).</li>
+      <li><b>By exchange with environment:</b> <b>Open</b> (full interfaces — info/material/energy) · <b>Partly open</b> (small pre-defined data, e.g. <b>OBD</b> in a car) · <b>Isolated</b> (nothing exchanged).</li>
+      <li>Parts can differ: a robot's <b>tracking = isolated</b>, its <b>map → open Bluetooth</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>3 doors on Robi</b> → wide-Open · mail-slot (Partly, “OBD”) · welded-shut (Isolated).</div></div>
+    <label class="learn"><input type="checkbox" data-k="t3">Mark learned</label>
+
+    <!-- 4 -->
+    <h3 class="topic"><span class="n">04</span>Cyber, Cybernetics &amp; CPS</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Why the “Cyber” in Cyber-Physical? <b>Cyber = short for cybernetics = controlling machines using feedback</b> — like Robi's brain asking “am I where I should be?” and correcting. Cy draws the <b>control loop</b>: Target − Current = a gap → Controller → Actuator → the world reacts → Sensor reads it → loop again.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Cyber = short form of cybernetics.</b> <b>Cybernetics = control of machines</b> incl. feedback of <b>sense organs</b> (analogy to lifeforms) and <b>social interactions</b> (communication).</li>
+      <li><b>Control loop (in order):</b> Target value → difference (target − current) → Controller → Command → Actuator → Action → System/Environment → Reaction → Sensor → Current value → fed back (−).</li>
+      <li><b>“Cyber” umbrella term:</b> Cybersecurity, Cyberspace, Cyberwarfare, Cybercrime, Cyber-attack, <b>Cyborgs</b> (organic + biomechatronic crossover).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Cyber = feedback brain.</b> The loop is a circle: <b>gap → fix → measure → repeat.</b></div></div>
+
+    <h3 class="topic" style="font-size:19px"><span class="n">04a</span>Mechatronic vs CPS</h3>
+    <div class="card story"><div class="who">🧒 Story</div>A <b>lone washing machine</b> is <b>mechatronic</b> — software + hardware, sealed, standalone. Now let the washer <b>text the solar panels</b> to run when the sun shines — that networked smart-home is a <b>CPS</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Mechatronic system</b> = software + hardware (mechanics &amp; electronics); <b>standalone/closed</b>. E.g. washing machine.</li>
+      <li><b>CPS</b> = <b>intercommunicating</b> software (esp. embedded, via internet = cyber) + hardware (= physical); for <b>large-scale, distributed networks (IoT)</b>. E.g. home automation linking washer + photovoltaic.</li>
+      <li><b>No sharp deviation</b> between mechatronic and CPS.</li>
+      <li>Applied to this lecture: <b>physical</b> (sensors, actuators, PCB &amp; wires) + <b>cyber</b> (processing unit, AI, general software) → a CPS.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Mechatronic = <b>lonely washer</b>. CPS = <b>washer that texts the solar panels</b>.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t4">Mark learned</label>
+
+    <!-- 5 -->
+    <h3 class="topic"><span class="n">05</span>System Wheel</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Cy spins a <b>bicycle wheel</b> — the course's master diagram. The <b>hub</b> is Robi's <b>“DNA” datasheet</b> (performance, weight, cost…). Spokes are <b>extra properties</b> (safety, EMC, thermal…). The <b>rim is painted in 3 colours</b> = the building trades: <b>mechanics, E/E, software</b>. The <b>customer</b> stands at the edge. (Full detail in Requirement Management.)</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li>Rings (inside→out): <b>core “DNA” properties (datasheet)</b> → <b>extended properties</b> (acoustics, efficiency, data/security, design-for-production/service, safety, EMC, sustainability, reliability, thermal, volumetric) → <b>realization domain</b> (mechanics / E/E / software) → <b>customer</b>.</li>
+      <li>Customer raises requirements <b>on system level</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Wheel = Hub (DNA) · Spokes (properties) · 3-colour Rim (mech/E-E/SW) · Customer at the edge.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="t5">Mark learned</label>
+
+    <!-- 6 -->
+    <h3 class="topic"><span class="n">06</span>System Structure (SIPOC)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Every system, says Cy, is secretly a <b>conveyor belt</b>: something comes <em>in</em>, gets <em>processed</em>, goes <em>out</em>. That's <b>SIPOC</b>. For Robi: a <b>Sensor</b> feels → a <b>wire</b> carries → the <b>Brain/Logic</b> decides → a <b>wire</b> carries → a <b>Motor</b> acts.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li>Every process = <b>SIPOC</b> (Supplier · Input · Process · Output · Customer).</li>
+      <li>High-level structure: <b>Sensor → Connector → Logic → Connector → Actuator/Visualizer.</b></li>
+      <li><b>Connector</b> = PCB / wire / wireless · <b>Logic</b> = software / IC / state machine / AI · <b>Actuator/Visualizer</b> = motor / valve / HMI / database.</li>
+      <li><b>ChatGPT:</b> prompt page → server → AI magic → browser → output field.</li>
+      <li><b>Sorting machine:</b> colour sensor 0–5 V → TXT controller → threshold picks pusher 1/2/3 → motor driver → pusher fires.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>“See It Process Output Customer”</b> = <b>S</b>ensor → <b>C</b>onnector → <b>L</b>ogic → <b>C</b>onnector → <b>A</b>ctuator. A conveyor belt, always.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t6">Mark learned</label>
+
+    <!-- 7 -->
+    <h3 class="topic"><span class="n">07</span>System Levels &amp; Tiers</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Pull Robi apart like <b>Russian nesting dolls</b>: the big <b>Supersystem</b> holds <b>Systems</b>, which hold <b>Sub-systems</b>, which hold <b>Components</b>. A higher level is just the <b>sum</b> of the dolls inside.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li>Levels (top→bottom): <b>Supersystem (4, rare) → System (3) → Sub-system (2) → Component (1).</b></li>
+      <li>A higher level = the <b>sum of the elements below</b>; lower-level count is <b>variable but always &gt; 1</b>.</li>
+      <li><b>Supersystem &amp; Sub-system optional; System &amp; Component always exist.</b></li>
+      <li><b>Same element, different level</b> by viewpoint: a car = system for the car-maker, but the <b>screw</b> = system for the screw supplier.</li>
+      <li>In industry, supplier levels = <b>“tiers”</b> (manufacturer → tier-1 → tier-2 → tier-3 → …).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Nesting dolls.</b> System + Component are the two that MUST exist; Super/Sub are optional. Your level depends on who holds the doll (tier).</div></div>
+    <label class="learn"><input type="checkbox" data-k="t7">Mark learned</label>
+
+    <!-- 8 -->
+    <h3 class="topic"><span class="n">08</span>Components</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Tip Robi out onto the bench — a <b>pile of bricks</b>. Some you can touch (<b>hardware, software, liquids</b>), some you can't (<b>talents, roles, ideas</b>). Each brick is <b>fenced off</b> and does its <b>own job</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Components = the basic elements of a system.</b></li>
+      <li><b>Real (material):</b> Hardware (electronics/mechanics/hydraulics) · Software (functions/interfaces) · Material/consumables (chemicals/liquids).</li>
+      <li><b>Immaterial:</b> Talents &amp; Roles · Ideas.</li>
+      <li>Components are <b>clearly bordered</b> and have <b>different functions/tasks</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Brick pile</b> — touchable bricks (HW/SW/liquids) + invisible bricks (people/ideas).</div></div>
+    <label class="learn"><input type="checkbox" data-k="t8">Mark learned</label>
+
+    <!-- 9 -->
+    <h3 class="topic"><span class="n">09</span>Emergence</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Drop <b>one</b> sulphur crumb — colourless. Pour a <b>pile</b> — it glows <b>yellow</b>. The colour belongs to the <em>group</em>, not the crumb. That surprise extra property = <b>emergence</b>, “1+1=3”. But if something only <em>seems</em> magic because we're <b>ignorant</b>, that's NOT emergence — it vanishes once science catches up.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Emergence = a system has other properties than the simple sum of its components (“1+1=3”).</b></li>
+      <li>Examples: <b>single sulphur atom = no colour, many = yellow</b>; <b>single molecule = no pressure, gas = pressure</b>.</li>
+      <li><b>Ignorance is NOT emergence</b> — effects merely unknown (low state-of-the-art) that disappear as knowledge evolves.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Glowing sulphur pile.</b> The property lives in the crowd, not the crumb. Don't-know ≠ emergence.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t9">Mark learned</label>
+
+    <!-- 10 -->
+    <h3 class="topic"><span class="n">10</span>Complexity &amp; VUCA</h3>
+    <div class="card story"><div class="who">🧒 Story</div>A <b>storm cloud</b> rolls over the workshop — the modern world is <b>VUCA</b>: a <em>Very Ugly Chaotic Atmosphere</em>. Then Cy plays a game: a <b>subway map</b> vs the <b>weather</b> — which is complex? The map is only <b>complicated</b> (hard but all rules known); the weather is truly <b>complex</b> (rules unknown, all tangled).</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>VUCA:</b> <b>V</b>olatile (discontinuity, high speed, big swings) · <b>U</b>ncertain (unclear outcomes, low predictability) · <b>C</b>omplex (many layers, fuzzy boundaries) · <b>A</b>mbiguous (no simple description, multiple interpretations).</li>
+      <li>Complexity is set by the <b>amount, order &amp; interaction</b> of components; <b>complex systems can't be broken into easy problems.</b></li>
+      <li><b>Properties of complex systems:</b> Agent-based · Non-linear · Emergence · Open · Self-organised · Self-regulating · Path-dependencies (history matters).</li>
+      <li><b>CAS</b> = changes itself (stock exchange, brain). <b>MAS/ABM</b> = self-organised agents, no boss, broadcast jobs (ant colony, DAI).</li>
+      <li><b>Measure complexity (IT):</b> Computational Complexity Theory via resource demand (time, storage, chip size, # parallel chips).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>VUCA = the storm.</b> Complicated = <b>subway map</b> (waterfall). Complex = <b>weather</b> (SCRUM).</div></div>
+    <details class="more"><summary>Show the data table (Complicated vs Complex)</summary><div class="inner">
+      <table><thead><tr><th>COMPLICATED</th><th>COMPLEX</th></tr></thead><tbody>
+        <tr><td>All elements known</td><td>Not all elements known</td></tr>
+        <tr><td>Clear rules (cause &amp; effect)</td><td>Rules (partly) unknown</td></tr>
+        <tr><td>Clear dependencies</td><td>Dependencies (partly) unknown</td></tr>
+        <tr><td>Much effort but <b>predictable</b></td><td><b>Prediction not possible</b></td></tr>
+        <tr><td>Can be “removed” by training &amp; knowledge</td><td><b>Cannot</b> be removed</td></tr>
+        <tr><td>PM tool → <b>waterfall model</b></td><td>PM tool → <b>agile (SCRUM)</b></td></tr>
+      </tbody></table>
+      <p style="font-size:14px;color:var(--ink-soft);margin:6px 0 0">Examples: subway grid plan = <b>complicated</b>; weather = <b>complex</b>.</p>
+    </div></details>
+    <label class="learn"><input type="checkbox" data-k="t10">Mark learned</label>
+
+    <!-- 11 -->
+    <h3 class="topic"><span class="n">11</span>Degree of Connectivity</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Tie Robi's parts together with <b>string</b> until they form a <b>spider web</b>. The more knots and threads, the higher the <b>connectivity</b>. Rule: parts in the <b>same unit</b> may talk; parts in <b>different units on the same level must NOT</b> — if they do, you drew the <b>border wrong</b> (→ wrong responsibilities!).</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li>Same-level, <b>same-unit</b> elements <b>may</b> interact &amp; affect each other.</li>
+      <li><b>No</b> interaction between same-level elements in <b>different units</b> — else the <b>border is wrong → risk of wrong responsibilities.</b></li>
+      <li>Interactions swap <b>information / material / energy</b>, are <b>interdependent</b>, <b>not unidirectional</b>.</li>
+      <li><b>Degree of connectivity</b> = (amount of different <b>nodes</b>) + (amount of causal <b>connections</b>).</li>
+      <li>Measured by the <b>clustering coefficient</b> (exact, no rounding; a <b>bidirectional</b> link = <b>2</b>).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Spider web</b> — count knots + threads; a two-way thread = <b>2</b>. Cross-unit threads = a wiring mistake.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t11">Mark learned</label>
+
+    <!-- 12 -->
+    <h3 class="topic"><span class="n">12</span>System Dynamics &amp; Chaos Theory</h3>
+    <div class="card story"><div class="who">🧒 Story</div>You can't sketch Robi's full behaviour on a napkin — too tangled. So you <b>simulate</b> the whole system on a computer and run it <b>1000 times</b>. That's <b>System Dynamics</b>. Then a <b>butterfly</b> flaps, the simulation goes wild and unpredictable — <b>Chaos Theory</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>System Dynamics</b> = model &amp; simulate the whole system (complex systems can't be described easily/linearly). Variants: qualitative &amp; quantitative.</li>
+      <li><b>Qualitative</b> — find <b>feedback loops</b>: <b>reinforcing</b> (positive coupling) &amp; <b>balancing</b> (negative coupling); easier; good overview.</li>
+      <li><b>Quantitative</b> — model &amp; simulate; <b>real numbers</b>; many runs; flow charts/process views; finds <b>non-linear effects</b>.</li>
+      <li><b>Chaos Theory</b> = non-linear dynamic systems; <b>“butterfly effect”</b> — small change → big effect, prediction impossible (turbulent gas, internet).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Simulate 1000× = System Dynamics (<b>Qualitative</b> = arrows/loops, <b>Quantitative</b> = numbers). <b>Butterfly = Chaos.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="t12">Mark learned</label>
+
+    <!-- 13 -->
+    <h3 class="topic"><span class="n">13</span>Design</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Now an <b>artist with a paintbrush</b> turns Robi's requirements into something real — drawings, models, code. But the artist can't ignore the <b>factory</b>: design, integration and production all <b>pull on each other</b>. A design nobody can manufacture (a ball inside a ball, or all-gold wires) is useless.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Design = translating requirements (respecting the system purpose) into a (technical) solution.</b></li>
+      <li><b>Deliverables:</b> Plan · Drawings/schematics · Models · Software code · …</li>
+      <li><b>Design, integration &amp; production can't be strictly divided</b> — they influence each other; build <b>prototypes</b> and <b>test</b> upfront.</li>
+      <li>Without production know-how → risk of a <b>non-producible</b> (ball-in-ball) or <b>non-commercial</b> (all-gold wires) part.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Paintbrush turns requirements → drawings/models/code; but the <b>factory is always watching</b>.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t13">Mark learned</label>
+
+    <!-- 14 -->
+    <h3 class="topic"><span class="n">14</span>System Design Process</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Zoom out to the whole <b>company factory</b>. Every process is one of <b>3 lanes</b>: the <b>core</b> lane (money made with customers/suppliers), the <b>management</b> lane (steering), the <b>support</b> lane (helpers). BMW's core lane reads like a relay: <b>Idea → Offer → Order → Delivery → Customer-Care.</b></div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>3 process classes:</b> <b>Core</b> (business with customers &amp; suppliers; <b>value-adding</b>) · <b>Management</b> · <b>Support</b>. Flow: <b>customer requirement → core process → customer satisfaction.</b></li>
+      <li><b>BMW core process:</b> <b>ItO</b> (Idea→Offer) · <b>OtO</b> (Offer→Order) · <b>OtD</b> (Order→Delivery) · <b>DtCC</b> (Delivery→Customer-Care).</li>
+      <li><b>ItO</b> = development from requirement → ideas/concepts → implementation; purchasing procures; after test &amp; validation + industrialisation → release for production. Aim: <b>optimal product, all requirements met.</b></li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>3 lanes = Core · Management · Support.</b> BMW relay: <b>I-O-O-D</b> → Idea, Offer, Order, Delivery (then Care).</div></div>
+    <label class="learn"><input type="checkbox" data-k="t14">Mark learned</label>
+
+    <!-- 15 -->
+    <h3 class="topic"><span class="n">15</span>System Engineering — the 7 steps ⭐</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Here's the <b>big gear-loop</b> that actually builds Robi. Five steps run in order — <b>Requirements → Ideation → Design → Test → Release</b> — and two more, <b>Risk</b> ☢️ and <b>Change</b> 🔁, <b>hug the whole loop</b> the entire time. Defined by a standard, <b>ISO 15288</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — SE is</div><ul>
+      <li>an <b>interdisciplinary</b> field of engineering + engineering management;</li>
+      <li><b>design, integrate &amp; manage complex systems over their life cycle</b>; defined in <b>ISO/IEC 15288</b>.</li>
+    </ul></div>
+    <div class="exam"><div class="tag">📝 The steps (in order)</div><ul>
+      <li><b>1. Requirement Management</b> — analyse problem &amp; requests (Customer, Law, LeLe); break into requirements; define system requirements.</li>
+      <li><b>2. Ideation / Concept</b> — creative search for ideas (maybe research!); define functions; create <b>system architecture</b>; break (super)system → subsystem → component; break requirements into levels; <b>interface design</b>.</li>
+      <li><b>3. Design / Realization</b> — model, simulate, analyse; implement into <b>HW/E-E/SW</b>; integrate levels; document. → <b>core engineering work</b>.</li>
+      <li><b>4. Test &amp; Verification &amp; Validation</b> — test design, the <b>“test of the test”</b>, planning, execution (virtual + HW). → <b>proof by measurement</b> every requirement is met.</li>
+      <li><b>5. Release</b> — sign off; release to production; take over <b>accountability</b> to the customer.</li>
+      <li><b>Risk Management</b> (surrounding) — check risks to product/time/cost/safety (e.g. FMEA); deviation management.</li>
+      <li><b>Change Management</b> (surrounding) — update on changing requirements (new law, customer change of mind, LeLe/field issues); <b>version control</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Gear-loop: R-I-D-T-R</b> (Requirements, Ideation, Design, Test, Release) wrapped by <b>Risk ☢️ + Change 🔁</b>. Standard = <b>15288</b>. Without it → the “tree-swing” cartoon.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t15">Mark learned</label>
+
+    <!-- 16 -->
+    <h3 class="topic"><span class="n">16</span>System Engineering — Challenges</h3>
+    <div class="card story"><div class="who">🧒 Story</div>A <b>runner at the start line</b> is sweating because modern CPS projects are brutal: the world went global, everything connects to everything, customers want endless variants, and you can't even prove the thing is safe.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Globalization</b> → many suppliers; rising <b>legal</b> specs; <b>unclear responsibilities</b> (fuzzy boundaries).</li>
+      <li><b>Interdisciplinary</b> work mandatory; <b>diverse interfaces</b> → <b>consistent control of all interfaces</b>.</li>
+      <li><b>Complex requirements</b> → more dynamics; <b>more variants</b> → component kits (reusable units). <em>(VW Golf ≈ 425 billion wiring-harness combos.)</em></li>
+      <li><b>Reduced cycle time</b> → hard <b>quality–cost–time</b> trade-off (VUCA).</li>
+      <li><b>Distributed sensor network</b> → <b>sensor fusion</b> (camera + lidar). <b>Communication handling</b> (when? which path?). <b>Information gathering</b> (lots of changing data).</li>
+      <li><b>Hard to verify</b> (can't stop it, who's root cause, hard to debug, AI changes). <b>Safety</b> (trust network data; new attack points).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Sweating runner.</b> Everything got bigger, more connected, more varied, harder to verify &amp; secure. “Who crashed the robot-car?” = nobody can tell → the future challenge.</div></div>
+    <details class="more"><summary>Show the System Wheel's 3 perspectives (customer · property · product)</summary><div class="inner">
+      <table><thead><tr><th>Perspective</th><th>Who / ring</th><th>Job</th></tr></thead><tbody>
+        <tr><td><b>Customer</b></td><td>inner “DNA” ring</td><td>Raises system-level requirements. Expects: intelligence, inter-connection, performance increase, user-friendly.</td></tr>
+        <tr><td><b>Property</b></td><td>property engineer (middle)</td><td>“Voice of the customer” for one property; overarching property optimization; breaks solution-open requirements down to component-teams.</td></tr>
+        <tr><td><b>Product</b></td><td>system engineer / PL (outer)</td><td>Mediates between property engineers; ensures process compliance; decides on conflicting targets (properties impact each other).</td></tr>
+        <tr><td><b>Realization domain</b></td><td>component-teams</td><td>Offers a decision matrix + component kit (e.g. SiC inverter 98% vs 3-level 97% vs HV 99%).</td></tr>
+      </tbody></table>
+    </div></details>
+    <label class="learn"><input type="checkbox" data-k="t16">Mark learned</label>
+
+    <!-- 17 -->
+    <h3 class="topic"><span class="n">17</span>MBSE, MDSD &amp; Digital Engineering</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Finally, three power-tools. <b>MBSE</b> = the System Wheel <b>with a working model</b> so every discipline reads the same picture. <b>MDSD</b> = a <b>vending machine</b> that spits out finished code/tests/docs straight from a diagram (Simulink → C). <b>Digital Engineering</b> = a <b>ghost-twin</b> of Robi you can watch and poke live.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>MBSE (Model-Based Systems Engineering)</b> = System Wheel + a <b>model</b>; cross-discipline communication; all info <b>independent of realization domains</b>; needs a <b>harmonized modelling language</b>. Languages: <b>UML &amp; SysML</b>.</li>
+      <li><b>MBSE benefits:</b> visualization · architectures/dependencies → <b>traceability</b> · automated tests · <b>different views</b> · foreseeable change impact · direct code generation (MDSD).</li>
+      <li><b>MDSD / MDD</b> = auto-generate <b>functional software, tests, documentation</b> from the model <b>without coding</b> (Simulink → C). Pro: abstraction, speed, fitting test cases. Con: more initial effort, tricky manual-code integration, harder troubleshooting.</li>
+      <li><b>Digital Engineering</b> = successor of MBSE (INCOSE / GfSE); uses <b>“digital twins”</b> (live + virtual interaction); uses MBSE · AI · CAD/CAE · additive manufacturing · VR/AR.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>MBSE = shared model · MDSD = vending machine (diagram → code) · Digital Engineering = ghost-twin.</b> Languages = UML/SysML; councils = INCOSE/GfSE.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t17">Mark learned</label>
+
+    <!-- 18 -->
+    <h3 class="topic"><span class="n">18</span>Fields of Application + Summary</h3>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Fields:</b> Traffic control · Production/logistics · <b>Medical devices</b> (smartwatch emergency call) · Energy/smart grid · <b>Automotive</b> (lane keeping, auto-stop, distance control).</li>
+      <li><b>Summary:</b> rising <b>complexity</b> (components + <b>VUCA</b> + interconnections) forces engineers to develop <b>whole systems &amp; functions</b>, not single sub-components; <b>system engineering</b> handles this; <b>holistic thinking</b> avoids failures and reaches the <b>overall optimum</b>, not a singular one.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">💬</span><div>Complexity went up → <b>engineer the WHOLE system</b> → a holistic optimum beats a local one.</div></div>
+    <label class="learn"><input type="checkbox" data-k="t18">Mark learned</label>
+
+    <div class="card" style="text-align:center;background:var(--ink);color:var(--paper)">
+      <div style="font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--amber)">YOUR PROGRESS</div>
+      <div id="progress" style="font-family:var(--disp);font-size:34px;font-weight:800;margin-top:4px">0 / 18 topics learned</div>
+      <div style="height:8px;background:#3a342b;border-radius:6px;margin-top:10px;overflow:hidden"><div id="progbar" style="height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--red));transition:.4s"></div></div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section id="cards">
+    <div class="sec-label">Active recall · flip to test yourself</div>
+    <h2>Flashcards</h2>
+    <p class="lead">Read the question, say the answer <em>out loud</em>, then flip. Cover the deck and run it twice — that's how it sticks. <span class="flip-note">(Click a card to flip · also exported to <b>1_flashcards.txt</b> for Anki.)</span></p>
+    <div id="fc-live" class="deck-wrap">
+      <div class="flashcard" id="fcard" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-face fc-front"><span class="lab">Question</span><div class="fc-q" id="fcq">…</div><span class="fc-hint">click to flip ⟲</span></div>
+          <div class="fc-face fc-back"><span class="lab">Answer</span><div class="fc-a" id="fca">…</div><span class="fc-hint">click to flip ⟲</span></div>
+        </div>
+      </div>
+      <div class="deck-ctrl">
+        <button class="btn" onclick="fcPrev()">‹ Prev</button>
+        <span class="counter" id="fccount">1 / 1</span>
+        <button class="btn" onclick="fcNext()">Next ›</button>
+        <button class="btn amber" onclick="fcShuffle()">⤮ Shuffle</button>
+      </div>
+    </div>
+    <!-- print version filled by JS -->
+    <div id="fc-print" class="print-only"></div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="exam">
+    <div class="sec-label">Exam rehearsal · write first, then reveal</div>
+    <h2>3 Practice Questions <span style="font-size:15px;font-family:var(--mono);color:var(--ink-soft)">+ model answers</span></h2>
+    <p class="lead">Try to answer on paper before clicking <b>Reveal</b>. The model answers show the exact points an examiner rewards.</p>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q1</span><span>Define a “system” and distinguish a mechatronic system from a cyber-physical system. Give one example of each.</span></div>
+      <div class="q-type">Type: definitions · ~8 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p>A <b>system</b> is a <b>group of associated components that work together for the same purpose and that can be bordered from the environment</b>. The components have different characteristics — otherwise it would be a mere <b>accumulation</b>. Borders are clear, though interfaces may partly overlap.</p>
+        <ul>
+          <li><b>Mechatronic system:</b> a merge of <b>software + hardware</b> (mechanics &amp; electronics); can be a <b>standalone, closed</b> system. Example: a <b>washing machine</b>.</li>
+          <li><b>Cyber-Physical System (CPS):</b> a merge of <b>intercommunicating software</b> (esp. embedded, via the internet = <em>cyber</em>) + <b>hardware</b> (= <em>physical</em>); suited to <b>large-scale, distributed networks (IoT)</b>. Example: <b>home automation</b> linking the washing machine with the photovoltaic system.</li>
+        </ul>
+        <p>There is <b>no sharp deviation</b> between the two. Applied to this lecture a system = physical (sensors, actuators, PCB &amp; wires) + cyber (processing unit, AI, software).</p>
+      </div>
+    </div>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q2</span><span>Explain the difference between a “complicated” and a “complex” system, define VUCA, and name what makes a system complex (its properties).</span></div>
+      <div class="q-type">Type: structured / theory · ~10 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p><b>Complicated</b> systems have <b>all elements, rules and dependencies known</b>; they need much effort but are <b>predictable</b> and can be mastered by training/knowledge → managed with a <b>waterfall</b> model (e.g. a subway grid plan). <b>Complex</b> systems have <b>(partly) unknown elements, rules and dependencies</b>; they are <b>not predictable</b> and cannot be “removed” → managed with <b>agile / SCRUM</b> (e.g. the weather).</p>
+        <p><b>VUCA</b> = <b>V</b>olatile (discontinuity, big fluctuations), <b>U</b>ncertain (unclear outcomes, low predictability), <b>C</b>omplex (many layers, fuzzy boundaries), <b>A</b>mbiguous (no simple description).</p>
+        <p><b>Properties of complex systems:</b> agent-based, non-linear, emergence, open, self-organised, self-regulating, and path-dependencies (behaviour depends on history, not just the current state).</p>
+      </div>
+    </div>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q3</span><span>You are building Robi, a cleaning robot. (a) Draw/describe its high-level system structure (SIPOC). (b) Name the steps of the System Engineering process. (c) Give two challenges of engineering such a CPS.</span></div>
+      <div class="q-type">Type: application · ~9 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p><b>(a)</b> Every system follows the <b>SIPOC</b> chain: <b>Sensor → Connector → Logic → Connector → Actuator/Visualizer</b>. For Robi: a dirt/obstacle <b>sensor</b> → a <b>wire</b> (connector) → the <b>logic</b> (software/AI on a processing unit) → a <b>wire</b> → the drive <b>motor/brush</b> (actuator).</p>
+        <p><b>(b)</b> System Engineering (ISO/IEC 15288) runs: <b>Requirement Management → Ideation/Concept → Design/Realization → Test &amp; Verification &amp; Validation → Release</b>, with <b>Risk Management</b> and <b>Change Management</b> surrounding the whole loop.</p>
+        <p><b>(c)</b> Any two of: increasing <b>interdisciplinary</b> work &amp; diverse <b>interfaces</b> (consistent control needed); many <b>product variants</b>; <b>distributed sensor network</b> needing <b>sensor fusion</b>; <b>hard to verify</b> (can't stop the whole system, AI keeps changing); <b>safety</b> (untrusted network data, new attack points); unclear <b>accountability</b> (e.g. who is liable when an autonomous car crashes).</p>
+      </div>
+    </div>
+
+    <details class="more"><summary>Bonus: 10 rapid-fire short answers</summary><div class="inner">
+      <ol>
+        <li><b>System Design =</b> System (purpose) + Design (how).</li>
+        <li><b>Emergence =</b> “1+1=3” (sulphur pile is yellow); ignorance ≠ emergence.</li>
+        <li><b>System levels:</b> Supersystem · System · Sub-system · Component (System &amp; Component always exist).</li>
+        <li><b>Cybernetics =</b> control of machines via feedback (sense organs + social).</li>
+        <li><b>Open / Partly-open / Isolated</b> — partly-open example = OBD in a car.</li>
+        <li><b>Connectivity =</b> nodes + connections; bidirectional link counts as 2 (clustering coefficient).</li>
+        <li><b>System Dynamics:</b> Qualitative (loops) vs Quantitative (real numbers).</li>
+        <li><b>Chaos theory =</b> non-linear, butterfly effect (turbulent gas, internet).</li>
+        <li><b>BMW core process:</b> ItO · OtO · OtD · DtCC.</li>
+        <li><b>MDSD =</b> auto-generate code/tests/docs from the model (Simulink → C).</li>
+      </ol>
+    </div></details>
+  </section>
+
+  <!-- CHEAT CARD -->
+  <section id="cheat">
+    <div class="sec-label">Last 5 minutes before the exam</div>
+    <h2>One-screen cheat-card</h2>
+    <table class="cheat"><tbody>
+      <tr><td>Two halves</td><td>System (purpose) + Design (how)</td><td>WHAT + HOW</td></tr>
+      <tr><td>System def</td><td>parts · one purpose · bordered</td><td>different parts + a fence</td></tr>
+      <tr><td>Natural vs Artificial</td><td>grew vs built</td><td>Galaxy/Leaf/Lung vs Piano/Plane/Robot</td></tr>
+      <tr><td>Open/Partly/Isolated</td><td>full · OBD · sealed</td><td>3 doors on Robi</td></tr>
+      <tr><td>Cybernetics</td><td>control via feedback loop</td><td>gap→fix→measure→repeat</td></tr>
+      <tr><td>Mechatronic vs CPS</td><td>standalone vs networked/IoT</td><td>lone washer vs washer-texts-solar</td></tr>
+      <tr><td>System Wheel</td><td>DNA core · properties · 3 domains · customer</td><td>bike wheel, 3-colour rim</td></tr>
+      <tr><td>SIPOC structure</td><td>Sensor→Conn→Logic→Conn→Actuator</td><td>“See It Process Output Customer”</td></tr>
+      <tr><td>Levels</td><td>Super·System·Sub·Component</td><td>nesting dolls (System+Comp always)</td></tr>
+      <tr><td>Components</td><td>HW/SW/liquids + talents/ideas</td><td>brick pile (touchable + invisible)</td></tr>
+      <tr><td>Emergence</td><td>1+1=3, group property</td><td>glowing sulphur pile</td></tr>
+      <tr><td>VUCA</td><td>Volatile·Uncertain·Complex·Ambiguous</td><td>the storm cloud</td></tr>
+      <tr><td>Complicated vs Complex</td><td>known→waterfall / unknown→SCRUM</td><td>subway map vs weather</td></tr>
+      <tr><td>MAS</td><td>self-organised agents, no boss</td><td>ant colony (broadcast jobs)</td></tr>
+      <tr><td>Connectivity</td><td>nodes + connections, bidirectional=2</td><td>spider web</td></tr>
+      <tr><td>System Dynamics</td><td>model &amp; simulate (qual loops / quant numbers)</td><td>simulate 1000×</td></tr>
+      <tr><td>Chaos</td><td>non-linear, butterfly effect</td><td>butterfly over turbulent gas</td></tr>
+      <tr><td>Design</td><td>requirements → technical solution</td><td>paintbrush + watching factory</td></tr>
+      <tr><td>Process classes</td><td>Core · Management · Support</td><td>3 lanes; BMW I-O-O-D</td></tr>
+      <tr><td>SE 7 steps</td><td>Req·Ideation·Design·Test·Release + Risk·Change</td><td>gear-loop, ISO 15288</td></tr>
+      <tr><td>Challenges</td><td>global · interfaces · variants · verify · safety</td><td>sweating runner; “who crashed the car?”</td></tr>
+      <tr><td>MBSE/MDSD/DigEng</td><td>model / code-vending / digital twin</td><td>share·vend·ghost; UML/SysML; INCOSE</td></tr>
+    </tbody></table>
+  </section>
+
+  <footer>
+    Basics of System Engineering · CPS MMC-01a · study build · keep Robi &amp; Cy in your head 🤖🦉<br>
+    Downloads: <a class="inline" href="1_study.pdf">PDF</a> · <a class="inline" href="1_flashcards.txt">Anki flashcards</a> · <a class="inline" href="1_memorize.md">memorize guide</a> · <a class="inline" href="1.md">notes</a>
+  </footer>
+</main>
+
+<script>
+/* progress bar on scroll */
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;const s=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(s*100)+'%';});
+
+/* mark-learned with localStorage */
+const boxes=[...document.querySelectorAll('.learn input')];
+const prog=document.getElementById('progress'),pb=document.getElementById('progbar');
+function refresh(){const n=boxes.filter(b=>b.checked).length;prog.textContent=n+' / '+boxes.length+' topics learned';pb.style.width=(n/boxes.length*100)+'%';}
+boxes.forEach(b=>{const k='se_'+b.dataset.k;if(localStorage.getItem(k)==='1')b.checked=true;b.addEventListener('change',()=>{localStorage.setItem(k,b.checked?'1':'0');refresh();});});
+refresh();
+
+/* FLASHCARDS */
+const CARDS=[
+ ["Define a \"system\".","A group of associated components that work together for the same purpose and that can be bordered from the environment."],
+ ["System vs accumulation?","A system's parts have different characteristics and one shared purpose; a mere pile of same parts is an accumulation."],
+ ["Two parts of System Design?","The System (the purpose / 'what') and the Design (the 'how')."],
+ ["Natural systems — 3 examples?","Galaxy (life), Leaf (photosynthesis), Lung (breathing) — developed without human input."],
+ ["Artificial systems — examples?","Piano (sound), Airplane (fly), Robot (expressions); also search engine, sports team, organization."],
+ ["3 types of systems?","Natural, Artificial, Biotechnical."],
+ ["3 types of man-made systems?","Technical (machines/tools), Social (family/groups/work), Sociotechnical (technical + social influencing each other)."],
+ ["Classify by exchange with environment?","Open (full interfaces), Partly open (small pre-defined data, e.g. OBD), Isolated (nothing exchanged)."],
+ ["What does 'Cyber' stand for?","Short form of 'cybernetics'."],
+ ["Define cybernetics.","Control of machines including feedback of sense organs (lifeform analogy) and feedback of social interactions (communication)."],
+ ["Cybernetic control loop in order?","Target → difference (target − current) → Controller → Command → Actuator → Action → System/Environment → Reaction → Sensor → Current value → fed back."],
+ ["What is a cyborg?","An organic ('man') + biomechatronic ('machine') crossover."],
+ ["Define a mechatronic system.","A merge of software + hardware (mechanics & electronics); can be standalone/closed. E.g. washing machine."],
+ ["Define a Cyber-Physical System (CPS).","Intercommunicating software (esp. embedded, via internet = cyber) + hardware (= physical); for large, distributed networks (IoT). E.g. home automation."],
+ ["Mechatronic vs CPS — sharp distinction?","No — there is no sharp deviation between them."],
+ ["Applied to this lecture, a system =?","Physical (sensors, actuators, PCB & wires) + cyber (processing unit, AI, software) → a CPS."],
+ ["System Wheel inner ring (core)?","The 'DNA' of the system — core properties of a one-page datasheet (performance, cost, weight, reliability, size...)."],
+ ["3 realization domains in the System Wheel?","Mechanics, E/E (electrics/electronics), Software."],
+ ["What is SIPOC?","Supplier – Input – Process – Output – Customer; a general way to describe any process."],
+ ["High-level system structure (SIPOC applied)?","Sensor → Connector → Logic → Connector → Actuator/Visualizer."],
+ ["What is a 'Connector' in the structure?","The link between blocks — PCB, wire, wireless, etc."],
+ ["What counts as 'Logic'?","Software, IC, calculator, state machine, AI, etc."],
+ ["Map ChatGPT onto the structure.","Prompt page (sensor) → to server (connector) → AI magic (logic) → to browser (connector) → output field (visualizer)."],
+ ["4 system levels (top→bottom)?","Supersystem (rare) → System → Sub-system → Component."],
+ ["Which levels always exist?","System and Component; Supersystem and Sub-system are optional."],
+ ["Why must a lower level have >1 element?","Else it would equal the higher level, so that level wouldn't exist."],
+ ["Same element, different level — example?","A car is a 'system' for the car-maker but a 'supersystem'; a screw is a 'system' for the screw supplier."],
+ ["What are 'tiers'?","Supplier levels in industry: manufacturer → tier-1 → tier-2 → tier-3, etc."],
+ ["What is a component?","The basic element of a system; clearly bordered, with different functions/tasks."],
+ ["Kinds of components (real & immaterial)?","Real: hardware, software, material/consumables. Immaterial: talents & roles, ideas."],
+ ["Define emergence.","A system has other properties than the simple sum of its components ('1+1=3')."],
+ ["Two examples of emergence?","One sulphur atom = no colour but many = yellow; one molecule = no pressure but a gas has pressure."],
+ ["Why is ignorance NOT emergence?","Some effects are merely unknown (low state-of-the-art) and disappear as knowledge evolves."],
+ ["What does VUCA stand for?","Volatile, Uncertain, Complex, Ambiguous."],
+ ["VUCA — Volatile?","Discontinuity; high speed & intensity; large ranges of fluctuation."],
+ ["VUCA — Uncertain?","Unclear outcomes; unknown future / low predictability; things seem to emerge from nothing."],
+ ["VUCA — Complex?","Elements connected in many layers; many systems; clear boundaries hard to define."],
+ ["VUCA — Ambiguous?","No simple description; situations interpreted differently."],
+ ["Properties of complex systems?","Agent-based, non-linear, emergence, open, self-organised, self-regulating, path-dependencies."],
+ ["Complicated vs Complex?","Complicated = all known, predictable, removable by training → waterfall. Complex = (partly) unknown, not predictable, can't be removed → agile/SCRUM."],
+ ["Subway map: complex or complicated?","Complicated — many lines but clear rules; all elements known; much effort but predictable."],
+ ["Weather: complex or complicated?","Complex — not all elements known; all interconnected; the kind of interconnection unknown."],
+ ["What is a Complex Adaptive System (CAS)?","A system that changes itself (adapts/learns), not static. E.g. stock exchange, human brain."],
+ ["What is a Multi-Agent System (MAS)?","Several agents that communicate; autonomous, distributed, self-organised (no boss); broadcast jobs to avoid double work. E.g. ant colony, DAI."],
+ ["How is complexity measured in IT?","Computational Complexity Theory via resource demand: computing time, storage, chip size, number of parallel chips."],
+ ["Rule: same-level elements in different units?","Must NOT interact — if they do, the element border is wrong (risk of wrong responsibilities)."],
+ ["What defines the degree of connectivity?","The amount of (different) nodes and the amount of causal connections between them."],
+ ["How is connectivity measured?","With the clustering coefficient (exact; a bidirectional connection counts as 2)."],
+ ["What is System Dynamics?","Modelling & simulating overall systems to analyse complex/dynamic systems. Variants: qualitative & quantitative."],
+ ["Qualitative system dynamics?","Identifies feedback loops: reinforcing (positive) & balancing (negative). Easier; good overview."],
+ ["Quantitative system dynamics?","Models & simulates the whole system; real numbers; many runs; flow charts; finds non-linear effects."],
+ ["What is Chaos Theory?","Field of non-linear dynamic systems; 'butterfly effect' — small change → big effect, prediction impossible (turbulent gas, internet)."],
+ ["Define 'design' (system design).","The process of translating requirements (respecting the system purpose) into a (technical) solution."],
+ ["Deliverables of a design?","Plan, drawings/schematics, models, software code, etc."],
+ ["Why can't design, integration & production be split?","They influence each other; ignoring production capability risks a non-producible (ball-in-ball) or non-commercial (all-gold wires) part."],
+ ["3 classes of company processes?","Core, Management, Support."],
+ ["What is a core process?","Value-adding business with customers & suppliers: customer requirement → core process → customer satisfaction."],
+ ["BMW's simplified core process phases?","ItO (Idea→Offer), OtO (Offer→Order), OtD (Order→Delivery), DtCC (Delivery→Customer Care)."],
+ ["What is 'ItO'?","Idea to Offer: development from requirement → ideas/concepts → implementation; after test, validation & industrialisation → release."],
+ ["Define System Engineering.","Interdisciplinary engineering + management; design, integrate & manage complex systems over their life cycle; defined in ISO/IEC 15288."],
+ ["Steps of the System Engineering process?","Requirement Mgmt → Ideation/Concept → Design/Realization → Test & Verification & Validation → Release; surrounded by Risk & Change Management."],
+ ["Requirement Management does what?","Analyses the problem & requests (Customer, Law, LeLe); breaks it into requirements; defines the system requirements."],
+ ["Ideation / Concept does what?","Creative search for ideas; define functions; create system architecture; break system→subsystem→component; break requirements into levels; interface design."],
+ ["Design / Realization does what?","Model, simulate, analyse; implement into HW/E-E/SW; integrate levels; document. (Core engineering work.)"],
+ ["Test & Verification & Validation does what?","Test design, 'test of the test', planning, execution (virtual + HW). Proof by measurement that every requirement is met."],
+ ["Release does what?","Sign off; release to production; take over accountability (per requirements & law) to the customer."],
+ ["What does the 'tree-swing' cartoon show?","The result of building a system WITHOUT system design & requirement management — every department builds something different."],
+ ["Name SE challenges.","Globalization, many suppliers, legal specs, unclear responsibilities, interdisciplinary work, diverse interfaces, complex requirements, many variants, reduced cycle time, sensor fusion, communication, verification, safety."],
+ ["Why is sensor fusion needed?","To describe an object, data from different sensors distributed by location must be combined (e.g. camera + lidar)."],
+ ["Wiring-harness variants in a typical car?","About 425 billion combinations (e.g. VW Golf), due to customization."],
+ ["What is MBSE?","Model-Based Systems Engineering — System Wheel + a model; cross-discipline communication; all info independent of realization domains; needs a harmonized modelling language."],
+ ["Benefits of MBSE?","Visualization, architectures/dependencies → traceability, automated tests, different views, foreseeable change impacts, direct code generation."],
+ ["MBSE modelling languages?","UML (Unified Modeling Language) and SysML (Systems Modeling Language)."],
+ ["What is MDSD (MDD)?","Model-Driven Software Development — auto-generate functional software, tests & docs from the model without coding (e.g. Simulink → C)."],
+ ["MDSD advantages & disadvantages?","Pro: higher abstraction, faster, fitting test cases. Con: more initial effort, tricky manual-code integration, harder troubleshooting."],
+ ["What is Digital Engineering?","Successor of MBSE (INCOSE / GfSE); uses digital twins to see performance live & interact virtually; uses MBSE, AI, CAD/CAE, AM, VR/AR."],
+ ["Example fields of application for CPS?","Traffic control, production/logistics, medical devices, energy/smart grid, automotive (lane keeping, auto-stop, distance control)."],
+ ["Core summary message of the chapter?","Rising complexity forces developing whole systems/functions, not single parts; system engineering handles this; holistic thinking reaches the overall optimum."]
+];
+let order=CARDS.map((_,i)=>i),pos=0;
+const q=document.getElementById('fcq'),a=document.getElementById('fca'),cnt=document.getElementById('fccount'),cardEl=document.getElementById('fcard');
+function show(){const c=CARDS[order[pos]];cardEl.classList.remove('flipped');q.textContent=c[0];a.textContent=c[1];cnt.textContent=(pos+1)+' / '+CARDS.length;}
+function fcNext(){pos=(pos+1)%CARDS.length;show();}
+function fcPrev(){pos=(pos-1+CARDS.length)%CARDS.length;show();}
+function fcShuffle(){for(let i=order.length-1;i>0;i--){const j=(i*7+pos*13+3)%(i+1);[order[i],order[j]]=[order[j],order[i]];}pos=0;show();}
+show();
+/* build print list */
+const fp=document.getElementById('fc-print');
+fp.innerHTML='<h3 class="topic">All flashcards (Q/A)</h3>'+CARDS.map((c,i)=>'<div class="pc"><div class="pq">'+(i+1)+'. '+c[0]+'</div><div class="pa">'+c[1]+'</div></div>').join('');
+
+/* practice reveal */
+function reveal(btn){const ans=btn.nextElementSibling;const open=ans.classList.toggle('show');btn.textContent=open?'Hide model answer':'Reveal model answer';}
+</script>
+</body>
+</html>

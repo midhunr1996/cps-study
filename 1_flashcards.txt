@@ -1,0 +1,94 @@
+#separator:tab
+#html:false
+#columns:Question	Answer
+What is the module competence for "Basics of System Engineering"?	Understand the necessity of systems and system design (level 3: apply).
+Which step of System Engineering is this chapter?	Step 1 — Basics of System Engineering (before Requirements, Risk, Change, Ideation, Design, Test, Project Setup).
+What are the two parts of System Design?	The System (the purpose / "what") and the Design (the "how").
+Define a "system".	A group of associated components that work together for the same purpose and that can be bordered from the environment.
+What turns a group of parts into a system rather than an accumulation?	The components have different characteristics/features and share one purpose; without that it's just an accumulation.
+Are system borders always sharp?	Mostly yes — systems are clearly bordered from others and the environment, but there can be partial overlaps at interfaces.
+Give three examples of NATURAL systems and what they enable.	Galaxy (enables life), Leaf (photosynthesis), Lung (breathing) — developed without active human input.
+Give three examples of ARTIFICIAL systems.	Piano (sound), Airplane (fly), Robot (human expressions); also search engine, sports team, organization — made by mankind.
+What are the three TYPES of systems?	Natural systems, Artificial systems, Biotechnical systems.
+What are the three types of man-made (artificial) systems?	Technical (machines, tools), Social (family, groups, work), Sociotechnical (technical + social influencing each other, e.g. information/work system).
+Classify systems by exchange with the environment.	Open (full interfaces — info/material/energy), Partly open (small pre-defined data, e.g. OBD in a car), Isolated (nothing exchanged).
+Can different parts of one system have different openness? Give an example.	Yes — a cleaning robot's tracking system is isolated, while its recorded map is shown via the open Bluetooth interface.
+What does "Cyber" stand for?	Short form of "cybernetics".
+Define cybernetics.	Control of machines including the feedback of sense organs (analogy to lifeforms) and the feedback of social interactions (communication).
+List the elements of a cybernetic control loop in order.	Target value → difference (target − current) → Controller → Command → Actuator → Action → System/Environment → Reaction → Sensor → Current value → fed back (−).
+"Cyber" is used as a prefix for which topics?	Computer/virtual-reality topics: Cybersecurity, Cyberspace, Cyberwarfare, Cybercrime, Cyber-attack, Cyborgs.
+What is a cyborg?	A crossover of organic ("man") and biomechatronic ("machine") parts.
+Define a mechatronic system.	A merge of software + hardware (mechanics & electronics); can be a standalone, closed system. E.g. washing machine.
+Define a Cyber-Physical System (CPS).	A merge of intercommunicating software components (esp. embedded, via internet = cyber) + hardware (mechanics & electronics = physical); for large-scale, distributed networks (IoT). E.g. home automation linking washer + photovoltaic.
+Is there a sharp distinction between mechatronic systems and CPS?	No — there is no sharp deviation between them.
+Applied to this lecture, what "things" make up a system?	Physical: sensors, actuators, PCB & wires. Cyber: processing unit, AI, general software. → A Cyber-Physical System.
+What does the System Wheel's inner ring (core) represent?	The "DNA" of the system — the core properties you'd write on a one-page datasheet (e.g. performance, consumption, cost, reliability, weight, size).
+What are the three realization domains in the System Wheel?	Mechanics, E/E (electrics/electronics), and Software.
+What is the SIPOC logic?	Supplier – Input – Process – Output – Customer — a general way to describe any process.
+Give the high-level structure of a system (SIPOC applied).	Sensor → Connector → Logic → Connector → Actuator/Visualizer.
+In the system structure, what is a "Connector"?	The link between blocks — PCB, wire, wireless, etc.
+In the system structure, what counts as "Logic"?	Software, IC, calculator, state machine, AI, etc.
+In the system structure, what is an "Actuator/Visualizer"?	The output element — motor, valve, HMI, database, etc.
+Map ChatGPT onto the system structure.	Sensor = prompt webpage; Connector = data transfer to server; Logic = "magic of AI"; Connector = data transfer to browser; Visualizer = output field.
+What are the four system levels (top to bottom)?	Supersystem (rare) → System → Sub-system → Component.
+Which system levels always exist and which are optional?	System and Component always exist; Supersystem and Sub-system are optional.
+Why must a lower level always have more than 1 element?	Otherwise the lower level would equal the higher one, so that level would not exist.
+How can the same element be at different levels?	It depends on integration/point of view — e.g. a car is a "system" for the car-maker but a "supersystem"; a screw is a "system" for the screw supplier.
+What are "tiers" in industry?	The supplier levels: manufacturer → tier-1 → tier-2 → tier-3 supplier, etc.
+What is a component (system part)?	The basic element of a system; clearly bordered, with different functions/tasks.
+Name the kinds of components (real and immaterial).	Real: hardware (electronics/mechanics/hydraulics), software (functions/interfaces), material/consumables (chemicals/liquids). Immaterial: talents & roles, ideas.
+Define emergence.	A system can have other properties than the simple sum of its single components' properties ("1+1=3").
+Give two examples of emergence.	A single sulphur atom has no colour but many are yellow; a single molecule has no pressure but a gas (many molecules) has pressure.
+Why is "ignorance" NOT emergence?	Some effects are merely unknown due to low state-of-the-art knowledge and disappear as knowledge evolves — that is not emergence.
+What does VUCA stand for?	Volatile, Uncertain, Complex, Ambiguous.
+VUCA — what does "Volatile" mean?	Discontinuity; high speed & intensity; large ranges of fluctuation.
+VUCA — what does "Uncertain" mean?	Countless scenarios with unclear outcome; unknown future / low predictability; things seem to emerge from "nothing".
+VUCA — what does "Complex" mean?	Elements connected in many layers; many different systems; clear boundaries hard to define.
+VUCA — what does "Ambiguous" mean?	No simple description; situations can be interpreted differently.
+What defines a system's level of complexity?	The amount of different components, their order, and their interaction. Complex systems can't be broken into easier problems.
+List the properties of complex systems.	Agent-based, non-linear, emergence, open, self-organised, self-regulating, path-dependencies.
+Difference between "complicated" and "complex" systems?	Complicated: all elements/rules/dependencies known, predictable, removable by training → waterfall PM. Complex: (partly) unknown elements/rules, not predictable, can't be removed → agile/SCRUM PM.
+Is a subway grid plan complex or complicated? Why?	Complicated — many stations/lines but clear rules and dependencies; all elements known; much effort but predictable.
+Is weather complex or complicated? Why?	Complex — not all elements known, all interconnected, and the kind of interconnection is unknown.
+What is a Complex Adaptive System (CAS)?	A system that changes itself (adapts/learns) based on its environment, so it's not statically analysable. E.g. stock exchange, human brain.
+What is a Multi-Agent System (MAS) / agent-based modelling?	A system of several homogeneous/heterogeneous "agents" that communicate; autonomous, distributed, self-organised (no overarching controller); an agent broadcasts when it takes a job to avoid double work. E.g. ant colony, DAI.
+How is complexity measured in IT?	By "Computational Complexity Theory" via resource demand: computing time, storage, chip size, number of parallel chips.
+Rule for connectivity between elements on the same level but different units?	There must be NO interaction — if there is, the element border is set wrong (risk of wrong responsibilities).
+What can interactions between elements swap?	Information, material, energy — interdependent and normally not unidirectional.
+What defines the degree of connectivity?	The amount of (different) nodes and the amount of causal connections between them.
+How is the degree of connectivity measured?	With the clustering coefficient (computed exactly; a bidirectional connection counts as 2).
+What is System Dynamics?	The modelling and simulating of overall systems to analyse complex/dynamic systems (because they can't be described easily/linearly). Variants: qualitative and quantitative.
+Qualitative system dynamics — what does it do?	Identifies feedback loops between items: reinforcing loops (positive coupling) and balancing loops (negative coupling). Easier than quantitative; gives a good overview.
+Quantitative system dynamics — what does it do?	Models & simulates the whole system, gives real numbers, allows many scenario runs, uses flow charts/process views, finds non-linear effects.
+What is Chaos Theory?	A field studying non-linear dynamic systems; the "butterfly effect" — small changes have big effects and prediction is impossible. E.g. turbulent gas flow, the internet.
+Define "design" (system design).	The process of translating requirements (respecting the system purpose) into a (technical) solution.
+What are the deliverables of a design?	Plan, drawings/schematics, models, software code, etc.
+Why can't design, integration and production be strictly divided?	They influence each other; without knowing production capabilities you risk a non-producible (ball-in-ball) or non-commercial (all-gold wires) part — so prototypes must be built and tested upfront.
+What are the three classes of company processes?	Core processes, Management processes, Support processes.
+What is a core process?	Activities working on business with customers & suppliers; value-adding (increasing corporate/customer value). Flow: customer requirement → core process → customer satisfaction.
+Name BMW's simplified core process phases.	ItO (Idea to Offer), OtO (Offer to Order), OtD (Order to Delivery), DtCC (Delivery to Customer Care).
+What is "ItO" (Idea to Offer)?	The core development process from requirement → ideas/concepts → implementation; purchasing procures materials/tools; after test & validation and industrialisation the product is released for production. Aim: meet all requirements, optimal product.
+Define System Engineering.	An interdisciplinary field of classical engineering + engineering management; design, integrate & manage complex systems over their life cycle; defined in ISO/IEC 15288.
+List the steps of the System Engineering process.	Requirement Management → Ideation/Concept → Design/Realization → Test & Verification & Validation → Release; surrounded by Risk Management and Change Management.
+What happens in Requirement Management?	Systematic analysis of the problem & requests (Customer, Law, LeLe); break the problem into requirements; define the system's requirements.
+What happens in Ideation / Concept?	Creative search for ideas/solutions (maybe research); define functions; create system architecture; break (super)system → subsystem → components; break requirements into levels; interface design.
+What happens in Design / Realization?	Model, simulate, analyse; implement functions into real HW/E-E/SW; integrate levels; system documentation. → Core engineering work.
+What happens in Test & Verification & Validation?	Test design, the "test of the test", planning, execution (virtual + hardware). → Proof by measurement that every requirement is fulfilled.
+What happens in Release?	Sign off the developed system; release to production; take over accountability (per requirements & law) towards the customer.
+What is the role of Change Management in System Engineering?	Update the system on changing requirements (new law, customer change of mind, LeLe/field issues); version control of system & components.
+What does the "tree-swing" cartoon illustrate?	The result of building a system WITHOUT system design and requirement management — every department builds something different from the customer's need.
+Name several System Engineering challenges.	Globalization & many suppliers; rising legal specs; unclear responsibilities; interdisciplinary work; diverse interfaces; complex requirements; many product variants; reduced cycle time; distributed sensor networks; communication handling; information gathering; hard to verify; safety.
+Why is sensor fusion needed (challenge)?	To describe an object, data from different (types of) sensors distributed by location must be combined — e.g. camera at the windscreen + lidar in the bumper.
+How many wiring-harness variants does a typical car have?	About 425 billion possible combinations (e.g. VW Golf) due to customization.
+In the autonomous-AI-car accident, who could be accountable?	Many parties — owner (renting company), customer, "driver" friend, sensor supplier, sensor-fusion dev, car maker, SW/HW devs, AI dev, AI trainer, dataset supplier, internet/interconnection suppliers — mastering this complexity is the future challenge.
+System Wheel — what does the "customer perspective" cover?	The inner "DNA" ring; customer raises system-level requirements; expectations: intelligence, inter-connection, performance increase, user-friendly.
+System Wheel — what does the property engineer do?	Translates customer requirements into system properties for one property (the "voice of the customer"); aims at overarching property optimization, breaking solution-open requirements down to component-teams.
+System Wheel — what does the system engineer (product perspective) do?	Mediates between property engineers, ensures process compliance, and decides in case of conflicting targets (since properties impact each other).
+What is MBSE?	Model-Based Systems Engineering — like the System Wheel + a model; models the system (not just text), enables cross-discipline communication, holds all system info independent of realization domains; needs a harmonized modelling language.
+Name benefits of MBSE.	Better visualization, architectures & dependencies (traceability), automated tests/plausibility checks, different views of one system, foreseeable change impacts, direct code generation (MDSD).
+Which languages are used for MBSE modelling?	UML (Unified Modeling Language) and SysML (Systems Modeling Language).
+What is MDSD (MDD)?	Model-Driven Software Development — automatically creates functional software, tests and documentation directly from the model without coding. E.g. Simulink → C-code.
+Advantages and disadvantages of MDSD?	Advantages: higher abstraction (clearer), faster development, faster system-fitting test cases. Disadvantages: more initial modelling effort, hard to integrate manual code, harder system-level troubleshooting.
+What is Digital Engineering?	The successor of MBSE (defined by INCOSE / GfSE in Germany); uses "digital twins" to see performance live and interact virtually; uses MBSE, AI, CAD/CAE, additive manufacturing, VR/AR.
+Give example fields of application for CPS / system engineering.	Traffic control, production/logistics, medical devices (smartwatch emergency call), energy control & smart grid, automotive (lane keeping, auto-stop, distance control).
+What is the core summary message of the chapter?	Rising complexity (components + VUCA + interconnections) forces engineers to develop whole systems/functions, not single parts; system engineering handles this; holistic thinking avoids failures and reaches the overall optimum.

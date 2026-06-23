@@ -1,0 +1,80 @@
+#separator:tab
+#html:false
+#columns:Question	Answer
+What is the definition of a "requirement"?	An accurately phrased development target for a property of the system or component, considering all relevant conditions.
+How many requirements does a typical product have?	Several hundred to (ten-)thousands, depending on product complexity (and growing over time).
+Which standards define requirements (engineering)?	ISO/IEC/IEEE 29148 (software requirements engineering) and ISO/IEC 25000 (SQuaRE). Also in maturity models CMMI, SPICE (ISO/IEC 15504), ISO/IEC 12207.
+What does ItO (Idea to Offer) describe?	The core development process: customer requirement → ItO → offer → product. Purchasing procures in parallel; after test/validation & industrialization the product is released for production.
+What is the goal of requirement management?	Identify the necessary requirements from (super)system level down to component level and maintain them over the whole lifecycle to build the right product.
+What does the "tree-swing" cartoon illustrate?	That every department understands the same words differently — which is why requirement management is needed to create one common understanding.
+What is RM the enabler of?	Higher customer satisfaction, common understanding between customer & supplier, avoidance of safety/field (quality) issues, fewer late changes & cost impacts, and LeLe.
+Why is RM the essential discipline in systems design?	If the targets (requirements) are set wrong, the whole product is wrong.
+Name the three main challenges for RM.	Clear & distinct definition, completeness (missing requirements found too late), and inaccurate interpretation of requirements.
+What are the two main (core) documents in RM?	The Product Requirements Document (PRD / Lastenheft) and the Implementation Specification (Pflichtenheft).
+What is the PRD (Lastenheft)?	The sum of all requirements of a commercial customer; used in the nomination phase to request technical & commercial offers from suppliers. (DIN 69901-5 / IEEE SRS 29148.)
+What does a PRD contain?	Introduction, current state, target/main requirements, interfaces, functional requirements, non-functional requirements (NFR), system architecture, expected scope of delivery, acceptance criteria.
+How detailed should a PRD be for external vs internal development?	Internal: detailed & tiered down. External: kept on a generic property level to avoid specifying the solution.
+What is the Implementation Specification (Pflichtenheft)?	The supplier's answer to the customer's PRD: the "How" (technical concept) and the "With what" (resources, project plan) to realize the requirements.
+When does development start in RM?	When the customer accepts the supplier's Implementation Specification (and every PRD requirement is covered by at least one deliverable).
+Which models/bodies describe the RM process?	IEEE (SWEBOK), CMMI, IIBA (BABOK), Volere, IREB.
+What are the two freeze milestones in the RM process?	PRD freeze and Implementation-specification freeze.
+Who steers the RM process in large developments?	A requirement manager.
+How do requests cascade by role?	Customer (request) → Property Engineer (1→x system properties) → Developer (x→y component/sub-system requirements).
+List the 6 phases of the requirement-management process.	(1) Collect requests, (2) Assess requests, (3) Develop requirements, (4) Tier down, (5) Validation/Verification, (6) Follow up of changes.
+What is the prior source of external requests?	The customer — it should and must be the prior source. (Also: law, standards & guidelines, cultural/political/social expectations.)
+What happens to gained knowledge as you add interview partners?	It decreases — diminishing returns with more interviewees.
+What is the use-case format for capturing demand?	"As… [role] / I would like to… [function] / To… [reason]." Use cases are named after their goal.
+Name typical internal requests.	LeLe (lessons learned), company standards, existing tool kits, company strategy, CI/design, business-department restrictions.
+What is LeLe (Lessons Learned)?	Knowledge management: using prior-project knowledge at a kick-off to avoid known errors and apply best practices; updated throughout, transferred to the new standard at the project end.
+What is the golden rule of LeLe documentation?	The solution is NOT just the negation of the problem — write a concrete, sustainably anchored action (e.g. "start the test ≥2 weeks before release and anchor it in the project plan").
+Which areas does LeLe knowledge cover?	Technical, project-management, and commercial knowledge — documented in software.
+Give examples of regional standards.	TGL (German DDR), DIN (German BRD), GB / GB-T (China).
+Give examples of international and industry standards.	International: EN (European), ISO (mechanics), IEC (electrical/electronics). Industry: IATF (automotive), VDE (electrotechnics).
+What three ways are used to assess requests?	By Relevance, by Priority, and by Classification.
+What does assessing by Relevance mean?	Is the request relevant for this specific product? (e.g. if not sold in Japan, ignore Japanese law/expectations.)
+What does Priority depend on?	Which request wins if not all can be fulfilled (e.g. safety) — and the company strategy/focus; requirements often negatively impact each other.
+Name design strategies that influence priority.	Design for Customer (Design Thinking), for Costs, for Quality/Reliability, for Production/Manufacturing (DFM), for Service.
+What is the Kano model and who created it?	A method to prioritise customer requests by linking implemented features to customer satisfaction; by Prof. Dr. Noriaki Kano (evolved from quality management).
+List the 5 levels of the Kano model.	Basic needs (must), Performance needs (should), Delighter (could), Indifferent, Reverse (don't).
+Kano: describe basic needs (must).	Natural & self-evident; only noticed when missing; absence causes dissatisfaction but presence gives no extra satisfaction; nearly no competitor differentiation (e.g. call-centre greeting).
+Kano: describe performance needs (should).	Recognised by the customer; satisfaction scales with the degree of fulfilment (e.g. hotline waiting time).
+Kano: describe delighters (could).	Unexpected features that create enthusiasm; a small increase gives a disproportionally large benefit (e.g. live status tracking of a ticket).
+Kano: describe indifferent and reverse features.	Indifferent = presence/absence has little impact (e.g. hold-music song). Reverse (don't) = its presence lowers satisfaction (e.g. jargon in a hotline call).
+How can a Kano classification change?	By customer (delighter for one = reverse for another), by price/business model (delighter on budget = basic on premium), and over time (delighters become basic needs).
+How is Kano feedback gathered?	By structured interview or standardized written survey (to remove interviewer impact), including demographic data to find peer groups and variants.
+What question pair does a Kano survey ask?	A functional question ("How would you feel if it had MORE of…?") and a dysfunctional question ("…if it had LESS/none of…?"); the class is read from the answer combination.
+Kano combination: "I expect it" + "I dislike it" =	Basic need (must).
+Kano combination: "I like it" + "I dislike it" =	Performance need (should).
+Kano combination: "I like it" + "I am neutral" =	Delighter (could).
+How are requirements classified by "Belonging"?	Product requirements (What) [SE focus], Process requirements (How), External requirements (Rest).
+Functional requirement vs NFR?	Functional = a dedicated feature (e.g. the system prints my file). NFR = an expectation that is not a feature (e.g. available 24/7 with 99.9% uptime).
+What are the attributes of a function?	Inputs/outputs, value range/dimensions, accepted margin/tolerance, how often executed, how fast results must be available (throughput time).
+List qualities a good requirement must have.	Complete, correct, SMART, testable, linked, necessary, short, atomic, active voice, no weak words, understandable, traceable, unambiguous & consistent, feasible, equipped with properties.
+Why must a requirement be atomic and in active voice?	Atomic = one requirement per sentence. Active ("The motor rotates the shaft") is clearer than passive ("The shaft is driven by the motor").
+What are weak words and how are they found?	Vague words like "really, very, roughly"; identified with tools such as ReQualize or DESIRe.
+Name key properties of a requirement.	Unique ID, description, rationale/target, originator, creator, user, fit criterion, priority, dependencies/interfaces, conflicts, release/maturity, linked documents, comments, version, change history, status.
+What does SMART stand for?	Specific, Measurable, Achievable, Reasonable, Time-Bound.
+Why does "specific" matter? (man-on-the-mountain example)	Natural language is ambiguous ("I saw the man on the mountain with the telescope" has many readings); fix it with mathematical/IF-THEN descriptions and by excluding variants.
+What is the lesson of the bicycle "TV box" example?	Don't be too specific — specify the problem (reduce shipping damage), not the solution; a clever solution (a box looking like a TV) then emerges.
+What makes a requirement testable?	It must be specific, detailed, affordable to test, and linked to a maturity level (e.g. "efficient" is untestable — 75%? 80%?).
+Why must verification be affordable?	You must not need impractical tests — e.g. crashing many real cars just to verify "the mute button is accessible after a crash".
+General guideline for writing requirements?	Positive not negative; avoid "could/should"; be specific ("robust" → works after 10× 2 m drops on concrete); say WHAT not HOW.
+What must a requirement be linked to?	Its request, mother/child requirements, neighbour requirements, functions & NFR, test items, and interfaces.
+What does the bridge example teach about linking?	A bridge built from Germany (North-Sea zero) and Switzerland (Mediterranean zero) had a 28 cm step, and the correction was made in the wrong direction — unlinked requirements cause costly errors.
+How does SCRUM handle requirements?	A simplified agile approach: Epic → feature request stored in the product backlog → sprint backlog; backlog rows use the role/function/reason format.
+What is the System Wheel?	An overview of typical mechatronic-system properties: hub (mechanics/E-E/software), inner core "DNA" datasheet properties, and 10 extended properties.
+Name the core "DNA" (datasheet) properties of the System Wheel.	Performance, consumption, acoustic, costs, reliability, weight, size.
+Name the 10 extended properties of the System Wheel.	Acoustical behaviour, performance & efficiency, data acquisition/access & security, design for production/service/upgrade, safety, EMC, sustainability, reliability, thermal behaviour, volumetric behaviour & design.
+What is the role of the property engineer?	The voice of the customer for one property; optimises across the whole system (not one component), thinking in system functions, and breaks the function down to component requirements.
+What does FMK mean in the System Wheel?	Funktionsmaßkonzept — the tolerance concept of interconnecting components (under volumetric behaviour & design).
+What is "tier down"?	Breaking system requirements down to lower levels (e.g. component level) so the component team can develop and take responsibility for them.
+What must the receiver of a tiered-down requirement do?	Accept, reject, or feedback a request for change — and only own what they can actually build (e.g. a speaker maker won't own the sound of the whole car).
+Describe the new-requirement decision flow (tier down).	New requirement → inbox/pool → acceptable? If yes, add to component requirements. If no, modification possible? Yes → modify (or decline with reason); No → discard.
+What is the system hierarchy for tier-down?	Supersystem (4) → System (3) → Sub-system (2) → Component (1).
+What is RM's role in validation/verification (phase 5)?	RM does not perform verification but tracks whether each (testable) requirement was successfully confirmed by testing (see Test & Verification chapter).
+What happens in phase 6 (changes)?	Changes of requests & requirements are tracked and followed up (see Change Management chapter).
+What is "analysis paralysis"?	Analysing and defining forever to be 100% perfect instead of starting realization — RM is important but must avoid this.
+What functions must professional RM software provide?	Administrate, structure/sort/filter, tailor to owner, manage workflow/status, link requirements, change history & versioning, and branching — with traceability & transparency.
+What is ReqIF?	Requirement Interchange Format — an XML data format managed by ProSTEP iViP e.V., used to exchange requirements between different software and between customer & supplier.
+Name example requirement-management tools.	Codebeamer (PTC), DOORS (IBM), JAMA. Agile tools: ClickUp, cplace, Jira.
+What is the core summary message of requirement management?	RM is the most important step in system design; it ensures the right product with the right quality and highest customer satisfaction; it runs in 6 phases and focuses on properties, not technical solutions.
