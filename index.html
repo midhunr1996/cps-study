@@ -81,6 +81,18 @@
   .hook .ic{font-size:20px;line-height:1.2}
   .hook b{color:#bfe6a8}
 
+  /* memory movie */
+  .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
+  .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
+  .scene .num{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep)}
+  .scene .decode{color:var(--red);font-weight:600}
+  .pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:16px 0}
+  .pic{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);break-inside:avoid}
+  .pic .big{font-size:32px;line-height:1}
+  .pic h4{font-family:var(--disp);margin:7px 0 4px;font-size:17px}
+  .pic p{margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.45}
+  .pic .key{color:var(--red);font-weight:600}
+
   table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
   th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
   th{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
@@ -174,7 +186,7 @@
 <header class="top"><div class="wrap">
   <span class="brand">⚠ Risk Mgmt · MMC-01a</span>
   <nav class="tabs">
-    <a href="#map">Map</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
     <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
     <a href="#" onclick="window.print();return false;">⤓ PDF</a>
   </nav>
@@ -208,6 +220,48 @@
     </div>
     <p>The chapter solves risk in a fixed order. Learn this one silly sentence and you already own the structure of the exam — everything else just bolts onto one of these six words:</p>
     <div class="hook"><span class="ic">🧠</span><div><b>“Detectives Always Eat Cold Mexican Donuts.”</b><br><b>D</b>etect → <b>A</b>nalyse → <b>E</b>valuate → <b>C</b>ontrol → <b>M</b>onitor → <b>D</b>ocument.</div></div>
+  </section>
+
+  <!-- MEMORY MOVIE -->
+  <section id="movie">
+    <div class="sec-label">The trick · watch, don't memorize</div>
+    <h2>🎬 The Memory Movie</h2>
+    <p class="lead">Don't memorize sentences — your brain hates random letters. Instead <b>close your eyes and play this silly 6-scene movie</b> of Riku's bad day. Each picture <em>is</em> the point, so when you replay the movie, the exam answer just appears. Read it 3 times, then try to replay it with your eyes shut.</p>
+
+    <div class="scene"><div class="emo">🔍</div><div><div class="num">Scene 1</div>A <b>detective</b> spots a <b>banana peel</b> on Riku's path. → <span class="decode">DETECT the risk.</span></div></div>
+    <div class="scene"><div class="emo">🔬</div><div><div class="num">Scene 2</div>He drops the peel under a <b>microscope</b> to study it. → <span class="decode">ANALYSE it.</span></div></div>
+    <div class="scene"><div class="emo">⚖️</div><div><div class="num">Scene 3</div>He plops it on a <b>kitchen scale</b>: “how slippery? × how often is it here?” → <span class="decode">EVALUATE = Severity × Occurrence.</span></div></div>
+    <div class="scene"><div class="emo">🎮</div><div><div class="num">Scene 4</div>He grabs Riku's <b>game controller</b> — a menu of <b>4 buttons</b> pops up: 🧱 ☂️ 🧍 🤷. → <span class="decode">CONTROL it (4 options below).</span></div></div>
+    <div class="scene"><div class="emo">📹</div><div><div class="num">Scene 5</div>He leans back and watches Riku on <b>CCTV screens</b> to see if it slips. → <span class="decode">MONITOR it.</span></div></div>
+    <div class="scene"><div class="emo">📓</div><div><div class="num">Scene 6</div>He scribbles the whole story into a <b>logbook</b>. → <span class="decode">DOCUMENT it.</span></div></div>
+
+    <div class="hook"><span class="ic">🎥</span><div>Replay in one breath: <b>spots → studies → weighs → grabs the controller → watches the screens → writes the logbook.</b> That's the whole chapter's skeleton — no letters needed.</div></div>
+
+    <h3 class="topic">🎮 The 4 buttons on the controller (how to CONTROL a risk)</h3>
+    <p>Picture standing in your doorway in the rain, choosing one button:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">🧱</div><h4>Wall = Avoid</h4><p>Build a wall so the rain never reaches you. <span class="key">Reduce occurrence to 0</span> (e.g. Poka Yoke).</p></div>
+      <div class="pic"><div class="big">☂️</div><h4>Umbrella = Prevent</h4><p>You still go out, but stay drier. <span class="key">Reduce occurrence or severity</span> (e.g. PDCA).</p></div>
+      <div class="pic"><div class="big">🧍</div><h4>Brother = Transfer</h4><p>Push someone who copes better into the rain. <span class="key">ECU → chassis.</span></p></div>
+      <div class="pic"><div class="big">🤷</div><h4>Shrug = Accept</h4><p>Just get a little wet. <span class="key">Only if it's a drizzle</span> (low × low).</p></div>
+    </div>
+
+    <h3 class="topic">🖼️ Picture-hooks for the tricky lists</h3>
+    <p>Same trick for every list that wouldn't stick — turn it into one strong, weird image:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">👻→👹</div><h4>Risk vs Problem</h4><p>A floating <b>ghost “?”</b> = a risk (not yet, &lt;100%). It drops to the floor and becomes a <b>monster</b> = a problem (already happened).</p></div>
+      <div class="pic"><div class="big">🍪</div><h4>PDCA</h4><p>Bake cookies on a <b>spinning plate</b>: <b>Plan</b> recipe → <b>Do</b> bake → <b>Check</b> taste → <b>Act</b> fix next batch. Round forever.</p></div>
+      <div class="pic"><div class="big">🚪</div><h4>6 ways to DETECT</h4><p>Walk into a room: a 📊 <b>dashboard</b> (KPI), an old 📔 <b>diary</b> (LeLe/lessons), a kid doing a 🤸 <b>headstand</b>, a 🔮 <b>fortune-teller</b> (Delphi), a 🔧 <b>workshop bench</b>, a ☢️ <b>hazard sign</b> (PAAG/HAZOP).</p></div>
+      <div class="pic"><div class="big">😣</div><h4>RPV = “how SORe”</h4><p>Riku trips and is <b>SORE</b>: how bad the bruise (<b>S</b>everity) × how <b>O</b>ften he trips (Occurrence) × can he see it coming (<b>R</b>ecognizability). Each /10.</p></div>
+      <div class="pic"><div class="big">🤖👑🩺</div><h4>FMEA family</h4><p>A plain robot (<b>FMEA</b>) puts on a 👑 <b>crown</b> to rank what's critical (FME<b>C</b>A) → then a 🩺 <b>stethoscope</b> to self-diagnose (FME<b>D</b>A).</p></div>
+      <div class="pic"><div class="big">☃️</div><h4>Rule of Ten</h4><p>A <b>snowball</b> at the hill-top: 1€ → 10€ → 100€ → 1000€, smashing the customer's house. <span class="key">Catch it at the TOP (planning).</span></p></div>
+      <div class="pic"><div class="big">📦💰🌍</div><h4>Where risks hide (9→3)</h4><p><b>Product box</b> (Technical, Compliance) · <b>Money/Time box</b> (Finance, Time, Market, Currency) · <b>People/Planet box</b> (Social, PM, Environmental).</p></div>
+      <div class="pic"><div class="big">🚗</div><h4>SC car badges</h4><p>A <b>BMW</b> wears <b>3</b> badges <b>L·S·F</b> (Legal, Safety, Function); a <b>VW</b> wears <b>2</b> badges <b>D·S</b> (Documented, Safety). Daimler = DS/DZ.</p></div>
+      <div class="pic"><div class="big">🏁</div><h4>Standards anchor</h4><p>A race-car with number plate <b>“26262”</b> = <b>ISO 26262</b> (automotive FMEA). Anchor on the car, the rest cluster around it.</p></div>
+      <div class="pic"><div class="big">🔮</div><h4>Delphi vs Headstand</h4><p><b>Delphi</b> = silent hooded oracles, answer alone, repeat, average. <b>Headstand</b> = flip the question (“how to make Riku fail FAST?”), then flip the answers back.</p></div>
+    </div>
+
+    <div class="hook"><span class="ic">🧠</span><div><b>How to actually lock it in:</b> (1) read a scene, (2) <b>shut your eyes and re-see the picture</b>, (3) say the real meaning out loud. Do the 6-scene movie + 10 picture-hooks twice today and once tomorrow — then test yourself with the <a href="#cards" style="color:#bfe6a8">flashcards</a>. Seeing beats reading; testing beats re-reading.</div></div>
   </section>
 
   <!-- LESSON -->

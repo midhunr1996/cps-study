@@ -7,6 +7,36 @@ You and your friends are building **Riku, a self-driving delivery robot**. You d
 
 ---
 
+## 🎬 The Memory Movie (use this if sentences won't stick)
+
+Don't memorize letters — **watch a movie**. Close your eyes and play *Riku's bad day* in 6 scenes. Each picture **is** the point, so replaying the movie hands you the answer.
+
+1. 🔍 A **detective** spots a **banana peel** on Riku's path → **DETECT** the risk.
+2. 🔬 He studies it under a **microscope** → **ANALYSE**.
+3. ⚖️ He weighs it on a **kitchen scale** — “how slippery × how often?” → **EVALUATE** = Severity × Occurrence.
+4. 🎮 He grabs a **game controller** with **4 buttons** (🧱☂️🧍🤷) → **CONTROL**.
+5. 📹 He watches Riku on **CCTV screens** → **MONITOR**.
+6. 📓 He writes it in a **logbook** → **DOCUMENT**.
+
+> Replay in one breath: **spots → studies → weighs → grabs the controller → watches the screens → writes the logbook.**
+
+**The 4 controller buttons (standing in the rain):** 🧱 Wall = **Avoid** (block it, occurrence→0) · ☂️ Umbrella = **Prevent** (stay drier) · 🧍 Brother = **Transfer** (push who copes better; ECU→chassis) · 🤷 Shrug = **Accept** (only if a drizzle).
+
+**Picture-hooks for the lists that won't stick:**
+- 👻→👹 **Risk vs Problem** — floating ghost “?” (risk, &lt;100%) drops and becomes a monster (problem, happened).
+- 🍪 **PDCA** — bake cookies on a spinning plate: Plan → Do → Check → Act, round forever.
+- 🚪 **6 ways to Detect** — a room with: 📊 dashboard (KPI), 📔 old diary (LeLe), 🤸 headstand, 🔮 fortune-teller (Delphi), 🔧 workshop bench, ☢️ hazard sign (PAAG/HAZOP).
+- 😣 **RPV = “how SORe”** — Riku trips & is SORE: **S**everity × **O**ccurrence × **R**ecognizability (each /10).
+- 🤖👑🩺 **FMEA family** — plain robot → puts on a 👑 crown to rank what's critical (FME**C**A) → a 🩺 stethoscope to self-diagnose (FME**D**A).
+- ☃️ **Rule of Ten** — a snowball: 1€→10€→100€→1000€ smashing the customer's house. Catch it at the TOP (planning).
+- 📦💰🌍 **Where risks hide** — Product box / Money-Time box / People-Planet box.
+- 🚗 **SC badges** — BMW wears **3** (L·S·F), VW wears **2** (D·S); Daimler DS/DZ.
+- 🏁 **Standards** — race car plate “26262” = ISO 26262 (automotive).
+
+**How to lock it in:** read a scene → shut your eyes → re-see the picture → say the meaning out loud. Movie + picture-hooks twice today, once tomorrow, then test with flashcards. **Seeing beats reading; testing beats re-reading.**
+
+---
+
 ## 0. The shape of the whole chapter (see this first)
 
 Risk Management is **step 3 of System Engineering**: `1 Basics → 2 Requirements → 3 RISK → 4 Change → 5 Ideation → (6 Design) → (7 Test) → (8 Project Setup)`.
