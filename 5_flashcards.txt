@@ -1,0 +1,61 @@
+#separator:tab
+#html:false
+#columns:Question	Answer
+What is Design Thinking?	A method for developing creative ideas and for problem solving, centred on the customer.
+Which competence does this module give (level)?	Develop new ideas and solutions for systems from a given problem using "design thinking" (level 3: apply).
+Which step of System Engineering is Ideation / Design Thinking?	Step 5 (Ideation), after Risk and Change Management, before Design and Test.
+What three things does design thinking put into focus?	The customer / benefit, the possibility to realize (feasibility), and commercial viability.
+How should the design-thinking team be composed?	As heterogeneous (diverse) as possible.
+What kind of method is design thinking, and what does it need?	An agile method that needs several iterations to reach the goal.
+What is the core motto of design thinking?	"Fail fast and cheap!"
+What are the two "spaces" in the design thinking process?	Problem Space (understand the problem & customer) and Solution Space (create & test solutions).
+List the six steps of the design thinking process in order.	(1) Understand, (2) Observe, (3) Design Principles, (4) Ideation, (5) Prototyping, (6) Testing.
+Which steps belong to the Problem Space?	Understand and Observe (steps 1–2); step 3 Design Principles bridges into the Solution Space.
+Which steps belong to the Solution Space?	Ideation, Prototyping and Testing (steps 4–6).
+Is the design thinking process linear or iterative?	Iterative — you loop through prototyping & testing several times.
+(1) Understand — what is its content?	Understand the problem and the target; build the team.
+In "Understand", what must you describe instead of the technical solution?	The target condition after using the technology (the desired outcome), NOT the technical solution.
+Name questions answered in the "Understand" step.	What should be newly developed? What's the problem? What's the target condition? Who is the customer? Which environment conditions apply?
+How do you carry out the "Understand" step?	An initial expert circle / brainstorming, updated with each new piece of information during the process.
+(2) Observe — what is its content?	Understand the customer: their will, wishes and inner needs; collect as much information as possible.
+What information should you collect about the customer in "Observe"?	The actual problem to solve, what it should be able to do, and personal background (family, hobbies, …).
+How do you carry out the "Observe" step?	Talk to and interview the customer, spend time with / observe them, and find the relevant peer groups.
+Why are "extreme voices" valuable in Observe?	Extreme voices raise important information that the average customer would not specifically point out.
+Two key rules during interviews (Observe)?	Let the customers talk, not the interviewer; and don't sell your own idea.
+What does the persona competency level scale measure?	The persona's (technology) knowledge, rated from 0 (no knowledge) to 5 (expert).
+Competency level 0 and 1?	0 = no knowledge; 1 = Newbie (has heard of it, knows where to find info, still uncertain).
+Competency level 5 (Expert)?	Specialist in the field; handles complex tasks alone; constantly advances the state of the art with new approaches.
+(3) Design Principles — what is its content?	Synthesis of the first two steps: find patterns / common sense between customers.
+In Design Principles, how do you capture the customer?	Create a profile using "Personas" or "Point-of-View" and visualize the customer's point of view.
+What must you update during the Design Principles step?	Your "(1) Understand" — the problem, target, and needed functions/features.
+What is a Persona?	A concept from analytical psychology describing the outer view and acting (role/face) of a person.
+What is a Buyer Persona?	An adaptation of the persona to economics; a fictional but fitting person describing the target customers of a product.
+What is the purpose of a Buyer Persona?	To describe the customer fully so you can take decisions in their name (would he/she like/use/handle it?).
+Helpful mindset for writing a persona?	Imagine you write a novel and need to describe the person (describe them like a good actress would a role).
+What demographic fields does a persona card contain?	Name, Sex, Age, Domicile, Relationship status, Kids, Job, Income, Education (fictional but fitting).
+Besides demographics, what four "feeling" sections does a persona card have?	Motivates, Frustrates, Goals, and Pain Points / Problems.
+How many core technologies are noted on the persona card?	Knowledge about 5 relevant core technologies.
+In the example persona, who is Jack Johnsen?	A 54-year-old married lifeguard at the Baltic Sea with 3 kids; income ~3,150€/month; trained as a paramedic.
+Jack Johnsen's motivates / frustrates?	Motivates: fresh air, working with kids, surfing. Frustrates: bad weather, empty smartphone, littering tourists.
+(4) Ideation — what is its content?	Create ideas to solve the customer's pain points.
+What is the rule about boundaries in Ideation?	There are NO boundaries (cost, technical limits…) — the crazier, the better the idea.
+What follows idea creation in Ideation?	Consolidation of ideas, decision making, getting customer feedback, and (if needed) competitor analysis.
+How do you carry out Ideation?	Individual creation of ideas → gather & discuss all ideas → decide via tools → get customer feedback.
+Name two decision-making tools used in Ideation.	Morphological box and QFD (Quality Function Deployment).
+Which criteria are used to select ideas?	Practicability, efficiency and economy.
+(5) Prototyping — what is its content?	Create a tangible, physical prototype that can be experienced.
+What is the premise for building a prototype?	Everything is allowed — but the simpler, the better!
+Key rules when giving a prototype to the customer?	NO verbal explanation; the customer must understand the solution (not you); it must solve the customer's problem, not realize your idea.
+(6) Testing — what is its content?	The customer tests the prototype to get feedback; if it fails it can be changed or discarded next cycle.
+How do you carry out Testing?	No demonstration; visually observe the customer using the product; take several iterations.
+What do you do if the customer doesn't understand the prototype?	Change or even discard the idea in the next cycle; observe and note improvements, then iterate.
+What is the famous MRI design-thinking example?	An MRI was scary for children, so it was redesigned (e.g. as a playful adventure) so kids accept it — solving the real fear, not just the machine.
+What does the MRI example teach?	Solve the customer's real problem (the child's fear), not only the technical problem.
+In the workshop exercise, how is the class organised?	Into 5 teams; each team gets one set of workshop material and each person a stack of paper templates.
+Interview rule in the exercise (Observe)?	Each person interviews min. 2 customers from OTHER groups (not your own); describe the problem only, no solution.
+Ideation-create rule in the exercise?	Individual drawing/painting only — NO writing, NO exchange in the group; min. 5 (better 10) ideas.
+How are the best ideas selected in the exercise?	Share in the group, take/modify the best 5, and decide with a "system" e.g. a morphological box.
+How many ideas are prototyped in the exercise?	2 ideas, chosen as a group based on customer feedback.
+Total time for the workshop exercise?	140 min base + 10 min per team = 190 min.
+What must the final presentation answer?	What was the problem? Who are your personas? What ideas did you go through? What was the final solution?
+Summary — what is design thinking in one line?	A customer-centred method for designing products through fast, iterative cycles that analyse and solve customer needs.

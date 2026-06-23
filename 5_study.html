@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Thinking — Field Manual · CPS MMC-01a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEE2; --paper-2:#ECE3D0; --card:#FBF7EE;
+    --ink:#211C16; --ink-soft:#5C5246; --line:#D9CDB4;
+    --amber:#E0962A; --amber-deep:#B96E12; --red:#B23A2E; --green:#4C7A46;
+    --shadow: 0 1px 0 rgba(33,28,22,.04), 0 18px 40px -28px rgba(33,28,22,.45);
+    --mono:'Space Mono',ui-monospace,monospace;
+    --disp:'Bricolage Grotesque',system-ui,sans-serif;
+    --body:'Spectral',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink); font-family:var(--body);
+    font-size:18px; line-height:1.62; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 12% -5%, rgba(224,150,42,.10), transparent 42%),
+      radial-gradient(circle at 92% 4%, rgba(178,58,46,.07), transparent 40%);
+  }
+  /* subtle grain */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.5; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+  /* progress + topbar */
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--amber),var(--red));z-index:60}
+  header.top{position:sticky;top:0;z-index:50;background:rgba(244,238,226,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;align-items:center;gap:14px;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--amber-deep);white-space:nowrap}
+  nav.tabs{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+  nav.tabs a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);text-decoration:none;padding:7px 10px;border-radius:7px}
+  nav.tabs a:hover{background:var(--paper-2);color:var(--ink)}
+
+  /* hero */
+  .hero{padding:70px 0 40px;border-bottom:3px solid var(--ink);position:relative}
+  .stripe{height:14px;width:100%;background:repeating-linear-gradient(45deg,var(--ink) 0 16px,var(--amber) 16px 32px);border-radius:3px;margin-bottom:30px}
+  .kicker{font-family:var(--mono);text-transform:uppercase;letter-spacing:3px;font-size:12px;color:var(--amber-deep)}
+  h1{font-family:var(--disp);font-weight:800;font-size:clamp(40px,8vw,76px);line-height:.95;margin:14px 0 8px;letter-spacing:-.02em}
+  h1 em{font-style:normal;color:var(--red)}
+  .sub{font-size:21px;color:var(--ink-soft);max-width:62ch}
+  .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin-top:18px;display:flex;gap:8px 18px;flex-wrap:wrap}
+  .meta b{color:var(--ink)}
+
+  .riku{margin-top:30px;background:var(--ink);color:var(--paper);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .riku::after{content:"💡";position:absolute;right:-10px;top:-26px;font-size:140px;opacity:.06}
+  .riku h3{font-family:var(--disp);margin:.1em 0 .4em;font-size:23px}
+  .riku p{margin:.3em 0;color:#E9DEC9}
+  .riku .big{font-family:var(--mono);font-weight:700;color:var(--amber);font-size:15px;letter-spacing:1px;margin-top:10px}
+
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .sec-label{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--amber-deep);display:flex;align-items:center;gap:10px}
+  .sec-label::before{content:"";width:34px;height:2px;background:var(--amber-deep)}
+  h2{font-family:var(--disp);font-weight:800;font-size:clamp(28px,5vw,42px);margin:12px 0 6px;letter-spacing:-.01em;line-height:1.04}
+  h3.topic{font-family:var(--disp);font-weight:600;font-size:23px;margin:34px 0 4px;color:var(--ink)}
+  h3.topic .n{font-family:var(--mono);font-size:13px;color:var(--amber-deep);margin-right:8px}
+
+  .lead{font-size:19px;color:var(--ink-soft)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;box-shadow:var(--shadow)}
+  .story{position:relative;padding-left:20px}
+  .story::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:linear-gradient(var(--amber),var(--red))}
+  .story .who{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--amber-deep)}
+
+  .exam{background:#FBF3DE;border:1px solid #E7C97E;border-left:5px solid var(--amber-deep);border-radius:10px;padding:14px 18px 14px 16px;margin:14px 0}
+  .exam .tag{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber-deep);display:flex;align-items:center;gap:7px}
+  .exam ul{margin:8px 0 2px;padding-left:20px}
+  .exam li{margin:5px 0}
+  .exam b{color:var(--red)}
+
+  .hook{display:flex;gap:12px;align-items:flex-start;background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:13px 16px;margin:12px 0;font-size:16.5px}
+  .hook .ic{font-size:20px;line-height:1.2}
+  .hook b{color:#bfe6a8}
+
+  /* memory movie */
+  .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
+  .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
+  .scene .num{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep)}
+  .scene .decode{color:var(--red);font-weight:600}
+  .pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:16px 0}
+  .pic{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);break-inside:avoid}
+  .pic .big{font-size:32px;line-height:1}
+  .pic h4{font-family:var(--disp);margin:7px 0 4px;font-size:17px}
+  .pic p{margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.45}
+  .pic .key{color:var(--red);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+  tbody tr:nth-child(even){background:var(--paper-2)}
+  td.c{text-align:center;font-family:var(--mono);font-weight:700}
+
+  details.more{margin:12px 0;border:1px dashed var(--line);border-radius:10px;background:var(--card);overflow:hidden}
+  details.more>summary{cursor:pointer;padding:11px 16px;font-family:var(--mono);font-size:13px;letter-spacing:.5px;color:var(--amber-deep);list-style:none}
+  details.more>summary::-webkit-details-marker{display:none}
+  details.more>summary::before{content:"▸ ";color:var(--amber-deep)}
+  details.more[open]>summary::before{content:"▾ "}
+  details.more .inner{padding:2px 16px 14px}
+
+  /* mark learned */
+  .learn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);cursor:pointer;user-select:none;margin-top:6px}
+  .learn input{appearance:none;width:18px;height:18px;border:2px solid var(--line);border-radius:5px;cursor:pointer;display:grid;place-content:center;background:var(--card)}
+  .learn input:checked{background:var(--green);border-color:var(--green)}
+  .learn input:checked::after{content:"✓";color:#fff;font-size:12px;font-weight:700}
+
+  /* FLASHCARDS */
+  .deck-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .flashcard{width:100%;max-width:640px;height:300px;perspective:1600px;cursor:pointer}
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+  .flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .fc-front{background:var(--card)}
+  .fc-back{background:var(--ink);color:var(--paper);transform:rotateY(180deg)}
+  .fc-face .lab{position:absolute;top:16px;left:22px;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.7}
+  .fc-front .lab{color:var(--amber-deep)} .fc-back .lab{color:var(--amber)}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:24px;line-height:1.18}
+  .fc-a{font-size:18px;line-height:1.5}
+  .fc-hint{position:absolute;bottom:14px;right:22px;font-family:var(--mono);font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:1px}
+  .deck-ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+  .btn{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.5px;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:9px;cursor:pointer;transition:.15s}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.amber{border-color:var(--amber-deep);background:var(--amber);color:#241a06}
+  .btn.amber:hover{background:var(--amber-deep);color:#fff}
+  .counter{font-family:var(--mono);font-size:14px;color:var(--ink-soft);min-width:74px;text-align:center}
+
+  /* PRACTICE */
+  .q-block{counter-increment:q}
+  .q-block .q-head{font-family:var(--disp);font-weight:700;font-size:21px;display:flex;gap:12px;align-items:baseline}
+  .q-block .q-head .num{font-family:var(--mono);color:#fff;background:var(--red);border-radius:8px;padding:2px 10px;font-size:15px;flex:none}
+  .q-type{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep);margin:4px 0 0 0}
+  .answer{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;display:none}
+  .answer.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
+  .answer .alab{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--green);font-weight:700}
+
+  .cheat td:first-child{font-family:var(--mono);font-size:12px;color:var(--amber-deep);white-space:nowrap}
+  .cheat td:nth-child(2){font-weight:600}
+
+  footer{padding:40px 0 70px;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:12px}
+  .print-only{display:none}
+  a.inline{color:var(--amber-deep)}
+
+  @media (max-width:560px){ body{font-size:17px} .flashcard{height:340px} h1{font-size:46px} }
+
+  /* ---------- PRINT / PDF ---------- */
+  @media print{
+    @page{size:A4;margin:15mm 14mm}
+    body{background:#fff;color:#000;font-size:11.5pt}
+    body::before,#bar{display:none}
+    header.top,nav.tabs,.deck-ctrl,.fc-hint,.learn,.flip-note{display:none !important}
+    .wrap{max-width:none;padding:0}
+    .hero{padding:0 0 14px;border-bottom:2px solid #000}
+    .riku{background:#f3f3f3;color:#000;box-shadow:none;border:1px solid #999}
+    .riku p{color:#222}.riku .big{color:#a8650a}.riku::after{display:none}
+    section{padding:14px 0;border-bottom:1px solid #bbb;break-inside:avoid}
+    .card,.exam,.hook,table,.q-block,.flashcard{box-shadow:none;break-inside:avoid}
+    .hook{background:#eef3ec;color:#000;border:1px solid #9bbf8c}.hook b{color:#2f5a28}
+    .exam{background:#fdf6e3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    th{background:#222 !important;color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .stripe{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    details.more{border:none} details.more .inner{padding:0} details.more>summary{display:none}
+    details.more[open] .inner, details.more .inner{display:block !important}
+    /* show all practice answers */
+    .answer{display:block !important;border-top:1px solid #bbb}
+    /* flatten flashcards to Q/A in print */
+    #fc-live{display:none}
+    .print-only{display:block}
+    #fc-print .pc{break-inside:avoid;border:1px solid #bbb;border-radius:8px;padding:8px 12px;margin:7px 0}
+    #fc-print .pq{font-weight:700} #fc-print .pa{color:#222}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="top"><div class="wrap">
+  <span class="brand">💡 Design Thinking · MMC-01a</span>
+  <nav class="tabs">
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
+    <a href="#" onclick="window.print();return false;">⤓ PDF</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <div class="stripe"></div>
+    <div class="kicker">Structure &amp; Functions of Cyber-Physical Systems</div>
+    <h1>Design <em>Thinking</em><br>Field Manual</h1>
+    <p class="sub">Memorize the whole deck the easy way: one beach story, the exact exam points, and a memory hook on every topic.</p>
+    <div class="meta"><span>Module <b>MMC-01a</b></span><span>Chapter <b>5 · Ideation</b></span><span>Lecturer <b>Prof. Dr. M. Górka</b></span><span>Source <b>5.pptx · 48 slides</b></span></div>
+
+    <div class="riku">
+      <h3>💡 Meet Maya — your memory anchor</h3>
+      <p>Maya is an inventor on the beach who wants to build a gadget for <b>Jack, a 54-year-old Baltic-Sea lifeguard</b> who loves surfing and hates littering tourists. She has <b>no idea what to build yet</b> — and that's exactly the point.</p>
+      <p>Every single slide just answers one question: <b>“How does a smart inventor go from a fuzzy problem to a gadget the customer actually loves — by failing fast and cheap?”</b> Keep Maya chasing Jack down the beach and the chapter tells itself.</p>
+      <div class="big">★ MASTER KEY → Walk from the 🏖️ Problem beach into the 🌊 Solution sea: Understand · Observe · Design-principles · Ideate · Prototype · Test</div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="sec-label">00 · The shape of the whole chapter</div>
+    <h2>See the skeleton before the bones</h2>
+    <p class="lead">Design Thinking is <b>step 5 (Ideation) of System Engineering</b>:</p>
+    <div class="card" style="font-family:var(--mono);font-size:14px;line-height:2">
+      1 Basics → 2 Requirements → 3 Risk → 4 Change → <b style="color:var(--red)">5 IDEATION ★</b> → (6 Design) → (7 Test) → (8 Project Setup)
+    </div>
+    <p>The method is a <b>6-step loop</b> that splits cleanly in half — first you understand the <b>problem</b> (on dry sand), then you build &amp; test a <b>solution</b> (in the water). No acronym needed: just watch Maya walk from the beach into the sea.</p>
+    <div class="hook"><span class="ic">🧠</span><div><b>🏖️ Problem space → 🌊 Solution space.</b><br><b>U</b>nderstand → <b>O</b>bserve → <b>D</b>esign principles → <b>I</b>deation → <b>P</b>rototyping → <b>T</b>esting. (Persona = the bridge from sand to sea.)</div></div>
+  </section>
+
+  <!-- MEMORY MOVIE -->
+  <section id="movie">
+    <div class="sec-label">The trick · watch, don't memorize</div>
+    <h2>🎬 The Memory Movie</h2>
+    <p class="lead">Don't memorize sentences — your brain hates random letters. Instead <b>close your eyes and play this silly 6-scene movie</b> of <em>Maya builds Jack's beach gadget</em>. Each picture <em>is</em> the point, so when you replay the movie, the exam answer just appears. Read it 3 times, then try to replay it with your eyes shut.</p>
+
+    <div class="scene"><div class="emo">🧩</div><div><div class="num">Scene 1 · 🏖️ Problem space</div>Maya stands on the sand holding a <b>giant jigsaw piece with a “?”</b> — grasping the puzzle: what's the problem, what's the goal (NOT the gadget yet!). → <span class="decode">(1) UNDERSTAND.</span></div></div>
+    <div class="scene"><div class="emo">🔭</div><div><div class="num">Scene 2 · 🏖️ Problem space</div>She lifts a <b>telescope and spies on Jack</b> rescuing swimmers, asking about his hobbies &amp; family. → <span class="decode">(2) OBSERVE the customer.</span></div></div>
+    <div class="scene"><div class="emo">🎭</div><div><div class="num">Scene 3 · the bridge</div>She glues her notes onto a <b>life-size cardboard “Fake-Jack”</b> she can interrogate. → <span class="decode">(3) DESIGN PRINCIPLES = build a Persona.</span></div></div>
+    <div class="scene"><div class="emo">💡</div><div><div class="num">Scene 4 · 🌊 Solution space</div>A <b>storm of crazy lightbulbs</b> rains down — the wilder the better, no rules. → <span class="decode">(4) IDEATION.</span></div></div>
+    <div class="scene"><div class="emo">🧱</div><div><div class="num">Scene 5 · 🌊 Solution space</div>She tapes <b>cardboard &amp; duct-tape</b> into a rough gadget and hands it over <b>without a word</b>. → <span class="decode">(5) PROTOTYPING (simpler = better).</span></div></div>
+    <div class="scene"><div class="emo">👀</div><div><div class="num">Scene 6 · 🌊 Solution space</div>She <b>hides behind a palm tree and just watches</b> Jack fumble with it, taking notes. → <span class="decode">(6) TESTING — then loop back to Scene 5.</span></div></div>
+
+    <div class="hook"><span class="ic">🎥</span><div>Replay in one breath: <b>puzzle piece → telescope → cardboard Fake-Jack → lightbulb storm → duct-tape gadget → spy from the palm tree.</b> Scenes 1–2 = Problem beach, 4–6 = Solution sea, Scene 3 is the bridge.</div></div>
+
+    <h3 class="topic">🎯 The 3 things design thinking keeps in focus</h3>
+    <p>Picture Maya's surfboard balanced on three rocks — take one away and it tips over:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">❤️</div><h4>Customer / benefit</h4><p>Does it actually help Jack? <span class="key">Desirability</span> — the customer is the centre of everything.</p></div>
+      <div class="pic"><div class="big">🔧</div><h4>Possibility to realize</h4><p>Can we actually build it? <span class="key">Feasibility.</span></p></div>
+      <div class="pic"><div class="big">💶</div><h4>Commercial viability</h4><p>Will it sell / pay off? <span class="key">Viability.</span></p></div>
+    </div>
+
+    <h3 class="topic">🖼️ Picture-hooks for the tricky bits</h3>
+    <p>Same trick for everything that wouldn't stick — turn it into one strong, weird image:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">🌈</div><h4>Heterogeneous team</h4><p>A beach-volleyball team where <b>everyone looks totally different</b> (chef, child, granny, robot). <span class="key">Mixed crowd = better ideas.</span></p></div>
+      <div class="pic"><div class="big">💸</div><h4>Fail fast &amp; cheap</h4><p>Maya snaps a <b>cardboard gadget in half</b>, laughs, grabs another. <span class="key">Failure costs almost nothing.</span> Agile + iterative.</p></div>
+      <div class="pic"><div class="big">🤫</div><h4>Observe rules</h4><p>Maya <b>zips her own mouth shut</b> and points the mic at Jack. <span class="key">Let the customer talk; don't sell your idea.</span></p></div>
+      <div class="pic"><div class="big">📣</div><h4>Extreme voices</h4><p>The <b>loudest, weirdest beach-goer</b> teaches Maya more than 100 calm tourists. <span class="key">Extremes reveal the real needs.</span></p></div>
+      <div class="pic"><div class="big">🪜</div><h4>Competency 0→5</h4><p>A 6-rung <b>lifeguard tower</b>: ground = <b>0 (nothing)</b>, top platform = <b>5 (expert who invents new moves)</b>.</p></div>
+      <div class="pic"><div class="big">🎭</div><h4>Persona vs Buyer Persona</h4><p>A Greek <b>theatre mask</b> (Persona = a role/face) a <b>shopkeeper</b> wears to play “the perfect customer” (Buyer Persona). <span class="key">Write Jack like a novel character.</span></p></div>
+      <div class="pic"><div class="big">📇</div><h4>Persona card</h4><p>One big ID card: <b>photo, stats, 5 tech apps</b>, and four arrows — ☺️ Motivates, 😠 Frustrates, 🎯 Goals, 🤕 Pain-points.</p></div>
+      <div class="pic"><div class="big">⚙️</div><h4>Decision tools</h4><p>To pick the best idea, Maya spins a <b>slot machine of boxes (Morphological box)</b> and a <b>QFD scorecard</b>.</p></div>
+      <div class="pic"><div class="big">🏥</div><h4>The MRI win</h4><p>A <b>scary white tube</b> repainted as a <b>pirate submarine</b> so kids climb in laughing. <span class="key">Solve the real fear, not the machine.</span></p></div>
+      <div class="pic"><div class="big">🎨</div><h4>Ideation rule</h4><p>In the workshop you <b>only draw — no writing, no sharing</b>, min. 5 (better 10) wild ideas.</p></div>
+    </div>
+
+    <div class="hook"><span class="ic">🧠</span><div><b>How to actually lock it in:</b> (1) read a scene, (2) <b>shut your eyes and re-see the picture</b>, (3) say the real meaning out loud. Do the 6-scene movie + picture-hooks twice today and once tomorrow — then test yourself with the <a href="#cards" style="color:#bfe6a8">flashcards</a>. Seeing beats reading; testing beats re-reading.</div></div>
+  </section>
+
+  <!-- LESSON -->
+  <section id="lesson">
+    <div class="sec-label">The full lesson · all slides</div>
+    <h2>Taught like a story — with the points you must write</h2>
+
+    <!-- 1 -->
+    <h3 class="topic"><span class="n">01</span>What <em>is</em> Design Thinking?</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Maya doesn't start by drawing a gadget. She asks, “what would actually help Jack — and would anyone build it or buy it?” Design thinking is a whole <b>method for inventing creative ideas and solving problems</b>, and the trick is to be <b>agile</b>: try, fail cheaply, try again. Her surfboard reads <b>“Fail fast and cheap.”</b></div>
+    <div class="exam"><div class="tag">📝 Write in exam — Definition</div><ul>
+      <li><b>Design Thinking = a method for developing creative ideas and for problem solving.</b></li>
+      <li>Puts <b>3 things in focus</b>: the <b>customer / benefit</b>, the <b>possibility to realize</b> (feasibility), and <b>commercial viability</b>.</li>
+      <li>The <b>team</b> should be <b>as heterogeneous as possible</b>.</li>
+      <li>It is an <b>agile method</b> needing <b>several iterations</b> to reach the goal.</li>
+      <li>Motto: <b>➜ Fail fast and cheap!</b></li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Surfboard on 3 rocks</b> = Customer · Feasibility · Viability. Mixed team + fail fast &amp; cheap.</div></div>
+    <label class="learn"><input type="checkbox" data-k="dt1">Mark learned</label>
+
+    <!-- 2 -->
+    <h3 class="topic"><span class="n">02</span>The Process — two spaces, six steps</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Picture the beach. On the <b>dry sand (Problem space)</b> Maya figures out <em>what's wrong and who for</em>. In the <b>water (Solution space)</b> she <em>makes things and tests them</em>. She crosses the wet line many times — it's a <b>loop, not a straight line</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Process</div><ul>
+      <li>Two spaces: <b>Problem Space</b> (understand the problem &amp; customer) and <b>Solution Space</b> (create &amp; test solutions).</li>
+      <li>Six steps in order: <b>(1) Understand → (2) Observe → (3) Design Principles → (4) Ideation → (5) Prototyping → (6) Testing</b>.</li>
+      <li>The process is <b>iterative</b> — loop through prototyping &amp; testing several times.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Walk from the beach into the sea.</b> Land = Understand + Observe · Water = Ideate + Prototype + Test · Persona = the bridge.</div></div>
+    <label class="learn"><input type="checkbox" data-k="dt2">Mark learned</label>
+
+    <!-- 3 -->
+    <h3 class="topic"><span class="n">03</span>(1) UNDERSTAND — grasp the puzzle</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Maya holds a <b>jigsaw piece with a big “?”</b>. First she builds a <b>team</b>, then asks: what should we make new? what's the <em>problem</em>? what's the <b>target condition</b> after Jack uses it — the <em>outcome</em>, <b>NOT the gadget itself!</b> Who's the customer? What's the environment (wind, salt, sand)?</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Understand</div><ul>
+      <li><b>Content: understand the problem and the target.</b> <b>Build the team.</b></li>
+      <li>What should be <b>newly developed</b>? What's the <b>problem</b>?</li>
+      <li>What's the <b>target condition</b> after using the tech — <b>NOT the technical solution!</b></li>
+      <li><b>Who is the customer?</b> Which <b>environment conditions</b> matter?</li>
+      <li><b>How to:</b> an <b>initial expert circle / brainstorming</b>, <b>updated with each new info</b> during the process.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Puzzle piece = describe the <b>goal/outcome, not the gadget.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="dt3">Mark learned</label>
+
+    <!-- 4 -->
+    <h3 class="topic"><span class="n">04</span>(2) OBSERVE — spy on the customer</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Maya grabs a <b>telescope</b> and follows Jack. She doesn't pitch ideas — she <b>shuts up and listens</b>. She asks about his <em>real</em> problem, what it must do, and even his <b>family &amp; hobbies</b>. She talks to the <b>loud, extreme beach-goers</b> because they shout out the useful stuff calm tourists never mention.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Observe</div><ul>
+      <li><b>Content: understand the customer</b> — their <b>will</b>, <b>wishes &amp; inner needs</b>; <b>collect as much info as possible</b> (actual problem, what it must do, <em>personal background</em>).</li>
+      <li><b>How to: learn from people</b> — <b>talk &amp; interview</b>, <b>spend time with / observe</b>, find the relevant <b>peer groups</b>; <b>extreme voices</b> reveal more than the average customer.</li>
+      <li><b>Important: let the customer talk, not the interviewer! Don't sell your own idea!</b></li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Zipped mouth + telescope.</b> The customer talks; you only listen. Loudest voice = best info.</div></div>
+
+    <h3 class="topic" style="font-size:19px"><span class="n">04a</span>Competency level of the persona (0–5)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>When Maya rates how much Jack knows about a technology, she climbs a <b>6-rung lifeguard tower</b>: ground = <b>0 (nothing)</b>, up to the top <b>5 (Expert</b> who invents new state-of-the-art moves).</div>
+    <details class="more"><summary>Show the competency-level table (0–5)</summary><div class="inner">
+      <table><thead><tr><th>Competency Level</th><th>Description</th></tr></thead><tbody>
+        <tr><td class="c">0</td><td>no knowledge — No knowledge</td></tr>
+        <tr><td class="c">1</td><td>Newbie — has heard of the topic &amp; knows where to find info; uncertainty in the subject</td></tr>
+        <tr><td class="c">2</td><td>basic knowledge — meets basic requirements; simple tasks with initial support</td></tr>
+        <tr><td class="c">3</td><td>Advanced knowledge — can work on standard tasks themselves</td></tr>
+        <tr><td class="c">4</td><td>Consolidated knowledge — standard tasks alone; independently develops new solutions for standard tasks</td></tr>
+        <tr><td class="c">5</td><td>Expert Knowledge — specialist; handles complex tasks alone; constantly advances the state of the art</td></tr>
+      </tbody></table>
+    </div></details>
+    <div class="hook"><span class="ic">🧠</span><div><b>0 = ground, 5 = top of the lifeguard tower.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="dt4">Mark learned</label>
+
+    <!-- 5 -->
+    <h3 class="topic"><span class="n">05</span>(3) DESIGN PRINCIPLES — build “Fake-Jack” (the Persona)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Maya glues all her notes onto a <b>life-size cardboard cut-out of Jack</b> — a <b>fake customer</b> she can ask questions to. She finds the <b>common patterns</b> across the people she met, gives him a photo, job, hobbies, fears, goals, and <b>updates her “Understand”</b>. Now when unsure she just asks the cardboard: “Jack, would you like this?”</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Design Principles</div><ul>
+      <li><b>Content: synthesis of steps 1 &amp; 2.</b> <b>Find patterns</b> → the <b>common sense</b> between customers.</li>
+      <li>Create a <b>profile</b> using <b>“Personas”</b> or <b>“Point-of-View”</b>; <b>visualize</b> the customer's view.</li>
+      <li><b>Update your “(1) Understand”</b> (problem, target, functions, features).</li>
+    </ul></div>
+    <div class="exam"><div class="tag">📝 Write in exam — Persona facts</div><ul>
+      <li><b>Persona</b> = concept from <b>analytical psychology</b> describing the <b>outer view/role</b> of a person (Greek/Latin = a <b>face/role</b>).</li>
+      <li><b>Buyer Persona</b> = persona <b>adapted to economics</b> to <b>understand the customer</b>; a <b>fictional but fitting person</b> for the target group; describe them <b>fully (attributes, background, behaviour) like a good actress</b>; lets you <b>decide in their name</b> (“would he use it?”). ➜ <b>write them like a novel character.</b></li>
+    </ul></div>
+    <details class="more"><summary>Show the persona card &amp; example (Jack Johnsen)</summary><div class="inner">
+      <p style="font-family:var(--mono);font-size:12px;margin:10px 0 2px;color:var(--amber-deep)">PERSONA CARD — what it holds</p>
+      <table><thead><tr><th>Section</th><th>Contents</th></tr></thead><tbody>
+        <tr><td>Demographics</td><td>Name · Sex · Age · Domicile · Relationship status · Kids · Job · Income · Education (fictional but fitting)</td></tr>
+        <tr><td>Photo / Drawing</td><td>A matching picture of the persona</td></tr>
+        <tr><td>Technology</td><td>Knowledge about <b>5 relevant core technologies</b></td></tr>
+        <tr><td>Motivates</td><td>What makes the persona happy? Spare-time interests / hobbies (×3)</td></tr>
+        <tr><td>Frustrates</td><td>What bothers/angers them? How could it impact the product? (×3)</td></tr>
+        <tr><td>Goals</td><td>The goals / targets of the persona (×3)</td></tr>
+        <tr><td>Pain Points</td><td>The problem the persona needs solved (×3)</td></tr>
+      </tbody></table>
+      <p style="font-family:var(--mono);font-size:12px;margin:14px 0 2px;color:var(--amber-deep)">EXAMPLE PERSONA — “Jack Johnsen”</p>
+      <table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+        <tr><td>Name / Sex / Age</td><td>Jack Johnsen · Male · 54</td></tr>
+        <tr><td>Domicile</td><td>Baltic Sea, owner-occupied home</td></tr>
+        <tr><td>Family</td><td>Married · 3 kids</td></tr>
+        <tr><td>Job / Income / Education</td><td>Lifeguard · 3,150 €/month · apprenticeship as Paramedic</td></tr>
+        <tr><td>Technology</td><td>Smartphone · Social Networks · Programming · UX Design · Painting</td></tr>
+        <tr><td>Motivates</td><td>Loves fresh air · working with kids · surfing</td></tr>
+        <tr><td>Frustrates</td><td>Bad weather · empty smartphone · littering by tourists</td></tr>
+        <tr><td>Goals</td><td>Ride the biggest wave · protect the environment · raise his kids</td></tr>
+        <tr><td>Pain Points</td><td>Find the biggest wave · enable people to take away their own garbage</td></tr>
+      </tbody></table>
+    </div></details>
+    <div class="hook"><span class="ic">🧠</span><div><b>Cardboard Fake-Jack</b> = a fictional customer you interrogate. <b>Theatre mask</b> = persona (a role). Write him <b>like a novel character.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="dt5">Mark learned</label>
+
+    <!-- 6 -->
+    <h3 class="topic"><span class="n">06</span>(4) IDEATION — the lightbulb storm</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Now the fun part. <b>Crazy lightbulbs rain from the sky</b> — Maya wants the <b>wildest ideas possible</b>, with <b>NO limits</b> on cost or tech. First everyone draws <b>alone</b>, then they <b>gather &amp; discuss</b>, then they <b>pick</b> the best with a <b>tool</b> (a slot-machine <b>morphological box</b> or a <b>QFD</b> scorecard), and finally they <b>show the customer for feedback.</b></div>
+    <div class="exam"><div class="tag">📝 Write in exam — Ideation</div><ul>
+      <li><b>Content: create ideas to solve the customer's pain points.</b></li>
+      <li><b>NO boundaries</b> (cost, tech…) — <b>the crazier the better!</b></li>
+      <li><b>Consolidate</b> ideas → <b>decision making</b> → <b>get customer feedback</b> → if needed, <b>competitor analysis</b>.</li>
+      <li><b>How to:</b> <b>individual</b> creation → <b>gather &amp; discuss</b> → <b>decide via tools</b> (<b>morphological box</b>, <b>QFD</b>, …) → <b>customer feedback</b>.</li>
+      <li>Selection criteria: <b>practicability · efficiency · economy</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Lightbulb storm = no limits, crazier is better.</b> Pick with the <b>morphological box / QFD slot machine.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="dt6">Mark learned</label>
+
+    <!-- 7 -->
+    <h3 class="topic"><span class="n">07</span>(5) PROTOTYPING — duct-tape it, say nothing</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Maya tapes together a <b>rough cardboard gadget</b> — <b>the simpler the better</b> — and hands it to Jack <b>without saying a single word</b>. If she has to explain it, it failed. It must <b>solve Jack's problem</b>, not show off <b>her</b> idea.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Prototyping</div><ul>
+      <li><b>Content: create a tangible prototype</b> — a <b>physical prototype that can be experienced.</b></li>
+      <li><b>Everything is allowed; the simpler the better!</b></li>
+      <li><b>Important: NO verbal explanation to the customer!</b> The <b>customer must understand the solution, not you.</b> It must <b>solve the customer's problem, not realize your idea.</b></li>
+      <li><b>How to:</b> be creative!</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Duct-tape gadget + zipped mouth.</b> Simple, silent, customer-first.</div></div>
+    <label class="learn"><input type="checkbox" data-k="dt7">Mark learned</label>
+
+    <!-- 8 -->
+    <h3 class="topic"><span class="n">08</span>(6) TESTING — spy from the palm tree, then loop</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Maya <b>hides behind a palm tree</b> and just <b>watches</b> Jack fumble with the gadget — <b>no demo, no help</b> — taking notes on what to fix. If it flops, she can <b>change or even throw the idea away</b> next round. Then she <b>loops back to prototyping</b>. <b>Take several iterations!</b></div>
+    <div class="exam"><div class="tag">📝 Write in exam — Testing</div><ul>
+      <li><b>Content: customer tests the prototype</b> → target is to <b>get feedback.</b></li>
+      <li>If misunderstood / not working → <b>change or discard</b> the idea next cycle.</li>
+      <li><b>Observe the customer</b> during tests; note improvements. <b>Take several iterations!</b></li>
+      <li><b>How to: NO demonstration!</b> <b>Visually observe</b> the customer using it. <b>Iterate!</b></li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Palm-tree spy.</b> Hand it over, shut up, watch, loop.</div></div>
+    <label class="learn"><input type="checkbox" data-k="dt8">Mark learned</label>
+
+    <!-- 9 -->
+    <h3 class="topic"><span class="n">09</span>The MRI example (the exam's favourite story)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>A real win: an <b>MRI scanner terrified children</b>. Instead of fixing the <em>machine</em>, designers fixed the <em>fear</em> — they redesigned the room as a <b>pirate-submarine adventure</b> so kids happily climbed in. That's design thinking: solve the <b>customer's real problem</b>, not the technical one.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li>Successful design thinking example — an <b>MRI was scary for children, so it was redesigned</b> to be friendly/playful and accepted by kids.</li>
+      <li>Lesson: customer-centred thinking beats a purely technical fix.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Scary white tube → painted pirate sub.</b> Fix the fear, not the magnet.</div></div>
+    <label class="learn"><input type="checkbox" data-k="dt9">Mark learned</label>
+
+    <!-- 10 -->
+    <h3 class="topic"><span class="n">10</span>The workshop exercise + Summary</h3>
+    <div class="card story"><div class="who">🧒 Story</div>In class you <em>run</em> the whole loop in <b>5 teams</b>. The big rules: interview <b>other</b> groups (never your own), in Ideation you <b>only draw — no words, no sharing</b>, and you <b>hand prototypes over silently</b> and just watch.</div>
+    <details class="more"><summary>Show the exercise timeline (190 min)</summary><div class="inner">
+      <table><thead><tr><th>Step</th><th>Activity</th><th>Time</th></tr></thead><tbody>
+        <tr><td>(1)</td><td>Understand — describe the problem</td><td class="c">10</td></tr>
+        <tr><td>(2)</td><td>Observe — interview min. 2 customers from OTHER groups</td><td class="c">10</td></tr>
+        <tr><td>(3)</td><td>Design Principles — present data, create persona(s), update Understand</td><td class="c">15</td></tr>
+        <tr><td>(4a)</td><td>Ideation create — individual drawing (NO writing/exchange), 5–10 ideas</td><td class="c">15</td></tr>
+        <tr><td>(4b)</td><td>Ideation select — take/modify best 5 via morphological box</td><td class="c">15</td></tr>
+        <tr><td>(4c)</td><td>Ideation feedback — present the 5 group ideas to customers</td><td class="c">15</td></tr>
+        <tr><td>(5)</td><td>Prototyping — build 2 physical prototypes</td><td class="c">30</td></tr>
+        <tr><td>(6)</td><td>Testing — hand over without explanation, observe</td><td class="c">10</td></tr>
+        <tr><td>(7)</td><td>Iterate — back to steps 5+6</td><td class="c">20</td></tr>
+        <tr><td>(8)</td><td>Presentation to the audience</td><td class="c">10/team</td></tr>
+      </tbody></table>
+      <p style="font-size:14px">Total: <b>140 min base + 10 min/team = 190 min</b>. Presentation answers: problem? personas? ideas tried? final solution?</p>
+    </div></details>
+    <div class="exam"><div class="tag">📝 Write in exam — key rules &amp; summary</div><ul>
+      <li><b>Observe:</b> interview <b>min. 2 customers from other groups</b>, not your own; describe the problem briefly only.</li>
+      <li><b>Ideation-create:</b> <b>drawing only, NO writing, NO exchange</b>, min. 5 (better 10) ideas; <b>select</b> best 5 via a system (morphological box).</li>
+      <li><b>Prototyping:</b> pick <b>2 ideas</b>, build <b>physical</b> prototypes; hand over with no explanation.</li>
+      <li><b>Summary:</b> design thinking is a <b>customer-centred method for designing products</b>; in <b>fast, iterative cycles</b> you <b>analyse &amp; solve</b> a customer's needs with several ideas.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div><b>Draw-don't-write, interview strangers, hand over in silence.</b> Stay customer-centred · fail fast &amp; cheap · iterate.</div></div>
+    <label class="learn"><input type="checkbox" data-k="dt10">Mark learned</label>
+
+    <div class="card" style="text-align:center;background:var(--ink);color:var(--paper)">
+      <div style="font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--amber)">YOUR PROGRESS</div>
+      <div id="progress" style="font-family:var(--disp);font-size:34px;font-weight:800;margin-top:4px">0 / 10 topics learned</div>
+      <div style="height:8px;background:#3a342b;border-radius:6px;margin-top:10px;overflow:hidden"><div id="progbar" style="height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--red));transition:.4s"></div></div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section id="cards">
+    <div class="sec-label">Active recall · flip to test yourself</div>
+    <h2>Flashcards</h2>
+    <p class="lead">Read the question, say the answer <em>out loud</em>, then flip. Cover the deck and run it twice — that's how it sticks. <span class="flip-note">(Click a card to flip · also exported to <b>5_flashcards.txt</b> for Anki.)</span></p>
+    <div id="fc-live" class="deck-wrap">
+      <div class="flashcard" id="fcard" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-face fc-front"><span class="lab">Question</span><div class="fc-q" id="fcq">…</div><span class="fc-hint">click to flip ⟲</span></div>
+          <div class="fc-face fc-back"><span class="lab">Answer</span><div class="fc-a" id="fca">…</div><span class="fc-hint">click to flip ⟲</span></div>
+        </div>
+      </div>
+      <div class="deck-ctrl">
+        <button class="btn" onclick="fcPrev()">‹ Prev</button>
+        <span class="counter" id="fccount">1 / 1</span>
+        <button class="btn" onclick="fcNext()">Next ›</button>
+        <button class="btn amber" onclick="fcShuffle()">⤮ Shuffle</button>
+      </div>
+    </div>
+    <!-- print version filled by JS -->
+    <div id="fc-print" class="print-only"></div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="exam">
+    <div class="sec-label">Exam rehearsal · write first, then reveal</div>
+    <h2>3 Practice Questions <span style="font-size:15px;font-family:var(--mono);color:var(--ink-soft)">+ model answers</span></h2>
+    <p class="lead">Try to answer on paper before clicking <b>Reveal</b>. The model answers show the exact points an examiner rewards.</p>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q1</span><span>Describe the design thinking process. Name and explain its six steps, and state which belong to the problem space and which to the solution space.</span></div>
+      <div class="q-type">Type: structured / theory · ~12 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p>Design thinking is a <b>customer-centred, agile</b> method moving between a <b>Problem Space</b> and a <b>Solution Space</b>, in an <b>iterative</b> loop (fail fast and cheap).</p>
+        <ul>
+          <li><b>(1) Understand</b> (problem space): build the team and understand the problem &amp; the <b>target condition</b> (the outcome, not the solution); who is the customer; environment conditions.</li>
+          <li><b>(2) Observe</b> (problem space): understand the customer — interview &amp; observe them, collect their wishes/inner needs and background; let the customer talk, don't sell your idea.</li>
+          <li><b>(3) Design Principles</b> (the bridge): synthesise steps 1–2, find patterns, build a <b>persona / point-of-view</b>, and update the “Understand”.</li>
+          <li><b>(4) Ideation</b> (solution space): create ideas with <b>no boundaries</b> (crazier = better), then consolidate, decide (e.g. morphological box, QFD) and get feedback.</li>
+          <li><b>(5) Prototyping</b> (solution space): build a simple, tangible prototype; hand it over with <b>no explanation</b> — it must solve the customer's problem, not realise your idea.</li>
+          <li><b>(6) Testing</b> (solution space): the customer tests it; <b>observe without demonstrating</b>, gather feedback, then <b>iterate</b> back to prototyping.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q2</span><span>What is a (buyer) persona and why is it used? List the information a persona card contains, and explain the competency-level scale.</span></div>
+      <div class="q-type">Type: theory / definitions · ~10 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p>A <b>persona</b> is a concept from <b>analytical psychology</b> describing the outer view/role of a person. A <b>buyer persona</b> adapts this to economics: a <b>fictional but fitting person</b> that best represents the target customers. You describe them as fully as possible (like writing a novel character) so the team can <b>take decisions in their name</b> — “would he/she like it, use it, deal with it?”.</p>
+        <p>A persona card holds: a <b>photo/drawing</b>; demographics (<b>Name, Sex, Age, Domicile, Relationship, Kids, Job, Income, Education</b>); knowledge of <b>5 core technologies</b>; and four blocks — <b>Motivates, Frustrates, Goals, Pain Points/Problems</b>.</p>
+        <p>The <b>competency-level scale (0–5)</b> rates the persona's technology knowledge: <b>0</b> none · <b>1</b> Newbie · <b>2</b> basic · <b>3</b> advanced · <b>4</b> consolidated · <b>5</b> expert (advances the state of the art).</p>
+      </div>
+    </div>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q3</span><span>Maya wants to build a gadget for Jack, a lifeguard who loves surfing. (a) What are the rules for Observe (interview) and for Prototyping/Testing? (b) Why is the MRI example a good design-thinking story? (c) Name two decision-making tools and the three foci of design thinking.</span></div>
+      <div class="q-type">Type: application · ~8 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p><b>(a) Observe:</b> talk to and observe the customer, find peer groups, value <b>extreme voices</b>; crucially <b>let the customer talk and don't sell your own idea</b>. <b>Prototyping/Testing:</b> build a simple tangible prototype, hand it over with <b>no verbal explanation/demonstration</b>, <b>observe</b> the customer using it, gather feedback, and <b>iterate</b> — the customer (not you) must understand it, and it must solve their problem.</p>
+        <p><b>(b) MRI:</b> the scanner frightened children, so it was redesigned to be playful/un-scary. It shows design thinking solves the customer's <b>real</b> problem (the child's fear) rather than only the technical one — customer-centred and iterative.</p>
+        <p><b>(c)</b> Decision-making tools: <b>morphological box</b> and <b>QFD</b>. The three foci: <b>customer/benefit</b>, <b>possibility to realize (feasibility)</b>, and <b>commercial viability</b>.</p>
+      </div>
+    </div>
+
+    <details class="more"><summary>Bonus: 10 rapid-fire short answers</summary><div class="inner">
+      <ol>
+        <li><b>Design thinking =</b> method for creative ideas &amp; problem solving, customer-centred.</li>
+        <li><b>3 foci =</b> customer/benefit · feasibility · commercial viability.</li>
+        <li><b>Motto =</b> fail fast and cheap; agile + iterative.</li>
+        <li><b>Two spaces =</b> Problem space (Understand, Observe) · Solution space (Ideate, Prototype, Test).</li>
+        <li><b>Understand =</b> describe the target condition, NOT the technical solution.</li>
+        <li><b>Observe rule =</b> let the customer talk; don't sell your idea; extreme voices matter.</li>
+        <li><b>Persona =</b> psychology concept (role/face); Buyer persona = fictional target customer.</li>
+        <li><b>Competency scale =</b> 0 none → 5 expert.</li>
+        <li><b>Decision tools =</b> morphological box, QFD.</li>
+        <li><b>Prototype rule =</b> simple, tangible, NO explanation; customer must understand it.</li>
+      </ol>
+    </div></details>
+  </section>
+
+  <!-- CHEAT CARD -->
+  <section id="cheat">
+    <div class="sec-label">Last 5 minutes before the exam</div>
+    <h2>One-screen cheat-card</h2>
+    <table class="cheat"><tbody>
+      <tr><td>6 steps</td><td>Understand·Observe·Design-principles·Ideate·Prototype·Test</td><td>Maya's beach → sea walk</td></tr>
+      <tr><td>Two spaces</td><td>Problem (1-2) / Solution (4-6)</td><td>dry sand vs water; persona = bridge</td></tr>
+      <tr><td>3 in focus</td><td>Customer · Feasibility · Viability</td><td>surfboard on 3 rocks</td></tr>
+      <tr><td>Mindset</td><td>agile · several iterations · fail fast &amp; cheap</td><td>snap cardboard, grab another</td></tr>
+      <tr><td>Team</td><td>as heterogeneous as possible</td><td>mixed volleyball team</td></tr>
+      <tr><td>(1) Understand</td><td>problem + target (NOT the solution!)</td><td>jigsaw “?”</td></tr>
+      <tr><td>(2) Observe</td><td>learn from customer; let them talk</td><td>telescope + zipped mouth</td></tr>
+      <tr><td>Extreme voices</td><td>reveal more than the average customer</td><td>the loud seagull guy</td></tr>
+      <tr><td>Competency 0-5</td><td>0 none → 5 expert</td><td>lifeguard tower</td></tr>
+      <tr><td>(3) Persona</td><td>synthesis; fictional customer; update Understand</td><td>cardboard Fake-Jack</td></tr>
+      <tr><td>Persona vs Buyer</td><td>role/mask vs economic customer model</td><td>Greek theatre mask</td></tr>
+      <tr><td>(4) Ideation</td><td>no limits, crazier = better; pick with tool</td><td>lightbulb storm</td></tr>
+      <tr><td>Decision tools</td><td>morphological box · QFD</td><td>slot machine of boxes</td></tr>
+      <tr><td>(5) Prototype</td><td>tangible, simple, NO explanation</td><td>duct-tape + silence</td></tr>
+      <tr><td>(6) Testing</td><td>hand over, observe, iterate</td><td>palm-tree spy</td></tr>
+      <tr><td>Example</td><td>MRI made un-scary for kids</td><td>scary tube → pirate sub</td></tr>
+    </tbody></table>
+  </section>
+
+  <footer>
+    Design Thinking · CPS MMC-01a · study build · keep Maya &amp; Jack on the beach 💡<br>
+    Downloads: <a class="inline" href="5_study.pdf">PDF</a> · <a class="inline" href="5_flashcards.txt">Anki flashcards</a> · <a class="inline" href="5_memorize.md">memorize guide</a> · <a class="inline" href="5.md">notes</a>
+  </footer>
+</main>
+
+<script>
+/* progress bar on scroll */
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;const s=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(s*100)+'%';});
+
+/* mark-learned with localStorage */
+const boxes=[...document.querySelectorAll('.learn input')];
+const prog=document.getElementById('progress'),pb=document.getElementById('progbar');
+function refresh(){const n=boxes.filter(b=>b.checked).length;prog.textContent=n+' / '+boxes.length+' topics learned';pb.style.width=(n/boxes.length*100)+'%';}
+boxes.forEach(b=>{const k='dt_'+b.dataset.k;if(localStorage.getItem(k)==='1')b.checked=true;b.addEventListener('change',()=>{localStorage.setItem(k,b.checked?'1':'0');refresh();});});
+refresh();
+
+/* FLASHCARDS */
+const CARDS=[
+ ["What is Design Thinking?","A method for developing creative ideas and for problem solving, centred on the customer."],
+ ["Which competence does this module give (level)?","Develop new ideas & solutions from a given problem using \"design thinking\" (level 3: apply)."],
+ ["Which step of System Engineering is Ideation / Design Thinking?","Step 5 (Ideation) — after Risk & Change, before Design & Test."],
+ ["The three things design thinking puts in focus?","Customer / benefit, possibility to realize (feasibility), and commercial viability."],
+ ["How should the team be composed?","As heterogeneous (diverse) as possible."],
+ ["What kind of method is design thinking?","An agile method that needs several iterations to reach the goal."],
+ ["Core motto of design thinking?","\"Fail fast and cheap!\""],
+ ["The two \"spaces\" in the process?","Problem Space (understand problem & customer) and Solution Space (create & test solutions)."],
+ ["The six steps of the process in order?","(1) Understand, (2) Observe, (3) Design Principles, (4) Ideation, (5) Prototyping, (6) Testing."],
+ ["Which steps are the Problem Space?","Understand & Observe (1–2); step 3 bridges into the Solution space."],
+ ["Which steps are the Solution Space?","Ideation, Prototyping, Testing (4–6)."],
+ ["Linear or iterative?","Iterative — loop through prototyping & testing several times."],
+ ["(1) Understand — content?","Understand the problem and the target; build the team."],
+ ["In Understand, what must you describe instead of the solution?","The target condition after using the technology — NOT the technical solution."],
+ ["How is the Understand step carried out?","Initial expert circle / brainstorming, updated with each new piece of information."],
+ ["(2) Observe — content?","Understand the customer: their will, wishes & inner needs; collect as much info as possible."],
+ ["What info do you collect about the customer?","The actual problem, what it must do, and personal background (family, hobbies…)."],
+ ["How is the Observe step carried out?","Talk to & interview the customer, spend time / observe them, find the relevant peer groups."],
+ ["Why are extreme voices valuable?","They raise important info the average customer wouldn't specifically point out."],
+ ["Two key interview rules (Observe)?","Let the customers talk, not the interviewer; and don't sell your own idea."],
+ ["What does the competency level scale measure?","The persona's (technology) knowledge, 0 (none) to 5 (expert)."],
+ ["Competency level 5 (Expert)?","Specialist; handles complex tasks alone; constantly advances the state of the art."],
+ ["(3) Design Principles — content?","Synthesis of steps 1 & 2: find patterns / common sense between customers."],
+ ["How do you capture the customer in Design Principles?","Create a profile using Personas or Point-of-View; visualize the customer's view."],
+ ["What must you update during Design Principles?","Your \"(1) Understand\" — problem, target, needed functions/features."],
+ ["What is a Persona?","A concept from analytical psychology describing the outer view/role (face) of a person."],
+ ["What is a Buyer Persona?","Persona adapted to economics; a fictional but fitting person describing the target customers."],
+ ["Purpose of a Buyer Persona?","Describe the customer fully so you can take decisions in their name (would he like/use it?)."],
+ ["Helpful mindset for writing a persona?","Imagine you write a novel and describe the person (like a good actress)."],
+ ["Persona card demographic fields?","Name, Sex, Age, Domicile, Relationship, Kids, Job, Income, Education (fictional but fitting)."],
+ ["The four \"feeling\" blocks on a persona card?","Motivates, Frustrates, Goals, Pain Points / Problems."],
+ ["How many core technologies on the persona card?","Knowledge about 5 relevant core technologies."],
+ ["Who is the example persona Jack Johnsen?","A 54-yr married lifeguard at the Baltic Sea, 3 kids, ~3,150€/month, trained paramedic."],
+ ["(4) Ideation — content?","Create ideas to solve the customer's pain points."],
+ ["The boundary rule in Ideation?","NO boundaries (cost, tech…) — the crazier the better."],
+ ["How is Ideation carried out?","Individual creation → gather & discuss → decide via tools → get customer feedback."],
+ ["Two decision-making tools in Ideation?","Morphological box and QFD (Quality Function Deployment)."],
+ ["Criteria used to select ideas?","Practicability, efficiency and economy."],
+ ["(5) Prototyping — content?","Create a tangible, physical prototype that can be experienced."],
+ ["Premise for building a prototype?","Everything is allowed — but the simpler, the better!"],
+ ["Key rule when giving a prototype to the customer?","NO verbal explanation; the customer must understand it; it must solve their problem, not realize your idea."],
+ ["(6) Testing — content?","The customer tests the prototype to get feedback; if it fails, change or discard next cycle."],
+ ["How is Testing carried out?","No demonstration; visually observe the customer using it; take several iterations."],
+ ["The famous MRI example?","An MRI was scary for children, so it was redesigned (playful) so kids accept it — solving the real fear."],
+ ["What does the MRI example teach?","Solve the customer's real problem (the child's fear), not only the technical one."],
+ ["Workshop: how is the class organised?","Into 5 teams; each team one set of material, each person a stack of paper templates."],
+ ["Workshop interview rule (Observe)?","Interview min. 2 customers from OTHER groups (not your own); describe the problem only."],
+ ["Workshop Ideation-create rule?","Drawing/painting only — NO writing, NO exchange; min. 5 (better 10) ideas."],
+ ["How many ideas are prototyped?","2 ideas, chosen as a group from customer feedback."],
+ ["Total time of the workshop?","140 min base + 10 min per team = 190 min."],
+ ["What must the final presentation answer?","Problem? Personas? Ideas you went through? Final solution?"],
+ ["Summary — design thinking in one line?","A customer-centred method that solves customer needs through fast, iterative cycles of ideas."]
+];
+let order=CARDS.map((_,i)=>i),pos=0;
+const q=document.getElementById('fcq'),a=document.getElementById('fca'),cnt=document.getElementById('fccount'),cardEl=document.getElementById('fcard');
+function show(){const c=CARDS[order[pos]];cardEl.classList.remove('flipped');q.textContent=c[0];a.textContent=c[1];cnt.textContent=(pos+1)+' / '+CARDS.length;}
+function fcNext(){pos=(pos+1)%CARDS.length;show();}
+function fcPrev(){pos=(pos-1+CARDS.length)%CARDS.length;show();}
+function fcShuffle(){for(let i=order.length-1;i>0;i--){const j=(i*7+pos*13+3)%(i+1);[order[i],order[j]]=[order[j],order[i]];}pos=0;show();}
+show();
+/* build print list */
+const fp=document.getElementById('fc-print');
+fp.innerHTML='<h3 class="topic">All flashcards (Q/A)</h3>'+CARDS.map((c,i)=>'<div class="pc"><div class="pq">'+(i+1)+'. '+c[0]+'</div><div class="pa">'+c[1]+'</div></div>').join('');
+
+/* practice reveal */
+function reveal(btn){const ans=btn.nextElementSibling;const open=ans.classList.toggle('show');btn.textContent=open?'Hide model answer':'Reveal model answer';}
+</script>
+</body>
+</html>

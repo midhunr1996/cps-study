@@ -1,0 +1,79 @@
+#separator:tab
+#html:false
+#columns:Question	Answer
+What are the two module competences for Change Management?	Understand the necessity of change management (level 1); apply the process of change management to projects (level 3).
+Which System Engineering step is Change Management?	Step 4 (after Risk Management, before Ideation); it sits between PRD freeze and Re-lease.
+What is engineering change management (CM)?	The process of changing a product or parts of it (Ger. Änderungsmanagement, ÄM).
+What is the "other" change management we DON'T mean in this course?	Organizational change management (Ger. Veränderungsmanagement) — changing processes, behaviours, strategy, systems, structures.
+What is the content and target of CM?	Content: align, track and follow up changes of requests & requirements. Target: as few changes as possible (stable development) but as many as needed (sellable product).
+When is a change NOT change management?	When the change is intended by the product itself (e.g. a chameleon changing colour). A change of the product DESIGN is change management.
+List the four disciplines VM/LCM/CM/CM by the object they manage.	Variant management = products/variants; Life cycle management = new generations; Configuration management = HW+SW configurations; Change management = components. Object count increases top→down.
+Give an example object for each of VM, LCM, Config-CM, Change-CM.	VM: sedan/convertible variants. LCM: BMW 3-series E90→F30→G20. Config-CM: ECU SW 3.7.2 + d-sample PCB. Change-CM: the d-sample PCB.
+Which two disciplines both abbreviate to "CM"?	Configuration management and Change management — must not be mixed up.
+What four factors increase the effort of a change?	System complexity, late point of detection (Rule of Ten), overlapping (parallel) changes, and variants.
+Name the 4 phases of WHEN to do change management.	Until SOP (most changes); Launch management (just before SOP, critical); SOP→EOP (trouble-shooting & cost-down); After EOP (record field issues, improve next product).
+WHERE should changes be documented, and what is the key rule?	At two IT locations: (1) project-management level (whole change) and (2) where the original object was created (e.g. PDM system). Both MUST be linked, or the data branches.
+For whom is CM applicable, and what is recommended for suppliers?	All internal AND bought/supplied products. Suppliers must report all changes; only nominate ISO 9001-certified suppliers and put the reporting duty in the contract.
+Why do change management? (key reasons)	Enables design-for-upgrade capability, traceability (versioning), releasable/conform product, cost control, avoids extra work/missed deadlines/dev issues, keeps high quality.
+What is the relationship between the level and the amount of changes?	The higher the level of change, the fewer (smaller amount of) such changes occur.
+What are the 3 TYPES of change?	Scope-Enlargement (add new content), Scope-Reduction (cancel existing content), Scope-Change (change existing content).
+Evolutionary vs Revolutionary/Disruptive change?	Evolutionary = gradual improvement of state of the art (e.g. better phone); risk of long-term failure if never disruptive. Revolutionary = radical rethink/new solution (e.g. smartphone replacing telephone); risk the product won't establish.
+What is the motivation for version control?	Traceability of the configuration over the whole life cycle: change frequency & object evolution visible, and return to previous versions possible.
+Key principle of version control on changing an object?	Never overwrite — create a NEW version. The version number is an attribute (auto-counter in pro tools).
+How is an object uniquely identified in version control?	By the combination of ID/name + version number (e.g. requirement #073 alone isn't enough — v1.0 or v1.1?).
+Name the version-numbering schemes.	Single-level numeric (0,1,2…), single-level alphabetical (a,b,…,aa,ab…), and two-stage (a.0…b.0 or 1.1,1.2,2.0).
+Explain MAJOR.MINOR.MICRO versioning with example 3.9.4.	Major = significant change/re-design (before the dot); Minor = feature/improvement (after the dot); Micro = patch/bug-fix. Next: 4.9.4 (major), 3.10.4 (minor — not 4.x!), or 3.9.5 (micro).
+Outline the version-control PROCESS.	Like "new requirements": change into pool → acceptable? → No: decline with reason (or modify & re-loop) → Yes: release new version.
+What should be documented in version control? (content)	Object, status, version number, what changed, why, for whom (which product/date), who changed it, when, who approved, when approved.
+What does ISO 9001 require for document control?	Information available & suitable where/when needed; adequately protected (confidentiality, integrity); managed for distribution/access/discovery/use; stored with preserved readability; change-monitored; external documents marked.
+Example: where to keep a machine's safety manual?	Directly at the machine so the operator always has access — not only on a digital folder/drive.
+Challenge with storing documents readable for 30 years?	Paper vs digital media — can you still read a CD/USB/hard-drive AND its file format after 30 years?
+What replaces individual 2D drawings in modern drawing control?	A central drawing management with master data, drawing, permissions, change history, release status, creator, etc.
+What can be the impact of a change?	Increased complexity (variants/configs) → quality issues & lower customer satisfaction; time delay; worse cost/benefit; breaks the PRD contract; worst case the whole project is stopped.
+What is the "inversed Rule of Ten"?	The LATER the root cause (not detection!) sits in the design process, the easier and cheaper the change. Cheapest→dearest: update design → update assembly process → change concept → redesign test → change whole system.
+What causes a design & concept change?	Failed tests (bad concept/design/implementation); realization issues (HW won't work or too costly → switch to SW); needing a re-design or new concept.
+Ideal vs reality of the PRD freeze?	Ideal: hard PRD freeze, no requirement changes after it. Reality: the freeze is partly soft, so changes are needed.
+What are "have-to" requirement changes?	Mandatory changes before launch: a changing law effective before launch; a failed verification → relax an over-engineered requirement (else change design/concept).
+What are "can-be" requirement changes?	Optional/your decision: new/extended applications, company strategy, customer expectation (B2B = extra cost), tool kits (e.g. round→rectangular plugs), cultural/political expectations.
+How do you handle a requirement change? (process)	Re-open the requirement process → impact analysis (resources + risks) → create a CR (change request) → CCB/project lead decides & records → prioritize (cost/benefit) → plan implementation.
+What is the current valid configuration equal to?	The base line (reference) + all CRs (change requests).
+After approving a change, what steps follow?	Update the requirements, document the change (versioning), implement, track the verification, release the change.
+What is a new product generation, and what manages it?	Passing the development process several times for one product creates a new generation; product lifecycle management (PLM/LCM) controls this.
+Positive vs negative reasons to repeat the product lifecycle?	Positive: new customer requirements, intrinsic advancement, state-of-the-art advances. Negative: competing products, quality issues, bad reviews, cost reduction.
+Horizontal vs vertical networking of life cycles?	Horizontal = across generations, usually forward-only. Vertical = across products, bidirectional; strength depends on the products' "technical proximity" and works across generations too.
+What four things can a life-cycle BRANCH do?	Continue linearly, reunite (merge), run separately (split), or die. (Example: the Linux distribution timeline.)
+What affects the LENGTH of a product life cycle?	Industry (auto ~7 yrs vs phone ~1 yr), new technologies (digital tools speed up, complexity slows), and the starting point. Trend: shorter cycles, countered by sustainability.
+Define new development, wide derivation, close derivation.	New development = nothing reused. Wide derivation = basic features inherited from predecessor. Close derivation = most carried over with minor adjustments. (Landline → mobile → smartphone.)
+List the 6 phases of the product-life-cycle curve.	0 Investment, 1 Introduction, 2 Growth, 3 Maturity, 4 Saturation, 5 Degradation.
+Characterise phase 0 (Investment) and phase 1 (Introduction).	0: development + production setup, high cost & uncertainty, as short as possible. 1: slow sales, no profit yet, ends at break-even (reach fast).
+Characterise phase 2 (Growth) and phase 3 (Maturity).	2: strong/steep sales rise, first revenues, short & steep. 3: most profitable, growth declines, should be as long as possible.
+Characterise phase 4 (Saturation) and phase 5 (Degradation).	4: no growth, sales fall, profit falls even faster. 5: profit negative, take the product off the market.
+What is the aim of product life cycle management (LCM)?	Coordinate the different product cycles to avoid company fluctuations — continuous production utilization, constant workload, consistent revenue. Avoid a successor "hole".
+Which LCM measures lengthen/stimulate a cycle?	Cost measures: remove unneeded functions (focusing), remove parts not experienced, cut over-spec (e.g. smaller semiconductors); plus product enrichment (new features).
+Why keep selling a product in the degradation phase?	Retain long-term customers, cross-sales ("entry-ticket" product), and shared investment / scale pricing across products.
+What is the BCG matrix and its limitation?	Boston Consulting Group portfolio tool plotting market growth × relative market share to make product decisions; it only records actuals — it does NOT forecast.
+BCG: describe the Star quadrant and its decision.	High growth, high market share, best product → invest from own cash flow, or skim without reducing market share.
+BCG: describe the Cash Cow quadrant and its decision.	Low/stagnating growth, high share, "milking cow" → milk/skim, no discounts.
+BCG: describe the Question Mark quadrant and its decision.	High-growth-potential market, low share, new product → invest from other sources or discontinue.
+BCG: describe the Poor Dog quadrant and its decision.	Low growth, low share, discontinued product → terminate, at latest when contribution margin (DB) is negative.
+Typical BCG order through a product life cycle?	Question Mark → Star → Cash Cow → Poor Dog. Question Marks create future Stars; Cash Cows finance investments.
+How is relative market share calculated in the BCG exercise?	Company market share ÷ competitor market share (>1 means you lead).
+What is configuration management, and how does it differ from change management?	Managing the combination (configuration) of HW+SW changes and the resulting properties (Ger. Konfigurationsmanagement). Change focuses on a single change/measure; configuration focuses on the interaction of changes.
+List the targets of configuration management.	Handle variant complexity, manage configuration items (HW/SW/combos), ensure system performance/function/integrity, document changes, inform all parties, enable concurrent/distributed engineering, enable roll-backs, create reproducible configurations.
+Name the 5 steps of the configuration-management process.	1) CM organization, 2) Configuration identification, 3) Configuration control, 4) Configuration status accounting, 5) Configuration verification and audit.
+In which CM step does change management take place?	Step 3 — Configuration control.
+What standards describe configuration management?	EIA-649C (ANSI/EIA), Automotive SPICE (SUP), IEEE 828-2012, ISO 10007, NIST; needed for ISO 26262 ch.8 (vehicle FuSi) and ISO 20000 (IT service mgmt).
+What is variant management (VM) and its target?	Business model defines the product variants to develop. Target: as many variants as needed for revenue, but as few as possible for complexity — use standard interfaces & tool kits.
+What are the tasks of variant management?	Transparency about variants, optimizing (create/delete variants), interconnection with LCM and impact on configuration management.
+How does a shared base product help variants?	Same base "below the outer shape" → components sourced more often → cheaper per piece (economy of scale); differentiate by visual appearance and features/configurations.
+Where does variant management cause additional effort?	Development (what must the base change?), Testing (which tests can be skipped safely?), Sales (avoid variants negativing each other; build IT-configurators), General (banned variants? cannibalization?).
+Reasons to increase vs decrease variants?	Increase: customization, new markets (US vs EU), new clientele (teens→silver agers), new use cases (craft→medical). Decrease: cut cost via synergies (e.g. one plug for all).
+Economy of scale and ROI of a variant?	A new variant causes low extra cost (base covers main costs) and has fewer customers, but its ROI is typically higher than the base.
+Variant decision: base positive, derivation positive, sum positive?	Implement the variant (case 1).
+Variant decision: base positive, derivation negative, sum positive?	Implement only if the variant's extra economy of scale is the reason the base's business case is positive (case 3).
+Variant decision: base positive, derivation negative, sum negative?	Don't implement; check the base variant is still business-case positive (case 4).
+Variant decision: base negative, derivation positive, sum negative?	Stop the product, optimize the base, or add more positive-BC variants (case 6).
+Software tools for version control (code)?	Azure DevOps, BitKeeper, BitBucket, Git, IBM Rational Synergy, RCS, Subversion.
+Software tools for product portfolio management?	cplace and ClickUp.
+Summary: when is no change management needed, and why is it needed in reality?	Ideally never. In reality: traceability (versioning), releasable/conform product, cost control, avoid extra workforce/missed deadlines/dev issues, keep high quality.
+What is the closing message of the chapter?	While change management is important, don't be afraid of changes.

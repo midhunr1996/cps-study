@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Risk Management — Field Manual · CPS MMC-01a</title>
+<title>CPS Exam Study Hub · MMC-01a</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -13,719 +13,142 @@
     --ink:#211C16; --ink-soft:#5C5246; --line:#D9CDB4;
     --amber:#E0962A; --amber-deep:#B96E12; --red:#B23A2E; --green:#4C7A46;
     --shadow: 0 1px 0 rgba(33,28,22,.04), 0 18px 40px -28px rgba(33,28,22,.45);
-    --mono:'Space Mono',ui-monospace,monospace;
-    --disp:'Bricolage Grotesque',system-ui,sans-serif;
-    --body:'Spectral',Georgia,serif;
+    --mono:'Space Mono',ui-monospace,monospace; --disp:'Bricolage Grotesque',system-ui,sans-serif; --body:'Spectral',Georgia,serif;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0; background:var(--paper); color:var(--ink); font-family:var(--body);
-    font-size:18px; line-height:1.62; -webkit-font-smoothing:antialiased;
-    background-image:
-      radial-gradient(circle at 12% -5%, rgba(224,150,42,.10), transparent 42%),
-      radial-gradient(circle at 92% 4%, rgba(178,58,46,.07), transparent 40%);
-  }
-  /* subtle grain */
-  body::before{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.5; mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
-  }
-  .wrap{max-width:920px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
-
-  /* progress + topbar */
-  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--amber),var(--red));z-index:60}
-  header.top{position:sticky;top:0;z-index:50;background:rgba(244,238,226,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
-  header.top .wrap{display:flex;align-items:center;gap:14px;height:56px}
-  .brand{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--amber-deep);white-space:nowrap}
-  nav.tabs{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
-  nav.tabs a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);text-decoration:none;padding:7px 10px;border-radius:7px}
-  nav.tabs a:hover{background:var(--paper-2);color:var(--ink)}
-
-  /* hero */
-  .hero{padding:70px 0 40px;border-bottom:3px solid var(--ink);position:relative}
-  .stripe{height:14px;width:100%;background:repeating-linear-gradient(45deg,var(--ink) 0 16px,var(--amber) 16px 32px);border-radius:3px;margin-bottom:30px}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 12% -5%,rgba(224,150,42,.12),transparent 42%),radial-gradient(circle at 92% 4%,rgba(178,58,46,.08),transparent 40%);}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+  .stripe{height:14px;width:100%;background:repeating-linear-gradient(45deg,var(--ink) 0 16px,var(--amber) 16px 32px);border-radius:3px;margin:0}
+  .hero{padding:64px 0 26px}
   .kicker{font-family:var(--mono);text-transform:uppercase;letter-spacing:3px;font-size:12px;color:var(--amber-deep)}
-  h1{font-family:var(--disp);font-weight:800;font-size:clamp(40px,8vw,76px);line-height:.95;margin:14px 0 8px;letter-spacing:-.02em}
+  h1{font-family:var(--disp);font-weight:800;font-size:clamp(40px,8vw,82px);line-height:.95;margin:14px 0 10px;letter-spacing:-.02em}
   h1 em{font-style:normal;color:var(--red)}
-  .sub{font-size:21px;color:var(--ink-soft);max-width:62ch}
-  .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin-top:18px;display:flex;gap:8px 18px;flex-wrap:wrap}
+  .sub{font-size:21px;color:var(--ink-soft);max-width:60ch}
+  .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin-top:16px;display:flex;gap:8px 18px;flex-wrap:wrap}
   .meta b{color:var(--ink)}
 
-  .riku{margin-top:30px;background:var(--ink);color:var(--paper);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .riku::after{content:"⚠";position:absolute;right:-10px;top:-26px;font-size:140px;opacity:.06}
-  .riku h3{font-family:var(--disp);margin:.1em 0 .4em;font-size:23px}
-  .riku p{margin:.3em 0;color:#E9DEC9}
-  .riku .big{font-family:var(--mono);font-weight:700;color:var(--amber);font-size:15px;letter-spacing:1px;margin-top:10px}
+  .pipe{display:flex;flex-wrap:wrap;gap:7px;margin:26px 0 6px;font-family:var(--mono);font-size:12px}
+  .pipe .step{padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink-soft)}
+  .pipe .step.on{border-color:var(--amber-deep);background:#FBF3DE;color:var(--ink);font-weight:700}
+  .pipe .step.future{opacity:.55;border-style:dashed}
 
-  section{padding:54px 0;border-bottom:1px solid var(--line)}
-  .sec-label{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--amber-deep);display:flex;align-items:center;gap:10px}
-  .sec-label::before{content:"";width:34px;height:2px;background:var(--amber-deep)}
-  h2{font-family:var(--disp);font-weight:800;font-size:clamp(28px,5vw,42px);margin:12px 0 6px;letter-spacing:-.01em;line-height:1.04}
-  h3.topic{font-family:var(--disp);font-weight:600;font-size:23px;margin:34px 0 4px;color:var(--ink)}
-  h3.topic .n{font-family:var(--mono);font-size:13px;color:var(--amber-deep);margin-right:8px}
+  h2.sec{font-family:var(--disp);font-weight:800;font-size:28px;margin:40px 0 4px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;margin:18px 0 10px}
+  .ch{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s;overflow:hidden}
+  a.ch:hover{transform:translateY(-3px);box-shadow:0 26px 50px -26px rgba(33,28,22,.5)}
+  .ch .num{position:absolute;top:-12px;right:6px;font-family:var(--disp);font-weight:800;font-size:104px;line-height:1;color:var(--ink);opacity:.05}
+  .ch .emo{font-size:38px;line-height:1}
+  .ch .tag{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep);margin-top:10px}
+  .ch h3{font-family:var(--disp);font-weight:700;font-size:23px;margin:2px 0 6px;letter-spacing:-.01em}
+  .ch p{margin:0 0 14px;font-size:15.5px;color:var(--ink-soft);line-height:1.5;flex:1}
+  .ch.done{text-decoration:none;color:inherit;display:flex}
+  .badge{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;align-self:flex-start}
+  .badge.ready{background:var(--green);color:#fff}
+  .badge.soon{background:var(--paper-2);color:var(--ink-soft);border:1px dashed var(--line)}
+  .links{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .links a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;text-decoration:none;padding:7px 11px;border-radius:8px;border:2px solid var(--ink);color:var(--ink)}
+  .links a.go{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .links a:hover{background:var(--amber);border-color:var(--amber-deep);color:#241a06}
+  .ch.soon{opacity:.72}
 
-  .lead{font-size:19px;color:var(--ink-soft)}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;box-shadow:var(--shadow)}
-  .story{position:relative;padding-left:20px}
-  .story::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:linear-gradient(var(--amber),var(--red))}
-  .story .who{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--amber-deep)}
-
-  .exam{background:#FBF3DE;border:1px solid #E7C97E;border-left:5px solid var(--amber-deep);border-radius:10px;padding:14px 18px 14px 16px;margin:14px 0}
-  .exam .tag{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber-deep);display:flex;align-items:center;gap:7px}
-  .exam ul{margin:8px 0 2px;padding-left:20px}
-  .exam li{margin:5px 0}
-  .exam b{color:var(--red)}
-
-  .hook{display:flex;gap:12px;align-items:flex-start;background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:13px 16px;margin:12px 0;font-size:16.5px}
-  .hook .ic{font-size:20px;line-height:1.2}
-  .hook b{color:#bfe6a8}
-
-  /* memory movie */
-  .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
-  .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
-  .scene .num{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep)}
-  .scene .decode{color:var(--red);font-weight:600}
-  .pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:16px 0}
-  .pic{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);break-inside:avoid}
-  .pic .big{font-size:32px;line-height:1}
-  .pic h4{font-family:var(--disp);margin:7px 0 4px;font-size:17px}
-  .pic p{margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.45}
-  .pic .key{color:var(--red);font-weight:600}
-
-  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
-  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
-  th{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
-  tbody tr:nth-child(even){background:var(--paper-2)}
-  td.c{text-align:center;font-family:var(--mono);font-weight:700}
-
-  details.more{margin:12px 0;border:1px dashed var(--line);border-radius:10px;background:var(--card);overflow:hidden}
-  details.more>summary{cursor:pointer;padding:11px 16px;font-family:var(--mono);font-size:13px;letter-spacing:.5px;color:var(--amber-deep);list-style:none}
-  details.more>summary::-webkit-details-marker{display:none}
-  details.more>summary::before{content:"▸ ";color:var(--amber-deep)}
-  details.more[open]>summary::before{content:"▾ "}
-  details.more .inner{padding:2px 16px 14px}
-
-  /* mark learned */
-  .learn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);cursor:pointer;user-select:none;margin-top:6px}
-  .learn input{appearance:none;width:18px;height:18px;border:2px solid var(--line);border-radius:5px;cursor:pointer;display:grid;place-content:center;background:var(--card)}
-  .learn input:checked{background:var(--green);border-color:var(--green)}
-  .learn input:checked::after{content:"✓";color:#fff;font-size:12px;font-weight:700}
-
-  /* FLASHCARDS */
-  .deck-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
-  .flashcard{width:100%;max-width:640px;height:300px;perspective:1600px;cursor:pointer}
-  .fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
-  .flashcard.flipped .fc-inner{transform:rotateY(180deg)}
-  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow);border:1px solid var(--line)}
-  .fc-front{background:var(--card)}
-  .fc-back{background:var(--ink);color:var(--paper);transform:rotateY(180deg)}
-  .fc-face .lab{position:absolute;top:16px;left:22px;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.7}
-  .fc-front .lab{color:var(--amber-deep)} .fc-back .lab{color:var(--amber)}
-  .fc-q{font-family:var(--disp);font-weight:600;font-size:24px;line-height:1.18}
-  .fc-a{font-size:18px;line-height:1.5}
-  .fc-hint{position:absolute;bottom:14px;right:22px;font-family:var(--mono);font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:1px}
-  .deck-ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
-  .btn{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.5px;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:9px;cursor:pointer;transition:.15s}
-  .btn:hover{background:var(--ink);color:var(--paper)}
-  .btn.amber{border-color:var(--amber-deep);background:var(--amber);color:#241a06}
-  .btn.amber:hover{background:var(--amber-deep);color:#fff}
-  .counter{font-family:var(--mono);font-size:14px;color:var(--ink-soft);min-width:74px;text-align:center}
-
-  /* PRACTICE */
-  .q-block{counter-increment:q}
-  .q-block .q-head{font-family:var(--disp);font-weight:700;font-size:21px;display:flex;gap:12px;align-items:baseline}
-  .q-block .q-head .num{font-family:var(--mono);color:#fff;background:var(--red);border-radius:8px;padding:2px 10px;font-size:15px;flex:none}
-  .q-type{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep);margin:4px 0 0 0}
-  .answer{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;display:none}
-  .answer.show{display:block;animation:fade .3s ease}
-  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
-  .answer .alab{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--green);font-weight:700}
-
-  .cheat td:first-child{font-family:var(--mono);font-size:12px;color:var(--amber-deep);white-space:nowrap}
-  .cheat td:nth-child(2){font-weight:600}
-
-  footer{padding:40px 0 70px;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:12px}
-  .print-only{display:none}
-  a.inline{color:var(--amber-deep)}
-
-  @media (max-width:560px){ body{font-size:17px} .flashcard{height:340px} h1{font-size:46px} }
-
-  /* ---------- PRINT / PDF ---------- */
-  @media print{
-    @page{size:A4;margin:15mm 14mm}
-    body{background:#fff;color:#000;font-size:11.5pt}
-    body::before,#bar{display:none}
-    header.top,nav.tabs,.deck-ctrl,.fc-hint,.learn,.flip-note{display:none !important}
-    .wrap{max-width:none;padding:0}
-    .hero{padding:0 0 14px;border-bottom:2px solid #000}
-    .riku{background:#f3f3f3;color:#000;box-shadow:none;border:1px solid #999}
-    .riku p{color:#222}.riku .big{color:#a8650a}.riku::after{display:none}
-    section{padding:14px 0;border-bottom:1px solid #bbb;break-inside:avoid}
-    .card,.exam,.hook,table,.q-block,.flashcard{box-shadow:none;break-inside:avoid}
-    .hook{background:#eef3ec;color:#000;border:1px solid #9bbf8c}.hook b{color:#2f5a28}
-    .exam{background:#fdf6e3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    th{background:#222 !important;color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .stripe{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    details.more{border:none} details.more .inner{padding:0} details.more>summary{display:none}
-    details.more[open] .inner, details.more .inner{display:block !important}
-    /* show all practice answers */
-    .answer{display:block !important;border-top:1px solid #bbb}
-    /* flatten flashcards to Q/A in print */
-    #fc-live{display:none}
-    .print-only{display:block}
-    #fc-print .pc{break-inside:avoid;border:1px solid #bbb;border-radius:8px;padding:8px 12px;margin:7px 0}
-    #fc-print .pq{font-weight:700} #fc-print .pa{color:#222}
-    a{color:#000;text-decoration:none}
-  }
+  .how{background:var(--ink);color:var(--paper);border-radius:18px;padding:26px 28px;margin:36px 0;box-shadow:var(--shadow)}
+  .how h3{font-family:var(--disp);margin:0 0 12px;font-size:24px;color:#fff}
+  .how .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .how .row div b{color:var(--amber)}
+  .how .row div{color:#E9DEC9;font-size:15.5px}
+  footer{padding:32px 0 64px;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:12px}
+  @media (max-width:520px){h1{font-size:46px}}
 </style>
 </head>
 <body>
-<div id="bar"></div>
+<div class="stripe"></div>
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Cyber-Physical Systems · MMC-01a · Prof. Dr. M. Górka</div>
+    <h1>Exam <em>Study</em> Hub</h1>
+    <p class="sub">Every chapter taught as a <b>story you can picture</b>, with the exact points you write in the exam, flip-flashcards, practice questions and a printable PDF. Pick a chapter to start.</p>
+    <div class="meta"><span>Method <b>🎬 Memory Movies</b></span><span>Active recall <b>🃏 Flashcards</b></span><span>Offline <b>📄 PDFs</b></span></div>
 
-<header class="top"><div class="wrap">
-  <span class="brand">⚠ Risk Mgmt · MMC-01a</span>
-  <nav class="tabs">
-    <a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
-    <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
-    <a href="#" onclick="window.print();return false;">⤓ PDF</a>
-  </nav>
-</div></header>
-
-<main class="wrap">
-
-  <!-- HERO -->
-  <div class="hero" id="top">
-    <div class="stripe"></div>
-    <div class="kicker">Structure &amp; Functions of Cyber-Physical Systems</div>
-    <h1>Risk <em>Management</em><br>Field Manual</h1>
-    <p class="sub">Memorize the whole deck the easy way: one story, the exact exam points, and a memory hook on every topic.</p>
-    <div class="meta"><span>Module <b>MMC-01a</b></span><span>Lecturer <b>Prof. Dr. M. Górka</b></span><span>Source <b>3.pptx · 73 slides</b></span><span><b>THD · NuW · AI for Smart Sensors</b></span></div>
-
-    <div class="riku">
-      <h3>🤖 Meet Riku — your memory anchor</h3>
-      <p>You and your friends are building <b>Riku, a self-driving delivery robot</b>. You're terrified it'll crash, hurt someone, or arrive late.</p>
-      <p>Every single slide just answers one question: <b>“How do clever engineers stop Riku from going wrong — as early and cheaply as possible?”</b> Keep Riku in your head and the chapter tells itself.</p>
-      <div class="big">★ MASTER KEY → “Detectives Always Eat Cold Mexican Donuts” = Detect · Analyse · Evaluate · Control · Monitor · Document</div>
+    <div class="pipe">
+      <span class="step future">1 · Basics of SE</span>
+      <span class="step future">2 · Requirements</span>
+      <span class="step on">3 · Risk ✓</span>
+      <span class="step on">4 · Change ✓</span>
+      <span class="step on">5 · Ideation ✓</span>
+      <span class="step">(6 Design)</span>
+      <span class="step">(7 Test)</span>
+      <span class="step">(8 Setup)</span>
     </div>
   </div>
 
-  <!-- MAP -->
-  <section id="map">
-    <div class="sec-label">00 · The shape of the whole chapter</div>
-    <h2>See the skeleton before the bones</h2>
-    <p class="lead">Risk Management is <b>step 3 of System Engineering</b>:</p>
-    <div class="card" style="font-family:var(--mono);font-size:14px;line-height:2">
-      1 Basics → 2 Requirements → <b style="color:var(--red)">3 RISK ★</b> → 4 Change → 5 Ideation → (6 Design) → (7 Test) → (8 Project Setup)
-    </div>
-    <p>The chapter solves risk in a fixed order. Learn this one silly sentence and you already own the structure of the exam — everything else just bolts onto one of these six words:</p>
-    <div class="hook"><span class="ic">🧠</span><div><b>“Detectives Always Eat Cold Mexican Donuts.”</b><br><b>D</b>etect → <b>A</b>nalyse → <b>E</b>valuate → <b>C</b>ontrol → <b>M</b>onitor → <b>D</b>ocument.</div></div>
-  </section>
+  <h2 class="sec">Chapters</h2>
+  <div class="grid">
 
-  <!-- MEMORY MOVIE -->
-  <section id="movie">
-    <div class="sec-label">The trick · watch, don't memorize</div>
-    <h2>🎬 The Memory Movie</h2>
-    <p class="lead">Don't memorize sentences — your brain hates random letters. Instead <b>close your eyes and play this silly 6-scene movie</b> of Riku's bad day. Each picture <em>is</em> the point, so when you replay the movie, the exam answer just appears. Read it 3 times, then try to replay it with your eyes shut.</p>
-
-    <div class="scene"><div class="emo">🔍</div><div><div class="num">Scene 1</div>A <b>detective</b> spots a <b>banana peel</b> on Riku's path. → <span class="decode">DETECT the risk.</span></div></div>
-    <div class="scene"><div class="emo">🔬</div><div><div class="num">Scene 2</div>He drops the peel under a <b>microscope</b> to study it. → <span class="decode">ANALYSE it.</span></div></div>
-    <div class="scene"><div class="emo">⚖️</div><div><div class="num">Scene 3</div>He plops it on a <b>kitchen scale</b>: “how slippery? × how often is it here?” → <span class="decode">EVALUATE = Severity × Occurrence.</span></div></div>
-    <div class="scene"><div class="emo">🎮</div><div><div class="num">Scene 4</div>He grabs Riku's <b>game controller</b> — a menu of <b>4 buttons</b> pops up: 🧱 ☂️ 🧍 🤷. → <span class="decode">CONTROL it (4 options below).</span></div></div>
-    <div class="scene"><div class="emo">📹</div><div><div class="num">Scene 5</div>He leans back and watches Riku on <b>CCTV screens</b> to see if it slips. → <span class="decode">MONITOR it.</span></div></div>
-    <div class="scene"><div class="emo">📓</div><div><div class="num">Scene 6</div>He scribbles the whole story into a <b>logbook</b>. → <span class="decode">DOCUMENT it.</span></div></div>
-
-    <div class="hook"><span class="ic">🎥</span><div>Replay in one breath: <b>spots → studies → weighs → grabs the controller → watches the screens → writes the logbook.</b> That's the whole chapter's skeleton — no letters needed.</div></div>
-
-    <h3 class="topic">🎮 The 4 buttons on the controller (how to CONTROL a risk)</h3>
-    <p>Picture standing in your doorway in the rain, choosing one button:</p>
-    <div class="pics">
-      <div class="pic"><div class="big">🧱</div><h4>Wall = Avoid</h4><p>Build a wall so the rain never reaches you. <span class="key">Reduce occurrence to 0</span> (e.g. Poka Yoke).</p></div>
-      <div class="pic"><div class="big">☂️</div><h4>Umbrella = Prevent</h4><p>You still go out, but stay drier. <span class="key">Reduce occurrence or severity</span> (e.g. PDCA).</p></div>
-      <div class="pic"><div class="big">🧍</div><h4>Brother = Transfer</h4><p>Push someone who copes better into the rain. <span class="key">ECU → chassis.</span></p></div>
-      <div class="pic"><div class="big">🤷</div><h4>Shrug = Accept</h4><p>Just get a little wet. <span class="key">Only if it's a drizzle</span> (low × low).</p></div>
+    <div class="ch soon">
+      <span class="num">1</span>
+      <div class="emo">🏗️</div>
+      <div class="tag">Step 1</div>
+      <h3>Basics of System Engineering</h3>
+      <p>The foundations — the system-engineering process, the system wheel, and how all the CPS modules connect.</p>
+      <span class="badge soon">Coming soon</span>
     </div>
 
-    <h3 class="topic">🖼️ Picture-hooks for the tricky lists</h3>
-    <p>Same trick for every list that wouldn't stick — turn it into one strong, weird image:</p>
-    <div class="pics">
-      <div class="pic"><div class="big">👻→👹</div><h4>Risk vs Problem</h4><p>A floating <b>ghost “?”</b> = a risk (not yet, &lt;100%). It drops to the floor and becomes a <b>monster</b> = a problem (already happened).</p></div>
-      <div class="pic"><div class="big">🍪</div><h4>PDCA</h4><p>Bake cookies on a <b>spinning plate</b>: <b>Plan</b> recipe → <b>Do</b> bake → <b>Check</b> taste → <b>Act</b> fix next batch. Round forever.</p></div>
-      <div class="pic"><div class="big">🚪</div><h4>6 ways to DETECT</h4><p>Walk into a room: a 📊 <b>dashboard</b> (KPI), an old 📔 <b>diary</b> (LeLe/lessons), a kid doing a 🤸 <b>headstand</b>, a 🔮 <b>fortune-teller</b> (Delphi), a 🔧 <b>workshop bench</b>, a ☢️ <b>hazard sign</b> (PAAG/HAZOP).</p></div>
-      <div class="pic"><div class="big">😣</div><h4>RPV = “how SORe”</h4><p>Riku trips and is <b>SORE</b>: how bad the bruise (<b>S</b>everity) × how <b>O</b>ften he trips (Occurrence) × can he see it coming (<b>R</b>ecognizability). Each /10.</p></div>
-      <div class="pic"><div class="big">🤖👑🩺</div><h4>FMEA family</h4><p>A plain robot (<b>FMEA</b>) puts on a 👑 <b>crown</b> to rank what's critical (FME<b>C</b>A) → then a 🩺 <b>stethoscope</b> to self-diagnose (FME<b>D</b>A).</p></div>
-      <div class="pic"><div class="big">☃️</div><h4>Rule of Ten</h4><p>A <b>snowball</b> at the hill-top: 1€ → 10€ → 100€ → 1000€, smashing the customer's house. <span class="key">Catch it at the TOP (planning).</span></p></div>
-      <div class="pic"><div class="big">📦💰🌍</div><h4>Where risks hide (9→3)</h4><p><b>Product box</b> (Technical, Compliance) · <b>Money/Time box</b> (Finance, Time, Market, Currency) · <b>People/Planet box</b> (Social, PM, Environmental).</p></div>
-      <div class="pic"><div class="big">🚗</div><h4>SC car badges</h4><p>A <b>BMW</b> wears <b>3</b> badges <b>L·S·F</b> (Legal, Safety, Function); a <b>VW</b> wears <b>2</b> badges <b>D·S</b> (Documented, Safety). Daimler = DS/DZ.</p></div>
-      <div class="pic"><div class="big">🏁</div><h4>Standards anchor</h4><p>A race-car with number plate <b>“26262”</b> = <b>ISO 26262</b> (automotive FMEA). Anchor on the car, the rest cluster around it.</p></div>
-      <div class="pic"><div class="big">🔮</div><h4>Delphi vs Headstand</h4><p><b>Delphi</b> = silent hooded oracles, answer alone, repeat, average. <b>Headstand</b> = flip the question (“how to make Riku fail FAST?”), then flip the answers back.</p></div>
+    <div class="ch soon">
+      <span class="num">2</span>
+      <div class="emo">📋</div>
+      <div class="tag">Step 2</div>
+      <h3>Requirement Management</h3>
+      <p>Eliciting, writing and managing requirements — the backbone every later phase builds on.</p>
+      <span class="badge soon">Coming soon</span>
     </div>
 
-    <div class="hook"><span class="ic">🧠</span><div><b>How to actually lock it in:</b> (1) read a scene, (2) <b>shut your eyes and re-see the picture</b>, (3) say the real meaning out loud. Do the 6-scene movie + 10 picture-hooks twice today and once tomorrow — then test yourself with the <a href="#cards" style="color:#bfe6a8">flashcards</a>. Seeing beats reading; testing beats re-reading.</div></div>
-  </section>
+    <a class="ch done" href="3_study.html">
+      <span class="num">3</span>
+      <div class="emo">⚠️</div>
+      <div class="tag">Step 3 · Risk Management</div>
+      <h3>Risk Management</h3>
+      <p>Detect → evaluate → control risks. FMEA, the risk matrix, the Rule of Ten, Poka Yoke. <i>Anchor: Riku the robot.</i></p>
+      <span class="badge ready">Ready ✓</span>
+      <div class="links"><a class="go">Open →</a><a href="3_study.pdf">PDF</a><a href="3_flashcards.txt">Cards</a></div>
+    </a>
 
-  <!-- LESSON -->
-  <section id="lesson">
-    <div class="sec-label">The full lesson · all slides</div>
-    <h2>Taught like a story — with the points you must write</h2>
+    <a class="ch done" href="4_study.html">
+      <span class="num">4</span>
+      <div class="emo">♻️</div>
+      <div class="tag">Step 4 · Change Management</div>
+      <h3>Change Management</h3>
+      <p>Changing a product safely across its life cycle — versioning, configuration & variant management, BCG, CR→CCB. <i>Anchor: Ada & the car “Volt”.</i></p>
+      <span class="badge ready">Ready ✓</span>
+      <div class="links"><a class="go">Open →</a><a href="4_study.pdf">PDF</a><a href="4_flashcards.txt">Cards</a></div>
+    </a>
 
-    <!-- 1 -->
-    <h3 class="topic"><span class="n">01</span>What <em>is</em> a risk?</h3>
-    <div class="card story"><div class="who">🧒 Story</div>Before Riku even moves you ask, “what could go wrong?” The battery <em>might</em> die; it <em>might</em> rain. Hasn't happened yet → those are <b>risks</b>. The instant Riku actually crashes, it stops being a risk and becomes a <b>problem</b> — too late to prevent.</div>
-    <div class="exam"><div class="tag">📝 Write in exam — Definition of risk</div><ul>
-      <li><b>“Risk is the effect of uncertainty”</b> — definition from <b>ISO 9001</b>.</li>
-      <li>RM's job: <b>sort &amp; structure risks</b> in a structured way (→ PDCA).</li>
-      <li>Risks = events/circumstances that can <b>prevent reaching the project goal</b> (probability <b>&lt; 100%</b>).</li>
-      <li>A risk that <b>already occurred → a “problem”</b> (treated differently).</li>
-      <li>Separate <b>general company risks</b> from <b>project-specific risks</b>.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div>Risk = <b>“not yet”</b> · Problem = <b>“already”</b>. Probability under 100% = still a risk.</div></div>
-    <label class="learn"><input type="checkbox" data-k="t1">Mark learned</label>
+    <a class="ch done" href="5_study.html">
+      <span class="num">5</span>
+      <div class="emo">💡</div>
+      <div class="tag">Step 5 · Ideation</div>
+      <h3>Ideation · Design Thinking</h3>
+      <p>Customer-centred innovation: Understand → Observe → Design principles → Ideate → Prototype → Test. <i>Anchor: Maya the inventor & Jack the lifeguard.</i></p>
+      <span class="badge ready">Ready ✓</span>
+      <div class="links"><a class="go">Open →</a><a href="5_study.pdf">PDF</a><a href="5_flashcards.txt">Cards</a></div>
+    </a>
 
-    <!-- 2 -->
-    <h3 class="topic"><span class="n">02</span>PDCA — the engineer's heartbeat</h3>
-    <div class="card story"><div class="who">🧒 Story</div>How do you do anything well? Like baking cookies: <b>Plan</b> the recipe → <b>Do</b> the baking → <b>Check</b> the taste → <b>Act</b> to improve the next batch. Engineers spin this loop forever. From <b>ISO 9001</b>; also the <b>Deming</b> / <b>Shewhart</b> cycle.</div>
-    <div class="exam"><div class="tag">📝 Write in exam — PDCA</div><ul>
-      <li><b>Plan</b> — plan process/product; set goals &amp; resources; address risks &amp; opportunities.</li>
-      <li><b>Do</b> — implement the plan.</li>
-      <li><b>Check</b> — monitor &amp; measure the process / target condition.</li>
-      <li><b>Act</b> — take action to improve performance.</li>
-      <li>Method used in “Plan”: <b>FMEA</b>.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div><b>P-D-C-A = “Please Don't Crash Again.”</b> It's a <b>circle</b>, never a straight line.</div></div>
-    <label class="learn"><input type="checkbox" data-k="t2">Mark learned</label>
+  </div>
 
-    <!-- 3 -->
-    <h3 class="topic"><span class="n">03</span>Three clever truths (general principles)</h3>
-    <div class="card story"><div class="who">🧒 Story</div>Three surprising facts examiners love: (1) risk has a good twin — an <b>opportunity</b>; (2) people fear reporting bad news, so build an <b>anonymous “speak-up line”</b>; (3) money adds up but <b>risks don't</b> — you must combine them with maths like <b>Monte Carlo</b>.</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li>Opportunities can be recorded as <b>positive events</b>.</li>
-      <li>Set up an <b>anonymous “speak-up line”</b> for undiscovered risks/violations.</li>
-      <li><b>Risks do not add up</b> → aggregate via <b>models &amp; simulations (Monte Carlo)</b>.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div><b>O-S-M</b> → <b>O</b>pportunity · <b>S</b>peak-up · <b>M</b>onte-Carlo (risks don't add).</div></div>
-    <label class="learn"><input type="checkbox" data-k="t3">Mark learned</label>
-
-    <!-- 4 -->
-    <h3 class="topic"><span class="n">04</span>Don't put all eggs in one basket (diversification)</h3>
-    <div class="card story"><div class="who">🧒 Story</div>Bet all your pocket money on one lottery ticket = super risky. Spread it across different, <em>unrelated</em> things = safer for the same reward. Companies do the same with projects. To make Riku's 50%-reliable crash sensor safer, you must add something <b>different</b>, not a copy.</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li>Diversify — <em>“not all in one basket”</em>: <b>asset</b> (different products) &amp; <b>time</b> diversification (idea by <b>Markowitz</b>, Nobel Prize).</li>
-      <li>Optimum portfolios lie <b>on the efficiency curve</b>; below it = <b>inefficient</b>.</li>
-      <li>To reduce risk: <b>diversified &amp; non-correlating</b> solutions.</li>
-      <li>ECU example — ❌ <b>wrong:</b> add a 2nd <b>identical</b> ECU (increases failure). ✅ <b>right:</b> add a <b>mechanical</b> crash detector.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div>Two of the <b>same</b> = double trouble. Two <b>different</b> = real safety.</div></div>
-    <label class="learn"><input type="checkbox" data-k="t4">Mark learned</label>
-
-    <!-- 5 -->
-    <h3 class="topic"><span class="n">05</span>The rulebook (standards)</h3>
-    <div class="card story"><div class="who">🧒 Story</div>You can't just <em>say</em> you manage risk — big standards <em>force</em> you. <b>ISO 9001</b> demands “risk-based thinking”; <b>ISO 31000</b> is the dedicated risk standard; companies keep a money-jar (<b>provisions</b>) to pay if risks hit; and the <b>boss</b> is responsible.</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li><b>ISO 9001</b> → <b>“risk-based thinking”</b> (use opportunities, prevent unwanted outcomes).</li>
-      <li><b>ISO 31000</b> → “Risk Management”.</li>
-      <li>Form <b>provisions (Rückstellungen)</b> for company &amp; product risks → linked to <b>quality management</b>.</li>
-      <li>Company-level RM = a <b>managerial task</b>.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div>“<b>9001 thinks, 31000 manages, the jar pays, the boss owns it.</b>”</div></div>
-    <label class="learn"><input type="checkbox" data-k="t5">Mark learned</label>
-
-    <!-- 6 -->
-    <h3 class="topic"><span class="n">06</span>Risks come from everywhere (levels affected)</h3>
-    <div class="card story"><div class="who">🧒 Story</div>Riku can fail in many directions. Turn 9 scary items into <b>3 buckets</b>: Product · Money/Time · People/Planet.</div>
-    <div class="exam"><div class="tag">📝 Write in exam — 9 levels</div><ul>
-      <li><b>Product:</b> Technical/product · Compliance</li>
-      <li><b>Money/Time:</b> Finances/costs · Time · Market · Currency</li>
-      <li><b>People/Planet:</b> Social · Project-management · Environmental</li>
-      <li>Also: <b>6 levels of risk management</b> by <b>Gleißner &amp; Mott</b>; German law <b>KonTraG</b> forces management to do risk analysis.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div><b>3 buckets → Product · Money/Time · People/Planet.</b> Remember the buckets, the items fall out.</div></div>
-    <label class="learn"><input type="checkbox" data-k="t6">Mark learned</label>
-
-    <!-- 7 -->
-    <h3 class="topic"><span class="n">07</span>Targets of Risk Management (master list)</h3>
-    <div class="card story"><div class="who">🧒 Story</div>This is the <b>D-A-E-C-M-D</b> skeleton, now with <b>Control</b> opened up. Controlling a risk = exactly 4 choices, like dealing with rain: <b>Avoid</b> (stay in), <b>Prevent</b> (umbrella), <b>Transfer</b> (send your brother), <b>Accept</b> (get a bit wet).</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li><b>Targets:</b> Detect → Analyse → Evaluate → <b>Control</b> → Monitor → Document &amp; communicate.</li>
-      <li><b>Control options:</b> Avoid · Prevent · Transfer · Accept.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div>Skeleton = <b>“Detectives Always Eat Cold Mexican Donuts.”</b> Control = <b>A-P-T-A</b> (rain). Matches the classic <b>4 T's</b>: Terminate, Treat, Transfer, Tolerate.</div></div>
-    <label class="learn"><input type="checkbox" data-k="t7">Mark learned</label>
-
-    <!-- 8 -->
-    <h3 class="topic"><span class="n">08</span>DETECT — finding risks</h3>
-    <div class="card story"><div class="who">🧒 Story</div>First, hunt for risks <b>regularly &amp; systematically</b>, looking <em>inside</em> and <em>outside</em> the company. A slow stable company checks rarely; a fast-changing one checks often.</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li>Regular &amp; systematic <b>internal and external</b> analysis of developments/events/changes; <b>frequency depends on volatility</b>.</li>
-      <li><b>6 methods to detect:</b> KPI changes · LeLe (lessons learned) · Headstand/Flip-Flop · Delphi · Risk workshop · PAAG/HAZOP.</li>
-      <li><b>Safety detection methods:</b> ALARP · FMEA · DRBFM.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div>“<b>Kids Love Hunting Down Risky Problems</b>” → KPI · LeLe · Headstand · Delphi · Risk-workshop · PAAG.</div></div>
-
-    <h3 class="topic" style="font-size:19px"><span class="n">08a</span>Head-stand / Flip-Flop method</h3>
-    <div class="card story"><div class="who">🧒 Story</div>Stand the question on its head! Instead of “how do we make Riku succeed?” ask <b>“how could we make Riku fail as FAST as possible?”</b> — kids find this funnier, so more ideas pop out. Then flip the silly answers back into real safety actions.</div>
-    <div class="exam"><div class="tag">📝 4 steps</div><ul><li>(1) <b>Invert the thesis</b> → (2) <b>find solutions</b> for the flipped thesis → (3) <b>invert those solutions</b> → (4) <b>define actions</b>.</li></ul></div>
-
-    <h3 class="topic" style="font-size:19px"><span class="n">08b</span>Delphi method</h3>
-    <div class="card story"><div class="who">🧒 Story</div>Ask many experts — but keep them in <b>separate rooms</b> so nobody copies or bullies. Everyone answers <b>anonymously</b>; you reveal the big disagreements, ask again, repeat until they roughly agree, then take the <b>average</b>. (Named after the ancient Oracle of Delphi.)</div>
-    <div class="exam"><div class="tag">📝 6 steps</div><ul><li>(1) leader explains topic &amp; targets → (2) worksheet to each expert, <b>no discussion</b> → (3) <b>anonymous</b> hand-in + evaluate → (4) share <b>major deviations</b> + comments, redistribute → (5) <b>repeat 2–4</b> until consolidated → (6) take the <b>average</b>.</li></ul></div>
-    <label class="learn"><input type="checkbox" data-k="t8">Mark learned</label>
-
-    <!-- 9 -->
-    <h3 class="topic"><span class="n">09</span>EVALUATE — scoring the risk</h3>
-    <div class="card story"><div class="who">🧒 Story</div>Every risk gets <b>two scores</b>, like rating a scary movie: <b>Severity</b> (how bad) and <b>Occurrence</b> (how likely). They say “occurrence,” NOT “probability,” because it's a <em>human guess</em>, not a calculation. Combine the two → a <b>risk matrix</b> telling you what to fear first.</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li>Two properties per risk: <b>Severity</b> + <b>Occurrence/likelihood</b> (subjective; <em>not</em> “probability”).</li>
-      <li>Combine → <b>risk matrix</b> to <b>prioritise</b>; keep an updated <b>risk list</b> (PM / risk manager).</li>
-      <li>Judge <b>impact</b> via: <b>historical data</b> · <b>probability distribution</b> · <b>Monte Carlo simulation</b>.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div><b>Severity × Occurrence = Risk Matrix.</b> “How bad × how likely.” Low number = mild · high = nasty · 0 = gone · top = already happened.</div></div>
-
-    <details class="more"><summary>Show the data tables (Severity · Occurrence · Risk Matrix)</summary><div class="inner">
-      <p style="font-family:var(--mono);font-size:12px;margin:10px 0 2px;color:var(--amber-deep)">SEVERITY (example)</p>
-      <table><thead><tr><th>Rating</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
-        <tr><td class="c">1</td><td>low</td><td>Function slightly below target · cost/weight &lt;1% · &lt;2 weeks late</td></tr>
-        <tr><td class="c">2</td><td>medium</td><td>Function below target · cost/weight &lt;5% · &lt;1 month late</td></tr>
-        <tr><td class="c">3</td><td>high</td><td>Important function significantly below setpoint · &lt;10% · &lt;3 months</td></tr>
-        <tr><td class="c">4</td><td>very high</td><td>Function impossible · cost/weight &gt;10% · &gt;3 months late</td></tr>
-      </tbody></table>
-      <p style="font-family:var(--mono);font-size:12px;margin:14px 0 2px;color:var(--amber-deep)">OCCURRENCE (example)</p>
-      <table><thead><tr><th>Occurrence</th><th>Rating</th><th>Meaning</th></tr></thead><tbody>
-        <tr><td>0%</td><td class="c">0</td><td>eliminated (no risk left)</td></tr>
-        <tr><td>&gt;0…≤25%</td><td class="c">1</td><td>low</td></tr>
-        <tr><td>&gt;25…≤50%</td><td class="c">2</td><td>medium</td></tr>
-        <tr><td>&gt;50…≤75%</td><td class="c">3</td><td>high</td></tr>
-        <tr><td>&gt;75…&lt;100%</td><td class="c">4</td><td>very high</td></tr>
-        <tr><td>100%</td><td class="c">5</td><td>occurred → problem management</td></tr>
-      </tbody></table>
-      <p style="font-family:var(--mono);font-size:12px;margin:14px 0 2px;color:var(--amber-deep)">RISK MATRIX (severity rows × occurrence columns)</p>
-      <table><thead><tr><th>Sev ↓ / Occ →</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody>
-        <tr><td><b>1 low</b></td><td class="c">0</td><td class="c">1</td><td class="c">1</td><td class="c">1</td><td class="c">2</td><td class="c">5</td></tr>
-        <tr><td><b>2 medium</b></td><td class="c">0</td><td class="c">1</td><td class="c">2</td><td class="c">2</td><td class="c">3</td><td class="c">5</td></tr>
-        <tr><td><b>3 high</b></td><td class="c">0</td><td class="c">1</td><td class="c">2</td><td class="c">3</td><td class="c">4</td><td class="c">5</td></tr>
-        <tr><td><b>4 very high</b></td><td class="c">0</td><td class="c">2</td><td class="c">3</td><td class="c">4</td><td class="c">4</td><td class="c">5</td></tr>
-      </tbody></table>
-    </div></details>
-    <label class="learn"><input type="checkbox" data-k="t9">Mark learned</label>
-
-    <!-- 10 -->
-    <h3 class="topic"><span class="n">10</span>CONTROL — the 5 ways to handle it</h3>
-    <div class="card story"><div class="who">🧒 Story</div>Rain again, plus a bonus tool: <b>Avoid</b> (ban it, occurrence→0; use barriers like Poka Yoke), <b>Poka Yoke</b> (make wrong physically impossible — like a SIM that fits one way), <b>Prevent</b> (umbrella), <b>Transfer</b> (give it to who copes better), <b>Accept</b> (shrug — only if small).</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li><b>Avoidance:</b> reduce occurrence to <b>0</b> — ban activities, remove features, <b>technical barriers (Poka Yoke)</b>.</li>
-      <li><b>Poka Yoke:</b> Japanese <b>“avoid silly mistakes”</b>; immediate error detection; <b>key-lock principle</b>.</li>
-      <li><b>Prevention:</b> reduce occurrence OR mitigate severity, using QM methods (e.g. <b>PDCA</b>).</li>
-      <li><b>Transfer:</b> shift the risk to who handles it best — e.g. crash <b>ECU → chassis</b>.</li>
-      <li><b>Acceptance:</b> consciously accept — <b>only if occurrence AND impact are low</b>.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div><b>Avoid · Poka-Yoke · Prevent · Transfer · Accept</b> = ban · mistake-proof · umbrella · chassis · shrug.</div></div>
-    <label class="learn"><input type="checkbox" data-k="t10">Mark learned</label>
-
-    <!-- 11 -->
-    <h3 class="topic"><span class="n">11</span>FMEA — the star of the exam ⭐</h3>
-    <div class="card story"><div class="who">🧒 Story</div>FMEA is a giant <b>“what could break, and what happens then?”</b> checklist that a team of experts fills in <b>early</b>, before Riku is even built — so failures get caught in advance.</div>
-    <div class="exam"><div class="tag">📝 Write in exam — FMEA basics</div><ul>
-      <li><b>FMEA = Failure Mode and Effects Analysis</b> (Ger. <em>Fehlermöglichkeiten- und Einflussanalyse</em>) — a <b>reliability-improvement method</b>.</li>
-      <li>Rates defects by <b>Severity, Probability, Recognizability</b>.</li>
-      <li><b>Goals:</b> spot <b>systematic &amp; random errors before they occur</b> · derive <b>detection &amp; prevention</b> · improve <b>successor products</b>.</li>
-      <li><b>Types:</b> System FMEA · <b>D-FMEA</b> (Design, customer focus) · <b>P-FMEA</b> (Process). D &amp; P must be <b>linked</b> (critical design feature = an <b>SC</b> checked in the process).</li>
-      <li><b>Standards:</b> Automotive <b>ISO 26262</b> · Industry IEC 61508 / ISO 13849 · Aerospace DO-254 / ARP 4761.</li>
-      <li><b>Process:</b> prepared <b>early</b>, in <b>expert workshops</b>, built <b>from cause → error</b>, then <b>verify the assumed probabilities</b>.</li>
-      <li><b>Living document:</b> maintain until <b>EOP</b> (better <b>EOS</b>); <b>update on every product change</b> (classic field-failure cause!); old FMEA feeds next project (<b>LeLe</b>).</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div>Family: <b>A → +C(riticality)=FMECA → +D(iagnostics)=FMEDA.</b> “Add a letter to upgrade.” · Standards anchor: <b>“cars = 26262.”</b></div></div>
-
-    <h3 class="topic" style="font-size:19px"><span class="n">11a</span>Rule of Ten 🔟</h3>
-    <div class="card story"><div class="who">🧒 Story</div>The longer a mistake hides, the more it costs — <b>×10 at every stage</b>. Catch Riku's bug while planning = 1€; let the customer find it = 1000€+. So fix things EARLY.</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul><li>Cost ×10 per stage: <b>Planning 1€ → Development 10€ → Assembly 100€ → Final acceptance 1000€ → Customer</b>. Focus on <b>planning &amp; development</b>.</li></ul></div>
-    <div class="hook"><span class="ic">🧠</span><div>Every stage you're late, <b>add a zero</b>: 1 → 10 → 100 → 1000.</div></div>
-
-    <h3 class="topic" style="font-size:19px"><span class="n">11b</span>FMECA &amp; FMEDA</h3>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li><b>FMECA</b> = FMEA + <b>Criticality</b> metric → enables <b>prioritisation</b> (usually what “FMEA” means in practice).</li>
-      <li><b>FMEDA</b> = FMEA + <b>Diagnostics</b>; <b>multiple-error analysis</b>; automotive electronics; counts how <b>self-detection/correction</b> lowers the failure rate; adds <b>quantifiable error data</b>; good for <b>complex systems</b>.</li>
-    </ul></div>
-    <label class="learn"><input type="checkbox" data-k="t11">Mark learned</label>
-
-    <!-- 12 -->
-    <h3 class="topic"><span class="n">12</span>RPV — the FMEA score (S × O × R)</h3>
-    <div class="card story"><div class="who">🧒 Story</div>To rank each failure, FMEA gives <b>three marks out of 10</b> and multiplies them: how <b>bad</b> (Severity), how <b>often</b> (Occurrence), can our design <b>catch</b> it (Recognizability). Big number = fix first.</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li><b>RPV = Severity × Probability(Occurrence) × Recognizability</b>, each rated <b>1–10</b>.</li>
-      <li>Watch the flip: Recognizability <b>1 = best (≥99% detected)</b>, <b>10 = worst (&lt;10% detected)</b>.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div><b>“S × O × R” = “how SORe will it be?”</b> = how Bad × how Often × can we Recognize. (Classic FMEA <b>S×O×D = RPN</b>; Recognizability = Detection.)</div></div>
-    <details class="more"><summary>Show the three 1–10 scales (Probability · Severity · Recognizability)</summary><div class="inner">
-      <p style="font-family:var(--mono);font-size:12px;margin:10px 0 2px;color:var(--amber-deep)">PROBABILITY (1–10)</p>
-      <table><thead><tr><th>Probability</th><th>Failure rate</th><th>Rating</th></tr></thead><tbody>
-        <tr><td>always (inevitable)</td><td>≥1 in 2 (50%)</td><td class="c">10</td></tr>
-        <tr><td>almost always</td><td>≥1 in 3</td><td class="c">9</td></tr>
-        <tr><td>very often</td><td>≥1 in 8</td><td class="c">8</td></tr>
-        <tr><td>often</td><td>≥1 in 20</td><td class="c">7</td></tr>
-        <tr><td>regularly</td><td>≥1 in 80</td><td class="c">6</td></tr>
-        <tr><td>repeated</td><td>≥1 in 400</td><td class="c">5</td></tr>
-        <tr><td>sometimes</td><td>≥1 in 2 000</td><td class="c">4</td></tr>
-        <tr><td>rarely</td><td>≥1 in 15 000</td><td class="c">3</td></tr>
-        <tr><td>very rare</td><td>≥1 in 150 000</td><td class="c">2</td></tr>
-        <tr><td>almost never</td><td>&lt;1 in 150 000</td><td class="c">1</td></tr>
-      </tbody></table>
-      <p style="font-family:var(--mono);font-size:12px;margin:14px 0 2px;color:var(--amber-deep)">SEVERITY (1–10)</p>
-      <table><thead><tr><th>Relevance</th><th>Description</th><th>Rating</th></tr></thead><tbody>
-        <tr><td>dangerous / illegal</td><td>Danger / law violation, serious injury, death</td><td class="c">10</td></tr>
-        <tr><td>critical</td><td>Danger possible; serious functional/safety deficiency</td><td class="c">9</td></tr>
-        <tr><td>fatal</td><td>Total loss of primary functions; customer very upset</td><td class="c">8</td></tr>
-        <tr><td>serious</td><td>Functions severely restricted; critical error</td><td class="c">7</td></tr>
-        <tr><td>significant</td><td>Failure of a main function; loss of comfort feature</td><td class="c">6</td></tr>
-        <tr><td>clearly</td><td>Moderate usability limit; reduced comfort feature</td><td class="c">5</td></tr>
-        <tr><td>recognizable</td><td>Use little limited; minor functional impairment</td><td class="c">4</td></tr>
-        <tr><td>slightly</td><td>Use slightly limited; minor look/sound impairment</td><td class="c">3</td></tr>
-        <tr><td>imperceptibly</td><td>Very low impact; barely noticeable</td><td class="c">2</td></tr>
-        <tr><td>no</td><td>Customer does not notice; no impairment</td><td class="c">1</td></tr>
-      </tbody></table>
-      <p style="font-family:var(--mono);font-size:12px;margin:14px 0 2px;color:var(--amber-deep)">RECOGNIZABILITY (1–10) — note: 1 = best</p>
-      <table><thead><tr><th>Recognizability</th><th>Detect probability</th><th>Rating</th></tr></thead><tbody>
-        <tr><td>certainly not recognized</td><td>&lt;10%</td><td class="c">10</td></tr>
-        <tr><td>very unlikely</td><td>≥10%</td><td class="c">9</td></tr>
-        <tr><td>unlikely</td><td>≥33%</td><td class="c">8</td></tr>
-        <tr><td>very low</td><td>≥65%</td><td class="c">7</td></tr>
-        <tr><td>low</td><td>≥73%</td><td class="c">6</td></tr>
-        <tr><td>medium</td><td>≥80%</td><td class="c">5</td></tr>
-        <tr><td>medium high</td><td>≥84%</td><td class="c">4</td></tr>
-        <tr><td>high</td><td>≥90%</td><td class="c">3</td></tr>
-        <tr><td>very high</td><td>≥95%</td><td class="c">2</td></tr>
-        <tr><td>surely recognized</td><td>≥99%</td><td class="c">1</td></tr>
-      </tbody></table>
-    </div></details>
-
-    <h3 class="topic" style="font-size:19px"><span class="n">12a</span>Special Characteristic (SC)</h3>
-    <div class="card story"><div class="who">🧒 Story</div>If a feature is <em>super severe</em>, stamp it <b>SC</b> on the drawing — a red “MUST CHECK” sticker. Every SC is measured in production. But don't sticker <em>everything</em> (too costly).</div>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li>High severity → <b>Special Characteristic (SC)</b>, marked on drawings, <b>each SC checked/measured</b>; can be a <b>legal/regulatory</b> requirement; don't over-use (cost!).</li>
-      <li><b>Automotive variants:</b> <b>BMW</b> = L/S/F (Legal/Safety/Function) · <b>Daimler</b> = DS/DZ · <b>VW</b> = D/S (Documented/Safety).</li>
-    </ul></div>
-    <div class="hook"><span class="ic">🧠</span><div>SC = red <b>“MUST-MEASURE”</b> sticker. BMW has <b>3 letters (LSF)</b>, VW has <b>2 (DS)</b>.</div></div>
-    <label class="learn"><input type="checkbox" data-k="t12">Mark learned</label>
-
-    <!-- 13 -->
-    <h3 class="topic"><span class="n">13</span>Loose ends + Summary</h3>
-    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
-      <li><b>Software</b> to track risks: <b>ClickUp · cplace · Jira</b> → key point: <b>consistent linking</b> with up/downstream processes.</li>
-      <li>Worked <b>example:</b> bicycle <b>cable-pull</b> FMEA (<em>341_Example_FMEA_Bicycle</em>).</li>
-      <li><b>Summary:</b> RM <b>avoids greater damage</b> · identify risks <b>as early as possible</b> (Rule of Ten) · rate by <b>severity &amp; occurrence</b> in a <b>risk list</b> · analyse products with <b>FMEA</b> &amp; derive <b>SCs</b>.</li>
-    </ul></div>
-    <div class="hook"><span class="ic">💬</span><div><b>Walter Scheel:</b> “Nothing happens without risk, but without taking risks also nothing happens.” → manage risk, but still <b>take risks to move forward</b>.</div></div>
-    <label class="learn"><input type="checkbox" data-k="t13">Mark learned</label>
-
-    <div class="card" style="text-align:center;background:var(--ink);color:var(--paper)">
-      <div style="font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--amber)">YOUR PROGRESS</div>
-      <div id="progress" style="font-family:var(--disp);font-size:34px;font-weight:800;margin-top:4px">0 / 13 topics learned</div>
-      <div style="height:8px;background:#3a342b;border-radius:6px;margin-top:10px;overflow:hidden"><div id="progbar" style="height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--red));transition:.4s"></div></div>
+  <div class="how">
+    <h3>How to use this hub 🧠</h3>
+    <div class="row">
+      <div><b>1. Watch the Movie 🎬</b><br>Open a chapter and read its Memory Movie. Close your eyes and replay the pictures — each image <i>is</i> a point.</div>
+      <div><b>2. Test yourself 🃏</b><br>Flip the flashcards (or import the <i>Cards</i> file into Anki). Say the answer out loud before flipping.</div>
+      <div><b>3. Rehearse ✏️</b><br>Do the 3 practice questions on paper, then reveal the model answers. Print the PDF for offline revision.</div>
     </div>
-  </section>
-
-  <!-- FLASHCARDS -->
-  <section id="cards">
-    <div class="sec-label">Active recall · flip to test yourself</div>
-    <h2>Flashcards</h2>
-    <p class="lead">Read the question, say the answer <em>out loud</em>, then flip. Cover the deck and run it twice — that's how it sticks. <span class="flip-note">(Click a card to flip · also exported to <b>3_flashcards.txt</b> for Anki.)</span></p>
-    <div id="fc-live" class="deck-wrap">
-      <div class="flashcard" id="fcard" onclick="this.classList.toggle('flipped')">
-        <div class="fc-inner">
-          <div class="fc-face fc-front"><span class="lab">Question</span><div class="fc-q" id="fcq">…</div><span class="fc-hint">click to flip ⟲</span></div>
-          <div class="fc-face fc-back"><span class="lab">Answer</span><div class="fc-a" id="fca">…</div><span class="fc-hint">click to flip ⟲</span></div>
-        </div>
-      </div>
-      <div class="deck-ctrl">
-        <button class="btn" onclick="fcPrev()">‹ Prev</button>
-        <span class="counter" id="fccount">1 / 1</span>
-        <button class="btn" onclick="fcNext()">Next ›</button>
-        <button class="btn amber" onclick="fcShuffle()">⤮ Shuffle</button>
-      </div>
-    </div>
-    <!-- print version filled by JS -->
-    <div id="fc-print" class="print-only"></div>
-  </section>
-
-  <!-- PRACTICE -->
-  <section id="exam">
-    <div class="sec-label">Exam rehearsal · write first, then reveal</div>
-    <h2>3 Practice Questions <span style="font-size:15px;font-family:var(--mono);color:var(--ink-soft)">+ model answers</span></h2>
-    <p class="lead">Try to answer on paper before clicking <b>Reveal</b>. The model answers show the exact points an examiner rewards.</p>
-
-    <div class="card q-block">
-      <div class="q-head"><span class="num">Q1</span><span>Describe the risk-management process. Name and explain its main steps, and the options available when <em>controlling</em> a risk.</span></div>
-      <div class="q-type">Type: structured / theory · ~10 marks</div>
-      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
-      <div class="answer"><div class="alab">✓ Model answer</div>
-        <p>Risk management follows a fixed cycle: <b>Detect → Analyse → Evaluate → Control → Monitor → Document &amp; communicate</b> (underpinned by the <b>PDCA</b> / Deming cycle from ISO 9001).</p>
-        <ul>
-          <li><b>Detect:</b> regular &amp; systematic internal and external analysis (KPI changes, lessons learned, head-stand method, Delphi, risk workshops, PAAG/HAZOP).</li>
-          <li><b>Analyse &amp; Evaluate:</b> score each risk by <b>severity</b> and <b>occurrence/likelihood</b> and place it in a <b>risk matrix</b> / risk list to prioritise.</li>
-          <li><b>Control</b> — four options: <b>Avoid</b> (reduce occurrence to 0, e.g. Poka Yoke), <b>Prevent</b> (reduce occurrence or severity, e.g. via PDCA), <b>Transfer</b> (shift to who handles it best, e.g. ECU→chassis), <b>Accept</b> (consciously, only if occurrence and impact are low).</li>
-          <li><b>Monitor:</b> check whether risks materialise; <b>Document &amp; communicate</b> and define the RM organisation.</li>
-        </ul>
-        <p>Distinguish a <b>risk</b> (not yet occurred, &lt;100%) from a <b>problem</b> (already occurred). Note risks <b>do not add up</b> — aggregate via models (Monte Carlo).</p>
-      </div>
-    </div>
-
-    <div class="card q-block">
-      <div class="q-head"><span class="num">Q2</span><span>Explain FMEA. Distinguish FMEA, FMECA and FMEDA, state how the Risk Priority Value (RPV) is calculated, and explain the “Rule of Ten”.</span></div>
-      <div class="q-type">Type: theory / definitions · ~12 marks</div>
-      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
-      <div class="answer"><div class="alab">✓ Model answer</div>
-        <p><b>FMEA (Failure Mode and Effects Analysis)</b> is a reliability-improvement method that, early and in cross-domain expert workshops, lists how a product can fail and what the effects are. It works <b>from cause to error</b> and aims to recognise systematic &amp; random errors <b>before they occur</b>, derive detection &amp; prevention measures, and improve successor products. It is a <b>living document</b> maintained until EOP/EOS.</p>
-        <ul>
-          <li><b>FMEA → FMECA:</b> adds a <b>Criticality</b> metric → enables prioritisation.</li>
-          <li><b>FMEA → FMEDA:</b> adds <b>Diagnostics</b> (multiple-error analysis, automotive electronics) — credits self-detection that lowers the failure rate.</li>
-        </ul>
-        <p><b>RPV = Severity × Probability(Occurrence) × Recognizability</b>, each rated 1–10 (for Recognizability, 1 = surely detected, 10 = not detected). A high RPV means act first.</p>
-        <p><b>Rule of Ten:</b> the later an error is found, the higher the cost — roughly <b>×10 per stage</b> (Planning 1€ → Development 10€ → Assembly 100€ → Final acceptance 1000€ → Customer). Therefore effort must focus on <b>planning &amp; development</b>.</p>
-      </div>
-    </div>
-
-    <div class="card q-block">
-      <div class="q-head"><span class="num">Q3</span><span>Riku, an autonomous delivery robot, has an obstacle-detection sensor that is only 50% reliable. (a) Use diversification to improve it — and say what would be WRONG. (b) Classify two risks with severity &amp; occurrence. (c) Name two ways to detect risks.</span></div>
-      <div class="q-type">Type: application · ~8 marks</div>
-      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
-      <div class="answer"><div class="alab">✓ Model answer</div>
-        <p><b>(a)</b> Reliability is improved by <b>diversified, non-correlating</b> solutions. <b>Wrong:</b> add a second <b>identical</b> sensor — same solution to the same problem; it even raises the failure rate. <b>Right:</b> add a <b>different</b> detection principle (e.g. a mechanical/ultrasonic detector) so the two don't fail together. (Markowitz — don't put all eggs in one basket.)</p>
-        <p><b>(b)</b> Examples (Severity 1–4, Occurrence 0–5 → risk matrix):</p>
-        <ul>
-          <li>Sensor briefly blinded by sunlight → frequent but mild: <b>Occurrence high, Severity low → medium</b>.</li>
-          <li>Robot fails to brake and hits a pedestrian → rare but catastrophic: <b>Occurrence low, Severity very high → high</b>.</li>
-        </ul>
-        <p><b>(c)</b> Any two of: <b>Head-stand/Flip-Flop method</b>, <b>Delphi method</b>, KPI-change monitoring, lessons learned (LeLe), risk workshop, PAAG/HAZOP, or safety methods ALARP / FMEA / DRBFM. <em>(Head-stand: ask “how could we make Riku crash as fast as possible?”, then invert the answers into safety actions.)</em></p>
-      </div>
-    </div>
-
-    <details class="more"><summary>Bonus: 10 rapid-fire short answers</summary><div class="inner">
-      <ol>
-        <li><b>Risk =</b> effect of uncertainty (ISO 9001), &lt;100%. <b>Problem =</b> already occurred.</li>
-        <li><b>PDCA =</b> Plan-Do-Check-Act (Deming/Shewhart).</li>
-        <li><b>Occurrence</b> is used (not “probability”) because it's a <b>subjective</b> assessment.</li>
-        <li><b>Poka Yoke =</b> “avoid silly mistakes”; key-lock principle.</li>
-        <li><b>Risk transfer example:</b> crash-ECU risk → car chassis.</li>
-        <li><b>FMEA types:</b> System, D-FMEA, P-FMEA.</li>
-        <li><b>Automotive FMEA standard:</b> ISO 26262.</li>
-        <li><b>SC variants:</b> BMW L/S/F, Daimler DS/DZ, VW D/S.</li>
-        <li><b>6 levels of RM by</b> Gleißner &amp; Mott; law = KonTraG.</li>
-        <li><b>Risks don't add up</b> → aggregate (Monte Carlo).</li>
-      </ol>
-    </div></details>
-  </section>
-
-  <!-- CHEAT CARD -->
-  <section id="cheat">
-    <div class="sec-label">Last 5 minutes before the exam</div>
-    <h2>One-screen cheat-card</h2>
-    <table class="cheat"><tbody>
-      <tr><td>Skeleton</td><td>Detect·Analyse·Evaluate·Control·Monitor·Document</td><td>“Detectives Always Eat Cold Mexican Donuts”</td></tr>
-      <tr><td>Control 4</td><td>Avoid·Prevent·Transfer·Accept</td><td>Rain: A-P-T-A (= 4 T's)</td></tr>
-      <tr><td>Risk vs problem</td><td>not-yet vs already</td><td>&lt;100% = risk</td></tr>
-      <tr><td>PDCA</td><td>Plan·Do·Check·Act</td><td>“Please Don't Crash Again” (circle)</td></tr>
-      <tr><td>Detect methods</td><td>KPI·LeLe·Headstand·Delphi·Risk-workshop·PAAG</td><td>“Kids Love Hunting Down Risky Problems”</td></tr>
-      <tr><td>Evaluate</td><td>Severity × Occurrence → matrix</td><td>bad × likely</td></tr>
-      <tr><td>FMEA family</td><td>A → +C(rit) → +D(iag)</td><td>add a letter to upgrade</td></tr>
-      <tr><td>RPV</td><td>Severity × Occurrence × Recognizability</td><td>“how SORe” (= S×O×D)</td></tr>
-      <tr><td>Rule of Ten</td><td>×10/stage, 1→1000€</td><td>each stage late = +1 zero</td></tr>
-      <tr><td>Diversify</td><td>different &amp; non-correlating</td><td>2 same = double trouble</td></tr>
-      <tr><td>SC</td><td>high severity → must-measure</td><td>BMW=LSF, VW=DS</td></tr>
-      <tr><td>Standards</td><td>cars = ISO 26262</td><td>9001 thinks · 31000 manages</td></tr>
-      <tr><td>Head-stand</td><td>flip → solve → flip back → act</td><td>stand it on its head</td></tr>
-      <tr><td>Delphi</td><td>silent · anonymous · repeat · average</td><td>Oracle of Delphi</td></tr>
-      <tr><td>Levels affected</td><td>Product / Money-Time / People-Planet</td><td>3 buckets</td></tr>
-    </tbody></table>
-  </section>
+  </div>
 
   <footer>
-    Risk Management · CPS MMC-01a · study build · keep Riku in your head 🤖<br>
-    Downloads: <a class="inline" href="3_study.pdf">PDF</a> · <a class="inline" href="3_flashcards.txt">Anki flashcards</a> · <a class="inline" href="3_memorize.md">memorize guide</a> · <a class="inline" href="3.md">notes</a>
+    CPS Exam Study Hub · MMC-01a · built for revision · seeing beats reading, testing beats re-reading 🤖
   </footer>
-</main>
-
-<script>
-/* progress bar on scroll */
-const bar=document.getElementById('bar');
-addEventListener('scroll',()=>{const h=document.documentElement;const s=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(s*100)+'%';});
-
-/* mark-learned with localStorage */
-const boxes=[...document.querySelectorAll('.learn input')];
-const prog=document.getElementById('progress'),pb=document.getElementById('progbar');
-function refresh(){const n=boxes.filter(b=>b.checked).length;prog.textContent=n+' / '+boxes.length+' topics learned';pb.style.width=(n/boxes.length*100)+'%';}
-boxes.forEach(b=>{const k='rm_'+b.dataset.k;if(localStorage.getItem(k)==='1')b.checked=true;b.addEventListener('change',()=>{localStorage.setItem(k,b.checked?'1':'0');refresh();});});
-refresh();
-
-/* FLASHCARDS */
-const CARDS=[
- ["What is the definition of \"risk\" (ISO 9001)?","\"Risk is the effect of uncertainty.\" An event that can prevent reaching the project goal (probability < 100%)."],
- ["Risk vs problem?","Risk = NOT happened yet (<100%). Problem = ALREADY occurred — handled differently."],
- ["Two kinds of risk to keep separate?","General company risks vs project-specific risks."],
- ["PDCA + other names?","Plan–Do–Check–Act. Also the Deming / Shewhart cycle (ISO 9001)."],
- ["PDCA — Plan?","Plan process/product, set goals & resources, address risks & opportunities."],
- ["PDCA — Do / Check / Act?","Do = implement; Check = monitor & measure; Act = improve performance."],
- ["Method used in the PDCA Plan phase?","FMEA."],
- ["Can a risk be positive?","Yes — opportunities recorded as positive events."],
- ["What is a speak-up line?","An anonymous channel to report undiscovered risks & violations."],
- ["Do risks add up like costs?","No — aggregate them with models/simulations (Monte Carlo)."],
- ["Reduce risk through diversification?","Diversified & NON-correlating solutions; asset & time diversification (Markowitz)."],
- ["50% ECU — wrong vs right fix?","Wrong: 2nd identical ECU (raises failure). Right: a different, mechanical detector."],
- ["Efficiency curve meaning?","Optimum portfolios on the curve; none above; below = inefficient."],
- ["ISO 9001 risk concept?","\"Risk-based thinking\" — use opportunities, prevent unwanted outcomes."],
- ["ISO 31000?","The dedicated Risk Management standard."],
- ["Provisions (Rückstellungen)?","Money set aside for company/product risks; linked to quality management."],
- ["Company-level RM is what task?","A managerial task."],
- ["9 levels risks affect?","Technical, Compliance, Finances, Time, Market, Currency, Social, Project-management, Environmental."],
- ["Who defined the 6 levels of RM?","Gleißner & Mott."],
- ["KonTraG?","German law obliging management to perform risk analysis."],
- ["The 6 targets/steps of RM?","Detect → Analyse → Evaluate → Control → Monitor → Document & communicate."],
- ["4 options when CONTROLLING a risk?","Avoid · Prevent · Transfer · Accept."],
- ["What does Detect involve?","Regular & systematic internal AND external analysis; frequency depends on volatility."],
- ["6 methods to detect risks?","KPI changes, LeLe, Headstand/Flip-Flop, Delphi, Risk workshop, PAAG/HAZOP."],
- ["3 safety detection methods?","ALARP, FMEA, DRBFM."],
- ["Head-stand method — 4 steps?","Invert thesis → find solutions → invert solutions → define actions."],
- ["Delphi method key idea?","Experts answer anonymously, no discussion, iterate on deviations, take the average."],
- ["Evaluate: which two properties?","Severity (how bad) + Occurrence/likelihood (how likely; subjective, not 'probability')."],
- ["Severity × Occurrence gives?","A risk matrix to prioritise; risks kept in a risk list (PM/risk manager)."],
- ["3 ways to assess impact?","Historical data, probability distribution, Monte Carlo simulation."],
- ["Severity & Occurrence scale ranges?","Severity 1(low)→4(very high). Occurrence 0(0%)→5(100%=occurred)."],
- ["Risk Avoidance?","Reduce occurrence to 0 — ban activities, remove features, Poka Yoke barriers."],
- ["Poka Yoke?","Japanese 'avoid silly mistakes' — mistake-proofing; key-lock principle."],
- ["Risk Prevention?","Reduce occurrence OR severity using QM methods (PDCA)."],
- ["Risk Transfer?","Shift the risk to who handles it best — e.g. crash ECU → chassis."],
- ["Risk Acceptance?","Consciously accept — only if occurrence AND impact are low."],
- ["FMEA — full form & what?","Failure Mode and Effects Analysis — a reliability-improvement method."],
- ["FMEA rates defects by?","Severity, Probability (Occurrence), Recognizability."],
- ["FMEA goals?","Spot systematic & random errors before they occur; derive detection & prevention; improve successor products."],
- ["FMECA?","FMEA + Criticality metric → enables prioritisation."],
- ["FMEDA?","FMEA + Diagnostics; multiple-error analysis; automotive electronics."],
- ["3 types of FMEA?","System, D-FMEA (Design), P-FMEA (Process)."],
- ["D-FMEA vs P-FMEA?","D = design/customer focus (avoid systemic errors); P = production-process weaknesses; must be linked."],
- ["FMEA standards by domain?","Automotive ISO 26262; Industry IEC 61508 / ISO 13849; Aerospace DO-254 / ARP 4761."],
- ["FMEA process?","Early, in expert workshops, from cause→error, then verify assumed probabilities."],
- ["Rule of Ten?","Cost ×10 per stage: Planning 1€→Dev 10€→Assembly 100€→Final 1000€→Customer."],
- ["FMEA maintained until?","EOP (better EOS); update on product changes; old FMEA feeds next project (LeLe)."],
- ["How is RPV calculated?","RPV = Severity × Probability(Occurrence) × Recognizability, each 1–10."],
- ["Recognizability scale direction?","1 = surely recognized (≥99%); 10 = certainly not recognized (<10%)."],
- ["Special Characteristic (SC)?","High-severity feature marked on drawings; each SC measured in production; can be legal."],
- ["SC automotive variants?","BMW L/S/F; Daimler DS/DZ; VW D/S."],
- ["System FMEA?","Whole system + subsystems; focuses on interfaces; finds random & systemic errors."],
- ["Software to track risks?","ClickUp, cplace, Jira — with consistent linking up/downstream."],
- ["Summary core message?","Avoid damage; identify early (Rule of Ten); rate by severity & occurrence; use FMEA + SC."],
- ["Walter Scheel quote?","\"Nothing happens without risk, but without taking risks also nothing happens.\""]
-];
-let order=CARDS.map((_,i)=>i),pos=0;
-const q=document.getElementById('fcq'),a=document.getElementById('fca'),cnt=document.getElementById('fccount'),cardEl=document.getElementById('fcard');
-function show(){const c=CARDS[order[pos]];cardEl.classList.remove('flipped');q.textContent=c[0];a.textContent=c[1];cnt.textContent=(pos+1)+' / '+CARDS.length;}
-function fcNext(){pos=(pos+1)%CARDS.length;show();}
-function fcPrev(){pos=(pos-1+CARDS.length)%CARDS.length;show();}
-function fcShuffle(){for(let i=order.length-1;i>0;i--){const j=(i*7+pos*13+3)%(i+1);[order[i],order[j]]=[order[j],order[i]];}pos=0;show();}
-show();
-/* build print list */
-const fp=document.getElementById('fc-print');
-fp.innerHTML='<h3 class="topic">All flashcards (Q/A)</h3>'+CARDS.map((c,i)=>'<div class="pc"><div class="pq">'+(i+1)+'. '+c[0]+'</div><div class="pa">'+c[1]+'</div></div>').join('');
-
-/* practice reveal */
-function reveal(btn){const ans=btn.nextElementSibling;const open=ans.classList.toggle('show');btn.textContent=open?'Hide model answer':'Reveal model answer';}
-</script>
+</div>
 </body>
 </html>

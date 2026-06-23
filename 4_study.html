@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Change Management — Field Manual · CPS MMC-01a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEE2; --paper-2:#ECE3D0; --card:#FBF7EE;
+    --ink:#211C16; --ink-soft:#5C5246; --line:#D9CDB4;
+    --amber:#E0962A; --amber-deep:#B96E12; --red:#B23A2E; --green:#4C7A46;
+    --shadow: 0 1px 0 rgba(33,28,22,.04), 0 18px 40px -28px rgba(33,28,22,.45);
+    --mono:'Space Mono',ui-monospace,monospace;
+    --disp:'Bricolage Grotesque',system-ui,sans-serif;
+    --body:'Spectral',Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink); font-family:var(--body);
+    font-size:18px; line-height:1.62; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 12% -5%, rgba(224,150,42,.10), transparent 42%),
+      radial-gradient(circle at 92% 4%, rgba(178,58,46,.07), transparent 40%);
+  }
+  /* subtle grain */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.5; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+  /* progress + topbar */
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--amber),var(--red));z-index:60}
+  header.top{position:sticky;top:0;z-index:50;background:rgba(244,238,226,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;align-items:center;gap:14px;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--amber-deep);white-space:nowrap}
+  nav.tabs{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+  nav.tabs a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);text-decoration:none;padding:7px 10px;border-radius:7px}
+  nav.tabs a:hover{background:var(--paper-2);color:var(--ink)}
+
+  /* hero */
+  .hero{padding:70px 0 40px;border-bottom:3px solid var(--ink);position:relative}
+  .stripe{height:14px;width:100%;background:repeating-linear-gradient(45deg,var(--ink) 0 16px,var(--amber) 16px 32px);border-radius:3px;margin-bottom:30px}
+  .kicker{font-family:var(--mono);text-transform:uppercase;letter-spacing:3px;font-size:12px;color:var(--amber-deep)}
+  h1{font-family:var(--disp);font-weight:800;font-size:clamp(40px,8vw,76px);line-height:.95;margin:14px 0 8px;letter-spacing:-.02em}
+  h1 em{font-style:normal;color:var(--red)}
+  .sub{font-size:21px;color:var(--ink-soft);max-width:62ch}
+  .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin-top:18px;display:flex;gap:8px 18px;flex-wrap:wrap}
+  .meta b{color:var(--ink)}
+
+  .riku{margin-top:30px;background:var(--ink);color:var(--paper);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .riku::after{content:"♻";position:absolute;right:-10px;top:-26px;font-size:140px;opacity:.06}
+  .riku h3{font-family:var(--disp);margin:.1em 0 .4em;font-size:23px}
+  .riku p{margin:.3em 0;color:#E9DEC9}
+  .riku .big{font-family:var(--mono);font-weight:700;color:var(--amber);font-size:15px;letter-spacing:1px;margin-top:10px}
+
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .sec-label{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--amber-deep);display:flex;align-items:center;gap:10px}
+  .sec-label::before{content:"";width:34px;height:2px;background:var(--amber-deep)}
+  h2{font-family:var(--disp);font-weight:800;font-size:clamp(28px,5vw,42px);margin:12px 0 6px;letter-spacing:-.01em;line-height:1.04}
+  h3.topic{font-family:var(--disp);font-weight:600;font-size:23px;margin:34px 0 4px;color:var(--ink)}
+  h3.topic .n{font-family:var(--mono);font-size:13px;color:var(--amber-deep);margin-right:8px}
+
+  .lead{font-size:19px;color:var(--ink-soft)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;box-shadow:var(--shadow)}
+  .story{position:relative;padding-left:20px}
+  .story::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:linear-gradient(var(--amber),var(--red))}
+  .story .who{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--amber-deep)}
+
+  .exam{background:#FBF3DE;border:1px solid #E7C97E;border-left:5px solid var(--amber-deep);border-radius:10px;padding:14px 18px 14px 16px;margin:14px 0}
+  .exam .tag{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber-deep);display:flex;align-items:center;gap:7px}
+  .exam ul{margin:8px 0 2px;padding-left:20px}
+  .exam li{margin:5px 0}
+  .exam b{color:var(--red)}
+
+  .hook{display:flex;gap:12px;align-items:flex-start;background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:13px 16px;margin:12px 0;font-size:16.5px}
+  .hook .ic{font-size:20px;line-height:1.2}
+  .hook b{color:#bfe6a8}
+
+  /* memory movie */
+  .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
+  .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
+  .scene .num{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep)}
+  .scene .decode{color:var(--red);font-weight:600}
+  .pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:16px 0}
+  .pic{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);break-inside:avoid}
+  .pic .big{font-size:32px;line-height:1}
+  .pic h4{font-family:var(--disp);margin:7px 0 4px;font-size:17px}
+  .pic p{margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.45}
+  .pic .key{color:var(--red);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+  tbody tr:nth-child(even){background:var(--paper-2)}
+  td.c{text-align:center;font-family:var(--mono);font-weight:700}
+
+  details.more{margin:12px 0;border:1px dashed var(--line);border-radius:10px;background:var(--card);overflow:hidden}
+  details.more>summary{cursor:pointer;padding:11px 16px;font-family:var(--mono);font-size:13px;letter-spacing:.5px;color:var(--amber-deep);list-style:none}
+  details.more>summary::-webkit-details-marker{display:none}
+  details.more>summary::before{content:"▸ ";color:var(--amber-deep)}
+  details.more[open]>summary::before{content:"▾ "}
+  details.more .inner{padding:2px 16px 14px}
+
+  /* mark learned */
+  .learn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);cursor:pointer;user-select:none;margin-top:6px}
+  .learn input{appearance:none;width:18px;height:18px;border:2px solid var(--line);border-radius:5px;cursor:pointer;display:grid;place-content:center;background:var(--card)}
+  .learn input:checked{background:var(--green);border-color:var(--green)}
+  .learn input:checked::after{content:"✓";color:#fff;font-size:12px;font-weight:700}
+
+  /* FLASHCARDS */
+  .deck-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .flashcard{width:100%;max-width:640px;height:300px;perspective:1600px;cursor:pointer}
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+  .flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:30px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .fc-front{background:var(--card)}
+  .fc-back{background:var(--ink);color:var(--paper);transform:rotateY(180deg)}
+  .fc-face .lab{position:absolute;top:16px;left:22px;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.7}
+  .fc-front .lab{color:var(--amber-deep)} .fc-back .lab{color:var(--amber)}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:24px;line-height:1.18}
+  .fc-a{font-size:18px;line-height:1.5}
+  .fc-hint{position:absolute;bottom:14px;right:22px;font-family:var(--mono);font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:1px}
+  .deck-ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+  .btn{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.5px;border:2px solid var(--ink);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:9px;cursor:pointer;transition:.15s}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.amber{border-color:var(--amber-deep);background:var(--amber);color:#241a06}
+  .btn.amber:hover{background:var(--amber-deep);color:#fff}
+  .counter{font-family:var(--mono);font-size:14px;color:var(--ink-soft);min-width:74px;text-align:center}
+
+  /* PRACTICE */
+  .q-block{counter-increment:q}
+  .q-block .q-head{font-family:var(--disp);font-weight:700;font-size:21px;display:flex;gap:12px;align-items:baseline}
+  .q-block .q-head .num{font-family:var(--mono);color:#fff;background:var(--red);border-radius:8px;padding:2px 10px;font-size:15px;flex:none}
+  .q-type{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--amber-deep);margin:4px 0 0 0}
+  .answer{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;display:none}
+  .answer.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
+  .answer .alab{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--green);font-weight:700}
+
+  .cheat td:first-child{font-family:var(--mono);font-size:12px;color:var(--amber-deep);white-space:nowrap}
+  .cheat td:nth-child(2){font-weight:600}
+
+  footer{padding:40px 0 70px;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:12px}
+  .print-only{display:none}
+  a.inline{color:var(--amber-deep)}
+
+  @media (max-width:560px){ body{font-size:17px} .flashcard{height:340px} h1{font-size:46px} }
+
+  /* ---------- PRINT / PDF ---------- */
+  @media print{
+    @page{size:A4;margin:15mm 14mm}
+    body{background:#fff;color:#000;font-size:11.5pt}
+    body::before,#bar{display:none}
+    header.top,nav.tabs,.deck-ctrl,.fc-hint,.learn,.flip-note{display:none !important}
+    .wrap{max-width:none;padding:0}
+    .hero{padding:0 0 14px;border-bottom:2px solid #000}
+    .riku{background:#f3f3f3;color:#000;box-shadow:none;border:1px solid #999}
+    .riku p{color:#222}.riku .big{color:#a8650a}.riku::after{display:none}
+    section{padding:14px 0;border-bottom:1px solid #bbb;break-inside:avoid}
+    .card,.exam,.hook,table,.q-block,.flashcard{box-shadow:none;break-inside:avoid}
+    .hook{background:#eef3ec;color:#000;border:1px solid #9bbf8c}.hook b{color:#2f5a28}
+    .exam{background:#fdf6e3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    th{background:#222 !important;color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .stripe{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    details.more{border:none} details.more .inner{padding:0} details.more>summary{display:none}
+    details.more[open] .inner, details.more .inner{display:block !important}
+    /* show all practice answers */
+    .answer{display:block !important;border-top:1px solid #bbb}
+    /* flatten flashcards to Q/A in print */
+    #fc-live{display:none}
+    .print-only{display:block}
+    #fc-print .pc{break-inside:avoid;border:1px solid #bbb;border-radius:8px;padding:8px 12px;margin:7px 0}
+    #fc-print .pq{font-weight:700} #fc-print .pa{color:#222}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<header class="top"><div class="wrap">
+  <span class="brand">♻ Change Mgmt · MMC-01a</span>
+  <nav class="tabs">
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
+    <a href="#" onclick="window.print();return false;">⤓ PDF</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <div class="stripe"></div>
+    <div class="kicker">Structure &amp; Functions of Cyber-Physical Systems</div>
+    <h1>Change <em>Management</em><br>Field Manual</h1>
+    <p class="sub">Memorize the whole deck the easy way: one story, the exact exam points, and a memory hook on every topic.</p>
+    <div class="meta"><span>Module <b>MMC-01a</b></span><span>Lecturer <b>Prof. Dr. M. Górka</b></span><span>Source <b>4.pptx · 135 slides</b></span><span><b>THD · NuW · Mechatronic &amp; CPS</b></span></div>
+
+    <div class="riku">
+      <h3>♻ Meet Ada — your memory anchor</h3>
+      <p>Ada is the <b>keeper of an electric car called “Volt.”</b> Its blueprint was frozen long ago (<b>PRD freeze</b>), but the real world keeps poking it: a new law, a failed test, a supplier swaps a plug.</p>
+      <p>Every slide just answers one question: <b>“How do we let the product change SAFELY — as few changes as possible, but as many as needed — and log every version perfectly?”</b> Keep Ada and her ever-changing car in your head and the chapter tells itself.</p>
+      <div class="big">★ MASTER SPIRIT → “As few changes as possible, but as many as needed.” (Risk Mgmt stopped things going wrong; Change Mgmt manages what must change anyway.)</div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="sec-label">00 · The shape of the whole chapter</div>
+    <h2>See the skeleton before the bones</h2>
+    <p class="lead">Change Management is <b>step 4 of System Engineering</b>, living between PRD freeze and Re-lease:</p>
+    <div class="card" style="font-family:var(--mono);font-size:14px;line-height:2">
+      1 Basics → 2 Requirements → 3 Risk → <b style="color:var(--red)">4 CHANGE ★</b> → 5 Ideation → (6 Design) → (7 Test) → (8 Project Setup)
+    </div>
+    <p>The chapter splits into a few big blocks. Learn this shape and everything else bolts onto one of these boxes:</p>
+    <div class="hook"><span class="ic">🧠</span><div><b>Fundamentals</b> (what/when/where/why) → <b>Version &amp; Document control</b> → <b>Impact &amp; Requirement changes</b> → <b>Product Life Cycle + BCG</b> → <b>Configuration &amp; Variant management.</b></div></div>
+  </section>
+
+  <!-- MEMORY MOVIE -->
+  <section id="movie">
+    <div class="sec-label">The trick · watch, don't memorize</div>
+    <h2>🎬 The Memory Movie</h2>
+    <p class="lead">Don't memorize sentences — your brain hates random letters. Instead <b>close your eyes and play this 8-scene movie</b> of Volt the electric car's whole life, in slide order. Each picture <em>is</em> the point, so when you replay the movie, the exam answer just appears. Read it 3 times, then try to replay it with your eyes shut.</p>
+
+    <div class="scene"><div class="emo">🦎</div><div><div class="num">Scene 1</div>A <b>colour-changing chameleon</b> sits on Volt. Changing by nature = not CM; re-painting the actual blueprint = CM. → <span class="decode">What change management IS.</span></div></div>
+    <div class="scene"><div class="emo">🪆</div><div><div class="num">Scene 2</div>Four nested <b>Russian dolls</b> tip out: a whole <b>fleet</b> → a <b>model-year</b> → a <b>HW+SW combo</b> → one tiny <b>circuit board</b>. → <span class="decode">VM ▸ LCM ▸ Config-CM ▸ Change-CM (objects grow as dolls shrink).</span></div></div>
+    <div class="scene"><div class="emo">🧊</div><div><div class="num">Scene 3</div>The frozen <b>blueprint cracks</b> — one crack labelled “new LAW,” another “failed TEST.” → <span class="decode">PRD freeze is soft; “have-to” changes break in.</span></div></div>
+    <div class="scene"><div class="emo">📒</div><div><div class="num">Scene 4</div>Ada opens a <b>logbook</b> stamped <code>3.9.4</code> and <b>never erases</b> — she only adds a new page. → <span class="decode">Version &amp; document control.</span></div></div>
+    <div class="scene"><div class="emo">❄️</div><div><div class="num">Scene 5</div>A <b>snowball rolls UP</b> the hill, getting smaller: the later the root cause, the cheaper the fix. → <span class="decode">Inversed Rule of Ten.</span></div></div>
+    <div class="scene"><div class="emo">🎢</div><div><div class="num">Scene 6</div>Volt rides a <b>roller-coaster</b>: pay to climb → peak &amp; earn → roll down &amp; get scrapped. → <span class="decode">Product life-cycle curve (phases 0–5).</span></div></div>
+    <div class="scene"><div class="emo">🐄</div><div><div class="num">Scene 7</div>A <b>farmyard</b> appears: a Star, a Cash Cow, a Question Mark, a Poor Dog. → <span class="decode">BCG matrix.</span></div></div>
+    <div class="scene"><div class="emo">🧩</div><div><div class="num">Scene 8</div>Ada snaps <b>LEGO bricks</b> into one kit and lines up <b>3 paint-swatch versions</b> of the car. → <span class="decode">Configuration management + Variant management.</span></div></div>
+
+    <div class="hook"><span class="ic">🎥</span><div>Replay in one breath: <b>chameleon → dolls → cracked blueprint → never-erase logbook → uphill snowball → roller-coaster → farmyard → LEGO kit + paint swatches.</b> That's the whole chapter — no letters needed.</div></div>
+
+    <h3 class="topic">🐄 The farmyard (BCG quadrants)</h3>
+    <p>Picture the four animals on a field of <b>market growth (up) × your-share-vs-rival (right)</b>:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">⭐</div><h4>Star</h4><p>High growth, high share, best product. <span class="key">Invest or skim without losing share.</span></p></div>
+      <div class="pic"><div class="big">🐄</div><h4>Cash Cow</h4><p>Low growth, high share. <span class="key">Milk it — no discounts.</span></p></div>
+      <div class="pic"><div class="big">❓</div><h4>Question Mark</h4><p>High-growth market, low share, new product. <span class="key">Invest from elsewhere or discontinue.</span></p></div>
+      <div class="pic"><div class="big">🐕</div><h4>Poor Dog</h4><p>Low growth, low share. <span class="key">Terminate (latest when margin/DB &lt; 0).</span></p></div>
+    </div>
+
+    <h3 class="topic">🖼️ Picture-hooks for the tricky lists</h3>
+    <p>Same trick for every list that wouldn't stick — turn it into one strong, weird image:</p>
+    <div class="pics">
+      <div class="pic"><div class="big">🪆</div><h4>The 4 cousins</h4><p>Russian dolls, biggest first: <b>V</b>ariant (fleet) ▸ <b>L</b>ifecycle (model-year) ▸ <b>C</b>onfig (HW+SW combo) ▸ <b>Change</b> (one PCB). <span class="key">More objects as the doll shrinks.</span></p></div>
+      <div class="pic"><div class="big">🧱</div><h4>Effort grows with 4</h4><p>A weightlifter under 4 plates: <b>C</b>omplexity · late <b>D</b>etection · <b>O</b>verlapping changes · <b>V</b>ariants. <span class="key">“Tangled, Late, Crowded, Many.”</span></p></div>
+      <div class="pic"><div class="big">⏱️</div><h4>4 phases of WHEN</h4><p>A clock chimes 4×: <b>before SOP</b> (most changes) → <b>launch</b> (critical) → <b>SOP–EOP</b> (fix &amp; cost-down) → <b>after EOP</b> (learn). <span class="key">Build·Launch·Fix·Learn.</span></p></div>
+      <div class="pic"><div class="big">🔗</div><h4>WHERE = 2 linked drawers</h4><p>A <b>project drawer</b> (whole change) chained to a <b>PDM drawer</b> (single object). <span class="key">Unchained = branched data.</span></p></div>
+      <div class="pic"><div class="big">🌗</div><h4>3 TYPES of change</h4><p>A balloon you <b>inflate</b> (enlarge), <b>pop a piece off</b> (reduce), or <b>squeeze into a new shape</b> (change). <span class="key">Inflate · Pop · Reshape.</span></p></div>
+      <div class="pic"><div class="big">🐢🚀</div><h4>SIZE of change</h4><p>A tortoise tiptoes (better phone = evolution) vs a rocket leaps to a new island (smartphone = disruption). <span class="key">Tortoise vs rocket.</span></p></div>
+      <div class="pic"><div class="big">🔢</div><h4>Version 3.9.4</h4><p>Three dials: big <b>MAJOR</b> (re-design), middle <b>MINOR</b> (feature — rolls past 9 to 3.10.4!), small <b>MICRO</b> (patch). <span class="key">Never overwrite.</span></p></div>
+      <div class="pic"><div class="big">❄️🔟</div><h4>Inversed Rule of Ten</h4><p>A snowball rolling <b>UP</b> the hill shrinks: the <b>later the root cause</b>, the cheaper the fix. <span class="key">(Inverse of the normal snowball.)</span></p></div>
+      <div class="pic"><div class="big">🧩</div><h4>Config 5-step</h4><p><b>O-I-C-S-V</b>: Organize → Identify → <b>Control</b> (change lives here!) → Status-accounting → Verify/audit.</p></div>
+      <div class="pic"><div class="big">🎚️</div><h4>Variant decision</h4><p>A see-saw of <b>base BC vs derivation BC</b> → read the <b>SUM</b>: positive = implement, negative = stop/optimize. <span class="key">Case 3 is the trap.</span></p></div>
+    </div>
+
+    <div class="hook"><span class="ic">🧠</span><div><b>How to actually lock it in:</b> (1) read a scene, (2) <b>shut your eyes and re-see the picture</b>, (3) say the real meaning out loud. Do the 8-scene movie + picture-hooks twice today and once tomorrow — then test yourself with the <a href="#cards" style="color:#bfe6a8">flashcards</a>. Seeing beats reading; testing beats re-reading.</div></div>
+  </section>
+
+  <!-- LESSON -->
+  <section id="lesson">
+    <div class="sec-label">The full lesson · all slides</div>
+    <h2>Taught like a story — with the points you must write</h2>
+
+    <!-- 1 -->
+    <h3 class="topic"><span class="n">01</span>What <em>is</em> change management? (and what it is NOT)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>A <b>chameleon</b> sits on Volt's hood, changing colour — but it was built to do that, so that's <b>not</b> change management. Re-drawing the car's actual blueprint <em>is</em>. Careful: the word also means the <em>organizational/people</em> kind (behaviours, strategy, structures) — but <b>in this course we ignore that</b>. We mean <b>engineering</b> change management = changing a <b>product or its parts</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Definition</div><ul>
+      <li><b>Engineering change management</b> (Ger. <em>Änderungsmanagement, ÄM</em>) = the <b>process of changing a product or parts of it</b>.</li>
+      <li>The <em>other</em> CM (Ger. <em>Veränderungsmanagement</em>) = <b>organizational</b> change (processes, behaviours, strategy, systems, structures) → <b>not</b> our topic.</li>
+      <li><b>Content:</b> changes of requests &amp; requirements must be <b>aligned, tracked, followed up</b>.</li>
+      <li><b>Target:</b> <b>as few changes as possible</b> (stable development) <b>but as many as needed</b> (sellable product).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Chameleon changes <b>on purpose</b> = no CM. Re-paint the <b>blueprint</b> = CM. Goal = <b>“few but enough.”</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="t1">Mark learned</label>
+
+    <!-- 2 -->
+    <h3 class="topic"><span class="n">02</span>Four cousins, all about “what object?”</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Tip out <b>Russian dolls</b>, biggest to smallest: the whole <b>fleet of variants</b> (VM), a <b>model-year generation</b> E90→F30→G20 (LCM), a <b>HW+SW combo</b> (Config-CM), and the tiniest doll, <b>one circuit board</b> (Change-CM). The smaller the doll, the MORE of them there are.</div>
+    <div class="exam"><div class="tag">📝 Write in exam — object increases top→down</div><ul>
+      <li><b>Variant management (VM):</b> products/variants — e.g. sedan, convertible.</li>
+      <li><b>Product life cycle management (LCM):</b> new generations — e.g. E90→F30→G20.</li>
+      <li><b>Configuration management (CM):</b> configurations = HW+SW combos — e.g. ECU SW 3.7.2 + d-sample PCB.</li>
+      <li><b>Change management (CM):</b> components — e.g. d-sample PCB.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Dolls shrink <b>V → L → C → C</b>; counts grow. Two “CM”s — <b>C</b>onfiguration vs <b>C</b>hange — don't mix!</div></div>
+    <label class="learn"><input type="checkbox" data-k="t2">Mark learned</label>
+
+    <!-- 3 -->
+    <h3 class="topic"><span class="n">03</span>The 5 W's of change (Effort · When · Where · For whom · Why)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Ada interrogates every change like a journalist: how <em>hard</em>, <em>when</em>, <em>where</em>, <em>for whom</em>, <em>why</em>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Effort</b> grows with: <b>system complexity · late point of detection (Rule of Ten) · overlapping (parallel) changes · variants</b>.</li>
+      <li><b>When — 4 phases:</b> Until <b>SOP</b> (most changes) → <b>Launch management</b> (just before SOP, critical) → <b>SOP→EOP</b> (trouble-shooting + cost-down) → <b>After EOP</b> (record field issues, improve next product).</li>
+      <li><b>Where — 2 linked locations:</b> (1) <b>project-management level</b> (whole change) + (2) <b>where the original object was made</b> (e.g. PDM → drawing/BoM). <b>Both MUST be linked</b>, else the data branches.</li>
+      <li><b>For whom:</b> all <b>internal</b> AND <b>bought/supplied</b> products; track suppliers, nominate only <b>ISO 9001-certified</b> ones, put the reporting duty <b>in the contract</b>.</li>
+      <li><b>Why:</b> design-for-upgrade capability · traceability (versioning) · releasable/conform product · cost control · avoid extra work/missed deadlines/dev issues · high quality.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Effort = <b>“Tangled, Late, Crowded, Many.”</b> When = <b>Build·Launch·Fix·Learn.</b> Where = <b>two drawers, one chain.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="t3">Mark learned</label>
+
+    <!-- 4 -->
+    <h3 class="topic"><span class="n">04</span>Level, Type &amp; Size of a change</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Sort every change three ways — how <em>high-level</em>, what <em>kind</em>, how <em>big a leap</em>. A balloon you can inflate, pop, or reshape; a tortoise step or a rocket jump.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Level:</b> the higher the level of change, the <b>fewer</b> there are.</li>
+      <li><b>3 Types:</b> <b>Scope-Enlargement</b> (add new content) · <b>Scope-Reduction</b> (cancel content) · <b>Scope-Change</b> (change existing content).</li>
+      <li><b>2 Sizes:</b> <b>Evolutionary</b> = gradual improvement (better phone; risk = long-term failure if never disruptive). <b>Revolutionary/Disruptive</b> = radical rethink (smartphone vs telephone; risk = never establishes).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Type = <b>Inflate · Pop · Reshape.</b> Size = <b>Tortoise tiptoe vs rocket leap.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="t4">Mark learned</label>
+
+    <!-- 5 -->
+    <h3 class="topic"><span class="n">05</span>Version control &amp; Document control (the logbook)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Ada's golden rule: <b>never erase — always add a new version</b>. Her logbook shows the object's whole history so anyone can roll back. Each object is named by <b>ID + version</b> (requirement #073 isn't enough — v1.0 or v1.1?).</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Version control</div><ul>
+      <li><b>Motivation:</b> traceability over the whole life cycle (change frequency &amp; object evolution visible; roll-back possible).</li>
+      <li><b>No overwriting</b> → create a <b>new version</b>; version number is an <b>attribute</b> (auto-counter in pro tools).</li>
+      <li><b>Identify = ID/name + version number</b> together.</li>
+      <li><b>Schemes:</b> single-level numeric (0,1,2…) · alphabetical (a,b,…,aa,ab…) · <b>two-stage</b> (a.0…b.0 or 1.1,1.2,2.0).</li>
+      <li><b>Semantic MAJOR.MINOR.MICRO:</b> Major = re-design (before the dot) · Minor = feature (after the dot) · Micro = patch. From <code>3.9.4</code> → <code>4.9.4</code> (major) / <code>3.10.4</code> (minor — <b>not</b> 4.x!) / <code>3.9.5</code> (micro).</li>
+      <li><b>Process:</b> like “new requirements” — change into pool → <em>acceptable?</em> → no: decline w/ reason (or modify &amp; re-loop) → yes: <b>release new version</b>.</li>
+      <li><b>Content to log:</b> object · status · version no. · <b>What · Why · For-whom · Who · When · Who-approved · When-approved</b>.</li>
+    </ul></div>
+    <div class="exam"><div class="tag">📝 Write in exam — Document control (ISO 9001)</div><ul>
+      <li>Information must be <b>available where/when needed · protected (confidentiality, integrity) · managed for distribution/access/discovery/use · stored with preserved readability · change-monitored · external docs marked</b>.</li>
+      <li><em>Available where needed</em> → safety manuals <b>at the machine</b>, not just on a drive.</li>
+      <li><em>Readability for 30 years</em> → can you still read that CD/USB and its <b>file format</b> later?</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Version dials = <b>big·middle(rolls past 9!)·small</b>. Content = <b>detective's W-form</b>. Docs = <b>right place · protected · readable in 30 yrs · external = stamped.</b></div></div>
+    <details class="more"><summary>Show the example Document &amp; version control table</summary><div class="inner">
+      <table><thead><tr><th>Document Control</th><th></th></tr></thead><tbody>
+        <tr><td>Title</td><td>FMEA</td></tr>
+        <tr><td>Current Version</td><td>003</td></tr>
+        <tr><td>Source</td><td>Technische Hochschule Deggendorf</td></tr>
+      </tbody></table>
+      <p style="font-family:var(--mono);font-size:12px;margin:10px 0 2px;color:var(--amber-deep)">ÄNDERUNGSHISTORIE (change history)</p>
+      <table><thead><tr><th>Ver.</th><th>Changes</th><th>Change date</th><th>Creator</th><th>Release</th></tr></thead><tbody>
+        <tr><td class="c">001</td><td>initial creation</td><td>14.04.2023</td><td>F. Maier, MSS</td><td>14.04.2023</td></tr>
+        <tr><td class="c">002</td><td>RPV rating wrong → calc updated in “RPV rating”</td><td>18.04.2023</td><td>A. Carlson, MDP</td><td>26.04.2023</td></tr>
+        <tr><td class="c">003</td><td>comments not translated → language updated in “FMEA”</td><td>27.04.2023</td><td>F. Maier, MSS</td><td>30.04.2024</td></tr>
+      </tbody></table>
+    </div></details>
+    <label class="learn"><input type="checkbox" data-k="t5">Mark learned</label>
+
+    <!-- 6 -->
+    <h3 class="topic"><span class="n">06</span>Impact of changes (+ the INVERSED Rule of Ten)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>One little change ripples everywhere. Example: you started the endurance test with the <b>old round plug</b>, now everything switches to <b>rectangular plugs</b> — stop &amp; redo? swap mid-test? ignore it?</div>
+    <div class="exam"><div class="tag">📝 Write in exam — Impact</div><ul>
+      <li>Increased complexity (variants/configs) → quality issues &amp; unhappy customers · time delay · worse cost/benefit · <b>breaks the PRD</b> · worst case <b>the whole project is stopped</b>.</li>
+    </ul></div>
+    <div class="exam"><div class="tag">📝 Write in exam — Inversed Rule of Ten</div><ul>
+      <li>The <b>later the root cause</b> (NOT the later the detection!) sits in the design process, the <b>cheaper &amp; easier</b> to change.</li>
+      <li>Cheap (late root cause) → expensive (early root cause): <b>update design → update assembly process → change concept → redesign the test → change the whole system</b>.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>A <b>snowball rolling UP</b> the hill shrinks — late root cause = small fix. (The inverse of the normal ❄️ snowball.)</div></div>
+    <label class="learn"><input type="checkbox" data-k="t6">Mark learned</label>
+
+    <!-- 7 -->
+    <h3 class="topic"><span class="n">07</span>Design, Concept &amp; Requirement changes</h3>
+    <div class="card story"><div class="who">🧒 Story</div>The frozen <b>blueprint cracks</b>. Two crack-types: ones you have <em>no choice</em> about, and ones you <em>choose</em>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Design &amp; concept change — caused by:</b> failed tests · realization issues (HW won't work / too costly → switch to SW) · needing a <b>re-design or new concept</b>.</li>
+      <li><b>PRD freeze:</b> ideal = hard (no changes after); reality = <b>soft</b> → changes happen.</li>
+      <li><b>“Have-to” changes</b> (no choice, before launch): a <b>new law</b> effective before launch · a <b>failed verification</b> → relax an <b>over-engineered</b> requirement (else change design/concept).</li>
+      <li><b>“Can-be” changes</b> (your call): new/extended <b>applications</b> · <b>company strategy</b> · <b>customer expectation</b> (B2B = extra cost) · <b>tool kits</b> (round→rectangular plugs) · <b>cultural/political</b> (no combustion engines).</li>
+      <li><b>How to handle:</b> re-open requirement process → <b>impact analysis</b> (resources + risks) → create a <b>CR</b> → <b>CCB</b>/project lead decides &amp; records → <b>prioritize</b> (cost/benefit) → <b>plan</b>. Valid config = <b>base line + all CRs</b>; then update → document → implement → <b>track verification</b> → release.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Cracks = <b>“have-to”</b> (law / failed test) vs <b>“can-be”</b> (your call). Path: <b>CR → CCB → prioritize → plan.</b></div></div>
+    <label class="learn"><input type="checkbox" data-k="t7">Mark learned</label>
+
+    <!-- 8 -->
+    <h3 class="topic"><span class="n">08</span>Product life cycle (the roller-coaster)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Volt rides a <b>roller-coaster</b>: you <b>pay to climb</b>, you <b>peak and earn</b>, then you <b>roll down and get scrapped</b>. Run the whole ride again = a <b>new generation</b> (managed by PLM/LCM).</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Repeat reasons:</b> <em>Positive</em> — new customer requirements, intrinsic advancement, state-of-the-art advances. <em>Negative</em> — competing products, quality issues, bad reviews, cost reduction.</li>
+      <li><b>Networking:</b> <b>Horizontal</b> = across generations (usually forward-only). <b>Vertical</b> = across products, <b>bidirectional</b>, strength = “technical proximity” (cars→trucks &gt; cars→bicycles).</li>
+      <li><b>Branches (not linear):</b> continue · <b>merge</b> · <b>split</b> · <b>die</b> (e.g. Linux distribution timeline).</li>
+      <li><b>Cycle length:</b> trend = shorter (fast fashion) vs sustainability. Depends on <b>industry</b> (auto ~7 yrs vs phone ~1 yr), <b>new technology</b>, and <b>starting point</b>.</li>
+      <li><b>Starting point / derivation:</b> <b>New development</b> (nothing reused) · <b>Wide derivation</b> (basic features inherited) · <b>Close derivation</b> (most carried over). E.g. landline → (wide: SIM) → mobile → (close: bigger display) → smartphone.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Roller-coaster phases below. Horizontal = generations (forward); Vertical = products (both ways).</div></div>
+    <details class="more"><summary>Show the 6 life-cycle phases (the curve)</summary><div class="inner">
+      <table><thead><tr><th>Phase</th><th>Name</th><th>Characteristics</th></tr></thead><tbody>
+        <tr><td class="c">0</td><td>Investment</td><td>Dev + production setup; high cost &amp; uncertainty; <b>as short as possible</b>.</td></tr>
+        <tr><td class="c">1</td><td>Introduction</td><td>Slow sales, no profit yet; ends at <b>break-even</b> (reach fast).</td></tr>
+        <tr><td class="c">2</td><td>Growth</td><td>Steep sales rise, first revenue; <b>short &amp; steep</b>.</td></tr>
+        <tr><td class="c">3</td><td>Maturity</td><td><b>Most profitable</b>; growth declines; <b>as long as possible</b>.</td></tr>
+        <tr><td class="c">4</td><td>Saturation</td><td>No growth; sales fall; profit falls even faster.</td></tr>
+        <tr><td class="c">5</td><td>Degradation</td><td>Profit negative; <b>take the product off the market</b>.</td></tr>
+      </tbody></table>
+      <p style="font-size:14.5px;color:var(--ink-soft)"><b>LCM</b> coordinates all products' cycles → continuous production, constant workload, consistent revenue. Too-fast succession = overload + profit fall; successor <b>too late = a “hole.”</b> Stretch a cycle by <b>cost measures</b> (remove unneeded functions/parts, cut over-spec) and <b>product enrichment</b> (new features). Keep selling in degradation for retention, cross-sales, and shared/scale costs.</p>
+    </div></details>
+    <label class="learn"><input type="checkbox" data-k="t8">Mark learned</label>
+
+    <!-- 9 -->
+    <h3 class="topic"><span class="n">09</span>BCG Matrix (the farmyard)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>A <b>farmyard</b> of products: a shooting <b>Star</b>, a <b>Cash Cow</b> to milk, a <b>Question Mark</b> new arrival, a sad <b>Poor Dog</b>. Boston Consulting Group plots them on <b>market growth × relative market share</b>. It only <b>records the actual</b> situation — it does <b>not forecast</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>⭐ Stars</b> — high growth, high share, best product → <b>invest</b> (own cash flow) or skim without losing share.</li>
+      <li><b>🐄 Cash Cow</b> — low growth, high share → <b>“milk” (skim), no discounts</b>.</li>
+      <li><b>❓ Question Marks</b> — high-growth, low share, new product → <b>invest from other sources or discontinue</b>.</li>
+      <li><b>🐕 Poor Dog</b> — low growth, low share, discontinued → <b>terminate</b> (latest when contribution margin / DB &lt; 0).</li>
+      <li><b>Typical order:</b> <b>❓ → ⭐ → 🐄 → 🐕</b>. Question-marks make future stars; cash cows finance; products support each other.</li>
+      <li><b>Relative market share</b> = company share ÷ competitor share (&gt;1 = you lead).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Farmyard: <b>Star → Cow → Question → Dog.</b> Growth ↑ × your-share-vs-rival.</div></div>
+    <details class="more"><summary>Show the worked BCG exercise (6 products)</summary><div class="inner">
+      <table><thead><tr><th>Prod.</th><th>Growth</th><th>Sales</th><th>Co. share</th><th>Comp. share</th><th>Rel. share</th><th>Category</th></tr></thead><tbody>
+        <tr><td class="c">A</td><td>30%</td><td>800.000 €</td><td>15,0%</td><td>10,0%</td><td class="c">1,50</td><td>Star</td></tr>
+        <tr><td class="c">B</td><td>20%</td><td>200.000 €</td><td>25,0%</td><td>20,0%</td><td class="c">1,25</td><td>Star</td></tr>
+        <tr><td class="c">C</td><td>5%</td><td>700.000 €</td><td>17,0%</td><td>10,0%</td><td class="c">1,70</td><td>Cash Cow</td></tr>
+        <tr><td class="c">D</td><td>25%</td><td>700.000 €</td><td>7,5%</td><td>15,0%</td><td class="c">0,50</td><td>Question Mark</td></tr>
+        <tr><td class="c">E</td><td>5%</td><td>300.000 €</td><td>5,0%</td><td>50,0%</td><td class="c">0,10</td><td>Poor Dog</td></tr>
+        <tr><td class="c">F</td><td>10%</td><td>300.000 €</td><td>15,0%</td><td>30,0%</td><td class="c">0,50</td><td>Poor Dog</td></tr>
+      </tbody></table>
+      <p style="font-size:14.5px;color:var(--ink-soft)">GDP 3,88 bn → forecast 4,46 bn ⇒ market-growth dividing line ≈ <b>15,0 %</b>. <b>Recommendation:</b> good distribution → <b>push D with C's money · stop E + F · launch a new product</b>.</p>
+    </div></details>
+    <label class="learn"><input type="checkbox" data-k="t9">Mark learned</label>
+
+    <!-- 10 -->
+    <h3 class="topic"><span class="n">10</span>Configuration management (snap the LEGO together)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Ada snaps the chosen <b>LEGO bricks</b> (one inverter version + one motor version + one damping version) into a single <b>working combo</b> and writes down exactly which bricks. <b>Configuration</b> management cares about the <b>combo's properties</b>; <b>change</b> management cares about the <b>single brick</b>. (Same “CM” — different job!) It runs even <b>after SOP</b>, owned by a <b>configuration manager</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Targets:</b> handle variant complexity · manage <b>configuration items (HW/SW/combos)</b> · ensure system <b>performance/function/integrity</b> · document changes · inform everyone (transparency) · enable <b>concurrent/distributed engineering</b> · enable <b>roll-backs</b> · create <b>reproducible</b> configurations.</li>
+      <li><b>5-step process (O-I-C-S-V):</b> ① <b>Organization</b> (rules, tools, naming, training) ② <b>Identification</b> (units, product structure, base line, granularity) ③ <b>Control</b> ← <b>change management happens HERE</b> ④ <b>Status accounting</b> (document config + item properties/versions) ⑤ <b>Verification &amp; audit</b> (test the requirements).</li>
+      <li><b>Standards:</b> EIA-649C · Automotive SPICE (SUP) · IEEE 828-2012 · ISO 10007 · NIST. Needed to pass <b>ISO 26262 ch.8</b> (vehicle FuSi) &amp; <b>ISO 20000</b> (IT service mgmt).</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>LEGO combo = config; one brick = change. Process = <b>O-I-C-S-V</b> (control = where change lives).</div></div>
+    <label class="learn"><input type="checkbox" data-k="t10">Mark learned</label>
+
+    <!-- 11 -->
+    <h3 class="topic"><span class="n">11</span>Variant management (paint-swatch versions)</h3>
+    <div class="card story"><div class="who">🧒 Story</div>Ada lines up the <b>same Volt in several paint-and-trim versions</b>. Underneath, the <b>same base product</b> → parts bought in bulk → <b>economy of scale</b>. Customers see different <b>looks</b> (HMI, colour, shape) and <b>features</b> (personal vs enterprise). More variants = more money but <b>more effort</b>.</div>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Basics:</b> business model defines the variants. Tasks: transparency · optimize (create/delete) · link with <b>LCM</b>, impact <b>config-CM</b>. <b>Target:</b> as many as needed for revenue, as few as possible for complexity → standard interfaces &amp; tool kits.</li>
+      <li><b>Extra effort by area:</b> <b>Development</b> (what must the base change?) · <b>Testing</b> (which tests can be skipped safely?) · <b>Sales</b> (don't let variants “negative” each other; build IT-configurators) · <b>General</b> (banned variants? cannibalization?).</li>
+      <li><b>Increase variants</b> → customization · new <b>markets</b> (US vs EU) · new <b>clientele</b> (teens→silver agers) · new <b>use cases</b> (craft→medical). <b>Decrease</b> → cut cost via <b>synergies</b> (one plug for all).</li>
+      <li><b>Economy &amp; ROI:</b> new variant = <b>low extra cost</b> (base covers it), <b>fewer customers</b>, but <b>ROI usually higher</b> than the base.</li>
+    </ul></div>
+    <div class="hook"><span class="ic">🧠</span><div>Same base under the shell = <b>economy of scale</b>. Target = <b>as needed / as few as possible</b> with tool kits.</div></div>
+    <details class="more"><summary>Show the 7-case business-case decision matrix</summary><div class="inner">
+      <table><thead><tr><th>#</th><th>Base</th><th>Derivation</th><th>Sum</th><th>Decision</th></tr></thead><tbody>
+        <tr><td class="c">1</td><td>+</td><td>+</td><td>+</td><td>Implement the variant</td></tr>
+        <tr><td class="c">2</td><td>+</td><td>+ (&gt; base)</td><td>+</td><td>Implement; check if the variant becomes the future base</td></tr>
+        <tr><td class="c">3</td><td>+</td><td>−</td><td>+</td><td>Implement <b>only if</b> the variant's economy of scale is why the base is positive</td></tr>
+        <tr><td class="c">4</td><td>+</td><td>−</td><td>−</td><td>Don't implement; check the base is still BC-positive</td></tr>
+        <tr><td class="c">5</td><td>−</td><td>+</td><td>+</td><td>Implement the variant</td></tr>
+        <tr><td class="c">6</td><td>−</td><td>+</td><td>−</td><td>Stop the product / optimize base / add positive-BC variants</td></tr>
+        <tr><td class="c">7</td><td>−</td><td>−</td><td>−</td><td>Stop the product or optimize</td></tr>
+      </tbody></table>
+      <p style="font-size:14.5px;color:var(--ink-soft)"><b>Read the SUM column:</b> positive = go, negative = stop. <b>Case 3 is the trap</b> — a “−” variant stays if it props up the base's economy of scale.</p>
+    </div></details>
+    <label class="learn"><input type="checkbox" data-k="t11">Mark learned</label>
+
+    <!-- 12 -->
+    <h3 class="topic"><span class="n">12</span>Loose ends + Summary</h3>
+    <div class="exam"><div class="tag">📝 Write in exam</div><ul>
+      <li><b>Software — version control (code):</b> Azure DevOps · BitKeeper · BitBucket · <b>Git</b> · IBM Rational Synergy · RCS · Subversion.</li>
+      <li><b>Software — product portfolio:</b> <b>cplace · ClickUp</b>.</li>
+      <li><b>Summary:</b> in an ideal project <b>no CM is needed</b>; in reality CM gives <b>traceability · releasable/conform product · cost control · fewer delays/issues · high quality</b>. Spirit: <b>“as few changes as possible, but as many as needed.”</b></li>
+    </ul></div>
+    <div class="hook"><span class="ic">💬</span><div><b>Closing message:</b> “While change management is important, <b>don't be afraid of changes!</b>”</div></div>
+    <label class="learn"><input type="checkbox" data-k="t12">Mark learned</label>
+
+    <div class="card" style="text-align:center;background:var(--ink);color:var(--paper)">
+      <div style="font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--amber)">YOUR PROGRESS</div>
+      <div id="progress" style="font-family:var(--disp);font-size:34px;font-weight:800;margin-top:4px">0 / 12 topics learned</div>
+      <div style="height:8px;background:#3a342b;border-radius:6px;margin-top:10px;overflow:hidden"><div id="progbar" style="height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--red));transition:.4s"></div></div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section id="cards">
+    <div class="sec-label">Active recall · flip to test yourself</div>
+    <h2>Flashcards</h2>
+    <p class="lead">Read the question, say the answer <em>out loud</em>, then flip. Cover the deck and run it twice — that's how it sticks. <span class="flip-note">(Click a card to flip · also exported to <b>4_flashcards.txt</b> for Anki.)</span></p>
+    <div id="fc-live" class="deck-wrap">
+      <div class="flashcard" id="fcard" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-face fc-front"><span class="lab">Question</span><div class="fc-q" id="fcq">…</div><span class="fc-hint">click to flip ⟲</span></div>
+          <div class="fc-face fc-back"><span class="lab">Answer</span><div class="fc-a" id="fca">…</div><span class="fc-hint">click to flip ⟲</span></div>
+        </div>
+      </div>
+      <div class="deck-ctrl">
+        <button class="btn" onclick="fcPrev()">‹ Prev</button>
+        <span class="counter" id="fccount">1 / 1</span>
+        <button class="btn" onclick="fcNext()">Next ›</button>
+        <button class="btn amber" onclick="fcShuffle()">⤮ Shuffle</button>
+      </div>
+    </div>
+    <!-- print version filled by JS -->
+    <div id="fc-print" class="print-only"></div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="exam">
+    <div class="sec-label">Exam rehearsal · write first, then reveal</div>
+    <h2>3 Practice Questions <span style="font-size:15px;font-family:var(--mono);color:var(--ink-soft)">+ model answers</span></h2>
+    <p class="lead">Try to answer on paper before clicking <b>Reveal</b>. The model answers show the exact points an examiner rewards.</p>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q1</span><span>Why is change management needed even after the PRD freeze? Describe when (the phases) and where it is done, and how a requirement change is processed.</span></div>
+      <div class="q-type">Type: structured / theory · ~10 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p>The ideal hard <b>PRD freeze</b> is in reality <b>soft</b>: laws change, tests fail, suppliers swap parts. The goal is <b>“as few changes as possible, but as many as needed”</b> (stable development, yet a sellable product).</p>
+        <ul>
+          <li><b>When — 4 phases:</b> until <b>SOP</b> (most changes), <b>launch management</b> (just before SOP, critical), <b>SOP→EOP</b> (trouble-shooting + cost-down), <b>after EOP</b> (record field issues to improve the next product).</li>
+          <li><b>Where:</b> documented at two linked IT locations — the <b>project-management level</b> (whole change) and <b>where the original object was made</b> (e.g. a PDM system). <b>Both must be linked</b> or the data branches.</li>
+          <li><b>Requirement change process:</b> re-open the requirement process → <b>impact analysis</b> (resources + risks) → create a <b>CR</b> → the <b>CCB</b> (or project lead) decides &amp; records → <b>prioritize</b> (cost/benefit) → <b>plan</b>. The valid configuration = <b>base line + all CRs</b>; then update, document (versioning), implement, track verification, release.</li>
+        </ul>
+        <p>Changes are either <b>“have-to”</b> (new law, failed verification) or <b>“can-be”</b> (new applications, strategy, customer expectation, tool kits, cultural/political).</p>
+      </div>
+    </div>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q2</span><span>Distinguish change management, configuration management, variant management and life-cycle management. Then list the 5 steps of the configuration-management process and say where change actually happens.</span></div>
+      <div class="q-type">Type: theory / definitions · ~12 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p>They differ by the <b>object</b> they manage (object count grows down the list):</p>
+        <ul>
+          <li><b>Variant management (VM):</b> products/variants (sedan, convertible).</li>
+          <li><b>Life-cycle management (LCM):</b> new generations (E90→F30→G20); coordinates all cycles to avoid “holes”.</li>
+          <li><b>Configuration management (CM):</b> HW+SW configurations and their resulting properties.</li>
+          <li><b>Change management (CM):</b> a single component / single change &amp; measure.</li>
+        </ul>
+        <p>Configuration vs change: <b>change</b> focuses on the <b>single change</b>; <b>configuration</b> on the <b>interaction of changes</b> and resulting properties.</p>
+        <p><b>CM 5-step process (O-I-C-S-V):</b> ① CM organization, ② configuration identification (units, product structure, base line, granularity), ③ <b>configuration control — change management happens here</b>, ④ status accounting, ⑤ verification &amp; audit (test the requirements). Standards: EIA-649C, Automotive SPICE (SUP), IEEE 828-2012, ISO 10007 — relevant for ISO 26262 ch.8 and ISO 20000.</p>
+      </div>
+    </div>
+
+    <div class="card q-block">
+      <div class="q-head"><span class="num">Q3</span><span>(a) Sketch the product life-cycle curve and name its phases. (b) Explain the BCG matrix and its typical order. (c) A new variant has a positive base BC, a negative derivation BC, but a positive sum — what do you do, and why?</span></div>
+      <div class="q-type">Type: application · ~8 marks</div>
+      <button class="btn amber" onclick="reveal(this)">Reveal model answer</button>
+      <div class="answer"><div class="alab">✓ Model answer</div>
+        <p><b>(a)</b> Phases over time (sales/revenue): <b>0 Investment</b> (high cost, short) → <b>1 Introduction</b> (slow, to break-even) → <b>2 Growth</b> (steep) → <b>3 Maturity</b> (most profitable, long) → <b>4 Saturation</b> (sales fall) → <b>5 Degradation</b> (negative profit, take it off the market). Key markers: market launch, break-even, EOS.</p>
+        <p><b>(b)</b> The <b>BCG matrix</b> (Boston Consulting Group) plots products on <b>market growth × relative market share</b> to record the actual portfolio (not a forecast): <b>Stars</b> (invest/skim), <b>Cash Cows</b> (milk), <b>Question Marks</b> (invest from elsewhere or drop), <b>Poor Dogs</b> (terminate). Typical order: <b>Question Mark → Star → Cash Cow → Poor Dog</b>; question-marks create future stars, cash cows finance them.</p>
+        <p><b>(c)</b> This is <b>case 3</b>: implement the variant <b>only if</b> the variant's additional <b>economy of scale</b> is the reason the base variant's business case is positive — i.e. removing the derivation would raise the base's costs and worsen the overall sum. Otherwise don't.</p>
+      </div>
+    </div>
+
+    <details class="more"><summary>Bonus: 10 rapid-fire short answers</summary><div class="inner">
+      <ol>
+        <li><b>Engineering CM =</b> the process of changing a product/parts (Ger. ÄM).</li>
+        <li><b>Two “CM”s:</b> Configuration vs Change — don't mix.</li>
+        <li><b>Effort grows with:</b> complexity, late detection, overlapping changes, variants.</li>
+        <li><b>Where to log:</b> project level + PDM — <b>linked</b>, or data branches.</li>
+        <li><b>3 types of change:</b> enlargement, reduction, change.</li>
+        <li><b>Versioning:</b> MAJOR.MINOR.MICRO — 3.9.4 → 3.10.4 (minor, not 4.x).</li>
+        <li><b>Inversed Rule of Ten:</b> later <b>root cause</b> = cheaper fix.</li>
+        <li><b>BCG limit:</b> records actuals only, not a forecast.</li>
+        <li><b>Config control</b> is where change management takes place.</li>
+        <li><b>Variant target:</b> as many as needed, as few as possible (tool kits).</li>
+      </ol>
+    </div></details>
+  </section>
+
+  <!-- CHEAT CARD -->
+  <section id="cheat">
+    <div class="sec-label">Last 5 minutes before the exam</div>
+    <h2>One-screen cheat-card</h2>
+    <table class="cheat"><tbody>
+      <tr><td>Spirit</td><td>as few as possible, as many as needed</td><td>keep stable, stay sellable</td></tr>
+      <tr><td>CM vs not</td><td>re-paint blueprint (yes) vs chameleon (no)</td><td>design change = CM</td></tr>
+      <tr><td>4 cousins</td><td>VM ▸ LCM ▸ Config-CM ▸ Change-CM</td><td>Russian dolls, counts grow</td></tr>
+      <tr><td>Two “CM”s</td><td>Configuration vs Change</td><td>combo vs single brick</td></tr>
+      <tr><td>Effort grows with</td><td>complexity · detection · overlap · variants</td><td>Tangled·Late·Crowded·Many</td></tr>
+      <tr><td>When (4)</td><td>preSOP · launch · SOP-EOP · postEOP</td><td>Build·Launch·Fix·Learn</td></tr>
+      <tr><td>Where (2)</td><td>project level + PDM, LINKED</td><td>two drawers, one chain</td></tr>
+      <tr><td>For whom</td><td>internal + suppliers (ISO 9001 + contract)</td><td>watch the supplier</td></tr>
+      <tr><td>Type (3)</td><td>enlarge · reduce · change</td><td>inflate · pop · reshape</td></tr>
+      <tr><td>Size (2)</td><td>evolution vs disruption</td><td>tortoise vs rocket</td></tr>
+      <tr><td>Versioning</td><td>MAJOR.MINOR.MICRO, never overwrite</td><td>3.9.4 → 3.10.4 (not 4.x)</td></tr>
+      <tr><td>Version content</td><td>what·why·who·when·approve</td><td>detective's W-form</td></tr>
+      <tr><td>Doc control</td><td>available·protected·readable·marked</td><td>manual at the machine (ISO 9001)</td></tr>
+      <tr><td>Inversed Rule of 10</td><td>later root cause = cheaper</td><td>snowball rolls UP</td></tr>
+      <tr><td>Req change</td><td>have-to vs can-be → CR→CCB</td><td>cracked frozen blueprint</td></tr>
+      <tr><td>Life-cycle phases</td><td>0 invest … 5 degrade</td><td>roller-coaster</td></tr>
+      <tr><td>BCG</td><td>Star · Cash Cow · Question · Dog</td><td>farmyard; ❓→⭐→🐄→🐕</td></tr>
+      <tr><td>Config process</td><td>O-I-C-S-V</td><td>change lives in Control</td></tr>
+      <tr><td>Variant decision</td><td>read the SUM column</td><td>+ = go, − = stop (case 3 trap)</td></tr>
+    </tbody></table>
+  </section>
+
+  <footer>
+    Change Management · CPS MMC-01a · study build · keep Ada &amp; her ever-changing car in your head ♻<br>
+    Downloads: <a class="inline" href="4_study.pdf">PDF</a> · <a class="inline" href="4_flashcards.txt">Anki flashcards</a> · <a class="inline" href="4_memorize.md">memorize guide</a> · <a class="inline" href="4.md">notes</a>
+  </footer>
+</main>
+
+<script>
+/* progress bar on scroll */
+const bar=document.getElementById('bar');
+addEventListener('scroll',()=>{const h=document.documentElement;const s=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=(s*100)+'%';});
+
+/* mark-learned with localStorage */
+const boxes=[...document.querySelectorAll('.learn input')];
+const prog=document.getElementById('progress'),pb=document.getElementById('progbar');
+function refresh(){const n=boxes.filter(b=>b.checked).length;prog.textContent=n+' / '+boxes.length+' topics learned';pb.style.width=(n/boxes.length*100)+'%';}
+boxes.forEach(b=>{const k='cm_'+b.dataset.k;if(localStorage.getItem(k)==='1')b.checked=true;b.addEventListener('change',()=>{localStorage.setItem(k,b.checked?'1':'0');refresh();});});
+refresh();
+
+/* FLASHCARDS */
+const CARDS=[
+ ["Two module competences for Change Management?","Understand the necessity of CM (level 1); apply the CM process to projects (level 3)."],
+ ["Which System Engineering step is Change Management?","Step 4 — after Risk, before Ideation; sits between PRD freeze and Re-lease."],
+ ["What is engineering change management (CM)?","The process of changing a product or parts of it (Ger. Änderungsmanagement, ÄM)."],
+ ["The 'other' CM we DON'T mean here?","Organizational change management (Veränderungsmanagement) — processes, behaviours, strategy, structures."],
+ ["Content & target of CM?","Content: align, track, follow up requirement/request changes. Target: as few changes as possible but as many as needed."],
+ ["When is a change NOT change management?","When intended by the product itself (e.g. a chameleon). A change of the product DESIGN is CM."],
+ ["VM / LCM / CM / CM by object?","VM = products/variants; LCM = new generations; Config-CM = HW+SW configurations; Change-CM = components. Count grows top→down."],
+ ["Example object for each cousin?","VM: sedan/convertible. LCM: E90→F30→G20. Config-CM: ECU SW 3.7.2 + d-sample PCB. Change-CM: the PCB."],
+ ["Which two disciplines both abbreviate 'CM'?","Configuration management and Change management."],
+ ["4 factors that increase a change's effort?","System complexity, late point of detection (Rule of Ten), overlapping changes, variants."],
+ ["The 4 phases of WHEN to do CM?","Until SOP (most changes); launch management (critical, just before SOP); SOP→EOP (trouble-shooting & cost-down); after EOP (field issues, next product)."],
+ ["WHERE to document changes + key rule?","Two IT locations: project-management level + where the original object was created (PDM). Both MUST be linked, or data branches."],
+ ["For whom is CM, and supplier rule?","All internal AND bought/supplied products; track suppliers, nominate ISO 9001-certified ones, put the reporting duty in the contract."],
+ ["Why do change management?","Design-for-upgrade, traceability (versioning), releasable/conform product, cost control, fewer delays/issues, high quality."],
+ ["Level vs amount of changes?","The higher the level of change, the fewer such changes occur."],
+ ["The 3 TYPES of change?","Scope-Enlargement (add new), Scope-Reduction (cancel), Scope-Change (change existing content)."],
+ ["Evolutionary vs Revolutionary change?","Evolution = gradual improvement (better phone). Revolution/disruption = radical rethink (smartphone vs telephone)."],
+ ["Motivation for version control?","Traceability over the whole life cycle: change frequency & evolution visible; roll-back possible."],
+ ["Key principle when changing an object?","Never overwrite — create a NEW version; version number is an attribute (auto-counter)."],
+ ["How is an object uniquely identified?","By ID/name + version number together (e.g. #073 alone isn't enough — v1.0 or v1.1?)."],
+ ["Version-numbering schemes?","Single-level numeric, single-level alphabetical, and two-stage (e.g. 1.1,1.2,2.0)."],
+ ["MAJOR.MINOR.MICRO from 3.9.4?","4.9.4 = major (re-design), 3.10.4 = minor (feature, not 4.x!), 3.9.5 = micro (patch)."],
+ ["Version-control PROCESS?","Like new requirements: change to pool → acceptable? → no: decline/modify → yes: release new version."],
+ ["What to log in version control?","Object, status, version, what changed, why, for whom, who changed, when, who approved, when approved."],
+ ["Document control per ISO 9001?","Available where/when needed; protected; managed for distribution/access/discovery/use; stored with preserved readability; change-monitored; external docs marked."],
+ ["Where to keep a machine's safety manual?","Directly at the machine, not only on a digital drive."],
+ ["What can be the impact of a change?","Complexity ↑ (quality issues, unhappy customers), time delay, worse cost/benefit, breaks the PRD, worst case the project is stopped."],
+ ["The 'inversed Rule of Ten'?","The later the ROOT CAUSE (not detection) in the design process, the cheaper & easier to change."],
+ ["Inversed Rule of Ten — cheap→dear order?","Update design → update assembly process → change concept → redesign test → change whole system."],
+ ["Causes of a design & concept change?","Failed tests; realization issues (HW won't work/too costly → SW); needing a re-design or new concept."],
+ ["Ideal vs reality of the PRD freeze?","Ideal: hard freeze, no changes after. Reality: partly soft, so changes are needed."],
+ ["'Have-to' requirement changes?","Mandatory before launch: a changing law, or a failed verification → relax an over-engineered requirement."],
+ ["'Can-be' requirement changes?","Your call: new applications, company strategy, customer expectation (B2B cost!), tool kits, cultural/political."],
+ ["How to handle a requirement change?","Re-open requirement process → impact analysis → create a CR → CCB decides & records → prioritize → plan."],
+ ["Current valid configuration equals?","Base line (reference) + all CRs."],
+ ["What manages repeated product generations?","Product lifecycle management (PLM/LCM)."],
+ ["Positive vs negative reasons to repeat the cycle?","Positive: new requirements, intrinsic advancement, state-of-art. Negative: competing products, quality issues, bad reviews, cost reduction."],
+ ["Horizontal vs vertical networking?","Horizontal = across generations (forward-only). Vertical = across products, bidirectional, by 'technical proximity'."],
+ ["What 4 things can a life-cycle branch do?","Continue, merge, split, or die (e.g. Linux distribution timeline)."],
+ ["What affects life-cycle length?","Industry (auto ~7 yrs vs phone ~1 yr), new technology, and the starting point; trend = shorter cycles."],
+ ["New / wide / close derivation?","New = nothing reused; wide = basic features inherited; close = most carried over with minor tweaks."],
+ ["The 6 life-cycle phases?","0 Investment, 1 Introduction, 2 Growth, 3 Maturity, 4 Saturation, 5 Degradation."],
+ ["Phase 0 & 1 characteristics?","0 Investment: high cost & uncertainty, as short as possible. 1 Introduction: slow sales, no profit, ends at break-even."],
+ ["Phase 3 & 5 characteristics?","3 Maturity: most profitable, as long as possible. 5 Degradation: negative profit, take it off the market."],
+ ["Aim of LCM?","Coordinate product cycles to avoid fluctuations — continuous production, constant workload, consistent revenue (no 'hole')."],
+ ["LCM measures to lengthen a cycle?","Cost measures (remove unneeded functions/parts, cut over-spec) and product enrichment (new features)."],
+ ["What is the BCG matrix + its limit?","BCG plots market growth × relative market share for product decisions; records actuals only — NOT a forecast."],
+ ["BCG: Star — properties & decision?","High growth, high share, best product → invest, or skim without losing share."],
+ ["BCG: Cash Cow — properties & decision?","Low growth, high share → milk/skim, no discounts."],
+ ["BCG: Question Mark — properties & decision?","High-growth, low share, new product → invest from other sources or discontinue."],
+ ["BCG: Poor Dog — properties & decision?","Low growth, low share → terminate (latest when contribution margin/DB < 0)."],
+ ["Typical BCG order in a life cycle?","Question Mark → Star → Cash Cow → Poor Dog."],
+ ["Relative market share formula?","Company market share ÷ competitor market share (>1 = you lead)."],
+ ["Configuration vs change management?","Config = the combination of changes & resulting properties; change = the single change/measure."],
+ ["Targets of configuration management?","Handle variant complexity, manage configuration items, ensure system integrity, document, inform, enable concurrent engineering & roll-backs, reproducible configs."],
+ ["The 5 steps of the CM process?","Organization, identification, control, status accounting, verification & audit (O-I-C-S-V)."],
+ ["In which CM step does change happen?","Step 3 — configuration control."],
+ ["Standards describing configuration management?","EIA-649C, Automotive SPICE (SUP), IEEE 828-2012, ISO 10007, NIST; needed for ISO 26262 ch.8 & ISO 20000."],
+ ["Variant management + its target?","Business model defines variants. Target: as many as needed for revenue, as few as possible for complexity — use standard interfaces & tool kits."],
+ ["How does a shared base product help variants?","Same base → components sourced more often → cheaper per piece (economy of scale); differentiate by look & features."],
+ ["Where do variants cause extra effort?","Development, testing, sales, and general (banned variants? cannibalization?)."],
+ ["Increase vs decrease variants?","Increase: customization, new markets/clientele/use cases. Decrease: cut cost via synergies (one plug for all)."],
+ ["Economy & ROI of a variant?","Low extra cost (base covers main costs), fewer customers, but ROI typically higher than the base."],
+ ["Variant decision: base+ deriv− sum+ ?","Case 3: implement only if the variant's economy of scale is why the base is positive."],
+ ["Variant decision: base+ deriv− sum− ?","Case 4: don't implement; check the base is still BC-positive."],
+ ["Software tools for code version control?","Azure DevOps, BitKeeper, BitBucket, Git, IBM Rational Synergy, RCS, Subversion."],
+ ["Software tools for product portfolio?","cplace and ClickUp."],
+ ["Summary: when is no CM needed, why needed in reality?","Ideally never. Reality: traceability, releasable/conform product, cost control, fewer delays/issues, high quality."],
+ ["Closing message of the chapter?","While change management is important, don't be afraid of changes."]
+];
+let order=CARDS.map((_,i)=>i),pos=0;
+const q=document.getElementById('fcq'),a=document.getElementById('fca'),cnt=document.getElementById('fccount'),cardEl=document.getElementById('fcard');
+function show(){const c=CARDS[order[pos]];cardEl.classList.remove('flipped');q.textContent=c[0];a.textContent=c[1];cnt.textContent=(pos+1)+' / '+CARDS.length;}
+function fcNext(){pos=(pos+1)%CARDS.length;show();}
+function fcPrev(){pos=(pos-1+CARDS.length)%CARDS.length;show();}
+function fcShuffle(){for(let i=order.length-1;i>0;i--){const j=(i*7+pos*13+3)%(i+1);[order[i],order[j]]=[order[j],order[i]];}pos=0;show();}
+show();
+/* build print list */
+const fp=document.getElementById('fc-print');
+fp.innerHTML='<h3 class="topic">All flashcards (Q/A)</h3>'+CARDS.map((c,i)=>'<div class="pc"><div class="pq">'+(i+1)+'. '+c[0]+'</div><div class="pa">'+c[1]+'</div></div>').join('');
+
+/* practice reveal */
+function reveal(btn){const ans=btn.nextElementSibling;const open=ans.classList.toggle('show');btn.textContent=open?'Hide model answer':'Reveal model answer';}
+</script>
+</body>
+</html>
