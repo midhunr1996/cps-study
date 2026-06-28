@@ -81,6 +81,14 @@
   .hook .ic{font-size:20px;line-height:1.2}
   .hook b{color:#bfe6a8}
 
+  /* full story tale */
+  .tale{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 32px 22px;box-shadow:var(--shadow);margin:18px 0}
+  .tale p{margin:0 0 16px;font-size:18.5px;line-height:1.74}
+  .tale p.open::first-letter{font-family:var(--disp);font-weight:800;font-size:62px;line-height:.74;float:left;margin:8px 12px 0 0;color:var(--red)}
+  .tale b{color:var(--ink);font-weight:700}
+  .tale .moral{background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:15px 18px;margin:18px 0 2px;font-size:16.5px;line-height:1.55}
+  .tale .moral b{color:#bfe6a8}
+
   /* memory movie */
   .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
   .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
@@ -186,7 +194,7 @@
 <header class="top"><div class="wrap">
   <span class="brand">⚠ Risk Mgmt · MMC-01a</span>
   <nav class="tabs">
-    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
     <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
     <a href="#" onclick="window.print();return false;">⤓ PDF</a>
   </nav>
@@ -220,6 +228,50 @@
     </div>
     <p>The chapter solves risk in a fixed order. Learn this one silly sentence and you already own the structure of the exam — everything else just bolts onto one of these six words:</p>
     <div class="hook"><span class="ic">🧠</span><div><b>“Detectives Always Eat Cold Mexican Donuts.”</b><br><b>D</b>etect → <b>A</b>nalyse → <b>E</b>valuate → <b>C</b>ontrol → <b>M</b>onitor → <b>D</b>ocument.</div></div>
+  </section>
+
+  <!-- FULL STORY -->
+  <section id="story">
+    <div class="sec-label">Read this once · like a bedtime story</div>
+    <h2>📖 The Full Story — “Riku's Bad Day”</h2>
+    <p class="lead">The whole chapter as <b>one connected tale</b>. Don't try to memorize it — just read it like a story and let it run as a film in your head. Because each thing happens <em>for a reason</em>, the concepts stick by themselves. Exam words are in <b>bold</b>; the table at the end maps every beat to the point you write in the exam.</p>
+
+    <div class="tale">
+      <p class="open">You and your friends have built <b>Riku, a self-driving delivery robot</b>, and tomorrow is his first real shift through a crowded town. You're terrified he'll crash, hurt someone, or arrive late — so you hire a sharp-eyed <b>Detective named Det</b> to ride on Riku's roof and hunt for trouble before it happens. The whole chapter is just Det's method: <em>how do clever engineers stop Riku from going wrong — as early and as cheaply as possible?</em></p>
+      <p>Before they roll out, Det chalks his definitions on the pavement. A <b>risk is “the effect of uncertainty”</b> (straight from <b>ISO 9001</b>) — an event that <em>might</em> stop you reaching your goal, with a probability <b>under 100%.</b> The battery <em>might</em> die; it <em>might</em> rain. The instant Riku actually crashes, it stops being a risk and becomes a <b>problem</b> — too late to prevent, and handled differently. Det's job is to <b>sort and structure</b> these risks methodically, keeping <b>general company risks</b> separate from this <b>project's</b> risks.</p>
+      <p>How does he do anything well? Det bakes cookies on a spinning plate to show the engineer's heartbeat: <b>Plan → Do → Check → Act</b>, the <b>PDCA</b> loop (from <b>ISO 9001</b>, also the <b>Deming / Shewhart</b> cycle), spinning forever — <em>“Please Don't Crash Again.”</em></p>
+      <p>Det shares three truths examiners love. First, every risk has a good twin — an <b>opportunity</b> (a risk can be a <em>positive</em> event worth recording). Second, because people fear reporting bad news, he installs an <b>anonymous “speak-up line”</b> so anyone can warn him about Riku without getting in trouble. Third, while money adds up (2 + 2 = 4), <b>risks do NOT add up</b> — you must <em>aggregate</em> them with models like <b>Monte Carlo simulation.</b> And he refuses to bet everything on one ticket: spreading your stake across <b>different, non-correlating</b> things is safer for the same reward — <b>diversification</b> (across <b>assets and time</b>), the Nobel idea of <b>Harry Markowitz</b>, whose best mixes sit <em>on</em> an <b>efficiency curve</b> (nothing rises above it; below it is wasteful). So when Riku's crash sensor is only 50% reliable, Det forbids the obvious fix of a <b>second identical sensor</b> (same weakness, doubled) and demands a <b>different, mechanical crash detector</b> instead.</p>
+      <p>Standards force the discipline: <b>ISO 9001</b> demands <b>“risk-based thinking,”</b> <b>ISO 31000</b> is the dedicated <b>Risk Management</b> standard, the company must keep a money-jar of <b>provisions (Rückstellungen)</b> to pay if risks hit, and managing risk is ultimately a <b>managerial task</b> (German law <b>KonTraG</b> even compels it). Riku can fail in nine directions, which Det groups into <b>three buckets</b>: a <b>Product</b> bucket (technical, compliance), a <b>Money/Time</b> bucket (finances, time, market, currency), and a <b>People/Planet</b> bucket (social, project-management, environmental).</p>
+      <p>Now the method itself — Det's <b>six moves, in order: Detect → Analyse → Evaluate → Control → Monitor → Document.</b> (<em>“Detectives Always Eat Cold Mexican Donuts.”</em>) <b>Detect:</b> Det spots a <b>banana peel</b> on Riku's path. He hunts <b>regularly and systematically, inside and outside</b> the company, as <b>often as the world changes</b> (a fast-moving environment = frequent checks). His toolkit has six finders — <b>KPI</b> changes, <b>Lessons-Learned</b>, the <b>Headstand/Flip-Flop</b> (ask “how could we make Riku fail as FAST as possible?”, then flip the silly answers into safety actions), the <b>Delphi</b> method (many experts in separate rooms, anonymous, repeating until they agree, then take the <b>average</b> — named for the Oracle of Delphi), a <b>risk workshop</b>, and <b>PAAG/HAZOP</b> — plus, for safety in development, <b>ALARP, FMEA and DRBFM.</b></p>
+      <p><b>Analyse &amp; Evaluate:</b> Det studies the peel under a <b>microscope</b>, then weighs it on a <b>kitchen scale</b> asking two things — how <b>bad</b> if Riku slips (<b>Severity</b>) and how <b>likely</b> it is (<b>Occurrence</b>, deliberately <em>not</em> “probability,” because it's a human guess). He multiplies the two into a <b>risk matrix</b> that ranks what to fear first, and keeps every risk in an updated <b>risk list</b> (a low-severity risk stays low even if likely; <b>0% = eliminated, 100% = it already happened</b>). <b>Control:</b> Det grabs a game controller with <b>four buttons</b>, like dealing with rain: <b>Avoid</b> (ban it, push occurrence to <b>0</b> — using physical barriers like <b>Poka Yoke</b>, the Japanese “avoid silly mistakes” key-lock trick where a SIM only fits one way), <b>Prevent</b> (umbrella — reduce occurrence or soften severity, e.g. with PDCA), <b>Transfer</b> (send whoever copes better — the crash ECU hands its risk to the car's <b>chassis</b>), and <b>Accept</b> (shrug — but only if both occurrence and impact are low). Then he keeps the <b>CCTV screens</b> running (<b>Monitor</b>) and writes everything in his <b>logbook</b> (<b>Document</b>).</p>
+      <p>The star of the exam is <b>FMEA — Failure Mode and Effects Analysis</b> — a giant <em>“what could break, and what happens then?”</em> checklist a team of experts fills in <b>early</b>, before Riku is even built, to catch <b>systematic and random errors before they occur.</b> Add a letter to upgrade it: <b>+C = FMECA</b> (adds <b>Criticality</b> to prioritise — usually what people mean by “FMEA”) and <b>+D = FMEDA</b> (adds <b>Diagnostics</b> for automotive electronics). It comes as <b>System</b>, <b>Design (D-)</b> and <b>Process (P-)</b> FMEA, where a critical design feature becomes a <b>Special Characteristic (SC)</b> the process must check. Cars live under <b>ISO 26262.</b> And never forget the <b>Rule of Ten</b>: a bug caught while <b>planning costs €1</b>, but ×10 at every stage it hides — <b>€10 in development, €100 at assembly, €1000+ once the customer has it</b> — so fix things early. FMEA is a <b>living document</b>, maintained until end of production/sales; change the product and you <b>must</b> update the FMEA, or it fails in the field.</p>
+      <p>To rank each failure, FMEA gives three marks out of ten and multiplies them into the <b>RPV (Risk Priority Value) = Severity × Occurrence × Recognizability</b> — <em>“how SORe will it be?”</em> (note the flip: for Recognizability, <b>1 = surely caught, 10 = never caught</b>). The nastiest features get stamped <b>SC</b> — a red “MUST-MEASURE” sticker checked in production (<b>BMW</b> marks <b>L/S/F</b>, <b>VW</b> marks <b>D/S</b>) — but don't sticker everything, it's expensive.</p>
+      <div class="moral"><b>The moral (your essay close):</b> risk management <b>avoids greater damage</b> by catching trouble <b>as early as possible</b> (Rule of Ten), rating each risk by <b>severity &amp; occurrence</b> in a <b>risk list</b>, and analysing every product with <b>FMEA</b> to derive its <b>Special Characteristics</b> — because, as <b>Walter Scheel</b> said, <em>“Nothing happens without risk, but without taking risks also nothing happens.”</em></div>
+    </div>
+
+    <h3 class="topic">🔗 Story beat → what to write in the exam</h3>
+    <table>
+      <thead><tr><th>Story beat</th><th>Exam point</th></tr></thead>
+      <tbody>
+        <tr><td>Det chalks the definition</td><td><b>Risk = “the effect of uncertainty”</b> (ISO 9001), prob <b>&lt; 100%</b>; if it happened → <b>problem</b></td></tr>
+        <tr><td>Cookies on a spinning plate</td><td><b>PDCA</b> (Plan-Do-Check-Act), ISO 9001, Deming/Shewhart cycle</td></tr>
+        <tr><td>Three examiner truths</td><td><b>Opportunity</b> (positive twin) · <b>anonymous speak-up line</b> · <b>risks don't add up</b> → Monte Carlo</td></tr>
+        <tr><td>Don't bet one ticket</td><td><b>Diversification</b> (asset + time), <b>Markowitz</b>, efficiency curve; fix = <b>different non-correlating</b> solution, not a 2nd identical sensor</td></tr>
+        <tr><td>Standards + money-jar</td><td><b>ISO 9001</b> (risk-based thinking) · <b>ISO 31000</b> · <b>provisions/Rückstellungen</b> · managerial task (KonTraG)</td></tr>
+        <tr><td>Three buckets</td><td>9 levels → <b>Product · Money/Time · People-Planet</b></td></tr>
+        <tr><td>Det's six moves</td><td><b>Detect → Analyse → Evaluate → Control → Monitor → Document</b></td></tr>
+        <tr><td>Banana peel + toolkit</td><td><b>Detect</b>: regular/systematic, internal+external, frequency by volatility; KPI·LeLe·Headstand·Delphi·workshop·PAAG (+ALARP/FMEA/DRBFM)</td></tr>
+        <tr><td>Headstand / Delphi</td><td>Headstand = flip→solve→flip back→act; Delphi = silent anonymous experts, repeat, <b>average</b></td></tr>
+        <tr><td>Microscope + kitchen scale</td><td><b>Evaluate</b>: <b>Severity × Occurrence</b> (not “probability”) → risk matrix + risk list; 0% eliminated, 100% occurred</td></tr>
+        <tr><td>Game controller, 4 buttons</td><td><b>Control</b>: <b>Avoid</b> (→0, Poka Yoke) · <b>Prevent</b> (PDCA) · <b>Transfer</b> (ECU→chassis) · <b>Accept</b> (only low/low)</td></tr>
+        <tr><td>The star checklist</td><td><b>FMEA</b> = Failure Mode &amp; Effects Analysis, early, expert team; <b>+C=FMECA</b> (criticality), <b>+D=FMEDA</b> (diagnostics); System/D-/P-FMEA; cars = <b>ISO 26262</b></td></tr>
+        <tr><td>Snowball of zeros</td><td><b>Rule of Ten</b>: 1→10→100→1000 €; catch it early; FMEA is a <b>living document</b> (update on change)</td></tr>
+        <tr><td>Three marks ×, “SORe”</td><td><b>RPV = Severity × Occurrence × Recognizability</b> (each 1–10; Recognizability flipped)</td></tr>
+        <tr><td>Red MUST-MEASURE sticker</td><td><b>Special Characteristic (SC)</b>, measured in production; BMW = L/S/F, VW = D/S</td></tr>
+      </tbody>
+    </table>
+
+    <div class="hook"><span class="ic">📖</span><div>Read the story <b>once tonight and once tomorrow</b>; then cover this page and <b>re-tell it out loud</b> in your own words. When you can re-tell the film, jump to the <a href="#movie" style="color:#bfe6a8">Movie</a> to compress it, then the <a href="#lesson" style="color:#bfe6a8">Lesson</a> for exact wording.</div></div>
   </section>
 
   <!-- MEMORY MOVIE -->

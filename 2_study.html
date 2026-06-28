@@ -81,6 +81,14 @@
   .hook .ic{font-size:20px;line-height:1.2}
   .hook b{color:#bfe6a8}
 
+  /* full story tale */
+  .tale{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 32px 22px;box-shadow:var(--shadow);margin:18px 0}
+  .tale p{margin:0 0 16px;font-size:18.5px;line-height:1.74}
+  .tale p.open::first-letter{font-family:var(--disp);font-weight:800;font-size:62px;line-height:.74;float:left;margin:8px 12px 0 0;color:var(--red)}
+  .tale b{color:var(--ink);font-weight:700}
+  .tale .moral{background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:15px 18px;margin:18px 0 2px;font-size:16.5px;line-height:1.55}
+  .tale .moral b{color:#bfe6a8}
+
   /* memory movie */
   .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
   .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
@@ -186,7 +194,7 @@
 <header class="top"><div class="wrap">
   <span class="brand">📝 Req Mgmt · MMC-01a</span>
   <nav class="tabs">
-    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
     <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
     <a href="#" onclick="window.print();return false;">⤓ PDF</a>
   </nav>
@@ -220,6 +228,53 @@
     </div>
     <p>The chapter solves requirements in a fixed order — the <b>6-phase process</b>. Learn this one picture-story and you already own the structure of the exam; everything else just bolts onto one of these six scenes:</p>
     <div class="hook"><span class="ic">🧠</span><div><b>basket → scale → index cards → ladder → checklist → catch the changes.</b><br><b>C</b>ollect → <b>A</b>ssess → <b>D</b>evelop → <b>T</b>ier-down → <b>V</b>erify → <b>C</b>hanges.</div></div>
+  </section>
+
+  <!-- FULL STORY -->
+  <section id="story">
+    <div class="sec-label">Read this once · like a bedtime story</div>
+    <h2>📖 The Full Story — “The Wish That Had to Be Caught Exactly”</h2>
+    <p class="lead">The whole chapter as <b>one connected tale</b>. Don't try to memorize it — just read it like a story and let it run as a film in your head. Because each thing happens <em>for a reason</em>, the concepts stick by themselves. Exam words are in <b>bold</b>; the table at the end maps every beat to the point you write in the exam.</p>
+
+    <div class="tale">
+      <p class="open">A kid named <b>Mira</b> pushes open the door of a robot shop; a bell jingles, and she announces: <em>“I want a robot pet!”</em> Behind the counter sits <b>Pip, a bright green parrot</b>, whose entire job is to <b>repeat the wish back — perfectly.</b> Because in the workshop at the back, dozens of builders will build exactly what Pip squawks, word for word. Mishear one syllable and they build the <em>wrong</em> robot. So Pip leans in, because a wish is <b>not yet a buildable order.</b> His whole task is to turn Mira's fuzzy human wish into <b>exact, written, testable cards</b> the workshop can obey — and keep them straight for the robot's entire life.</p>
+      <p>First Pip writes the idea of his trade on the wall: a <b>requirement</b> is an <b>accurately phrased development target for one property</b>, already accounting for <b>every relevant condition</b> (will the pet live outdoors? must it be silent at night?). One robot pet, he warns, needs <b>hundreds to tens of thousands</b> of these cards — and the count only grows (an autonomous car gains more every year). Serious shops follow rulebooks — <b>ISO/IEC/IEEE 29148</b>, <b>SQuaRE (ISO 25000)</b>, maturity models like <b>CMMI</b> and <b>SPICE</b> — and it all lives inside the <b>ItO — Idea to Offer</b>, the journey from a customer's wish to a finished product.</p>
+      <p>Why be this fussy? Pip points at a cartoon pinned by the till: the famous <b>tree-swing</b>. The customer described a swing, sales drew another, the engineer a third, the workshop built a fourth, and what the customer <em>truly</em> needed was a fifth — all from the same few words. <em>That chaos is exactly why Pip exists.</em> Requirement Management <b>finds every requirement from supersystem down to component level and keeps them alive across the whole lifecycle</b>; it is the <b>enabler</b> of customer satisfaction, of one <b>common understanding</b> between customer and supplier, and of <b>avoiding safety/field disasters and costly late changes.</b> Set the targets wrong, Pip says gravely, and <b>the whole product is wrong.</b> His three eternal enemies: an <b>unclear</b> definition, an <b>incomplete</b> set (the missing card you find too late), and an <b>inaccurately interpreted</b> card.</p>
+      <p>To keep customer and workshop honest, Pip carries <b>two binders</b>. Mira hands him the <b>red WISH binder — the PRD (Lastenheft)</b> — the sum of everything <em>she</em> wants (the <b>“what”</b>), used in the <b>nomination phase</b> to ask suppliers for offers. The workshop reads it and writes back the <b>green PROMISE binder — the Implementation Spec (Pflichtenheft)</b> — <em>how</em> they'll build it and <em>with what</em> (technical concept, resources, plan), where <b>every PRD requirement must be answered by at least one deliverable.</b> The day Mira signs the green binder, building begins. <em>Red = the customer's Request; green = the supplier's Guarantee.</em></p>
+      <p>The work itself runs as <b>six scenes</b>, always in order, and Pip acts them out. <b>Scene one — Collect:</b> he grabs a <b>basket</b> and scoops up wishes — from <b>outside</b> first (the <b>customer before everything</b>, then law, standards, cultural and social expectations) and from <b>inside</b> the shop (the old <b>Lessons-Learned</b> notebook, house standards, the kit of motors he's allowed, company strategy). He notices the more people he interviews, the <b>less new information each one adds.</b> He captures each demand as a <b>use case</b>: <em>“As a child, I want a pet that follows me, so that I'm never lonely.”</em> That <b>LeLe</b> notebook is sacred: read at <b>kick-off</b>, updated throughout, and at the <b>closing workshop</b> the team bakes new wisdom into the standard — obeying the <b>golden rule</b> that a fix is <b>never just the negation of the problem.</b> “We tested too late” must become <em>“start the test at least two weeks before release, written into the project plan,”</em> not “don't be late.”</p>
+      <p><b>Scene two — Assess:</b> Pip can't build everything, so he sets a <b>judge's scale</b> and weighs each wish three ways — is it <b>relevant</b> to <em>this</em> product, how <b>important</b> is it, what <b>kind</b> is it? The celebrity judge is <b>Mr. Kano</b>, who sorts every feature onto one of <b>five shelves</b>: the <b>bread shelf</b> (basic/must — invisible when present, fury when missing), the <b>dial</b> (performance/should — more is happier), the <b>surprise gift</b> (delighter/could — unexpected wow), the <b>grey box</b> (indifferent — nobody cares), and the <b>stink bomb</b> (reverse/don't — having it makes things worse). The shelves <b>shift</b> by customer, by price, and over <b>time</b> (today's delighter is tomorrow's bread). To find the shelf, Pip asks a <b>functional and a dysfunctional question as a pair</b> and reads the class from the combination. He also files each wish as <b>Product / Process / External</b> (What / How / Rest) and as either <b>Functional</b> or a <b>non-functional requirement (NFR)</b> — the “how well,” like 99.9% uptime.</p>
+      <p><b>Scene three — Develop:</b> Pip writes each survivor as a tiny, perfect <b>index card</b> — <b>one idea per card, active voice, written so a robot could obey it.</b> A good card is <b>complete, correct, SMART, testable, linked, atomic</b>, free of weak words (“roughly”, “very”) and free of “should/must.” Each carries a <b>passport</b>: unique ID, who asked, who wrote it, who'll use it, its <b>fit-criterion</b> (test), priority, version, status. The <b>SMART</b> brain wears a smartwatch: <b>Specific · Measurable · Achievable · Reasonable · Time-bound.</b> “Specific” matters because language lies — <em>“I saw the man on the mountain with the telescope”</em> gets drawn five ways, so you pin it down with <b>IF–THEN</b> logic. But don't over-specify: a firm asked to <b>stop bicycles being damaged in shipping</b> wasn't told <em>how</em>, so someone shipped each bike in a <b>box printed to look like a TV</b> — damage plummeted. <em>Specify the problem, not the solution.</em> “Testable” means measurable and <b>affordable to test</b> (don't crash ten real cars to check one card). And every card must be <b>linked</b> — recall the <b>bridge built by two countries</b> whose sea-level zeros differed, meeting mid-river with a <b>28 cm step</b>, then “fixed” the wrong way and <b>doubled.</b></p>
+      <p><b>Scene four — Tier down:</b> Pip carries the cards <b>down a ladder</b> — supersystem → system → sub-system → component — handing each floor an order it can actually build <b>and own.</b> The loudspeaker maker refuses to promise the sound inside the whole car — he never built the room! At every door stands a <b>bouncer</b>: does this card fit? In. If not — can I tweak it? Yes → modify; no → toss (with a reason). <em>Only promise what you can build.</em> <b>Scenes five &amp; six — Verify and Changes:</b> Pip doesn't run the tests himself; he simply <b>ticks each card off</b> as the workshop proves it built right (real testing belongs to the <b>Test</b> chapter), and when anyone changes their mind he <b>chases that change</b> through every linked card, handing the heavy lifting to <b>Change Management.</b></p>
+      <p>To forget no property of Mira's pet, Pip spins the <b>System Wheel</b> like a wagon wheel: a <b>hub</b> of the three trades (mechanics, E/E, software), an <b>inner ring</b> of the seven <b>“DNA” datasheet</b> properties, and an <b>outer ring</b> of <b>ten extended</b> properties (safety, EMC, thermal, sustainability…). Each property gets a <b>property engineer</b> — the <b>voice of the customer for that one property</b> — who optimises across the whole system, not a single component. One last warning: Pip could polish cards forever and <b>never let the workshop start</b> — the trap of <b>analysis paralysis.</b> Don't freeze; start building. And because thousands of cards can't live in Word or Excel, real shops use tools (<b>DOORS, Codebeamer, Jama</b>), and when two tools — or customer and supplier — must talk, they share one universal <b>XML adapter, ReqIF</b> (Requirement Interchange Format, kept by <b>ProSTEP iViP</b>).</p>
+      <div class="moral"><b>The moral (your essay close):</b> RM is the <b>most important step in system design</b> — it runs in <b>six phases</b>, focuses on <b>properties not solutions</b>, carries the <b>red PRD</b> and <b>green Implementation Spec</b>, and remembers that if the targets are wrong the product is wrong — <em>but don't drown in analysis; start realizing.</em></div>
+    </div>
+
+    <h3 class="topic">🔗 Story beat → what to write in the exam</h3>
+    <table>
+      <thead><tr><th>Story beat</th><th>Exam point</th></tr></thead>
+      <tbody>
+        <tr><td>Pip must repeat the wish perfectly</td><td><b>Requirement</b> = exact written development target for <b>one property</b>, all conditions; hundreds–tens of thousands</td></tr>
+        <tr><td>Rulebooks on the wall</td><td>Standards <b>29148</b>, <b>SQuaRE/25000</b>, CMMI/SPICE; lives in <b>ItO</b></td></tr>
+        <tr><td>Tree-swing cartoon</td><td><b>Why RM</b>: one common understanding; identify reqs supersystem→component, maintain lifecycle; wrong targets → wrong product</td></tr>
+        <tr><td>Two binders</td><td><b>PRD/Lastenheft</b> (customer, “what”) · <b>Implementation Spec/Pflichtenheft</b> (supplier, “how + with what”); every PRD req covered</td></tr>
+        <tr><td>Six scenes</td><td>Process: <b>Collect → Assess → Develop → Tier-down → Verify → Changes</b></td></tr>
+        <tr><td>Basket + customer first</td><td><b>Collect</b>: customer FIRST, then law/standards (external) + LeLe/strategy (internal); diminishing returns; <b>use case</b> (role/function/reason)</td></tr>
+        <tr><td>Sacred LeLe notebook</td><td>LeLe at kick-off + closing workshop → new standard; <b>fix ≠ negation of problem</b> (anchor a concrete action)</td></tr>
+        <tr><td>Judge's scale + Mr. Kano</td><td><b>Assess</b>: relevance/priority/classification; <b>Kano 5</b>: bread·dial·gift·grey box·stink bomb; shifts by customer/price/time</td></tr>
+        <tr><td>Functional + dysfunctional pair</td><td>Kano survey method; classify <b>Product/Process/External</b>, <b>Functional vs NFR</b></td></tr>
+        <tr><td>Perfect index card</td><td><b>Develop</b>: atomic, active voice, SMART, testable, linked, no weak words; passport (ID/who/why/test/version/status)</td></tr>
+        <tr><td>Telescope sentence</td><td><b>Specific</b> → fix ambiguity with IF–THEN</td></tr>
+        <tr><td>Bicycle in a TV box</td><td>Don't over-specify — <b>specify the problem, not the solution</b></td></tr>
+        <tr><td>28 cm bridge step</td><td>Every requirement must be <b>linked</b></td></tr>
+        <tr><td>Ladder + bouncer</td><td><b>Tier down</b> super→system→sub→component; accept/reject/feedback; only own what you can build</td></tr>
+        <tr><td>Ticking the checklist</td><td><b>Verify (5)</b>: RM tracks ticks, doesn't test · <b>Changes (6)</b> → Change Management</td></tr>
+        <tr><td>Wagon wheel</td><td><b>System Wheel</b>: hub (3 domains) + 7 DNA + 10 extended; <b>property engineer</b> = one property's customer-voice</td></tr>
+        <tr><td>Frozen at the desk</td><td><b>Analysis paralysis</b> — start realizing</td></tr>
+        <tr><td>Universal plug</td><td>Tools (DOORS/Codebeamer/Jama); <b>ReqIF</b> = XML interchange (ProSTEP iViP), tool↔tool &amp; customer↔supplier</td></tr>
+      </tbody>
+    </table>
+
+    <div class="hook"><span class="ic">📖</span><div>Read the story <b>once tonight and once tomorrow</b>; then cover this page and <b>re-tell it out loud</b> in your own words. When you can re-tell the film, jump to the <a href="#movie" style="color:#bfe6a8">Movie</a> to compress it, then the <a href="#lesson" style="color:#bfe6a8">Lesson</a> for exact wording.</div></div>
   </section>
 
   <!-- MEMORY MOVIE -->

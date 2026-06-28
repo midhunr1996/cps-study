@@ -40,6 +40,55 @@ Don't memorize letters — **watch a movie**. Close your eyes and play *Pip buil
 
 ---
 
+## 📖 The Full Story — "The Wish That Had to Be Caught Exactly" (read this once, like a bedtime story)
+
+> The whole chapter as **one connected tale**. Don't try to memorize it — just *read it like a story* and let it run as a film in your head. Because each thing happens **for a reason**, the concepts stick by themselves. Exam words are in **bold**. After the story there's a tiny **beat → exam point** table.
+
+A kid named **Mira** pushes open the door of a robot shop; a bell jingles, and she announces: *"I want a robot pet!"* Behind the counter sits **Pip, a bright green parrot**, whose entire job is to **repeat the wish back — perfectly.** Because in the workshop at the back, dozens of builders will build exactly what Pip squawks, word for word. Mishear one syllable and they build the *wrong* robot. So Pip leans in, because a wish is **not yet a buildable order.** His whole task is to turn Mira's fuzzy human wish into **exact, written, testable cards** the workshop can obey — and keep them straight for the robot's entire life.
+
+First Pip writes the idea of his trade on the wall: a **requirement** is an **accurately phrased development target for one property**, already accounting for **every relevant condition** (will the pet live outdoors? must it be silent at night?). One robot pet, he warns, needs **hundreds to tens of thousands** of these cards — and the count only grows (an autonomous car gains more every year). Serious shops follow rulebooks for this — **ISO/IEC/IEEE 29148**, **SQuaRE (ISO 25000)**, maturity models like **CMMI** and **SPICE** — and it all lives inside the **ItO — Idea to Offer**, the journey from a customer's wish to a finished product.
+
+Why be this fussy? Pip points at a cartoon pinned by the till: the famous **tree-swing**. The customer described a swing, sales drew another, the engineer a third, the workshop built a fourth, and what the customer *truly* needed was a fifth — all from the same few words. *That chaos is exactly why Pip exists.* Requirement Management **finds every requirement from supersystem down to component level and keeps them alive across the whole lifecycle**; it is the **enabler** of customer satisfaction, of one **common understanding** between customer and supplier, and of **avoiding safety/field disasters and costly late changes.** Set the targets wrong, Pip says gravely, and **the whole product is wrong.** His three eternal enemies: an **unclear** definition, an **incomplete** set (the missing card you find too late), and an **inaccurately interpreted** card.
+
+To keep customer and workshop honest, Pip carries **two binders**. Mira hands him the **red WISH binder — the PRD (*Lastenheft*)** — the sum of everything *she* wants (the **"what"**), used in the **nomination phase** to ask suppliers for offers. The workshop reads it and writes back the **green PROMISE binder — the Implementation Spec (*Pflichtenheft*)** — *how* they'll build it and *with what* (technical concept, resources, plan), where **every PRD requirement must be answered by at least one deliverable.** The day Mira signs the green binder, building begins. *Red = the customer's Request; green = the supplier's Guarantee.*
+
+The work itself runs as **six scenes**, always in order, and Pip acts them out. **Scene one — Collect:** he grabs a **basket** and scoops up wishes — from **outside** first (the **customer before everything**, then law, standards, cultural and social expectations) and from **inside** the shop (the old **Lessons-Learned** notebook, house standards, the kit of motors he's allowed, company strategy). He notices the more people he interviews, the **less new information each one adds.** He captures each demand as a **use case**: *"As a child, I want a pet that follows me, so that I'm never lonely."* That **LeLe** notebook is sacred: read at **kick-off**, updated throughout, and at the **closing workshop** the team bakes new wisdom into the standard — obeying the **golden rule** that a fix is **never just the negation of the problem.** "We tested too late" must become *"start the test at least two weeks before release, written into the project plan,"* not "don't be late."
+
+**Scene two — Assess:** Pip can't build everything, so he sets a **judge's scale** and weighs each wish three ways — is it **relevant** to *this* product, how **important** is it, what **kind** is it? The celebrity judge is **Mr. Kano**, who sorts every feature onto one of **five shelves**: the **bread shelf** (basic/must — invisible when present, fury when missing), the **dial** (performance/should — more is happier), the **surprise gift** (delighter/could — unexpected wow), the **grey box** (indifferent — nobody cares), and the **stink bomb** (reverse/don't — having it makes things worse). The shelves **shift** by customer, by price, and over **time** (today's delighter is tomorrow's bread). To find the shelf, Pip asks a **functional and a dysfunctional question as a pair** and reads the class from the combination. He also files each wish as **Product / Process / External** (What / How / Rest) and as either **Functional** or a **non-functional requirement (NFR)** — the "how well," like 99.9% uptime.
+
+**Scene three — Develop:** Pip writes each survivor as a tiny, perfect **index card** — **one idea per card, active voice, written so a robot could obey it.** A good card is **complete, correct, SMART, testable, linked, atomic**, free of weak words ("roughly", "very") and free of "should/must." Each carries a **passport**: unique ID, who asked, who wrote it, who'll use it, its **fit-criterion** (test), priority, version, status. The **SMART** brain wears a smartwatch: **Specific · Measurable · Achievable · Reasonable · Time-bound.** "Specific" matters because language lies — *"I saw the man on the mountain with the telescope"* gets drawn five ways, so you pin it down with **IF–THEN** logic. But don't over-specify: a firm asked to **stop bicycles being damaged in shipping** wasn't told *how*, so someone shipped each bike in a **box printed to look like a TV** — damage plummeted. *Specify the problem, not the solution.* "Testable" means measurable and **affordable to test** (don't crash ten real cars to check one card). And every card must be **linked** — recall the **bridge built by two countries** whose sea-level zeros differed, meeting mid-river with a **28 cm step**, then "fixed" the wrong way and **doubled.**
+
+**Scene four — Tier down:** Pip carries the cards **down a ladder** — supersystem → system → sub-system → component — handing each floor an order it can actually build **and own.** The loudspeaker maker refuses to promise the sound inside the whole car — he never built the room! At every door stands a **bouncer**: does this card fit? In. If not — can I tweak it? Yes → modify; no → toss (with a reason). *Only promise what you can build.* **Scenes five & six — Verify and Changes:** Pip doesn't run the tests himself; he simply **ticks each card off** as the workshop proves it built right (real testing belongs to the **Test** chapter), and when anyone changes their mind he **chases that change** through every linked card, handing the heavy lifting to **Change Management.**
+
+To forget no property of Mira's pet, Pip spins the **System Wheel** like a wagon wheel: a **hub** of the three trades (mechanics, E/E, software), an **inner ring** of the seven **"DNA" datasheet** properties, and an **outer ring** of **ten extended** properties (safety, EMC, thermal, sustainability…). Each property gets a **property engineer** — the **voice of the customer for that one property** — who optimises across the whole system, not a single component. One last warning: Pip could polish cards forever and **never let the workshop start** — the trap of **analysis paralysis.** Don't freeze; start building. And because thousands of cards can't live in Word or Excel, real shops use tools (**DOORS, Codebeamer, Jama**), and when two tools — or customer and supplier — must talk, they share one universal **XML adapter, ReqIF** (Requirement Interchange Format, kept by **ProSTEP iViP**).
+
+> **The moral (your essay close):** RM is the **most important step in system design** — it runs in **six phases**, focuses on **properties not solutions**, carries the **red PRD** and **green Implementation Spec**, and remembers that if the targets are wrong the product is wrong — *but don't drown in analysis; start realizing.*
+
+### 🔗 Story beat → what to write in the exam
+
+| Story beat | Exam point |
+|---|---|
+| Pip must repeat the wish perfectly | **Requirement** = exact written development target for **one property**, all conditions; hundreds–tens of thousands |
+| Rulebooks on the wall | Standards **29148**, **SQuaRE/25000**, CMMI/SPICE; lives in **ItO** |
+| Tree-swing cartoon | **Why RM**: one common understanding; identify reqs supersystem→component, maintain lifecycle; wrong targets → wrong product |
+| Two binders | **PRD/Lastenheft** (customer, "what") · **Implementation Spec/Pflichtenheft** (supplier, "how + with what"); every PRD req covered |
+| Six scenes | Process: **Collect → Assess → Develop → Tier-down → Verify → Changes** |
+| Basket + customer first | **Collect**: customer FIRST, then law/standards (external) + LeLe/strategy (internal); diminishing returns; **use case** (role/function/reason) |
+| Sacred LeLe notebook | LeLe at kick-off + closing workshop → new standard; **fix ≠ negation of problem** (anchor a concrete action) |
+| Judge's scale + Mr. Kano | **Assess**: relevance/priority/classification; **Kano 5**: bread·dial·gift·grey box·stink bomb; shifts by customer/price/time |
+| Functional + dysfunctional pair | Kano survey method; classify **Product/Process/External**, **Functional vs NFR** |
+| Perfect index card | **Develop**: atomic, active voice, SMART, testable, linked, no weak words; passport (ID/who/why/test/version/status) |
+| Telescope sentence | **Specific** → fix ambiguity with IF–THEN |
+| Bicycle in a TV box | Don't over-specify — **specify the problem, not the solution** |
+| 28 cm bridge step | Every requirement must be **linked** |
+| Ladder + bouncer | **Tier down** super→system→sub→component; accept/reject/feedback; only own what you can build |
+| Ticking the checklist | **Verify (5)**: RM tracks ticks, doesn't test · **Changes (6)** → Change Management |
+| Wagon wheel | **System Wheel**: hub (3 domains) + 7 DNA + 10 extended; **property engineer** = one property's customer-voice |
+| Frozen at the desk | **Analysis paralysis** — start realizing |
+| Universal plug | Tools (DOORS/Codebeamer/Jama); **ReqIF** = XML interchange (ProSTEP iViP), tool↔tool & customer↔supplier |
+
+---
+
 ## 0. The shape of the whole chapter (see this first)
 
 Requirement Management is **step 2 of System Engineering**: `1 Basics → 2 REQUIREMENTS → 3 Risk → 4 Change → 5 Ideation → (6 Design) → (7 Test) → (8 Project Setup)`.

@@ -41,6 +41,55 @@ Don't memorize letters — **watch a movie**. Close your eyes and play *the life
 
 ---
 
+## 📖 The Full Story — "Ada and the Ever-Changing Car" (read this once, like a bedtime story)
+
+> The whole chapter as **one connected tale**. Don't try to memorize it — just *read it like a story* and let it run as a film in your head. Because each thing happens **for a reason**, the concepts stick by themselves. Exam words are in **bold**. After the story there's a tiny **beat → exam point** table.
+
+Meet **Ada, keeper of an electric car called "Volt."** Its blueprint was frozen long ago — the **PRD freeze** — but the real world keeps poking it: a new law, a failed test, a supplier who swaps a plug. Ada's job is the *opposite* of Riku's detective work: there they **stopped** things going wrong; here Ada **manages the things that must change anyway.** Her motto is carved above her desk — *"as few changes as possible, but as many as needed."*
+
+First she's clear about what her job is *not*. A **chameleon** suns itself on Volt's hood, flushing from green to red — but it was *built* to do that, so that's **no change management.** The moment someone re-draws the car's actual **blueprint**, *that* is **engineering change management** — the process of changing a **product or its parts** (not the *organizational* kind — changing people's behaviour and strategy — which this course ignores).
+
+She keeps four cousins straight by tipping out **Russian dolls**, biggest to smallest: the **whole fleet of variants** (**Variant Management**) holds each **model-year generation** E90→F30→G20 (**Lifecycle Management**), which holds a **HW+SW combo** like "software 3.7.2 on the d-sample board" (**Configuration Management**), which holds one tiny **circuit board** (**Change Management**). The smaller the doll, the more of them there are — and beware the two "CM"s, **C**onfiguration and **C**hange, doing different jobs.
+
+Ada interrogates every change like a journalist — *how hard, when, where, for whom, why.* The **effort** grows under four weight-plates: **system complexity, late detection, overlapping parallel changes, and variants** ("tangled, late, crowded, many"). The **when** chimes four times across Volt's life: most changes land **before SOP** (start of production), a few critical ones at **launch**, then **SOP→EOP** brings trouble-shooting and cost-down, and **after EOP** you record field issues to improve the next product. The **where** is two filing drawers **chained together** — the **project-management level** (the whole change) and the **PDM system** where the original object lives — and *the chain is the point*: unlink them and the **data branches.** The **for whom** covers internal products *and* suppliers, who must be **ISO 9001-certified** and contractually bound to **report every change.** And the **why**: upgrade capability, traceability, a releasable conformant product, cost control and high quality.
+
+Every change also gets sorted three ways: by **level** (the higher the level, the fewer there are), by **type** — a balloon you **inflate** (scope-enlargement), **pop a piece off** (scope-reduction) or **squeeze into a new shape** (scope-change) — and by **size**: a **tortoise's** evolutionary baby-steps (a better phone) versus a **rocket's** disruptive leap (a smartphone replacing the telephone).
+
+Ada's golden discipline is her **logbook**: *never erase — always add a new version.* Each object is named by **ID + version number**, so "requirement #073" is meaningless without "v1.0 or v1.1." Pro tools count versions semantically as **MAJOR.MINOR.MICRO** — a **re-design** before the first dot, a **feature** in the middle (which can roll past 9, so `3.9.4` → `3.10.4`, *not* 4.x!), and a **bug-fix** at the end. Each version logs a detective's **W-form**: *what* changed, *why*, *who*, *when*, *for whom*, and who approved it when. On top sits **document control (ISO 9001)**: information must be **available where it's needed** (the safety manual *at the machine*, not buried on a drive), **protected**, and **readable in 30 years** (will that old CD format still open?).
+
+Why so careful? Because one little change **ripples** — tangling variants, delaying time, raising cost, breaking the PRD contract, and at worst **killing the project.** Here lurks the chapter's twist, the **inversed Rule of Ten**: the normal rule said the later you *detect* a fault, the dearer; this one says the later the **root cause** sits in the design, the **cheaper** to fix — a snowball rolling *up* the hill, shrinking. Updating a design is cheap; re-doing the whole concept or the entire test is what costs you.
+
+The frozen blueprint cracks for two kinds of reason. **"Have-to" changes** give you no choice — a **new law** before launch, or a **failed verification** forcing you to relax an over-engineered requirement. **"Can-be" changes** are your call — new applications, company strategy, a customer's shifting expectation, a tool-kit swap (round plugs → rectangular), cultural or political shifts. Either way Ada runs the same path: **re-open the requirement → impact analysis → raise a Change Request (CR) → the Change Control Board (CCB) decides and records → prioritize by cost/benefit → plan the implementation** (a valid configuration = the **base line + all approved CRs**).
+
+Volt itself rides a **roller-coaster**, the **product life-cycle curve** in six phases: **(0) Investment** (pay to climb, keep it short), **(1) Introduction** (slow climb to break-even), **(2) Growth** (steep up), **(3) Maturity** (the top — most profit — stretch it as long as possible), **(4) Saturation** (rolling down), **(5) Degradation** (off the rails — take it off the market). Running the whole ride again is a **new generation**, and **Lifecycle Management** coordinates every product's cycle so the company has **no holes and no overload.** To survey her whole farmyard of products, Ada uses the **BCG matrix** — plotting **market growth against relative market share** — sorting each into a shooting **⭐ Star** (invest), a **🐄 Cash Cow** (milk it, no discounts), a **❓ Question Mark** (a new arrival — fund it or drop it) or a **🐕 Poor Dog** (terminate when its margin turns negative). It only **records the actual** picture; it never forecasts. The usual life-story runs **❓ → ⭐ → 🐄 → 🐕**: question-marks grow into stars, and cash cows pay the bills (**relative market share = your share ÷ the rival's**).
+
+Two last tools snap together. **Configuration Management** locks chosen **LEGO bricks** — one inverter version, one motor, one damping — into a single working **combo** and records exactly which bricks (config cares about the *combo's* properties; change cares about the *single brick*). It even runs **after SOP** for upgrades, in five steps **O-I-C-S-V**: **Organization → Identification → Control** (where the change actually happens!) **→ Status-accounting → Verification/audit** (its standards — EIA-649C, Automotive SPICE, IEEE 828 — are needed to pass **ISO 26262 ch.8** and **ISO 20000**). And **Variant Management** lines up the **same Volt in several paint-and-trim versions** over one shared base — buying parts in bulk for **economy of scale** — aiming for *as many variants as revenue needs, as few as complexity allows*, via **standard interfaces & tool kits.** Each candidate variant faces a **see-saw**: weigh the **base business-case against the derivation's**, then read the **SUM** — positive means build it, negative means stop or optimize (the trap is **case 3**: a money-losing variant stays *only* if its volume is what keeps the base profitable).
+
+> **The moral (your essay close):** in an *ideal* project no change management is needed — but in reality it guarantees **traceability, a releasable product, cost control and high quality.** The spirit is always *"as few changes as possible, but as many as needed"* — and, as the closing slide insists, **don't be afraid of changes.**
+
+### 🔗 Story beat → what to write in the exam
+
+| Story beat | Exam point |
+|---|---|
+| Chameleon vs re-painting the blueprint | **Engineering CM** = changing a product/parts; *not* organizational CM; goal **"few but enough"** |
+| Russian dolls, biggest→smallest | **VM → LCM → Config-CM → Change-CM** (objects grow as dolls shrink); two "CM"s differ |
+| Four weight-plates | **Effort** grows with complexity · late detection · overlapping changes · variants |
+| Clock chimes four times | **When**: before SOP (most) · launch · SOP–EOP · after EOP |
+| Two chained drawers | **Where**: project level + PDM, **MUST be linked** else data branches |
+| Watch the supplier | **For whom**: internal + suppliers (ISO 9001 + contract clause) |
+| Sort 3 ways | **Level** (higher=fewer) · **Type** enlarge/reduce/change · **Size** evolution (tortoise) vs disruption (rocket) |
+| Never-erase logbook | **Version control**: ID + version; **MAJOR.MINOR.MICRO** (3.9.4 → 3.10.4, not 4.x); W-form content |
+| Manual at the machine | **Document control (ISO 9001)**: available · protected · readable 30 yrs · external marked |
+| Snowball rolls UP | **Inversed Rule of Ten**: later root cause = cheaper fix |
+| Cracked blueprint | Requirement change: **have-to** (law/failed verification) vs **can-be** (your call) → **CR → CCB → prioritize → plan**; config = base line + CRs |
+| Roller-coaster | **Life-cycle curve**: 0 Investment · 1 Introduction · 2 Growth · 3 Maturity · 4 Saturation · 5 Degradation |
+| Coordinate the cycles | **LCM**: avoid holes & overload (no gaps, no overload) |
+| Farmyard | **BCG**: ⭐Star · 🐄Cash Cow · ❓Question · 🐕Dog; growth × relative share; records actual, no forecast; order ❓→⭐→🐄→🐕 |
+| LEGO combo | **Configuration Mgmt** (combo) vs **Change Mgmt** (brick); 5-step **O-I-C-S-V** (change lives in Control) |
+| Paint-swatch versions + see-saw | **Variant Mgmt**: economy of scale; as needed/as few; read the **SUM** (case 3 trap) |
+
+---
+
 ## 0. The shape of the whole chapter (see this first)
 
 Change Management is **step 4 of System Engineering**: `1 Basics → 2 Requirements → 3 Risk → 4 CHANGE → 5 Ideation → (6 Design) → (7 Test) → (8 Project Setup)`. It lives between **PRD freeze** and **Re-lease**.

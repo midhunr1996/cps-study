@@ -81,6 +81,14 @@
   .hook .ic{font-size:20px;line-height:1.2}
   .hook b{color:#bfe6a8}
 
+  /* full story tale */
+  .tale{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 32px 22px;box-shadow:var(--shadow);margin:18px 0}
+  .tale p{margin:0 0 16px;font-size:18.5px;line-height:1.74}
+  .tale p.open::first-letter{font-family:var(--disp);font-weight:800;font-size:62px;line-height:.74;float:left;margin:8px 12px 0 0;color:var(--red)}
+  .tale b{color:var(--ink);font-weight:700}
+  .tale .moral{background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:15px 18px;margin:18px 0 2px;font-size:16.5px;line-height:1.55}
+  .tale .moral b{color:#bfe6a8}
+
   /* memory movie */
   .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
   .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
@@ -186,7 +194,7 @@
 <header class="top"><div class="wrap">
   <span class="brand">♻ Change Mgmt · MMC-01a</span>
   <nav class="tabs">
-    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
     <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
     <a href="#" onclick="window.print();return false;">⤓ PDF</a>
   </nav>
@@ -220,6 +228,52 @@
     </div>
     <p>The chapter splits into a few big blocks. Learn this shape and everything else bolts onto one of these boxes:</p>
     <div class="hook"><span class="ic">🧠</span><div><b>Fundamentals</b> (what/when/where/why) → <b>Version &amp; Document control</b> → <b>Impact &amp; Requirement changes</b> → <b>Product Life Cycle + BCG</b> → <b>Configuration &amp; Variant management.</b></div></div>
+  </section>
+
+  <!-- FULL STORY -->
+  <section id="story">
+    <div class="sec-label">Read this once · like a bedtime story</div>
+    <h2>📖 The Full Story — “Ada and the Ever-Changing Car”</h2>
+    <p class="lead">The whole chapter as <b>one connected tale</b>. Don't try to memorize it — just read it like a story and let it run as a film in your head. Because each thing happens <em>for a reason</em>, the concepts stick by themselves. Exam words are in <b>bold</b>; the table at the end maps every beat to the point you write in the exam.</p>
+
+    <div class="tale">
+      <p class="open">Meet <b>Ada, keeper of an electric car called “Volt.”</b> Its blueprint was frozen long ago — the <b>PRD freeze</b> — but the real world keeps poking it: a new law, a failed test, a supplier who swaps a plug. Ada's job is the <em>opposite</em> of Riku's detective work: there they <b>stopped</b> things going wrong; here Ada <b>manages the things that must change anyway.</b> Her motto is carved above her desk — <em>“as few changes as possible, but as many as needed.”</em></p>
+      <p>First she's clear about what her job is <em>not</em>. A <b>chameleon</b> suns itself on Volt's hood, flushing from green to red — but it was <em>built</em> to do that, so that's <b>no change management.</b> The moment someone re-draws the car's actual <b>blueprint</b>, <em>that</em> is <b>engineering change management</b> — the process of changing a <b>product or its parts</b> (not the <em>organizational</em> kind — changing people's behaviour and strategy — which this course ignores).</p>
+      <p>She keeps four cousins straight by tipping out <b>Russian dolls</b>, biggest to smallest: the <b>whole fleet of variants</b> (<b>Variant Management</b>) holds each <b>model-year generation</b> E90→F30→G20 (<b>Lifecycle Management</b>), which holds a <b>HW+SW combo</b> like “software 3.7.2 on the d-sample board” (<b>Configuration Management</b>), which holds one tiny <b>circuit board</b> (<b>Change Management</b>). The smaller the doll, the more of them there are — and beware the two “CM”s, <b>C</b>onfiguration and <b>C</b>hange, doing different jobs.</p>
+      <p>Ada interrogates every change like a journalist — <em>how hard, when, where, for whom, why.</em> The <b>effort</b> grows under four weight-plates: <b>system complexity, late detection, overlapping parallel changes, and variants</b> (“tangled, late, crowded, many”). The <b>when</b> chimes four times across Volt's life: most changes land <b>before SOP</b> (start of production), a few critical ones at <b>launch</b>, then <b>SOP→EOP</b> brings trouble-shooting and cost-down, and <b>after EOP</b> you record field issues to improve the next product. The <b>where</b> is two filing drawers <b>chained together</b> — the <b>project-management level</b> (the whole change) and the <b>PDM system</b> where the original object lives — and <em>the chain is the point</em>: unlink them and the <b>data branches.</b> The <b>for whom</b> covers internal products <em>and</em> suppliers, who must be <b>ISO 9001-certified</b> and contractually bound to <b>report every change.</b> And the <b>why</b>: upgrade capability, traceability, a releasable conformant product, cost control and high quality.</p>
+      <p>Every change also gets sorted three ways: by <b>level</b> (the higher the level, the fewer there are), by <b>type</b> — a balloon you <b>inflate</b> (scope-enlargement), <b>pop a piece off</b> (scope-reduction) or <b>squeeze into a new shape</b> (scope-change) — and by <b>size</b>: a <b>tortoise's</b> evolutionary baby-steps (a better phone) versus a <b>rocket's</b> disruptive leap (a smartphone replacing the telephone).</p>
+      <p>Ada's golden discipline is her <b>logbook</b>: <em>never erase — always add a new version.</em> Each object is named by <b>ID + version number</b>, so “requirement #073” is meaningless without “v1.0 or v1.1.” Pro tools count versions semantically as <b>MAJOR.MINOR.MICRO</b> — a <b>re-design</b> before the first dot, a <b>feature</b> in the middle (which can roll past 9, so <b>3.9.4 → 3.10.4</b>, <em>not</em> 4.x!), and a <b>bug-fix</b> at the end. Each version logs a detective's <b>W-form</b>: <em>what</em> changed, <em>why</em>, <em>who</em>, <em>when</em>, <em>for whom</em>, and who approved it when. On top sits <b>document control (ISO 9001)</b>: information must be <b>available where it's needed</b> (the safety manual <em>at the machine</em>, not buried on a drive), <b>protected</b>, and <b>readable in 30 years</b> (will that old CD format still open?).</p>
+      <p>Why so careful? Because one little change <b>ripples</b> — tangling variants, delaying time, raising cost, breaking the PRD contract, and at worst <b>killing the project.</b> Here lurks the chapter's twist, the <b>inversed Rule of Ten</b>: the normal rule said the later you <em>detect</em> a fault, the dearer; this one says the later the <b>root cause</b> sits in the design, the <b>cheaper</b> to fix — a snowball rolling <em>up</em> the hill, shrinking. Updating a design is cheap; re-doing the whole concept or the entire test is what costs you.</p>
+      <p>The frozen blueprint cracks for two kinds of reason. <b>“Have-to” changes</b> give you no choice — a <b>new law</b> before launch, or a <b>failed verification</b> forcing you to relax an over-engineered requirement. <b>“Can-be” changes</b> are your call — new applications, company strategy, a customer's shifting expectation, a tool-kit swap (round plugs → rectangular), cultural or political shifts. Either way Ada runs the same path: <b>re-open the requirement → impact analysis → raise a Change Request (CR) → the Change Control Board (CCB) decides and records → prioritize by cost/benefit → plan the implementation</b> (a valid configuration = the <b>base line + all approved CRs</b>).</p>
+      <p>Volt itself rides a <b>roller-coaster</b>, the <b>product life-cycle curve</b> in six phases: <b>(0) Investment</b> (pay to climb, keep it short), <b>(1) Introduction</b> (slow climb to break-even), <b>(2) Growth</b> (steep up), <b>(3) Maturity</b> (the top — most profit — stretch it as long as possible), <b>(4) Saturation</b> (rolling down), <b>(5) Degradation</b> (off the rails — take it off the market). Running the whole ride again is a <b>new generation</b>, and <b>Lifecycle Management</b> coordinates every product's cycle so the company has <b>no holes and no overload.</b> To survey her whole farmyard of products, Ada uses the <b>BCG matrix</b> — plotting <b>market growth against relative market share</b> — sorting each into a shooting <b>⭐ Star</b> (invest), a <b>🐄 Cash Cow</b> (milk it, no discounts), a <b>❓ Question Mark</b> (a new arrival — fund it or drop it) or a <b>🐕 Poor Dog</b> (terminate when its margin turns negative). It only <b>records the actual</b> picture; it never forecasts. The usual life-story runs <b>❓ → ⭐ → 🐄 → 🐕</b>: question-marks grow into stars, and cash cows pay the bills (<b>relative market share = your share ÷ the rival's</b>).</p>
+      <p>Two last tools snap together. <b>Configuration Management</b> locks chosen <b>LEGO bricks</b> — one inverter version, one motor, one damping — into a single working <b>combo</b> and records exactly which bricks (config cares about the <em>combo's</em> properties; change cares about the <em>single brick</em>). It even runs <b>after SOP</b> for upgrades, in five steps <b>O-I-C-S-V</b>: <b>Organization → Identification → Control</b> (where the change actually happens!) <b>→ Status-accounting → Verification/audit</b> (its standards — EIA-649C, Automotive SPICE, IEEE 828 — are needed to pass <b>ISO 26262 ch.8</b> and <b>ISO 20000</b>). And <b>Variant Management</b> lines up the <b>same Volt in several paint-and-trim versions</b> over one shared base — buying parts in bulk for <b>economy of scale</b> — aiming for <em>as many variants as revenue needs, as few as complexity allows</em>, via <b>standard interfaces &amp; tool kits.</b> Each candidate variant faces a <b>see-saw</b>: weigh the <b>base business-case against the derivation's</b>, then read the <b>SUM</b> — positive means build it, negative means stop or optimize (the trap is <b>case 3</b>: a money-losing variant stays <em>only</em> if its volume is what keeps the base profitable).</p>
+      <div class="moral"><b>The moral (your essay close):</b> in an <em>ideal</em> project no change management is needed — but in reality it guarantees <b>traceability, a releasable product, cost control and high quality.</b> The spirit is always <em>“as few changes as possible, but as many as needed”</em> — and, as the closing slide insists, <b>don't be afraid of changes.</b></div>
+    </div>
+
+    <h3 class="topic">🔗 Story beat → what to write in the exam</h3>
+    <table>
+      <thead><tr><th>Story beat</th><th>Exam point</th></tr></thead>
+      <tbody>
+        <tr><td>Chameleon vs re-painting the blueprint</td><td><b>Engineering CM</b> = changing a product/parts; <em>not</em> organizational CM; goal <b>“few but enough”</b></td></tr>
+        <tr><td>Russian dolls, biggest→smallest</td><td><b>VM → LCM → Config-CM → Change-CM</b> (objects grow as dolls shrink); two “CM”s differ</td></tr>
+        <tr><td>Four weight-plates</td><td><b>Effort</b> grows with complexity · late detection · overlapping changes · variants</td></tr>
+        <tr><td>Clock chimes four times</td><td><b>When</b>: before SOP (most) · launch · SOP–EOP · after EOP</td></tr>
+        <tr><td>Two chained drawers</td><td><b>Where</b>: project level + PDM, <b>MUST be linked</b> else data branches</td></tr>
+        <tr><td>Watch the supplier</td><td><b>For whom</b>: internal + suppliers (ISO 9001 + contract clause)</td></tr>
+        <tr><td>Sort 3 ways</td><td><b>Level</b> (higher=fewer) · <b>Type</b> enlarge/reduce/change · <b>Size</b> evolution (tortoise) vs disruption (rocket)</td></tr>
+        <tr><td>Never-erase logbook</td><td><b>Version control</b>: ID + version; <b>MAJOR.MINOR.MICRO</b> (3.9.4 → 3.10.4, not 4.x); W-form content</td></tr>
+        <tr><td>Manual at the machine</td><td><b>Document control (ISO 9001)</b>: available · protected · readable 30 yrs · external marked</td></tr>
+        <tr><td>Snowball rolls UP</td><td><b>Inversed Rule of Ten</b>: later root cause = cheaper fix</td></tr>
+        <tr><td>Cracked blueprint</td><td>Requirement change: <b>have-to</b> (law/failed verification) vs <b>can-be</b> (your call) → <b>CR → CCB → prioritize → plan</b>; config = base line + CRs</td></tr>
+        <tr><td>Roller-coaster</td><td><b>Life-cycle curve</b>: 0 Investment · 1 Introduction · 2 Growth · 3 Maturity · 4 Saturation · 5 Degradation</td></tr>
+        <tr><td>Coordinate the cycles</td><td><b>LCM</b>: avoid holes &amp; overload (no gaps, no overload)</td></tr>
+        <tr><td>Farmyard</td><td><b>BCG</b>: ⭐Star · 🐄Cash Cow · ❓Question · 🐕Dog; growth × relative share; records actual, no forecast; order ❓→⭐→🐄→🐕</td></tr>
+        <tr><td>LEGO combo</td><td><b>Configuration Mgmt</b> (combo) vs <b>Change Mgmt</b> (brick); 5-step <b>O-I-C-S-V</b> (change lives in Control)</td></tr>
+        <tr><td>Paint-swatch versions + see-saw</td><td><b>Variant Mgmt</b>: economy of scale; as needed / as few; read the <b>SUM</b> (case 3 trap)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="hook"><span class="ic">📖</span><div>Read the story <b>once tonight and once tomorrow</b>; then cover this page and <b>re-tell it out loud</b> in your own words. When you can re-tell the film, jump to the <a href="#movie" style="color:#bfe6a8">Movie</a> to compress it, then the <a href="#lesson" style="color:#bfe6a8">Lesson</a> for exact wording.</div></div>
   </section>
 
   <!-- MEMORY MOVIE -->

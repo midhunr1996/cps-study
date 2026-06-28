@@ -37,6 +37,56 @@ Don't memorize letters — **watch a movie**. Close your eyes and play *Riku's b
 
 ---
 
+## 📖 The Full Story — "Riku's Bad Day" (read this once, like a bedtime story)
+
+> The whole chapter as **one connected tale**. Don't try to memorize it — just *read it like a story* and let it run as a film in your head. Because each thing happens **for a reason**, the concepts stick by themselves. Exam words are in **bold**. After the story there's a tiny **beat → exam point** table.
+
+You and your friends have built **Riku, a self-driving delivery robot**, and tomorrow is his first real shift through a crowded town. You're terrified he'll crash, hurt someone, or arrive late — so you hire a sharp-eyed **Detective named Det** to ride on Riku's roof and hunt for trouble before it happens. The whole chapter is just Det's method: *how do clever engineers stop Riku from going wrong — as early and as cheaply as possible?*
+
+Before they roll out, Det chalks his definitions on the pavement. A **risk is "the effect of uncertainty"** (straight from **ISO 9001**) — an event that *might* stop you reaching your goal, with a probability **under 100%.** The battery *might* die; it *might* rain. The instant Riku actually crashes, it stops being a risk and becomes a **problem** — too late to prevent, and handled differently. Det's job is to **sort and structure** these risks methodically, keeping **general company risks** separate from this **project's** risks.
+
+How does he do anything well? Det bakes cookies on a spinning plate to show the engineer's heartbeat: **Plan → Do → Check → Act**, the **PDCA** loop (from **ISO 9001**, also the **Deming / Shewhart** cycle), spinning forever — *"Please Don't Crash Again."*
+
+Det shares three truths examiners love. First, every risk has a good twin — an **opportunity** (a risk can be a *positive* event worth recording). Second, because people fear reporting bad news, he installs an **anonymous "speak-up line"** so anyone can warn him about Riku without getting in trouble. Third, while money adds up (2 + 2 = 4), **risks do NOT add up** — you must *aggregate* them with models like **Monte Carlo simulation.** And he refuses to bet everything on one ticket: spreading your stake across **different, non-correlating** things is safer for the same reward — **diversification** (across **assets *and* time**), the Nobel idea of **Harry Markowitz**, whose best mixes sit *on* an **efficiency curve** (nothing rises above it; below it is wasteful). So when Riku's crash sensor is only 50% reliable, Det forbids the obvious fix of a **second identical sensor** (same weakness, doubled) and demands a **different, mechanical crash detector** instead.
+
+Standards force the discipline: **ISO 9001** demands **"risk-based thinking,"** **ISO 31000** is the dedicated **Risk Management** standard, the company must keep a money-jar of **provisions (Rückstellungen)** to pay if risks hit, and managing risk is ultimately a **managerial task** (German law **KonTraG** even compels it). Riku can fail in nine directions, which Det groups into **three buckets**: a **Product** bucket (technical, compliance), a **Money/Time** bucket (finances, time, market, currency), and a **People/Planet** bucket (social, project-management, environmental).
+
+Now the method itself — Det's **six moves, in order: Detect → Analyse → Evaluate → Control → Monitor → Document.** (*"Detectives Always Eat Cold Mexican Donuts."*)
+
+**Detect:** Det spots a **banana peel** on Riku's path. He hunts **regularly and systematically, inside and outside** the company, as **often as the world changes** (a fast-moving environment = frequent checks). His toolkit has six finders — **KPI** changes, **Lessons-Learned**, the **Headstand/Flip-Flop** (ask "how could we make Riku fail as FAST as possible?", then flip the silly answers into safety actions), the **Delphi** method (many experts in separate rooms, anonymous, repeating until they agree, then take the **average** — named for the Oracle of Delphi), a **risk workshop**, and **PAAG/HAZOP** — plus, for safety in development, **ALARP, FMEA and DRBFM.**
+
+**Analyse &amp; Evaluate:** Det studies the peel under a **microscope**, then weighs it on a **kitchen scale** asking two things — how **bad** if Riku slips (**Severity**) and how **likely** it is (**Occurrence**, deliberately *not* "probability," because it's a human guess). He multiplies the two into a **risk matrix** that ranks what to fear first, and keeps every risk in an updated **risk list** (a low-severity risk stays low even if likely; **0% = eliminated, 100% = it already happened**).
+
+**Control:** Det grabs a game controller with **four buttons**, like dealing with rain: **Avoid** (ban the activity, push occurrence to **0** — using physical barriers like **Poka Yoke**, the Japanese "avoid silly mistakes" key-lock trick where a SIM only fits one way), **Prevent** (umbrella — reduce occurrence or soften severity, e.g. with PDCA), **Transfer** (send whoever copes better — the crash ECU hands its risk to the car's **chassis**), and **Accept** (shrug — but only if both occurrence and impact are low). Then he keeps the **CCTV screens** running (**Monitor**) and writes everything in his **logbook** (**Document**).
+
+The star of the exam is **FMEA — Failure Mode and Effects Analysis** — a giant *"what could break, and what happens then?"* checklist a team of experts fills in **early**, before Riku is even built, to catch **systematic and random errors before they occur.** Add a letter to upgrade it: **+C = FMECA** (adds **Criticality** to prioritise — usually what people mean by "FMEA") and **+D = FMEDA** (adds **Diagnostics** for automotive electronics). It comes as **System**, **Design (D-)** and **Process (P-)** FMEA, where a critical design feature becomes a **Special Characteristic (SC)** the process must check. Cars live under **ISO 26262.** And never forget the **Rule of Ten**: a bug caught while **planning costs €1**, but ×10 at every stage it hides — **€10 in development, €100 at assembly, €1000+ once the customer has it** — so fix things early. FMEA is a **living document**, maintained until end of production/sales; change the product and you **must** update the FMEA, or it fails in the field.
+
+To rank each failure, FMEA gives three marks out of ten and multiplies them into the **RPV (Risk Priority Value) = Severity × Occurrence × Recognizability** — *"how SORe will it be?"* (note the flip: for Recognizability, **1 = surely caught, 10 = never caught**). The nastiest features get stamped **SC** — a red "MUST-MEASURE" sticker checked in production (**BMW** marks **L/S/F**, **VW** marks **D/S**) — but don't sticker everything, it's expensive.
+
+> **The moral (your essay close):** risk management **avoids greater damage** by catching trouble **as early as possible** (Rule of Ten), rating each risk by **severity &amp; occurrence** in a **risk list**, and analysing every product with **FMEA** to derive its **Special Characteristics** — because, as **Walter Scheel** said, *"Nothing happens without risk, but without taking risks also nothing happens."*
+
+### 🔗 Story beat → what to write in the exam
+
+| Story beat | Exam point |
+|---|---|
+| Det chalks the definition | **Risk = "the effect of uncertainty"** (ISO 9001), prob **< 100%**; if it happened → **problem** |
+| Cookies on a spinning plate | **PDCA** (Plan-Do-Check-Act), ISO 9001, Deming/Shewhart cycle |
+| Three examiner truths | **Opportunity** (positive twin) · **anonymous speak-up line** · **risks don't add up** → Monte Carlo |
+| Don't bet one ticket | **Diversification** (asset + time), **Markowitz**, efficiency curve; fix = **different non-correlating** solution, not a 2nd identical sensor |
+| Standards + money-jar | **ISO 9001** (risk-based thinking) · **ISO 31000** · **provisions/Rückstellungen** · managerial task (KonTraG) |
+| Three buckets | 9 levels → **Product · Money/Time · People-Planet** |
+| Det's six moves | **Detect → Analyse → Evaluate → Control → Monitor → Document** |
+| Banana peel + toolkit | **Detect**: regular/systematic, internal+external, frequency by volatility; KPI·LeLe·Headstand·Delphi·workshop·PAAG (+ALARP/FMEA/DRBFM) |
+| Headstand / Delphi | Headstand = flip→solve→flip back→act; Delphi = silent anonymous experts, repeat, **average** |
+| Microscope + kitchen scale | **Evaluate**: **Severity × Occurrence** (not "probability") → risk matrix + risk list; 0% eliminated, 100% occurred |
+| Game controller, 4 buttons | **Control**: **Avoid** (→0, Poka Yoke) · **Prevent** (PDCA) · **Transfer** (ECU→chassis) · **Accept** (only low/low) |
+| The star checklist | **FMEA** = Failure Mode &amp; Effects Analysis, early, expert team; **+C=FMECA** (criticality), **+D=FMEDA** (diagnostics); System/D-/P-FMEA; cars = **ISO 26262** |
+| Snowball of zeros | **Rule of Ten**: 1→10→100→1000 €; catch it early; FMEA is a **living document** (update on change) |
+| Three marks ×, SORe | **RPV = Severity × Occurrence × Recognizability** (each 1–10; Recognizability flipped) |
+| Red MUST-MEASURE sticker | **Special Characteristic (SC)**, measured in production; BMW = L/S/F, VW = D/S |
+
+---
+
 ## 0. The shape of the whole chapter (see this first)
 
 Risk Management is **step 3 of System Engineering**: `1 Basics → 2 Requirements → 3 RISK → 4 Change → 5 Ideation → (6 Design) → (7 Test) → (8 Project Setup)`.

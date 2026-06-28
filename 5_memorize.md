@@ -38,6 +38,49 @@ Don't memorize letters — **watch a movie**. Close your eyes and play *Maya bui
 
 ---
 
+## 📖 The Full Story — "Maya, Jack & the Beach Gadget" (read this once, like a bedtime story)
+
+> The whole chapter as **one connected tale**. Don't try to memorize it — just *read it like a story* and let it run as a film in your head. Because each thing happens **for a reason**, the concepts stick by themselves. Exam words are in **bold**. After the story there's a tiny **beat → exam point** table.
+
+Meet **Maya the inventor.** She wants to build a gadget for **Jack, a 54-year-old lifeguard on the Baltic Sea** who loves surfing and hates littering tourists — and here's the catch: Maya has **no idea yet what to build.** That's the whole point. Her job this chapter is **Design Thinking** — a method for inventing creative ideas and solving problems — and her motto, painted on her surfboard, is *"fail fast and cheap."* She keeps three things balanced like a **surfboard resting on three rocks**: the **customer's benefit**, whether it's **feasible** to build, and whether it's **commercially viable** to sell — pull one rock away and the board tips over. She also packs the most **heterogeneous team** she can find (a chef, a child, a granny), because mixed minds make better ideas, and she expects to **loop many times**, not get it right once.
+
+The whole method is a walk from the **beach into the sea.** On the dry sand — the **Problem space** — Maya figures out *what's wrong and who for*; in the water — the **Solution space** — she *makes things and tests them*. Six steps in order carry her across: **Understand → Observe → Design Principles → Ideation → Prototyping → Testing**, and she crosses the wet line again and again because it's a **loop, not a line.**
+
+**Step 1 — Understand:** Maya holds up a **giant jigsaw piece marked "?"** She builds her team and asks what should be newly made, what the *problem* really is, and — crucially — what the **target condition** is *after* Jack uses the gadget: the **outcome, not the gadget itself.** Who is the customer, and what environment must it survive (wind, salt, sand)? She starts with an **expert brainstorm** and keeps updating it as she learns.
+
+**Step 2 — Observe:** Maya lifts a **telescope** and follows Jack around, but she **zips her own mouth shut** — she doesn't pitch ideas, she *listens.* She digs for his real problem, what the thing must do, and even his **family and hobbies**, and she seeks out the **loudest, most extreme beach-goers**, because the guy screaming about seagulls teaches her more than a hundred calm tourists. The cardinal rule: **let the customer talk, never sell your own idea.** To capture *how much* Jack knows about a technology she climbs a **lifeguard tower of competency** from **0 (knows nothing)** up through newbie, basic, advanced and consolidated to **5 (an expert who invents new moves).**
+
+**Step 3 — Design Principles:** Maya glues all her notes onto a **life-size cardboard cut-out of "Fake-Jack"** — a fictional customer she can interrogate any time. She hunts for the **patterns and common sense** across everyone she met, gives him a **photo, job, hobbies, fears and goals**, and **updates her "Understand"** with what she's learned. This is the **bridge from beach to sea**: from now on, whenever she's unsure, she just asks the cardboard, *"Jack, would you like this?"* Technically this dummy is a **Buyer Persona** — a **persona** (from analytical psychology, the *outer role or face* of a person) adapted to economics: a fictional-but-fitting target customer she writes **like a novel character**, complete with a **card** listing his demographics, **five core technologies**, and what **motivates** and **frustrates** him, his **goals** and his **pain points.**
+
+**Step 4 — Ideation:** now the fun. **Crazy lightbulbs rain from the sky** — Maya wants the **wildest ideas possible, with NO limits** on cost or technology, the crazier the better. Everyone first sketches **alone**, then they **gather and discuss**, then they **pick** the strongest with a tool — a slot-machine-like **morphological box** or a **QFD scorecard** — judging by **practicability, efficiency and economy**, and finally they **show the customer for feedback.**
+
+**Step 5 — Prototyping:** Maya tapes together a **rough cardboard-and-duct-tape gadget** — *the simpler the better* — and hands it to Jack **without saying one word.** If she has to explain it, it failed: the **customer must understand the solution, not the inventor**, and it must **solve Jack's problem, not show off Maya's idea.**
+
+**Step 6 — Testing:** Maya **hides behind a palm tree** and simply **watches** Jack fumble with the gadget — **no demo, no help** — scribbling notes on what to fix. If it flops she can **change or even throw the idea away** next round, then **loop straight back to prototyping** and try again. *Take several iterations.*
+
+The exam's favourite proof is the **MRI scanner that terrified children.** Instead of fixing the *machine*, designers fixed the *fear* — they repainted the room as a **pirate-submarine adventure** so kids climbed in laughing. That is design thinking in one image: **solve the customer's real problem, not the technical one.**
+
+> **The moral (your essay close):** Design Thinking is a **customer-centred** method that, in **fast iterative cycles**, analyses and solves a customer's real **needs and problems** with many cheap attempts. Keep Jack at the centre, **fail fast and cheap**, and **iterate** until the prototype truly delights him.
+
+### 🔗 Story beat → what to write in the exam
+
+| Story beat | Exam point |
+|---|---|
+| Surfboard on three rocks | **Design Thinking** = method for creative ideas & problem-solving; focus on **customer · feasibility · commercial viability** |
+| Mixed team, fail fast | Team **as heterogeneous as possible**; **agile**, several iterations; **fail fast & cheap** |
+| Walk beach → sea | Two spaces (**Problem / Solution**); 6 steps **Understand→Observe→Design Principles→Ideation→Prototyping→Testing**; iterative loop |
+| Jigsaw "?" | **(1) Understand**: problem + **target condition** (outcome, NOT the solution); build team; customer & environment |
+| Telescope + zipped mouth | **(2) Observe**: understand the customer (will/wishes/needs + background); **let customer talk, don't sell**; **extreme voices** reveal most |
+| Lifeguard tower 0–5 | Competency level: 0 none → 5 expert (invents state-of-the-art) |
+| Cardboard Fake-Jack | **(3) Design Principles**: synthesis; find patterns; build a **Persona / Buyer Persona** (write like a novel character); update Understand |
+| Persona card | Photo, demographics, 5 core technologies, **motivates/frustrates/goals/pain-points** |
+| Lightbulb storm | **(4) Ideation**: NO limits, crazier = better; individual → discuss → decide via **morphological box / QFD** → customer feedback |
+| Duct-tape gadget, silent | **(5) Prototyping**: tangible & simple; **NO verbal explanation**; solve the customer's problem, not your idea |
+| Palm-tree spy | **(6) Testing**: customer tests, observe, **no demonstration**; change/discard; **iterate!** |
+| Scary tube → pirate sub | **MRI example**: fix the customer's real fear, not the machine (customer-centred beats technical fix) |
+
+---
+
 ## 0. The shape of the whole chapter (see this first)
 
 Design Thinking is **step 5 (Ideation)** of System Engineering: `1 Basics → 2 Requirements → 3 Risk → 4 Change → 5 IDEATION → (6 Design) → (7 Test) → (8 Project Setup)`.
