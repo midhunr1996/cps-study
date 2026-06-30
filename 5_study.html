@@ -89,6 +89,21 @@
   .tale .moral{background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:15px 18px;margin:18px 0 2px;font-size:16.5px;line-height:1.55}
   .tale .moral b{color:#bfe6a8}
 
+  /* comic-strip panels */
+  .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:8px;margin:16px 0 6px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 6px 9px;text-align:center;box-shadow:var(--shadow);break-inside:avoid;position:relative}
+  .panel .pn{position:absolute;top:5px;left:7px;font-family:var(--mono);font-size:8.5px;color:var(--amber-deep)}
+  .panel .pe{font-size:30px;line-height:1.15;margin-top:6px}
+  .panel .pc{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.2px;color:var(--ink-soft);margin-top:5px;display:block;line-height:1.25}
+
+  /* exam-model diagrams */
+  .figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin:18px 0}
+  .fig{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px;box-shadow:var(--shadow);break-inside:avoid;margin:0}
+  .fig svg{width:100%;height:auto;display:block}
+  .fig figcaption{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--amber-deep);margin-top:10px;text-align:center}
+  .fig figcaption .cap2{display:block;font-family:var(--body);font-size:13.5px;color:var(--ink-soft);text-transform:none;letter-spacing:0;margin-top:3px}
+  .fig.wide{grid-column:1/-1}
+
   /* memory movie */
   .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
   .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
@@ -170,7 +185,7 @@
     .riku{background:#f3f3f3;color:#000;box-shadow:none;border:1px solid #999}
     .riku p{color:#222}.riku .big{color:#a8650a}.riku::after{display:none}
     section{padding:14px 0;border-bottom:1px solid #bbb;break-inside:avoid}
-    .card,.exam,.hook,table,.q-block,.flashcard{box-shadow:none;break-inside:avoid}
+    .card,.exam,.hook,table,.q-block,.flashcard,.fig,.panel{box-shadow:none;break-inside:avoid}
     .hook{background:#eef3ec;color:#000;border:1px solid #9bbf8c}.hook b{color:#2f5a28}
     .exam{background:#fdf6e3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     th{background:#222 !important;color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -194,7 +209,7 @@
 <header class="top"><div class="wrap">
   <span class="brand">💡 Design Thinking · MMC-01a</span>
   <nav class="tabs">
-    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#diagrams">🖼️ Diagrams</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
     <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
     <a href="#" onclick="window.print();return false;">⤓ PDF</a>
   </nav>
@@ -236,6 +251,22 @@
     <h2>📖 The Full Story — “Maya, Jack &amp; the Beach Gadget”</h2>
     <p class="lead">The whole chapter as <b>one connected tale</b>. Don't try to memorize it — just read it like a story and let it run as a film in your head. Because each thing happens <em>for a reason</em>, the concepts stick by themselves. Exam words are in <b>bold</b>; the table at the end maps every beat to the point you write in the exam.</p>
 
+    <div class="strip">
+      <div class="panel"><span class="pn">1</span><div class="pe">🎯</div><span class="pc">3 in focus</span></div>
+      <div class="panel"><span class="pn">2</span><div class="pe">🌈</div><span class="pc">mixed team</span></div>
+      <div class="panel"><span class="pn">3</span><div class="pe">💸</div><span class="pc">fail fast &amp; cheap</span></div>
+      <div class="panel"><span class="pn">4</span><div class="pe">🧩</div><span class="pc">1 understand</span></div>
+      <div class="panel"><span class="pn">5</span><div class="pe">🔭</div><span class="pc">2 observe</span></div>
+      <div class="panel"><span class="pn">6</span><div class="pe">🤫</div><span class="pc">let them talk</span></div>
+      <div class="panel"><span class="pn">7</span><div class="pe">🪜</div><span class="pc">competency 0–5</span></div>
+      <div class="panel"><span class="pn">8</span><div class="pe">🎭</div><span class="pc">3 persona</span></div>
+      <div class="panel"><span class="pn">9</span><div class="pe">💡</div><span class="pc">4 ideation</span></div>
+      <div class="panel"><span class="pn">10</span><div class="pe">🧱</div><span class="pc">5 prototype</span></div>
+      <div class="panel"><span class="pn">11</span><div class="pe">👀</div><span class="pc">6 test · loop</span></div>
+      <div class="panel"><span class="pn">12</span><div class="pe">⚙️</div><span class="pc">morph box / QFD</span></div>
+      <div class="panel"><span class="pn">13</span><div class="pe">🏥</div><span class="pc">MRI → pirate sub</span></div>
+    </div>
+
     <div class="tale">
       <p class="open">Meet <b>Maya the inventor.</b> She wants to build a gadget for <b>Jack, a 54-year-old lifeguard on the Baltic Sea</b> who loves surfing and hates littering tourists — and here's the catch: Maya has <b>no idea yet what to build.</b> That's the whole point. Her job this chapter is <b>Design Thinking</b> — a method for inventing creative ideas and solving problems — and her motto, painted on her surfboard, is <em>“fail fast and cheap.”</em> She keeps three things balanced like a <b>surfboard resting on three rocks</b>: the <b>customer's benefit</b>, whether it's <b>feasible</b> to build, and whether it's <b>commercially viable</b> to sell — pull one rock away and the board tips over. She also packs the most <b>heterogeneous team</b> she can find (a chef, a child, a granny), because mixed minds make better ideas, and she expects to <b>loop many times</b>, not get it right once.</p>
       <p>The whole method is a walk from the <b>beach into the sea.</b> On the dry sand — the <b>Problem space</b> — Maya figures out <em>what's wrong and who for</em>; in the water — the <b>Solution space</b> — she <em>makes things and tests them</em>. Six steps in order carry her across: <b>Understand → Observe → Design Principles → Ideation → Prototyping → Testing</b>, and she crosses the wet line again and again because it's a <b>loop, not a line.</b></p>
@@ -269,6 +300,91 @@
     </table>
 
     <div class="hook"><span class="ic">📖</span><div>Read the story <b>once tonight and once tomorrow</b>; then cover this page and <b>re-tell it out loud</b> in your own words. When you can re-tell the film, jump to the <a href="#movie" style="color:#bfe6a8">Movie</a> to compress it, then the <a href="#lesson" style="color:#bfe6a8">Lesson</a> for exact wording.</div></div>
+  </section>
+
+  <!-- DIAGRAMS -->
+  <section id="diagrams">
+    <div class="sec-label">Draw these · the exam's favourite figures</div>
+    <h2>🖼️ Diagrams you can redraw</h2>
+    <p class="lead">The models examiners love to ask you to <b>sketch</b>. Copy each one by hand a couple of times — if you can redraw it from memory, you've understood it.</p>
+    <div class="figs">
+
+      <figure class="fig wide">
+        <svg viewBox="0 0 600 162" role="img" aria-label="Design thinking two-space six-step process">
+          <defs><marker id="e1" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#211C16"/></marker></defs>
+          <g font-family="'Space Mono',ui-monospace,monospace" font-size="11" fill="#211C16" text-anchor="middle">
+            <rect x="0" y="24" width="298" height="116" fill="#f1e6cc"/>
+            <rect x="298" y="24" width="302" height="116" fill="#e2eae6"/>
+            <text x="149" y="18" font-size="11" fill="#B96E12">🏖️ PROBLEM space</text>
+            <text x="449" y="18" font-size="11" fill="#4C7A46">🌊 SOLUTION space</text>
+            <rect x="10" y="74" width="86" height="46" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="53" y="101" font-size="11">Understand</text>
+            <rect x="108" y="74" width="86" height="46" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="151" y="101" font-size="11">Observe</text>
+            <rect x="206" y="74" width="90" height="46" rx="8" fill="#FBF3DE" stroke="#211C16"/><text x="251" y="96" font-size="10">Design</text><text x="251" y="109" font-size="10">Principles</text>
+            <rect x="306" y="74" width="86" height="46" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="349" y="101" font-size="11">Ideation</text>
+            <rect x="404" y="74" width="86" height="46" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="447" y="101" font-size="11">Prototype</text>
+            <rect x="502" y="74" width="86" height="46" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="545" y="101" font-size="11">Testing</text>
+            <line x1="96" y1="97" x2="107" y2="97" stroke="#211C16" marker-end="url(#e1)"/>
+            <line x1="194" y1="97" x2="205" y2="97" stroke="#211C16" marker-end="url(#e1)"/>
+            <line x1="296" y1="97" x2="305" y2="97" stroke="#211C16" marker-end="url(#e1)"/>
+            <line x1="392" y1="97" x2="403" y2="97" stroke="#211C16" marker-end="url(#e1)"/>
+            <line x1="490" y1="97" x2="501" y2="97" stroke="#211C16" marker-end="url(#e1)"/>
+            <polyline points="545,74 545,56 447,56 447,74" fill="none" stroke="#B96E12" marker-end="url(#e1)"/>
+            <text x="496" y="52" font-size="9" fill="#B96E12">iterate</text>
+            <text x="251" y="136" font-size="9" fill="#5C5246">persona = the bridge</text>
+          </g>
+        </svg>
+        <figcaption>Design Thinking — two spaces, six steps<span class="cap2">Understand → Observe → Design Principles → Ideation → Prototyping → Testing (loop)</span></figcaption>
+      </figure>
+
+      <figure class="fig">
+        <svg viewBox="0 0 360 244" role="img" aria-label="Competency ladder 0 to 5">
+          <g font-family="'Space Mono',ui-monospace,monospace" fill="#211C16" text-anchor="middle">
+            <line x1="6" y1="216" x2="354" y2="216" stroke="#211C16"/>
+            <rect x="10" y="192" width="50" height="24" fill="#FBF3DE" stroke="#211C16"/><text x="35" y="208" font-size="12">0</text>
+            <rect x="66" y="162" width="50" height="54" fill="#f3d79a" stroke="#211C16"/><text x="91" y="186" font-size="12">1</text>
+            <rect x="122" y="132" width="50" height="84" fill="#ecc06a" stroke="#211C16"/><text x="147" y="172" font-size="12">2</text>
+            <rect x="178" y="102" width="50" height="114" fill="#E0962A" stroke="#211C16"/><text x="203" y="156" font-size="12" fill="#fff">3</text>
+            <rect x="234" y="72" width="50" height="144" fill="#c8722a" stroke="#211C16"/><text x="259" y="140" font-size="12" fill="#fff">4</text>
+            <rect x="290" y="42" width="50" height="174" fill="#4C7A46" stroke="#211C16"/><text x="315" y="120" font-size="12" fill="#fff">5</text>
+            <text x="35" y="230" font-size="8">none</text><text x="91" y="230" font-size="8">newbie</text><text x="147" y="230" font-size="8">basic</text><text x="203" y="230" font-size="8">advanced</text><text x="259" y="230" font-size="8">consol.</text><text x="315" y="230" font-size="8">expert</text>
+          </g>
+        </svg>
+        <figcaption>Competency level 0–5<span class="cap2">0 knows nothing → 5 expert who invents new state-of-the-art</span></figcaption>
+      </figure>
+
+      <figure class="fig">
+        <svg viewBox="0 0 360 244" role="img" aria-label="Persona card template">
+          <g font-family="'Space Mono',ui-monospace,monospace" fill="#211C16">
+            <rect x="8" y="8" width="344" height="228" rx="12" fill="#FBF7EE" stroke="#211C16"/>
+            <rect x="22" y="22" width="74" height="74" rx="6" fill="#ECE3D0" stroke="#211C16"/><text x="59" y="66" font-size="28" text-anchor="middle">📷</text>
+            <text x="108" y="40" font-size="12">Jack Johnsen, 54</text>
+            <text x="108" y="58" font-size="10" fill="#5C5246">Lifeguard · Baltic Sea</text>
+            <text x="108" y="74" font-size="10" fill="#5C5246">married · 3 kids</text>
+            <text x="108" y="92" font-size="9.5" fill="#B96E12">5 core tech ▸▸▸▸▸</text>
+            <rect x="22" y="108" width="156" height="54" rx="6" fill="#FBF3DE" stroke="#D9CDB4"/><text x="30" y="128" font-size="10.5" fill="#4C7A46">☺ Motivates</text>
+            <rect x="184" y="108" width="158" height="54" rx="6" fill="#FBF3DE" stroke="#D9CDB4"/><text x="192" y="128" font-size="10.5" fill="#B23A2E">☹ Frustrates</text>
+            <rect x="22" y="170" width="156" height="54" rx="6" fill="#FBF3DE" stroke="#D9CDB4"/><text x="30" y="190" font-size="10.5" fill="#B96E12">🎯 Goals</text>
+            <rect x="184" y="170" width="158" height="54" rx="6" fill="#FBF3DE" stroke="#D9CDB4"/><text x="192" y="190" font-size="10.5" fill="#B96E12">🤕 Pain points</text>
+          </g>
+        </svg>
+        <figcaption>Buyer Persona card<span class="cap2">photo · demographics · 5 core tech · motivates / frustrates / goals / pain points</span></figcaption>
+      </figure>
+
+      <figure class="fig wide">
+        <svg viewBox="0 0 460 210" role="img" aria-label="Three things in focus triangle">
+          <g font-family="'Space Mono',ui-monospace,monospace" fill="#211C16" text-anchor="middle">
+            <polygon points="230,30 70,180 390,180" fill="#FBF3DE" stroke="#211C16" stroke-width="1.5"/>
+            <circle cx="230" cy="30" r="6" fill="#B23A2E"/><circle cx="70" cy="180" r="6" fill="#B96E12"/><circle cx="390" cy="180" r="6" fill="#4C7A46"/>
+            <text x="230" y="120" font-size="13">Design</text><text x="230" y="138" font-size="13">Thinking</text>
+            <text x="230" y="20" font-size="12" fill="#B23A2E">❤️ Customer / benefit</text>
+            <text x="70" y="198" font-size="12" fill="#B96E12">🔧 Feasibility</text><text x="70" y="210" font-size="9" fill="#5C5246">can we build it?</text>
+            <text x="390" y="198" font-size="12" fill="#4C7A46">💶 Viability</text><text x="390" y="210" font-size="9" fill="#5C5246">will it sell?</text>
+          </g>
+        </svg>
+        <figcaption>The 3 things in focus<span class="cap2">surfboard on 3 rocks — Customer · Feasibility · Viability (remove one and it tips)</span></figcaption>
+      </figure>
+
+    </div>
   </section>
 
   <!-- MEMORY MOVIE -->

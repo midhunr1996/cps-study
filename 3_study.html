@@ -89,6 +89,21 @@
   .tale .moral{background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:15px 18px;margin:18px 0 2px;font-size:16.5px;line-height:1.55}
   .tale .moral b{color:#bfe6a8}
 
+  /* comic-strip panels */
+  .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:8px;margin:16px 0 6px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 6px 9px;text-align:center;box-shadow:var(--shadow);break-inside:avoid;position:relative}
+  .panel .pn{position:absolute;top:5px;left:7px;font-family:var(--mono);font-size:8.5px;color:var(--amber-deep)}
+  .panel .pe{font-size:30px;line-height:1.15;margin-top:6px}
+  .panel .pc{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.2px;color:var(--ink-soft);margin-top:5px;display:block;line-height:1.25}
+
+  /* exam-model diagrams */
+  .figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin:18px 0}
+  .fig{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px;box-shadow:var(--shadow);break-inside:avoid;margin:0}
+  .fig svg{width:100%;height:auto;display:block}
+  .fig figcaption{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--amber-deep);margin-top:10px;text-align:center}
+  .fig figcaption .cap2{display:block;font-family:var(--body);font-size:13.5px;color:var(--ink-soft);text-transform:none;letter-spacing:0;margin-top:3px}
+  .fig.wide{grid-column:1/-1}
+
   /* memory movie */
   .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
   .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
@@ -170,7 +185,7 @@
     .riku{background:#f3f3f3;color:#000;box-shadow:none;border:1px solid #999}
     .riku p{color:#222}.riku .big{color:#a8650a}.riku::after{display:none}
     section{padding:14px 0;border-bottom:1px solid #bbb;break-inside:avoid}
-    .card,.exam,.hook,table,.q-block,.flashcard{box-shadow:none;break-inside:avoid}
+    .card,.exam,.hook,table,.q-block,.flashcard,.fig,.panel{box-shadow:none;break-inside:avoid}
     .hook{background:#eef3ec;color:#000;border:1px solid #9bbf8c}.hook b{color:#2f5a28}
     .exam{background:#fdf6e3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     th{background:#222 !important;color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -194,7 +209,7 @@
 <header class="top"><div class="wrap">
   <span class="brand">⚠ Risk Mgmt · MMC-01a</span>
   <nav class="tabs">
-    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#diagrams">🖼️ Diagrams</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
     <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
     <a href="#" onclick="window.print();return false;">⤓ PDF</a>
   </nav>
@@ -236,6 +251,26 @@
     <h2>📖 The Full Story — “Riku's Bad Day”</h2>
     <p class="lead">The whole chapter as <b>one connected tale</b>. Don't try to memorize it — just read it like a story and let it run as a film in your head. Because each thing happens <em>for a reason</em>, the concepts stick by themselves. Exam words are in <b>bold</b>; the table at the end maps every beat to the point you write in the exam.</p>
 
+    <div class="strip">
+      <div class="panel"><span class="pn">1</span><div class="pe">👻</div><span class="pc">risk = not-yet</span></div>
+      <div class="panel"><span class="pn">2</span><div class="pe">🍪</div><span class="pc">PDCA loop</span></div>
+      <div class="panel"><span class="pn">3</span><div class="pe">💡</div><span class="pc">opportunity twin</span></div>
+      <div class="panel"><span class="pn">4</span><div class="pe">🎲</div><span class="pc">risks don't add</span></div>
+      <div class="panel"><span class="pn">5</span><div class="pe">🥚</div><span class="pc">diversify</span></div>
+      <div class="panel"><span class="pn">6</span><div class="pe">🏁</div><span class="pc">9001 / 31000</span></div>
+      <div class="panel"><span class="pn">7</span><div class="pe">📦</div><span class="pc">3 risk buckets</span></div>
+      <div class="panel"><span class="pn">8</span><div class="pe">🔍</div><span class="pc">DETECT</span></div>
+      <div class="panel"><span class="pn">9</span><div class="pe">🔬</div><span class="pc">ANALYSE</span></div>
+      <div class="panel"><span class="pn">10</span><div class="pe">⚖️</div><span class="pc">EVALUATE</span></div>
+      <div class="panel"><span class="pn">11</span><div class="pe">🎮</div><span class="pc">CONTROL · 4 ways</span></div>
+      <div class="panel"><span class="pn">12</span><div class="pe">📹</div><span class="pc">MONITOR</span></div>
+      <div class="panel"><span class="pn">13</span><div class="pe">📓</div><span class="pc">DOCUMENT</span></div>
+      <div class="panel"><span class="pn">14</span><div class="pe">⭐</div><span class="pc">FMEA</span></div>
+      <div class="panel"><span class="pn">15</span><div class="pe">☃️</div><span class="pc">Rule of Ten</span></div>
+      <div class="panel"><span class="pn">16</span><div class="pe">😣</div><span class="pc">RPV = SORe</span></div>
+      <div class="panel"><span class="pn">17</span><div class="pe">🏷️</div><span class="pc">SC sticker</span></div>
+    </div>
+
     <div class="tale">
       <p class="open">You and your friends have built <b>Riku, a self-driving delivery robot</b>, and tomorrow is his first real shift through a crowded town. You're terrified he'll crash, hurt someone, or arrive late — so you hire a sharp-eyed <b>Detective named Det</b> to ride on Riku's roof and hunt for trouble before it happens. The whole chapter is just Det's method: <em>how do clever engineers stop Riku from going wrong — as early and as cheaply as possible?</em></p>
       <p>Before they roll out, Det chalks his definitions on the pavement. A <b>risk is “the effect of uncertainty”</b> (straight from <b>ISO 9001</b>) — an event that <em>might</em> stop you reaching your goal, with a probability <b>under 100%.</b> The battery <em>might</em> die; it <em>might</em> rain. The instant Riku actually crashes, it stops being a risk and becomes a <b>problem</b> — too late to prevent, and handled differently. Det's job is to <b>sort and structure</b> these risks methodically, keeping <b>general company risks</b> separate from this <b>project's</b> risks.</p>
@@ -272,6 +307,84 @@
     </table>
 
     <div class="hook"><span class="ic">📖</span><div>Read the story <b>once tonight and once tomorrow</b>; then cover this page and <b>re-tell it out loud</b> in your own words. When you can re-tell the film, jump to the <a href="#movie" style="color:#bfe6a8">Movie</a> to compress it, then the <a href="#lesson" style="color:#bfe6a8">Lesson</a> for exact wording.</div></div>
+  </section>
+
+  <!-- DIAGRAMS -->
+  <section id="diagrams">
+    <div class="sec-label">Draw these · the exam's favourite figures</div>
+    <h2>🖼️ Diagrams you can redraw</h2>
+    <p class="lead">The models examiners love to ask you to <b>sketch</b>. Copy each one by hand a couple of times — if you can redraw it from memory, you've understood it.</p>
+    <div class="figs">
+
+      <figure class="fig wide">
+        <svg viewBox="0 0 600 116" role="img" aria-label="Detect Analyse Evaluate Control Monitor Document flow">
+          <defs><marker id="c1" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#211C16"/></marker></defs>
+          <g font-family="'Space Mono',ui-monospace,monospace" font-size="11.5" fill="#211C16" text-anchor="middle">
+            <rect x="6" y="26" width="84" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="48" y="50">Detect</text><text x="48" y="84" font-size="16">🔍</text>
+            <rect x="104" y="26" width="84" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="146" y="50">Analyse</text><text x="146" y="84" font-size="16">🔬</text>
+            <rect x="202" y="26" width="84" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="244" y="50">Evaluate</text><text x="244" y="84" font-size="16">⚖️</text>
+            <rect x="300" y="26" width="84" height="40" rx="8" fill="#FBF3DE" stroke="#211C16"/><text x="342" y="50">Control</text><text x="342" y="84" font-size="16">🎮</text>
+            <rect x="398" y="26" width="84" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="440" y="50">Monitor</text><text x="440" y="84" font-size="16">📹</text>
+            <rect x="496" y="26" width="84" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="538" y="50">Document</text><text x="538" y="84" font-size="16">📓</text>
+            <line x1="90" y1="46" x2="103" y2="46" stroke="#211C16" marker-end="url(#c1)"/>
+            <line x1="188" y1="46" x2="201" y2="46" stroke="#211C16" marker-end="url(#c1)"/>
+            <line x1="286" y1="46" x2="299" y2="46" stroke="#211C16" marker-end="url(#c1)"/>
+            <line x1="384" y1="46" x2="397" y2="46" stroke="#211C16" marker-end="url(#c1)"/>
+            <line x1="482" y1="46" x2="495" y2="46" stroke="#211C16" marker-end="url(#c1)"/>
+          </g>
+        </svg>
+        <figcaption>The risk skeleton<span class="cap2">“Detectives Always Eat Cold Mexican Donuts” — Control = Avoid · Prevent · Transfer · Accept</span></figcaption>
+      </figure>
+
+      <figure class="fig">
+        <svg viewBox="0 0 320 244" role="img" aria-label="Risk matrix">
+          <g font-family="'Space Mono',ui-monospace,monospace" font-size="11" fill="#211C16" text-anchor="middle">
+            <rect x="64" y="24" width="52" height="40" fill="#fbe7bf" stroke="#D9CDB4"/><rect x="116" y="24" width="52" height="40" fill="#f0cabf" stroke="#D9CDB4"/><rect x="168" y="24" width="52" height="40" fill="#f0cabf" stroke="#D9CDB4"/><rect x="220" y="24" width="52" height="40" fill="#f0cabf" stroke="#D9CDB4"/>
+            <rect x="64" y="64" width="52" height="40" fill="#fbe7bf" stroke="#D9CDB4"/><rect x="116" y="64" width="52" height="40" fill="#fbe7bf" stroke="#D9CDB4"/><rect x="168" y="64" width="52" height="40" fill="#f0cabf" stroke="#D9CDB4"/><rect x="220" y="64" width="52" height="40" fill="#f0cabf" stroke="#D9CDB4"/>
+            <rect x="64" y="104" width="52" height="40" fill="#d9e7cf" stroke="#D9CDB4"/><rect x="116" y="104" width="52" height="40" fill="#fbe7bf" stroke="#D9CDB4"/><rect x="168" y="104" width="52" height="40" fill="#fbe7bf" stroke="#D9CDB4"/><rect x="220" y="104" width="52" height="40" fill="#f0cabf" stroke="#D9CDB4"/>
+            <rect x="64" y="144" width="52" height="40" fill="#d9e7cf" stroke="#D9CDB4"/><rect x="116" y="144" width="52" height="40" fill="#d9e7cf" stroke="#D9CDB4"/><rect x="168" y="144" width="52" height="40" fill="#d9e7cf" stroke="#D9CDB4"/><rect x="220" y="144" width="52" height="40" fill="#fbe7bf" stroke="#D9CDB4"/>
+            <text x="56" y="48" text-anchor="end" font-size="10">4</text><text x="56" y="88" text-anchor="end" font-size="10">3</text><text x="56" y="128" text-anchor="end" font-size="10">2</text><text x="56" y="168" text-anchor="end" font-size="10">1</text>
+            <text x="90" y="200" font-size="10">1</text><text x="142" y="200" font-size="10">2</text><text x="194" y="200" font-size="10">3</text><text x="246" y="200" font-size="10">4</text>
+            <text x="168" y="222" font-size="11" fill="#B96E12">Occurrence →</text>
+            <text x="20" y="104" font-size="11" fill="#B96E12" transform="rotate(-90 20 104)">Severity →</text>
+          </g>
+        </svg>
+        <figcaption>Risk matrix<span class="cap2">Severity × Occurrence → green (ok) · amber (watch) · red (fix first)</span></figcaption>
+      </figure>
+
+      <figure class="fig">
+        <svg viewBox="0 0 320 244" role="img" aria-label="Rule of Ten staircase">
+          <defs><marker id="c3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#B23A2E"/></marker></defs>
+          <g font-family="'Space Mono',ui-monospace,monospace" font-size="9.5" fill="#211C16" text-anchor="middle">
+            <line x1="6" y1="206" x2="314" y2="206" stroke="#211C16"/>
+            <rect x="12" y="176" width="48" height="30" fill="#f3d79a" stroke="#211C16"/><text x="36" y="170">€1</text>
+            <rect x="72" y="146" width="48" height="60" fill="#ecc06a" stroke="#211C16"/><text x="96" y="140">€10</text>
+            <rect x="132" y="112" width="48" height="94" fill="#E0962A" stroke="#211C16"/><text x="156" y="106">€100</text>
+            <rect x="192" y="76" width="48" height="130" fill="#c8722a" stroke="#211C16"/><text x="216" y="70" fill="#211C16">€1000</text>
+            <rect x="252" y="40" width="48" height="166" fill="#B23A2E" stroke="#211C16"/><text x="276" y="34" fill="#B23A2E">€1000+</text>
+            <text x="36" y="222" font-size="8.5">Plan</text><text x="96" y="222" font-size="8.5">Develop</text><text x="156" y="222" font-size="8.5">Assembly</text><text x="216" y="222" font-size="8.5">Final</text><text x="276" y="222" font-size="8.5">Customer</text>
+            <text x="160" y="22" font-size="10" fill="#B23A2E">×10 at every stage →</text>
+          </g>
+        </svg>
+        <figcaption>Rule of Ten<span class="cap2">the later you catch a bug, the more it costs — fix it while planning</span></figcaption>
+      </figure>
+
+      <figure class="fig wide">
+        <svg viewBox="0 0 580 116" role="img" aria-label="RPV formula">
+          <g font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#211C16" text-anchor="middle">
+            <rect x="8" y="28" width="118" height="60" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="67" y="50">Severity</text><text x="67" y="67" font-size="10" fill="#5C5246">how bad</text><text x="67" y="81" font-size="10" fill="#5C5246">(1–10)</text>
+            <text x="138" y="64" font-size="20" fill="#B96E12">×</text>
+            <rect x="150" y="28" width="118" height="60" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="209" y="50">Occurrence</text><text x="209" y="67" font-size="10" fill="#5C5246">how often</text><text x="209" y="81" font-size="10" fill="#5C5246">(1–10)</text>
+            <text x="280" y="64" font-size="20" fill="#B96E12">×</text>
+            <rect x="292" y="28" width="170" height="60" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="377" y="50">Recognizability</text><text x="377" y="67" font-size="10" fill="#5C5246">1 = caught …</text><text x="377" y="81" font-size="10" fill="#5C5246">… 10 = missed</text>
+            <text x="474" y="64" font-size="20" fill="#B96E12">=</text>
+            <rect x="486" y="28" width="86" height="60" rx="8" fill="#FBF3DE" stroke="#211C16"/><text x="529" y="58">RPV</text><text x="529" y="76" font-size="10" fill="#5C5246">(priority)</text>
+          </g>
+        </svg>
+        <figcaption>RPV = Severity × Occurrence × Recognizability<span class="cap2">“how SORe will it be?” — note Recognizability is flipped (1 = best)</span></figcaption>
+      </figure>
+
+    </div>
   </section>
 
   <!-- MEMORY MOVIE -->

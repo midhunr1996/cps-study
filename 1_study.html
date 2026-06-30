@@ -89,6 +89,21 @@
   .tale .moral{background:#1d2a1c;color:#e8f0e4;border-radius:10px;padding:15px 18px;margin:18px 0 2px;font-size:16.5px;line-height:1.55}
   .tale .moral b{color:#bfe6a8}
 
+  /* comic-strip panels */
+  .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:8px;margin:16px 0 6px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 6px 9px;text-align:center;box-shadow:var(--shadow);break-inside:avoid;position:relative}
+  .panel .pn{position:absolute;top:5px;left:7px;font-family:var(--mono);font-size:8.5px;color:var(--amber-deep)}
+  .panel .pe{font-size:30px;line-height:1.15;margin-top:6px}
+  .panel .pc{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.2px;color:var(--ink-soft);margin-top:5px;display:block;line-height:1.25}
+
+  /* exam-model diagrams */
+  .figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px;margin:18px 0}
+  .fig{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px;box-shadow:var(--shadow);break-inside:avoid;margin:0}
+  .fig svg{width:100%;height:auto;display:block}
+  .fig figcaption{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--amber-deep);margin-top:10px;text-align:center}
+  .fig figcaption .cap2{display:block;font-family:var(--body);font-size:13.5px;color:var(--ink-soft);text-transform:none;letter-spacing:0;margin-top:3px}
+  .fig.wide{grid-column:1/-1}
+
   /* memory movie */
   .scene{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber-deep);border-radius:14px;padding:14px 18px;margin:11px 0;box-shadow:var(--shadow)}
   .scene .emo{font-size:42px;line-height:1;flex:none;width:56px;text-align:center}
@@ -170,7 +185,7 @@
     .riku{background:#f3f3f3;color:#000;box-shadow:none;border:1px solid #999}
     .riku p{color:#222}.riku .big{color:#a8650a}.riku::after{display:none}
     section{padding:14px 0;border-bottom:1px solid #bbb;break-inside:avoid}
-    .card,.exam,.hook,table,.q-block,.flashcard{box-shadow:none;break-inside:avoid}
+    .card,.exam,.hook,table,.q-block,.flashcard,.fig,.panel{box-shadow:none;break-inside:avoid}
     .hook{background:#eef3ec;color:#000;border:1px solid #9bbf8c}.hook b{color:#2f5a28}
     .exam{background:#fdf6e3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     th{background:#222 !important;color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -194,7 +209,7 @@
 <header class="top"><div class="wrap">
   <span class="brand">🤖 System Eng · MMC-01a</span>
   <nav class="tabs">
-    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
+    <a href="index.html" style="color:var(--amber-deep);font-weight:700">🏠 Chapters</a><a href="#map">Map</a><a href="#story">📖 Story</a><a href="#diagrams">🖼️ Diagrams</a><a href="#movie">🎬 Movie</a><a href="#lesson">Lesson</a><a href="#cards">Flashcards</a>
     <a href="#exam">Practice</a><a href="#cheat">Cheat-card</a>
     <a href="#" onclick="window.print();return false;">⤓ PDF</a>
   </nav>
@@ -235,6 +250,27 @@
     <div class="sec-label">Read this once · like a bedtime story</div>
     <h2>📖 The Full Story — “The Build”</h2>
     <p class="lead">The whole chapter as <b>one connected tale</b>. Don't try to memorize it — just read it like a story and let it run as a film in your head. Because each thing happens <em>for a reason</em>, the concepts stick by themselves. Exam words are in <b>bold</b>; the table at the end maps every beat to the point you write in the exam.</p>
+
+    <div class="strip">
+      <div class="panel"><span class="pn">1</span><div class="pe">🦉</div><span class="pc">napkin: what+how</span></div>
+      <div class="panel"><span class="pn">2</span><div class="pe">🌌</div><span class="pc">parts+purpose</span></div>
+      <div class="panel"><span class="pn">3</span><div class="pe">🪸</div><span class="pc">classify · 3 doors</span></div>
+      <div class="panel"><span class="pn">4</span><div class="pe">🔁</div><span class="pc">control loop</span></div>
+      <div class="panel"><span class="pn">5</span><div class="pe">📡</div><span class="pc">mechatronic→CPS</span></div>
+      <div class="panel"><span class="pn">6</span><div class="pe">🎡</div><span class="pc">System Wheel</span></div>
+      <div class="panel"><span class="pn">7</span><div class="pe">➡️</div><span class="pc">SIPOC chain</span></div>
+      <div class="panel"><span class="pn">8</span><div class="pe">🪆</div><span class="pc">levels / tiers</span></div>
+      <div class="panel"><span class="pn">9</span><div class="pe">🧱</div><span class="pc">components</span></div>
+      <div class="panel"><span class="pn">10</span><div class="pe">🟡</div><span class="pc">emergence 1+1=3</span></div>
+      <div class="panel"><span class="pn">11</span><div class="pe">🌪️</div><span class="pc">VUCA · complex</span></div>
+      <div class="panel"><span class="pn">12</span><div class="pe">🕸️</div><span class="pc">connectivity</span></div>
+      <div class="panel"><span class="pn">13</span><div class="pe">🦋</div><span class="pc">dynamics+chaos</span></div>
+      <div class="panel"><span class="pn">14</span><div class="pe">🎨</div><span class="pc">design</span></div>
+      <div class="panel"><span class="pn">15</span><div class="pe">🏭</div><span class="pc">3 lanes · BMW</span></div>
+      <div class="panel"><span class="pn">16</span><div class="pe">🔄</div><span class="pc">SE 7-step loop</span></div>
+      <div class="panel"><span class="pn">17</span><div class="pe">🏃</div><span class="pc">challenges</span></div>
+      <div class="panel"><span class="pn">18</span><div class="pe">👯</div><span class="pc">MBSE·MDSD·twin</span></div>
+    </div>
 
     <div class="tale">
       <p class="open">It's a grey Monday in the workshop and your team has exactly one idea, written on a coffee-stained napkin: <em>build a robot that cleans the floor.</em> You grab a screwdriver — and a wise owl named <b>Cy</b> glides down, lands right on the napkin, and stops your hand with a wing.</p>
@@ -285,6 +321,102 @@
     </table>
 
     <div class="hook"><span class="ic">📖</span><div>Read the story <b>once tonight and once tomorrow</b>; then cover this page and <b>re-tell it out loud</b> in your own words. When you can re-tell the film, jump to the <a href="#movie" style="color:#bfe6a8">Movie</a> to compress it, then the <a href="#lesson" style="color:#bfe6a8">Lesson</a> for exact wording.</div></div>
+  </section>
+
+  <!-- DIAGRAMS -->
+  <section id="diagrams">
+    <div class="sec-label">Draw these · the exam's favourite figures</div>
+    <h2>🖼️ Diagrams you can redraw</h2>
+    <p class="lead">The four models examiners love to ask you to <b>sketch</b>. Copy each one by hand a couple of times — if you can redraw it from memory, you've understood it.</p>
+    <div class="figs">
+
+      <figure class="fig">
+        <svg viewBox="0 0 560 200" role="img" aria-label="Cybernetic control loop diagram">
+          <defs><marker id="a1" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#211C16"/></marker></defs>
+          <g font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#211C16" text-anchor="middle">
+            <rect x="8" y="30" width="94" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="55" y="55">Target value</text>
+            <circle cx="140" cy="50" r="16" fill="#FBF3DE" stroke="#211C16"/><text x="140" y="56" font-size="16">Σ</text><text x="140" y="28" font-size="12" fill="#B23A2E">−</text>
+            <rect x="188" y="30" width="104" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="240" y="55">Controller</text>
+            <rect x="332" y="30" width="92" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="378" y="55">Actuator</text>
+            <rect x="462" y="22" width="92" height="56" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="508" y="46">System /</text><text x="508" y="63">Environ.</text>
+            <rect x="300" y="142" width="120" height="40" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="360" y="167">Sensor</text>
+            <line x1="102" y1="50" x2="121" y2="50" stroke="#211C16" marker-end="url(#a1)"/>
+            <line x1="156" y1="50" x2="186" y2="50" stroke="#211C16" marker-end="url(#a1)"/>
+            <line x1="292" y1="50" x2="330" y2="50" stroke="#211C16" marker-end="url(#a1)"/><text x="311" y="44" font-size="9" fill="#5C5246">command</text>
+            <line x1="424" y1="50" x2="460" y2="50" stroke="#211C16" marker-end="url(#a1)"/><text x="442" y="44" font-size="9" fill="#5C5246">action</text>
+            <polyline points="508,78 508,162 422,162" fill="none" stroke="#211C16" marker-end="url(#a1)"/>
+            <polyline points="300,162 140,162 140,68" fill="none" stroke="#211C16" marker-end="url(#a1)"/>
+            <text x="214" y="178" font-size="10" fill="#5C5246">current value (−)</text>
+          </g>
+        </svg>
+        <figcaption>Cybernetic control loop<span class="cap2">target − current = gap → controller → actuator → sensor → fed back</span></figcaption>
+      </figure>
+
+      <figure class="fig">
+        <svg viewBox="0 0 340 300" role="img" aria-label="System Wheel diagram">
+          <defs><marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#211C16"/></marker></defs>
+          <g font-family="'Space Mono',ui-monospace,monospace" fill="#211C16" text-anchor="middle">
+            <circle cx="170" cy="155" r="128" fill="#ECE3D0" stroke="#211C16"/>
+            <line x1="249.7" y1="109" x2="280.8" y2="91" stroke="#211C16"/>
+            <line x1="90.3" y1="109" x2="59.2" y2="91" stroke="#211C16"/>
+            <line x1="170" y1="247" x2="170" y2="283" stroke="#211C16"/>
+            <circle cx="170" cy="155" r="92" fill="#FBF3DE" stroke="#211C16"/>
+            <circle cx="170" cy="155" r="54" fill="#E0962A" stroke="#211C16"/>
+            <text x="170" y="148" font-size="12" fill="#fff">DNA</text><text x="170" y="162" font-size="11" fill="#fff">datasheet</text><text x="170" y="175" font-size="10" fill="#3a2606">(core)</text>
+            <text x="170" y="50" font-size="12">Mechanics</text>
+            <text x="86" y="212" font-size="12">E / E</text>
+            <text x="262" y="212" font-size="12">Software</text>
+            <text x="170" y="90" font-size="9.5" fill="#5C5246">extended props</text>
+            <text x="170" y="14" font-size="11" fill="#B96E12">Customer ▾</text>
+            <line x1="170" y1="18" x2="170" y2="26" stroke="#B96E12" marker-end="url(#a2)"/>
+          </g>
+        </svg>
+        <figcaption>System Wheel<span class="cap2">DNA core → extended properties → mechanics / E-E / software → customer</span></figcaption>
+      </figure>
+
+      <figure class="fig wide">
+        <svg viewBox="0 0 600 130" role="img" aria-label="SIPOC system structure diagram">
+          <defs><marker id="a3" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#211C16"/></marker></defs>
+          <g font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#211C16" text-anchor="middle">
+            <text x="300" y="16" font-size="11" fill="#B96E12">SIPOC = Supplier · Input · Process · Output · Customer</text>
+            <rect x="8" y="34" width="96" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="56" y="61">Sensor</text><text x="56" y="98" font-size="9.5" fill="#5C5246">input</text>
+            <rect x="126" y="34" width="96" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="174" y="61">Connector</text><text x="174" y="98" font-size="9.5" fill="#5C5246">wire / PCB</text>
+            <rect x="244" y="34" width="96" height="44" rx="8" fill="#FBF3DE" stroke="#211C16"/><text x="292" y="61">Logic</text><text x="292" y="98" font-size="9.5" fill="#5C5246">SW · IC · AI</text>
+            <rect x="362" y="34" width="96" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="410" y="61">Connector</text><text x="410" y="98" font-size="9.5" fill="#5C5246">wire / PCB</text>
+            <rect x="480" y="34" width="112" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="536" y="54">Actuator /</text><text x="536" y="70">Visualizer</text><text x="536" y="98" font-size="9.5" fill="#5C5246">motor · HMI</text>
+            <line x1="104" y1="56" x2="124" y2="56" stroke="#211C16" marker-end="url(#a3)"/>
+            <line x1="222" y1="56" x2="242" y2="56" stroke="#211C16" marker-end="url(#a3)"/>
+            <line x1="340" y1="56" x2="360" y2="56" stroke="#211C16" marker-end="url(#a3)"/>
+            <line x1="458" y1="56" x2="478" y2="56" stroke="#211C16" marker-end="url(#a3)"/>
+          </g>
+        </svg>
+        <figcaption>System structure (SIPOC)<span class="cap2">every system is a conveyor belt: Sensor → Connector → Logic → Connector → Actuator</span></figcaption>
+      </figure>
+
+      <figure class="fig wide">
+        <svg viewBox="0 0 600 210" role="img" aria-label="System Engineering loop diagram">
+          <defs><marker id="a4" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#211C16"/></marker></defs>
+          <g font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#211C16" text-anchor="middle">
+            <rect x="8" y="34" width="584" height="134" rx="16" fill="none" stroke="#B96E12" stroke-dasharray="6 5"/>
+            <text x="170" y="26" font-size="11" fill="#B23A2E">☢️ RISK MANAGEMENT — surrounds the loop</text>
+            <text x="438" y="200" font-size="11" fill="#4C7A46">🔁 CHANGE MANAGEMENT — surrounds the loop</text>
+            <rect x="22" y="70" width="100" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="72" y="92">Require-</text><text x="72" y="106">ments</text>
+            <rect x="138" y="70" width="100" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="188" y="97">Ideation</text>
+            <rect x="254" y="70" width="100" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="304" y="97">Design</text>
+            <rect x="370" y="70" width="100" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="420" y="97">Test / V&amp;V</text>
+            <rect x="486" y="70" width="100" height="44" rx="8" fill="#FBF7EE" stroke="#211C16"/><text x="536" y="97">Release</text>
+            <line x1="122" y1="92" x2="136" y2="92" stroke="#211C16" marker-end="url(#a4)"/>
+            <line x1="238" y1="92" x2="252" y2="92" stroke="#211C16" marker-end="url(#a4)"/>
+            <line x1="354" y1="92" x2="368" y2="92" stroke="#211C16" marker-end="url(#a4)"/>
+            <line x1="470" y1="92" x2="484" y2="92" stroke="#211C16" marker-end="url(#a4)"/>
+            <polyline points="536,114 536,146 72,146 72,116" fill="none" stroke="#211C16" marker-end="url(#a4)"/>
+            <text x="304" y="142" font-size="9.5" fill="#5C5246">iterate over the life cycle · ISO/IEC 15288</text>
+          </g>
+        </svg>
+        <figcaption>System Engineering — the loop<span class="cap2">Requirements → Ideation → Design → Test → Release, ringed by Risk &amp; Change (ISO 15288)</span></figcaption>
+      </figure>
+
+    </div>
   </section>
 
   <!-- MEMORY MOVIE -->
